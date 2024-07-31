@@ -9,10 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Blogs.Application.Bootstrapper
 {
-	public static class ServiceBootstrapper
+	public static class BlogServiceBootstrapper
 	{
 
-		public static void InstallBlogServices(IServiceCollection service)
+		public static void Config(IServiceCollection service)
 		{
 
 			service.AddTransient<IBlogCategoryService, BlogCategoryService>();

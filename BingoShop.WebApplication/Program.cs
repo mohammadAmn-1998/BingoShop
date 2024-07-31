@@ -2,6 +2,7 @@ using BingoShop.WebApplication.Services;
 using Blogs.Application.Bootstrapper;
 using Blogs.Infrastructure.Bootstrapper;
 using Shared.Application.Services;
+using Users.Infrastructure.Bootstrapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +14,12 @@ var connectionString = builder.Configuration.GetConnectionString("local");
 
 #region Ioc
 
-InfraBootstrapper.InstallBlogServices(services, connectionString!);
-ServiceBootstrapper.InstallBlogServices(services);
+BlogInfraBootstrapper.Config(services, connectionString!);
+UsersInfraBootstrapper.Config(services, connectionString!);
+BlogServiceBootstrapper.Config(services);
+
 services.AddTransient<IFileService, FileService>();
+services.AddTransient<IAuthService, AuthService>();
 
 #endregion
 

@@ -12,10 +12,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Blogs.Infrastructure.Bootstrapper
 {
-	public static class InfraBootstrapper
+	public static class BlogInfraBootstrapper
 	{
 
-		public static void InstallBlogServices(IServiceCollection service,string connectionString)
+		public static void Config(IServiceCollection service,string connectionString)
 		{
 
 			service.AddTransient<IBlogCategoryRepository, BlogCategoryRepository>();

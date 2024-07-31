@@ -16,6 +16,8 @@ namespace Shared.Application.Utility
 		public const string BlogCategoryImageDirectory400 = "/assets/images/blog_category_img400";
 		public const string BlogCategoryImageDirectory100 = "/assets/images/blog_category_img100";
 		public const string UserAvatarDirectory = "/assets/images/user_img";
+		public const string UserAvatarDirectory100 = "/assets/images/user_img100";
+		public const string UserAvatarDirectory400 = "/assets/images/user_img400";
 
 
 

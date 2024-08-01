@@ -124,6 +124,28 @@ namespace Users.Application.Services.Implements
 			}
 		}
 
+		public OperationResult ChangePassword(ChangePasswordUserDto dto)
+		{
+			try
+			{
+
+				var user = _userRepository.GetBy(x => x.Id == dto.UserId);
+				if (user == null)
+					throw new Exception();
+
+				user.ChangePassword(dto.NewPassword);
+				if(_userRepository.Save() >0)
+					return new (Status.Success);
+
+				throw new Exception();
+
+			}
+			catch (Exception e)
+			{
+				return new(Status.InternalServerError, ErrorMessages.InternalServerError);
+			}
+		}
+
 		public EditUserByUserDto GetForEditByUser(int userId)
 		{
 			try

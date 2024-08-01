@@ -8,6 +8,7 @@ public interface IUserService
 	OperationResult Create(CreateUserDto dto);
 	OperationResult Login(LoginUserDto dto);
 	OperationResult EditByUser(EditUserByUserDto dto);
+	OperationResult ChangePassword(ChangePasswordUserDto dto);
 	EditUserByUserDto GetForEditByUser(int userId);
 	EditUserByAdminDto GetForEditByAdmin(int userId);
 	bool ExistsByUserName(string username);

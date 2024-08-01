@@ -107,6 +107,12 @@ namespace Users.Domain.UserAgg
 			UpdateDate = DateTime.Now;
 		}
 
+		public void ChangePassword(string newPassword)
+		{
+			UpdateDate = DateTime.Now;
+			Password = newPassword;
+		}
+
 		public void ActivationChange()
 		{
 			Active = !Active;

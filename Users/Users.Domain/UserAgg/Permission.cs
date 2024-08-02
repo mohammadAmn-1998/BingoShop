@@ -8,7 +8,9 @@ namespace Users.Domain.UserAgg
 	{
 
 		public int RoleId { get; private set; }
+
 		public UserPermission UserPermission { get; private set; }
+
 		public Role Role { get; private set; }
 
 		public Permission(int roleId, UserPermission userPermission)

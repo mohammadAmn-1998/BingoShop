@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Shared.Application.Utility;
 using Shared.Domain.Enums;
-using Users.Application.Services.Dtos.UserAddressDtos;
+using Users.Application.Dtos.UserAddressDtos;
 using Users.Application.Services.Interfaces;
 using Users.Domain.UserAgg;
 
 namespace Users.Application.Services.Implements
 {
-	internal class UserAddressService : IUserAddressService
+    internal class UserAddressService : IUserAddressService
 	{
 
 		private readonly IUserAddressRepository _userAddressRepository;
@@ -50,7 +50,7 @@ namespace Users.Application.Services.Implements
 				var userAddress = _userAddressRepository.GetBy(x => x.Id == addressId && x.UserId == userId);
 
 				if(userAddress == null)
-					return new(Status.NotFound);
+					return new(Status.NotFound,ErrorMessages.UserAddressNotFound);
 
 				if(_userAddressRepository.Delete(userAddress))
 					return new(Status.Success);

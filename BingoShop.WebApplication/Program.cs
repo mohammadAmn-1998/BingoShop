@@ -1,3 +1,4 @@
+using BingoShop.WebApplication.DependencyBootstrapper;
 using BingoShop.WebApplication.Services;
 using Blogs.Application.Bootstrapper;
 using Blogs.Infrastructure.Bootstrapper;
@@ -10,13 +11,14 @@ var services = builder.Services;
 
 services.AddControllersWithViews();
 
+services.AddHttpContextAccessor();
+
 var connectionString = builder.Configuration.GetConnectionString("local");
 
-#region Ioc
+#region Dependency 
 
-BlogInfraBootstrapper.Config(services, connectionString!);
-UsersInfraBootstrapper.Config(services, connectionString!);
-BlogServiceBootstrapper.Config(services);
+Moduls_Bootstrapper.Config(services,connectionString!);
+
 
 services.AddTransient<IFileService, FileService>();
 services.AddTransient<IAuthService, AuthService>();
@@ -24,10 +26,7 @@ services.AddTransient<IAuthService, AuthService>();
 #endregion
 
 
-
 var app = builder.Build();
-
-
 
 if (!app.Environment.IsDevelopment())
 {
@@ -38,7 +37,6 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 
 app.UseAuthorization();

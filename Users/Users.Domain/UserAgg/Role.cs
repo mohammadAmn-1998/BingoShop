@@ -11,6 +11,8 @@ public class Role : BaseEntity<int>
 	public Role(string title)
 	{
 		Title = title;
+		Permissions = new();
+		UserRoles = new();
 	}
 	public void Edit(string title)
 	{

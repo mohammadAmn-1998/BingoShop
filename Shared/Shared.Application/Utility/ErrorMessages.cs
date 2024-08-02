@@ -33,7 +33,19 @@ namespace Shared.Application.Utility
 
 		#endregion
 
+		#region UserAddress
 
+		public const string UserAddressNotFound = "آدرسی با این مشخصات پیدا نشد	";
+
+
+
+		#endregion
+
+		#region Role
+
+		public const string RoleNotFound = "نقشی با این مشخصات پیدا نشد	";
+
+		#endregion
 
 	}
 }

@@ -3,14 +3,14 @@ using Shared.Application.Models;
 using Shared.Application.Services;
 using Shared.Application.Utility;
 using Shared.Domain.Enums;
-using Users.Application.Services.Dtos.UserDtos;
+using Users.Application.Dtos.UserDtos;
 using Users.Application.Services.Interfaces;
 using Users.Domain.UserAgg;
 using Encoder = Shared.Application.Utility.Encoder;
 
 namespace Users.Application.Services.Implements
 {
-	internal class UserService : IUserService
+    internal class UserService : IUserService
 	{
 		private IUserRepository _userRepository;
 		private readonly IFileService _fileService;

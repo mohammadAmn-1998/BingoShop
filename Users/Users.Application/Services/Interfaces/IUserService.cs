@@ -1,5 +1,5 @@
 ﻿using Shared.Application.Utility;
-using Users.Application.Services.Dtos.UserDtos;
+using Users.Application.Dtos.UserDtos;
 
 namespace Users.Application.Services.Interfaces;
 

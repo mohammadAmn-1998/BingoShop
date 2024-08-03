@@ -2,6 +2,7 @@ using BingoShop.WebApplication.DependencyBootstrapper;
 using BingoShop.WebApplication.Services;
 using Blogs.Application.Bootstrapper;
 using Blogs.Infrastructure.Bootstrapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Shared.Application.Services;
 using Users.Infrastructure.Bootstrapper;
 
@@ -15,10 +16,28 @@ services.AddHttpContextAccessor();
 
 var connectionString = builder.Configuration.GetConnectionString("local");
 
+#region Auth
+
+services.AddAuthentication(options =>
+{
+	options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+	options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+	options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
+}).AddCookie(options =>
+{
+	options.Cookie.Name = "Authentication.Cookie";
+	options.ExpireTimeSpan = TimeSpan.FromDays(30);
+	options.LoginPath = "/Home/Login";
+	options.LogoutPath = "/Home/Logout";
+	options.AccessDeniedPath = "/Home/not-permitted";
+});
+
+#endregion
+
 #region Dependency 
 
 Moduls_Bootstrapper.Config(services,connectionString!);
-
 
 services.AddTransient<IFileService, FileService>();
 services.AddTransient<IAuthService, AuthService>();
@@ -27,6 +46,7 @@ services.AddTransient<IAuthService, AuthService>();
 
 
 var app = builder.Build();
+
 
 if (!app.Environment.IsDevelopment())
 {
@@ -39,6 +59,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

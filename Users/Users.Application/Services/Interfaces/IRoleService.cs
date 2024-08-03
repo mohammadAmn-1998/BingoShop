@@ -18,5 +18,7 @@ namespace Users.Application.Services.Interfaces
 
 		OperationResult EditRole(EditRoleDto dto, List<UserPermission> permissions);
 
+		bool CheckPermission(int userId, UserPermission permission);
+
 	}
 }

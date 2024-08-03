@@ -20,6 +20,7 @@ namespace Users.Infrastructure.Bootstrapper
 			services.AddTransient<IUserRepository, UserRepository>();
 			services.AddTransient<IRoleRepository, RoleRepository>();
 			services.AddTransient<IUserAddressRepository, UserAddressRepository>();
+			services.AddTransient<IUserRoleRepository, UserRoleRepository>();
 
 			services.AddDbContext<BlogUsers_Context>(options =>
 			{

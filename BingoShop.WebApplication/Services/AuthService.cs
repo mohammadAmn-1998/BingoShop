@@ -29,14 +29,15 @@ namespace BingoShop.WebApplication.Services
 					new Claim(ClaimTypes.Name, model.Mobile),
 					new Claim("user_id", model.UserId.ToString())
 				};
-				var identity = new ClaimsIdentity(claims);
+				var identity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
 				var principal = new ClaimsPrincipal(identity);
 				var properties = new AuthenticationProperties()
 				{
-					IsPersistent = true
+					IsPersistent = true,
+					AllowRefresh = true,
 				};
 
-				HttpContext?.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, properties);
+				HttpContext!.SignInAsync( principal, properties);
 				return true;
 			}
 			catch (Exception e)

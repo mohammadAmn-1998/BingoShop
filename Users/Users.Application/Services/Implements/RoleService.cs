@@ -15,7 +15,8 @@ namespace Users.Application.Services.Implements
 	{
 
 		private readonly  IRoleRepository _roleRepository;
-		
+		private readonly IUserRoleRepository _userRoleRepository;
+
 
 		public OperationResult CreateRole(CreateRoleDto dto, List<UserPermission> permissions)
 		{
@@ -38,6 +39,29 @@ namespace Users.Application.Services.Implements
 			return _roleRepository.Edit(role, permissions);
 		}
 
-		
+		public bool CheckPermission(int userId, UserPermission permission)
+		{
+			try
+			{
+
+				var userRoles = _userRoleRepository.GetUserRoles(userId);
+				if(userRoles == null)
+					return false;
+
+				foreach (var userRole in userRoles)
+				{
+					if(userRole.Role.Permissions.Any(x=> x.UserPermission == permission))
+						return true;
+
+				}
+
+				return false;
+			}
+			catch (Exception e)
+			{
+
+				return false;
+			}
+		}
 	}
 }

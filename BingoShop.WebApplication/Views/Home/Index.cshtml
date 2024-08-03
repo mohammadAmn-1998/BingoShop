@@ -1,6 +1,14 @@
-﻿@{
+﻿@using System.Diagnostics.Eventing.Reader
+@model int 
+@{
     ViewData["Title"] = "Home Page";
+	
 }
+@if (Model != 0)
+{
+	<h1 class=" text-danger">userId : @Model</h1>
+}
+<a class="btn btn-primary" asp-action="SignIn">sign in</a>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>

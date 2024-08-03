@@ -8,7 +8,15 @@
 {
 	<h1 class=" text-danger">userId : @Model</h1>
 }
-<a class="btn btn-primary" asp-action="SignIn">sign in</a>
+
+@if (Context.User.Identity.IsAuthenticated)
+{
+	<a class="btn btn-danger" asp-action="Logout">sign out</a>
+}
+else
+{
+	<a class="btn btn-primary" asp-action="SignIn">sign in</a>
+}
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>

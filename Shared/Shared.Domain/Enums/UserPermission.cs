@@ -12,6 +12,7 @@ namespace Shared.Domain.Enums
 		AdminPanel,
 		EditBlog,
 		AddBlog,
+		JustMember
 
 	}
 }

@@ -31,6 +31,7 @@ namespace Users.Infrastructure.Context
 			modelBuilder.ApplyConfiguration(new PermissionConfig());
 			modelBuilder.ApplyConfiguration(new UserAddressConfig());
 			modelBuilder.ApplyConfiguration(new RoleConfig());
+			modelBuilder.ApplyConfiguration(new UserRoleConfig());
 
 			base.OnModelCreating(modelBuilder);
 		}

@@ -224,7 +224,7 @@ namespace Users.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Users.Domain.UserAgg.Permission", b =>

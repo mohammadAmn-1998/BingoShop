@@ -17,6 +17,10 @@ namespace Users.Application.Services.Implements
 		private readonly  IRoleRepository _roleRepository;
 		private readonly IUserRoleRepository _userRoleRepository;
 
+		public RoleService(IUserRoleRepository userRoleRepository)
+		{
+			_userRoleRepository = userRoleRepository;
+		}
 
 		public OperationResult CreateRole(CreateRoleDto dto, List<UserPermission> permissions)
 		{

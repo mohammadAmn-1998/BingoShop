@@ -15,8 +15,11 @@ namespace Users.Infrastructure.Repositories
 {
 	internal class UserRoleRepository : Repository<int,UserRole> , IUserRoleRepository
 	{
+		private readonly BlogUsers_Context _context;
+
 		public UserRoleRepository(BlogUsers_Context context) : base(context)
 		{
+			_context = context;
 		}
 
 
@@ -27,7 +30,8 @@ namespace Users.Infrastructure.Repositories
 			try
 			{
 
-				var userRoles = GetAsQueryable(x => x.UserId == userId, true);
+				var userRoles = _context.UserRoles.Where(x => x.UserId == userId).Include(x => x.User)
+					.Include(x => x.Role).ThenInclude(x => x.Permissions);
 
 				return userRoles?.ToList();
 

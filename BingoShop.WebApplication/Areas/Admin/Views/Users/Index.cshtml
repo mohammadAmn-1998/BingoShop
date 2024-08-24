@@ -1,0 +1,66 @@
+﻿@model Users.Application.Dtos.UserDtos.FilteredUserDto
+
+@if (Model.FilteredUsers != null && Model.FilteredUsers.Any())
+{
+	<form class="form-inline ml-3  float-sm-left" asp-action="Index" method="get">
+		<div class="input-group input-group-sm">
+			<input class="form-control w-90" type="search" placeholder="نام کاربری را وارد کنید..." aria-label="Search" name="q" value="@Model.FilterParams.Title">
+			<div class="input-group-append ">
+				<button class="btn btn-lg " type="submit">
+					<i class="fa fa-search"></i>
+				</button>
+			</div>
+		</div>
+	</form>
+
+	<div class="row">
+
+		<table class="table table-bordered table-dark table-hover">
+			<tr>
+				<th>نام کاربری</th>
+				<th>آواتار</th>
+				<th>ایمیل</th>
+				<th>فعال؟</th>
+			</tr>
+
+			@foreach (var user in Model.FilteredUsers)
+			{
+
+				<td>@user.UserName</td>
+				<td>@user.Avatar</td>
+				<td>@user.Email</td>
+				<td><input type="checkbox" id="@user.IsActive" name="@user.IsActive" disabled/></td>
+
+			}
+
+
+		</table>
+
+	</div>
+
+	if (Model.TotalPages > 1)
+	{
+		<div class="row">
+			<ul class="pagination pagination-sm " style="margin-right: 500px">
+				@if (Model.CurrentPage > 1)
+				{
+					<li class="page-item"><a class="page-link" asp-area="Admin" asp-controller="Users" asp-route-pageId="@(Model.CurrentPage-1)" >&laquo;</a></li>
+				}
+				@for (var i = Model.StartPage; i <= Model.EndPage; i++)
+				{
+					<li class="page-item"><a asp-area="Admin" asp-Controller="Users" asp-route-pageId="@i"  class="page-link" >@i</a></li>
+				}
+				@if (Model.CurrentPage < Model.EndPage)
+				{
+					<li class="page-item"><a class="page-link" asp-area="Admin" asp-controller="Users" asp-route-pageId="@(Model.CurrentPage+1)">&raquo;</a></li>
+				}
+
+			</ul>
+		</div>
+
+	}
+	
+}else
+{
+	<h1>هنوز چیزی برای نمایش وجود ندارد...</h1>
+}

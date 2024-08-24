@@ -1,10 +1,13 @@
-﻿using Shared.Application.Utility;
+﻿using Shared.Application.Models;
+using Shared.Application.Utility;
 using Users.Application.Dtos.UserDtos;
 
 namespace Users.Application.Services.Interfaces;
 
 public interface IUserService
 {
+	List<UserDto>? GetUsersForAdmin();
+	FilteredUserDto GetFilteredUserForAdmin(FilterParams  filterParams);
 	OperationResult Create(CreateUserDto dto);
 	OperationResult Login(LoginUserDto dto);
 	OperationResult EditByUser(EditUserByUserDto dto);

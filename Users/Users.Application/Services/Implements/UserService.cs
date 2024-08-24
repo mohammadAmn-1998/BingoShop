@@ -23,6 +23,72 @@ namespace Users.Application.Services.Implements
 		}
 
 
+		public List<UserDto>? GetUsersForAdmin()
+		{
+			try
+			{
+
+				var users = _userRepository.GetAll(false);
+
+				return users?.Select(x => new UserDto
+				{
+					Id = x.Id,
+					UserName = x.UserName,
+					Avatar = x.Avatar,
+					Email = x.EmailAddress,
+					IsActive = x.Active
+
+				}).ToList();
+			}
+			catch (Exception e)
+			{
+				return null;
+			}
+		}
+
+		public FilteredUserDto GetFilteredUserForAdmin(FilterParams filterParams)
+		{
+
+			try
+			{
+
+				var result = _userRepository.GetAsQueryable(eager: true);
+
+				if (!string.IsNullOrEmpty(filterParams.Title))
+				{
+					result = result?.Where(x => x.UserName.Contains(filterParams.Title));
+				}
+
+				var skip = (filterParams.PageId - 1) * filterParams.Take;
+
+				result = result?.Skip(skip).Take(filterParams.Take);
+
+				FilteredUserDto filteredUserDto = new()
+				{
+					FilterParams = filterParams,
+					FilteredUsers = result.OrderByDescending(x => x.CreateDate).Select(x => new UserDto
+						{
+							Id = x.Id,
+							UserName = x.UserName,
+							Avatar = x.Avatar,
+							Email = x.EmailAddress,
+							IsActive = x.Active
+						}
+					).ToList()
+				};
+
+
+				filteredUserDto.GetBasePagination(result,filterParams.PageId,filterParams.Take);
+
+				return filteredUserDto;
+			}
+			catch (Exception e)
+			{
+				return new();
+			}
+
+		}
+
 		public OperationResult Create(CreateUserDto dto)
 		{
 

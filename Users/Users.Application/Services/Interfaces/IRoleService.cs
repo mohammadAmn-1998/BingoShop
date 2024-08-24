@@ -11,6 +11,7 @@ namespace Users.Application.Services.Interfaces
 {
 	public interface IRoleService
 	{
+		List<RoleDto>? GetRoles(); 
 
 		OperationResult CreateRole(CreateRoleDto dto, List<UserPermission> permissions);
 

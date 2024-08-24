@@ -16,5 +16,11 @@ namespace Shared.Application.Utility
 			return random.ToString();
 
 		}
+
+		public static string GenerateUserUniqueCode()
+		{
+			var guid = Guid.NewGuid().ToString();
+			return guid;
+		}
 	}
 }

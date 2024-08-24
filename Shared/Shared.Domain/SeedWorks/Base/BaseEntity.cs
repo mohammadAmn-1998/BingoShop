@@ -15,11 +15,10 @@ namespace Shared.Domain.SeedWorks.Base
 
 		public bool Active { get; set; }
 
-
-		// public BaseEntity()
-		// {
-		// 	CreateDate = DateTime.Now;
-		// }
+		public BaseEntity()
+		{
+			CreateDate = DateTime.Now;
+		}
 
 		public void ActivationChange()
 		{

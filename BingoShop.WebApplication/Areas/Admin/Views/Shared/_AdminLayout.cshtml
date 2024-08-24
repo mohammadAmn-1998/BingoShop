@@ -1,0 +1,40 @@
+﻿
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<partial name="_AdminCss"/>
+	
+	@await RenderSectionAsync("styles", false)
+
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+		
+<partial name="_MainHeader"/>
+<partial name="_SideBar"/>
+
+<div class="content-wrapper" style="min-height: 916.281px;">
+	
+	
+
+
+	<section class="content">
+		@RenderBody()
+
+	</section>
+
+</div>
+
+<partial name="_Footer"/>
+
+</div>
+<partial name="_AdminScripts"/>
+
+@await RenderSectionAsync("scripts",false)
+
+</body>
+
+</html>

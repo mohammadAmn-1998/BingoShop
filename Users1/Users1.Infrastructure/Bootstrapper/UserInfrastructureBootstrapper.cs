@@ -20,7 +20,7 @@ namespace Users1.Infrastructure.Bootstrapper
 
 			services.AddDbContext<UsersContext>(options =>
 			{
-				options.UseSqlServer();
+				options.UseSqlServer(connectionString);
 			});
 
 			services.AddTransient<IUserRepository, UserRepository>();

@@ -1,0 +1,14 @@
+﻿@model Users1.Application.Contract.UserService.Command.RegisterUser
+<div class="login-page">
+	<div class="form">
+		
+		
+		<form class="login-form" asp-action="Register" method="post">
+			<input type="hidden" asp-for="ReturnUrl"></input>
+			<input type="text" asp-for="Mobile" placeholder="شماره موبایل را وارد کنید..."/>
+			<span class="text-danger " asp-validation-for="Mobile"></span>
+			<button class="mt3" type="submit">ورود </button>
+
+		</form>
+	</div>
+</div>

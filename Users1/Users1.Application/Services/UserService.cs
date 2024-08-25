@@ -24,7 +24,7 @@ namespace Users1.Application.Services
 			_fileService = fileService;
 		}
 
-		public bool Register(RegisterUser command)
+		public async Task<bool> Register(RegisterUser command)
 		{
 			try
 			{
@@ -35,16 +35,21 @@ namespace Users1.Application.Services
 				{
 					
 					user = User.Register(command.Mobile, passkey);
-					_userRepository.Create(user);
+					if(await _userRepository.Create(user))
+					{
+						//send sms passkey code
+						return true;
+					}
+					return false;
 
-					//send sms passkey code
-					return true;
 				}
 				else
 				{
-					_userRepository.ChangePassKey(command.Mobile, passkey);
+					if( await _userRepository.ChangePassKey(command.Mobile, passkey))
 					//send sms passkey code
 					return true;
+
+					return false;
 				}
 			}
 			catch (Exception e)

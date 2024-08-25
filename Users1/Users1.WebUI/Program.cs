@@ -1,15 +1,36 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Options;
+using Users1.WebUI.Bootstrapper;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var services = builder.Services;
+var connectionString = builder.Configuration.GetConnectionString("default");
+services.AddHttpContextAccessor();
+services.AddAuthentication(opt =>
+{
+	opt.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+	opt.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+	opt.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie(opt =>
+{
+	opt.Cookie.Name = "Authentication.Cookie";
+	opt.LoginPath = "/Account";
+	opt.LogoutPath = "/Account/Logout";
+	opt.ExpireTimeSpan = TimeSpan.FromDays(5);
+
+
+});
+services.AddAuthorization();
+DependencyBootstrapper.Config(services,connectionString!);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
 	app.UseExceptionHandler("/Home/Error");
-	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 	app.UseHsts();
 }
 
@@ -18,6 +39,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

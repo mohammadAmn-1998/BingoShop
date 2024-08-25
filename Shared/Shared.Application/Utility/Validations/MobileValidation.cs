@@ -15,7 +15,7 @@ namespace Shared.Application.Utility.Validations
 
 			if (string.IsNullOrEmpty(num)) return false;
 
-			if (!num.StartsWith("09") || !num.StartsWith("+989"))
+			if (!(num.StartsWith("09") || num.StartsWith("+989")))
 				return false;
 
 			if ((num.StartsWith("09") && num.Length != 11) || (num.StartsWith("+98") && num.Length != 13))

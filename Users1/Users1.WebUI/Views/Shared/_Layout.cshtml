@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Users1.WebUI.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/assets/login/css/login.css"/>
 </head>
 <body>
     <header>
@@ -22,9 +23,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+	                    <li class="nav-item">
+		                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+	                    </li>
+						
+	                    <li class="nav-item">
+		                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Login or Register</a>
+	                    </li>
                     </ul>
                 </div>
             </div>
@@ -44,6 +49,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+     <script src="/assets/login/js/login.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

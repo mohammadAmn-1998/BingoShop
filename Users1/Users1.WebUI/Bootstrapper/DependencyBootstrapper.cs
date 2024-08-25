@@ -2,6 +2,7 @@
 using Users.Infrastructure.Bootstrapper;
 using Users1.Application.Bootstrapper;
 using Users1.Infrastructure.Bootstrapper;
+using Users1.Query.Bootstrapper;
 using Users1.WebUI.Services;
 
 namespace Users1.WebUI.Bootstrapper
@@ -17,7 +18,7 @@ namespace Users1.WebUI.Bootstrapper
 
 			UserInfrastructureBootstrapper.Config(services, connectionString);
 			UsersApplicationBootstrapper.Config(services);
-
+			UsersQueryBootstrapper.Config(services);
 		}
 
 	}

@@ -4,7 +4,7 @@ namespace Users1.Application.Contract.UserService.Command;
 
 public interface IUserService
 {
-	bool Register(RegisterUser command);
+	Task<bool> Register(RegisterUser command);
 	OperationResult Login(LoginUser command);
 	// OperationResult Create(CreateUser command);
 	Task<OperationResult> Edit(EditUserByAdmin command);

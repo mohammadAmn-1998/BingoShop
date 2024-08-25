@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shared.Domain.SeedWorks.Base;
 
 namespace Users1.Domain.UserAgg
 {
-	public class UserRole
+	public class UserRole : BaseEntity<long>
 	{
 
-		public int UserId { get; private set; }
-		public int RoleId { get; private set; }
+		public long UserId { get; private set; }
+		public long RoleId { get; private set; }
 
 		public Role Role { get; private set; }
 		public User User { get; private set; }
 
-		public UserRole(int userId, int roleId)
+		public UserRole(long userId, long roleId)
 		{
 			UserId = userId;
 			RoleId = roleId;

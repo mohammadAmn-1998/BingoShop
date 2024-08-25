@@ -39,7 +39,7 @@ services.AddAuthentication(options =>
 
 Moduls_Bootstrapper.Config(services,connectionString!);
 
-services.AddTransient<IFileService, FileService>();
+services.AddTransient<IFileService, BingoShop.WebApplication.Services.FileService>();
 services.AddTransient<IAuthService, AuthService>();
 
 #endregion

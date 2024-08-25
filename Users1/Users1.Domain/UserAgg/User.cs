@@ -31,6 +31,8 @@ namespace Users1.Domain.UserAgg
 
 		public List<UserRole> UserRoles { get; set; }
 
+		
+
 		public User()
 		{
 			UserRoles = new();
@@ -49,10 +51,20 @@ namespace Users1.Domain.UserAgg
 			Mobile = mobile;
 			Biography = biography;
 			
+			
 		}
 
-		public void Edit(string fullName, string mobile,
-			string email, string avatar, Gender gender,string? biography)
+		public void Edit(string fullName, string avatar, Gender gender,string? biography)
+		{
+			FullName = fullName;
+			Avatar = avatar;
+			Gender = gender;
+			UpdateDate = DateTime.Now;
+			Biography = biography;
+		}
+
+		public void EditByAdmin(string fullName, string mobile,
+			string email, string avatar, Gender gender, string? biography )
 		{
 			FullName = fullName;
 			Mobile = mobile;
@@ -60,11 +72,18 @@ namespace Users1.Domain.UserAgg
 			Avatar = avatar;
 			Gender = gender;
 			Biography = biography;
+			UpdateDate = DateTime.Now;
+
 		}
 
 		public static User Register(string mobile,string passKey)
 		{
 			return new("", mobile, Guid.NewGuid().ToString(), "default.png",passKey , " ",Gender.PreferNotToSay," ",mobile,null);
+		}
+
+		public void ChangePassKey(string passKey)
+		{
+			PassKey = passKey;
 		}
 
 		public void ChangeBane()

@@ -11,14 +11,13 @@ namespace Shared.Domain.SeedWorks.Base
 
 		public TKey Id { get; set; }
 
-		public DateTime CreateDate { get; set; }
+		public DateTime CreateDate { get; set; } = DateTime.Now;
+
+		public DateTime? UpdateDate { get; set; }
 
 		public bool Active { get; set; }
 
-		public BaseEntity()
-		{
-			CreateDate = DateTime.Now;
-		}
+		
 
 		public void ActivationChange()
 		{

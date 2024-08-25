@@ -22,6 +22,7 @@ namespace Shared.Application.Utility
 		#region User
 
 		public const string MobileIsInvalid = "شماره همراه نامعتبر است!";
+		public const string MobileNotFound = "کاربری با این شماره  موبایل ثبت نشده است!!";
 		public const string PasswordLengthError = "  پسورد باید بین 5 تا 8 کاراکتر باشد!";
 		public const string PasswordMustContainNumbersAndLetters = "پسورد باید دارای عدد و حروف باشد!";
 		public const string DuplicateMobileError = "موبایل وارد شده قبلا ثبت شده است!";
@@ -44,6 +45,12 @@ namespace Shared.Application.Utility
 		#region Role
 
 		public const string RoleNotFound = "نقشی با این مشخصات پیدا نشد	";
+
+		#endregion
+
+		#region File
+
+		public const string IsNotImage = "تصویر نامعتبر است!";
 
 		#endregion
 

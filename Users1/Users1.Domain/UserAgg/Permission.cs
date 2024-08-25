@@ -11,10 +11,10 @@ namespace Users1.Domain.UserAgg
 	public class Permission : BaseEntity<long>
 	{
 
-		public int RoleId { get; private set; }
+		public long RoleId { get; private set; }
 		public UserPermission UserPermission { get; private set; }
 		public Role Role { get; private set; }
-		public Permission(int roleId, UserPermission userPermission)
+		public Permission(long roleId, UserPermission userPermission)
 		{
 			RoleId = roleId;
 			UserPermission = userPermission;

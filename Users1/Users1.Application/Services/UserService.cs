@@ -17,6 +17,7 @@ namespace Users1.Application.Services
 		private readonly IUserRepository _userRepository;
 		private readonly IAuthService _authService;
 		private readonly IFileService _fileService;
+
 		public UserService(IUserRepository userRepository, IAuthService authService, IFileService fileService)
 		{
 			_userRepository = userRepository;
@@ -29,7 +30,7 @@ namespace Users1.Application.Services
 			try
 			{
 				var user = _userRepository.GetByMobile(command.Mobile.Trim());
-				var passkey = RandomGenerator.GenerateRandomUserActiveKey();
+				var passkey = RandomGenerator.GenerateRandomUserTwoStepVerificationPassKey();
 
 				if (user == null)
 				{
@@ -65,6 +66,12 @@ namespace Users1.Application.Services
 			{
 				var user = _userRepository.GetByMobile(command.Mobile);
 				if (user == null) return new(Status.NotFound, ErrorMessages.MobileNotFound);
+
+				if (user.PassKey != command.PassKey.Trim())
+				{
+					return new(Status.BadRequest, ErrorMessages.PasskeyIsInvalid,nameof(command.PassKey));
+				}
+					
 
 				var ok = _authService.Login(new(user.Id, user.UserUniqueCode, user.Mobile));
 				if (!ok)

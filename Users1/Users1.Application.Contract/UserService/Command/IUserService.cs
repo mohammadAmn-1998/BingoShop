@@ -8,7 +8,6 @@ public interface IUserService
 	OperationResult Login(LoginUser command);
 	// OperationResult Create(CreateUser command);
 	Task<OperationResult> Edit(EditUserByAdmin command);
-
 	Task<OperationResult> EditByUser(EditUserByUser command, int userId);
 	EditUserByUser GetForEditByUser(int userId);
 	EditUserByAdmin GetForEditByAdmin(int userId);

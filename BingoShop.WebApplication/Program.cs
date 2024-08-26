@@ -28,7 +28,7 @@ services.AddAuthentication(options =>
 {
 	options.Cookie.Name = "Authentication.Cookie";
 	options.ExpireTimeSpan = TimeSpan.FromDays(30);
-	options.LoginPath = "/Home/Login";
+	options.LoginPath = "/Home/Register";
 	options.LogoutPath = "/Home/Logout";
 	options.AccessDeniedPath = "/Home/not-permitted";
 });

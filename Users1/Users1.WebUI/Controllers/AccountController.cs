@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics.Contracts;
+using Microsoft.AspNetCore.Mvc;
+using Shared.Application.Services;
 using Shared.Application.Utility;
+using Shared.Application.Utility.Validations;
+using Shared.Domain.Enums;
 using Users1.Application.Contract.UserService.Command;
 using Users1.Application.Contract.UserService.Query;
 
@@ -9,11 +13,12 @@ namespace Users1.WebUI.Controllers
 	{
 		private readonly IUserService _userService;
 		private readonly IUserQuery _userQuery;
-
-		public AccountController(IUserService userService, IUserQuery userQuery)
+		private readonly IAuthService _authService;
+		public AccountController(IUserService userService, IUserQuery userQuery, IAuthService authService)
 		{
 			_userService = userService;
 			_userQuery = userQuery;
+			_authService = authService;
 		}
 
 		public IActionResult Register(string returnUrl = "/")
@@ -43,16 +48,46 @@ namespace Users1.WebUI.Controllers
 			if (user != null)
 			{
 				TempData["Success"] = true;
-				return RedirectToAction("Activation", new { id = user.userId });
+				return RedirectToAction("Login", new LoginUser
+				{
+					Mobile = model.Mobile,
+					ReturnUrl = model.ReturnUrl
+				});
 			}
 			
 			ModelState.AddModelError(nameof(model.Mobile),ErrorMessages.InternalServerError);
 			return View(model);
 		}
 
-		public IActionResult Activation(long id)
+		
+
+		public IActionResult Login(LoginUser model)
 		{
-			return View();
+			return View(model);
 		}
+
+		[HttpPost]
+		public IActionResult LoginUser(LoginUser model)
+		{
+			if (!ModelState.IsValid)
+				return View("Login", model);
+
+			var result = _userService.Login(model);
+			if (result.Status != Status.Success)
+			{
+				ModelState.AddModelError(result.ModelName!,result.Message!);
+				return View("Login", model);
+			}
+
+			TempData["SuccessLogin"] = true;
+			return Redirect(model.ReturnUrl);
+
+		}
+
+		public IActionResult LogOut()
+		{
+			return _authService.Logout() ? Redirect("/") : Redirect("Home/Error");
+		}
+
 	}
 }

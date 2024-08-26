@@ -24,6 +24,11 @@ namespace Users1.Application.Services
 			_userRepository = userRepository;
 		}
 
+		public async Task<bool> CheckPermission(long userId, UserPermission permission)
+		{
+			return await _userRepository.CheckPermission(userId, permission);
+		}
+
 		public async Task<OperationResult> CreateRole(CreateRole command)
 		{
 			try

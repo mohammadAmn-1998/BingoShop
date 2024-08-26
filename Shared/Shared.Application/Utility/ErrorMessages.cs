@@ -15,7 +15,7 @@ namespace Shared.Application.Utility
 		public const string FieldIsRequired = "این فیلد اجباری است";
 		public const string InternalServerError = "مشکلی در سرور به وجود آمده دوباره تلاش کنید!";
 		public const string MaxLengthError = "تعداد کاراکتر ها از حد مجاز بیشتر است";
-		public const string MinLength = "تعداد کاراکتر ها از حد مجاز کمتر است";
+		public const string MinLengthError = "تعداد کاراکتر ها از حد مجاز کمتر است";
 
 		#endregion
 
@@ -31,6 +31,7 @@ namespace Shared.Application.Utility
 		public const string DuplicateUserNameError = "این نام کاربری قبلا ثبت شده است!";
 		public const string UserNameOrPasswordIsInvalid = "نام کاربری یا پسورد اشتباه است!";
 		public const string UserNotFound = "کاربر پیدا نشد!";
+		public const string PasskeyIsInvalid = "رمز شما اشتباه است!";
 
 		#endregion
 

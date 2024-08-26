@@ -1,0 +1,16 @@
+﻿@model Users1.Application.Contract.UserService.Command.LoginUser
+<div class="login-page">
+	<div class="form">
+
+		<form class="login-form" asp-action="LoginUser"method="post">
+
+			<input type="password" asp-for="PassKey" placeholder="رمز شش رقمی را وارد کنید"/>
+			<span asp-validation-for="PassKey" class="text-danger"></span>
+			<input type="hidden" asp-for="ReturnUrl"/>
+			<input type="hidden" asp-for="Mobile"/>
+
+			<button type="submit">ورود </button>
+
+		</form>
+	</div>
+</div>

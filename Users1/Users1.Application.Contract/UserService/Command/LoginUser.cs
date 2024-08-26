@@ -13,10 +13,15 @@ namespace Users1.Application.Contract.UserService.Command
 	{
 
 		[Display(Name = "شماره همراه")]
-		[Required(ErrorMessage = ErrorMessages.FieldIsRequired)]
 		[MobileValidation(ErrorMessage = ErrorMessages.MobileIsInvalid)]
 		public string Mobile { get; set; }
-		
+
+		[Display(Name = "رمز شش رقمی")]
+		[MaxLength(6,ErrorMessage = ErrorMessages.MaxLengthError)]
+		[MinLength(6,ErrorMessage = ErrorMessages.MinLengthError)]
+		[Required(ErrorMessage = ErrorMessages.FieldIsRequired)]
+		public string PassKey { get; set; }
+
 		public string ReturnUrl { get; set; }
 	}
 }

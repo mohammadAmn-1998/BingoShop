@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Shared.Domain.Enums;
 using Shared.Domain.SeedWorks.Base;
 using Users1.Application.Contract.UserService.Command;
 using Users1.Domain.UserAgg;
@@ -20,6 +21,24 @@ namespace Users1.Infrastructure.Repositories
 		{
 		}
 
+
+		public async Task<bool> CheckPermission(long userId, UserPermission permission)
+		{
+
+
+			try
+			{
+				var userRoles = await Table<UserRole>().Include(x => x.Role).ThenInclude(x => x.Permissions).Where(x => x.UserId == userId).ToListAsync();
+
+				return userRoles.SelectMany(userRole => userRole.Role.Permissions).Any(userPermission => userPermission.UserPermission == permission);
+
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+
+		}
 
 		public User? GetByMobile(string mobile)
 		{

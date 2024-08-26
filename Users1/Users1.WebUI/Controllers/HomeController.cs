@@ -23,6 +23,12 @@ namespace Users1.WebUI.Controllers
 			return View();
 		}
 
+		[Route("/not-permitted")]
+		public IActionResult NotPermitted()
+		{
+			return View("_NotPermitted");
+		}
+
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{

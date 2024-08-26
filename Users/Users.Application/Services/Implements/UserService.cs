@@ -95,7 +95,7 @@ namespace Users.Application.Services.Implements
 			if (_userRepository.IsExists(x => x.Mobile.Trim() == dto.Mobile.Trim()))
 				return new(Status.BadRequest, ErrorMessages.DuplicateMobileError, "Mobile");
 			var hashedPass = Encoder.EncodeToSha256(dto.Password);
-			var activeKey = RandomGenerator.GenerateRandomUserActiveKey();
+			var activeKey = RandomGenerator.GenerateRandomUserTwoStepVerificationPassKey();
 
 
 			var newUser = User.Register(dto.Mobile,hashedPass,activeKey);

@@ -9,10 +9,10 @@ namespace Shared.Application.Utility
 	public static class RandomGenerator
 	{
 
-		public static string GenerateRandomUserActiveKey()
+		public static string GenerateRandomUserTwoStepVerificationPassKey()
 		{
 
-			var random = new Random().Next(10000, 99999);
+			var random = new Random().Next(100000, 999999);
 			return random.ToString();
 
 		}

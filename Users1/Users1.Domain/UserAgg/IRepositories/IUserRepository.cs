@@ -1,10 +1,13 @@
-﻿using Users1.Application.Contract.UserService.Command;
+﻿using Shared.Domain.Enums;
+using Users1.Application.Contract.UserService.Command;
 
 namespace Users1.Domain.UserAgg.IRepositories;
 
 public interface IUserRepository
 {
 	
+	Task<bool> CheckPermission(long  userId,UserPermission permission);
+
 	User? GetByMobile (string mobile);
 
 	User? GetById(long id);

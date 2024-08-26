@@ -1,9 +1,12 @@
 ﻿using Shared.Application.Utility;
+using Shared.Domain.Enums;
 
 namespace Users1.Application.Contract.RoleService.Command;
 
 public interface IRoleService
 {
+
+	Task<bool> CheckPermission(long userId,UserPermission  permission);
 
     Task<OperationResult> CreateRole(CreateRole command);
 

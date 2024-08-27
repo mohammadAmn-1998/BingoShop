@@ -4,7 +4,7 @@ using Users1.WebUI.Models;
 
 namespace Users1.WebUI.Controllers
 {
-	public class HomeController : Controller
+	public class HomeController : ControllerBase
 	{
 		private readonly ILogger<HomeController> _logger;
 

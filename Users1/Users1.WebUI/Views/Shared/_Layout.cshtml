@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Users1.WebUI.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="/assets/login/css/login.css"/>
+    <link rel="stylesheet" href="/assets/sweet_alert/css/sweetalert2.css"/>
 </head>
 <body>
     <header>
@@ -28,7 +29,15 @@
 	                    </li>
 						
 	                    <li class="nav-item">
-		                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Login or Register</a>
+							@if (Context.User.Identity.IsAuthenticated)
+							{
+								<a class="nav-link text-dark" class="btn btn-danger" asp-area="" asp-controller="Account" asp-action="LogOut">LogOut </a>
+							}
+							else
+							{
+								<a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Login or Register</a>
+							}
+		                   
 	                    </li>
                     </ul>
                 </div>
@@ -50,6 +59,8 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
      <script src="/assets/login/js/login.js"></script>
+     <script src="/assets/sweet_alert/js/sweetalert2.js"></script>
+     <script src="/js/global.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

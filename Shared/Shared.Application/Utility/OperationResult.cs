@@ -23,6 +23,44 @@ namespace Shared.Application.Utility
 			Message = message;
 		}
 
-		
+		#region Error
+
+		public static OperationResult Error()
+		{
+			return new(Status.Error);
+		}
+		public static OperationResult Error(string message)
+		{
+			return new(Status.Error, message);
+		}
+
+		#endregion
+
+		#region Success
+
+		public static OperationResult Success()
+		{
+			return new(Status.Success);
+		}
+		public static OperationResult Success(string message)
+		{
+			return new(Status.Success, message);
+		}
+
+		#endregion
+
+		#region NotFound
+
+		public static OperationResult NotFound()
+		{
+			return new(Status.NotFound);
+		}
+		public static OperationResult NotFound(string message)
+		{
+			return new(Status.NotFound, message);
+		}
+
+		#endregion
+
 	}
 }

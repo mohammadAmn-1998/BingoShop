@@ -4,26 +4,25 @@
 
 <partial name="_AdminHead"/>
 
+@await RenderSectionAsync("Css",false)
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-	  
-<partial name="_AdminMainHeader"/>
 
-<partial name="_AdminSideBar"/>
+	<partial name="_AdminMainHeader"/>
+	<partial name="_AdminSideBar"/>
 
-<div class="content-wrapper">
+	<div class="content-wrapper">
+		@RenderBody
+	</div>
 
-@RenderBody
-
-<!-- /.content -->
-</div>
-
-<partial name="_AdminFooter"/>
+	<partial name="_AdminFooter"/>
 
 </div>
   
 <partial name="_AdminScripts"/>
  
+@await RenderSectionAsync("Scripts",false)
 </body>
 
 </html>

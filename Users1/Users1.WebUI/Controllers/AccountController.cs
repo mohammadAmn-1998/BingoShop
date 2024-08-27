@@ -9,7 +9,7 @@ using Users1.Application.Contract.UserService.Query;
 
 namespace Users1.WebUI.Controllers
 {
-	public class AccountController : Controller
+	public class AccountController : ControllerBase
 	{
 		private readonly IUserService _userService;
 		private readonly IUserQuery _userQuery;
@@ -48,10 +48,12 @@ namespace Users1.WebUI.Controllers
 			if (user != null)
 			{
 				TempData["Success"] = true;
+				SuccessAlert("رمز ورود به شما فرستاده شد!" +"\n"+"لطفا رمز شش رقمی ارسال شده را وارد کنید");
 				return RedirectToAction("Login", new LoginUser
 				{
 					Mobile = model.Mobile,
-					ReturnUrl = model.ReturnUrl
+					ReturnUrl = model.ReturnUrl,
+					PassKey = ""
 				});
 			}
 			
@@ -80,13 +82,13 @@ namespace Users1.WebUI.Controllers
 			}
 
 			TempData["SuccessLogin"] = true;
-			return Redirect(model.ReturnUrl);
+			return RedirectAndShowAlert(Redirect(model.ReturnUrl),new OperationResult(Status.Success,"شما وارد شدید!"));
 
 		}
 
-		public IActionResult LogOut()
+		public IActionResult LogOut(string returnUrl = "/")
 		{
-			return _authService.Logout() ? Redirect("/") : Redirect("Home/Error");
+			return _authService.Logout() ? RedirectAndShowAlert(Redirect(returnUrl),new OperationResult(Status.Info,"شما از حساب کاربری خود خارج شدید!")) : Redirect("Home/Error");
 		}
 
 	}

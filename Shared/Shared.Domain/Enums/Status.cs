@@ -17,7 +17,7 @@ namespace Shared.Domain.Enums
 		UnAuthorized = 403,
 		Success = 200,
 		Error = 600,
-		Info = 700,
+		Info = 10,
 
 	}
 }

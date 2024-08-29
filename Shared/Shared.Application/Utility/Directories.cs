@@ -20,11 +20,11 @@ namespace Shared.Application.Utility
 		public const string UserAvatarDirectory400 = "wwwroot/assets/images/user_img400";
 
 
-		public static string GetUserAvatarFullPath(string imageName,int? imageSize)
+		public static string GetUserAvatarFullPath(string? imageName,int? imageSize)
 		{
 
-			if (imageName is "Default.png" or " ")
-				return UserAvatarDirectory.Replace("wwwroot","") + "/" + imageName;
+			if (imageName is "Default.png" or " " or null)
+				return UserAvatarDirectory.Replace("wwwroot","") + "/" + "Default.png";
 
 			switch (imageSize)
 			{

@@ -9,6 +9,7 @@ namespace Users1.Application.Contract.RoleService.Query
 	public interface IRoleQuery
 	{
 
+		Task<List<RoleQueryModel>?> GetRoles();
 
 	}
 }

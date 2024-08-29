@@ -72,7 +72,7 @@ namespace Users.Domain.UserAgg
 
 		public static User Register(string mobile,string password,string activeKey)
 		{
-			return new User("", "", password, "default.png","",mobile,"", activeKey, Shared.Domain.Enums.Gender.PreferNotToSay)
+			return new User("", "", password, "default.png","",mobile,"", activeKey, Shared.Domain.Enums.Gender.نامشخص)
 				;
 		}
 

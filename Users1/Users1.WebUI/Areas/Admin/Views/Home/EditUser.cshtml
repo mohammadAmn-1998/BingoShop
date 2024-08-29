@@ -5,46 +5,50 @@
 	ViewData["Title"]= "ویرایش کاربر";
 	
 }
+
 <div style="margin-right: 200px; margin-left: 200px; " >
 
 	<br><br>
-<form class=" mt-3" method="post" href="/Admin/Home/EditUser" enctype="multipart/form-data">
+	<form class=" mt-3" method="post" href="/Admin/Home/EditUser" enctype="multipart/form-data">
 	
-	@Html.HiddenFor(x=> x.Id)
-	@Html.HiddenFor(x=> x.AvatarName)
-	@Html.EditorFor(x=> x.FullName)
-	@Html.EditorFor(x=> x.Mobile)
-	@Html.EditorFor(x=> x.Email)
-	@Html.EditorFor(x=> x.UserGender)
-	<br><br>
-	<img id="user_avatar" src="@Directories.GetUserAvatarFullPath(@Model.AvatarName,100)" height="100" width="100" alt="user-avatar"/>
-	<br><br>
+		@Html.HiddenFor(x=> x.Id)
+		@Html.HiddenFor(x=> x.AvatarName)
+		@Html.EditorFor(x=> x.FullName)
+		@Html.EditorFor(x=> x.Mobile)
+		@Html.EditorFor(x=> x.Email)
+		@Html.EditorFor(x=> x.UserGender)
+		<br><br>
+		<img id="img_preview" src="@Directories.GetUserAvatarFullPath(@Model?.AvatarName ?? null,100)" height="100" width="100" alt="user-avatar" />
+		<br><br>
 	
-	@Html.EditorFor(x=> x.AvatarFile)
-	@Html.EditorFor(x=> x.biography)
+		@Html.EditorFor(x=> x.AvatarFile)
+		@Html.EditorFor(x=> x.biography)
 	
-	@if (@Model.IsBanned)
-	{
-		<a class="btn btn-danger  mr-1" onclick="changeBan('/Admin/Home/ChangeUserBan/@Model.Id')">بــــن کردن</a>
-	}
-	else
-	{
-		<a class="btn btn-primary mr-1" onclick="changeBan('/Admin/Home/ChangeUserBan/@Model.Id')">از بن در آوردن</a>
-	}
+		@if (@Model.IsBanned)
+		{
+			<a class="btn btn-danger  mr-1" onclick="changeBan('/Admin/Home/ChangeUserBan/@Model.Id')">بــــن کردن</a>
+		}
+		else
+		{
+			<a class="btn btn-primary mr-1" onclick="changeBan('/Admin/Home/ChangeUserBan/@Model.Id')">از بن در آوردن</a>
+		}
 	
-	@if (Model.IsActive)
-	{
-		<a class="btn btn-danger mr-1" onclick="changeActivation('/Admin/Home/ChangeUserActivation/@Model.Id')"> غیر فعال کردن</a>
-	}
-	else
-	{
-		<a class="btn btn-primary mr-1" onclick="changeActivation('/Admin/Home/ChangeUserActivation/@Model.Id')">  فعال کردن</a>
-	}
-	<br><br>
-	<button type="submit" onclick="return confirmSubmission()" class="btn btn-success mr-1 ">ثبت ویرایش</button>
-	<a class="btn btn-danger m-3" href="../">انصراف</a>
-</form>
+		@if (Model.IsActive)
+		{
+			<a class="btn btn-danger mr-1" onclick="changeActivation('/Admin/Home/ChangeUserActivation/@Model.Id')"> غیر فعال کردن</a>
+		}
+		else
+		{
+			<a class="btn btn-primary mr-1" onclick="changeActivation('/Admin/Home/ChangeUserActivation/@Model.Id')">  فعال کردن</a>
+		}
+		
+		<hr>
+		<button type="submit" onclick="return confirmSubmission()" class="btn btn-success mr-1 ">ثبت ویرایش</button>
+		<a class="btn btn-danger m-3" href="./">انصراف</a>
+	</form>
 </div>
+
+
 @section Scripts
 {
 	
@@ -52,9 +56,7 @@
 		function confirmSubmission() {
 			return confirm("آیا مطمعنید؟");
 		}
-	</script>
 
-	<script>
 		function changeActivation(url, errorTitle, errorText) {
 			if (errorTitle == null || errorTitle == "undefined") {
 				errorTitle = "عملیات ناموفق";
@@ -101,9 +103,7 @@
 				}
 			});
 		}
-	</script>
 	
-	<script>
 		function changeBan(url, errorTitle, errorText) {
 			if (errorTitle == null || errorTitle == "undefined") {
 				errorTitle = "عملیات ناموفق";
@@ -150,6 +150,33 @@
 				}
 			});
 		}
-	</script>
+	  
+		//event listener for input type file for preventing choosing any file except image file before user submit the form
+		document.getElementById('file_input').addEventListener('change', function(event) {
+			const file = event.target.files[0];
+			if (validateImageFile(file)) {
+				if (file && file.type.startsWith('image/')) {
+					const reader = new FileReader();
+					reader.onload = function(e) {
+						const img = document.getElementById('img_preview');
+						img.src = e.target.result;
+						img.style.display = 'block';
+					};
+					reader.readAsDataURL(file);
+				}
+			}
+			
+		});
 
+		function validateImageFile(file) {
+			const allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp'];
+			if (file && allowedImageTypes.includes(file.type)) {
+				return true;
+			} else {
+				ErrorAlert('تصویر نامعتبر!','لطفا تصویر معتبر که پسوند های jpeg,png,bmp,webp داشته باشد انتخاب کنید');
+				$("#file_input").val('');
+				return false;
+			}
+		}
+	</script>
 }

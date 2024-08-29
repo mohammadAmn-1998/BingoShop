@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Users1.Application.Contract.RoleService.Query;
 using Users1.Application.Contract.UserService.Query;
 using Users1.Query.Services;
 
@@ -17,6 +18,7 @@ namespace Users1.Query.Bootstrapper
 		{
 
 			services.AddTransient<IUserQuery, UserQuery>();
+			services.AddTransient<IRoleQuery, RoleQuery>();
 
 		}
 	}

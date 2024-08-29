@@ -9,9 +9,9 @@ namespace Shared.Domain.Enums
 	public enum Gender
 	{
 
-		PreferNotToSay,
-		Man,
-		Woman,
+		نامشخص,
+		مرد,
+		زن,
 
 	}
 }

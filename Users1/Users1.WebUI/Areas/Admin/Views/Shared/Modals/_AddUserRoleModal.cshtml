@@ -1,0 +1,37 @@
+﻿@model Users1.Application.Contract.RoleService.Command.CreateUserRole
+
+<!-- Modal -->
+@if (Model.Roles == null)
+{
+	<h1>هنوز نقشی وجود ندارد...</h1>
+}
+else
+{
+	<form action="/Admin/Roles/AddUserRole" method="post" class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">اضافه کردن نقش به کاربر</h5>
+
+			</div>
+			<div class="modal-body">
+				@Html.HiddenFor(x=> x.userId)
+				<div class="form-group">
+					<select asp-for="roleId" class="form-control" >
+
+						@foreach (var role in Model.Roles)
+						{
+							<option  value="@role.Id">@role.Title</option>
+						}
+					</select>
+					<span class="text-danger" asp-validation-for="@Model.roleId"></span>
+				</div>
+			
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">انصراف</button>
+				<button type="submit" class="btn btn-primary">افزودن</button>
+			</div>
+		</div>
+	</form>
+}
+

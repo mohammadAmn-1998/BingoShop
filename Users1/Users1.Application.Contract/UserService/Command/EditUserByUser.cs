@@ -23,7 +23,7 @@ namespace Users1.Application.Contract.UserService.Command
 		public IFormFile? AvatarFile { get; set; }
 
 		[Display(Name = "جنسیت")]
-		[UIHint("Gender")]
+		[UIHint("Enum")]
 		public Gender UserGender { get; set; }
 
 		[Display(Name = "بیوگرافی")]

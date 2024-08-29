@@ -77,6 +77,30 @@ namespace Users1.Application.Services
 			}
 		}
 
+		public async Task<OperationResult> AddRoleToUser(long userId, long roleId)
+		{
+			try
+			{
+
+				var userRole = await _roleRepository.GetUserRole(userId, roleId);
+
+				if(userRole !=null)
+					return new(Status.Error,ErrorMessages.DuplicateUserRoleError);
+
+				if (await _roleRepository.AddRolesToUser(userId, new List<long>() { roleId })) 
+					return new(Status.Success);
+
+
+				throw new Exception();
+
+			}
+			catch (Exception e)
+			{
+				return new(Status.InternalServerError, ErrorMessages.InternalServerError);
+
+			}
+		}
+
 		public EditRole GetRoleForEdit(long roleId)
 		{
 			try
@@ -122,6 +146,19 @@ namespace Users1.Application.Services
 			{
 				return new(Status.InternalServerError, ErrorMessages.InternalServerError);
 			}
+		}
+
+		public async Task<bool> DeleteUserRole(long userId, long roleId)
+		{
+			try
+			{
+				return await _roleRepository.DeleteUserRole(userId, roleId);
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+			
 		}
 	}
 }

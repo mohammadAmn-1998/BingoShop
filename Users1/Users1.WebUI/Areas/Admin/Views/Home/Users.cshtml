@@ -1,10 +1,16 @@
 ﻿@using Shared.Application.Utility
+@using Users.Domain.UserAgg
+@using Users1.Application.Contract.RoleService.Command
+@using Users1.Application.Contract.RoleService.Query
 @model List<Users1.Application.Contract.UserService.Query.UserQueryModel>?
 @{
 	ViewData["Title"] = "کاربران سایت";
 	ViewData["Selected"] = "Users";
+	
 	var counter = 0;
+	
 }
+
 
 
 <div class="table-responsive-md">
@@ -45,7 +51,10 @@
 						@foreach (var role in @user.Roles)
 						{
 							@role.Title
+
+							<a class="btn btn-danger mr-1" onclick="deleteUserRole('@user.userId','@role.Id')">حذف</a>
 						}
+					
 					</td>
 
 					<td class="btn-group-sm">
@@ -57,16 +66,26 @@
 						{
 							@* <ajax-change-activation-button url="/Admin/Home?handler=ChangeUserActivation&userId=@user.userId" error-text="عملیات انجام نشد " error-title="" btn-color="danger">غیر فعال کردن</ajax-change-activation-button> *@
 
-								<a class="btn btn-danger mr-1" onclick="changeActivation('/Admin/Home/ChangeUserActivation/@user.userId')"> غیر فعال کردن</a>
+								<a class="btn btn-danger" onclick="changeActivation('/Admin/Home/ChangeUserActivation/@user.userId')"> غیر فعال کردن کاربر</a>
 						}
 						else
 						{
 							@* 	<ajax-change-activation-button url="/Admin/Home?handler=ChangeUserActivation&userId=@user.userId" btn-color="primary"> فعال کردن</ajax-change-activation-button> *@
 
 
-								<a class="btn btn-primary mr-1" onclick="changeActivation('/Admin/Home/ChangeUserActivation/@user.userId')">  فعال کردن</a>
+								<a class="btn btn-primary " onclick="changeActivation('/Admin/Home/ChangeUserActivation/@user.userId')">  فعال کردن کاربر</a>
 						}
-					
+						
+						<!-- Button trigger modal -->
+						<a  class="btn btn-primary" onclick="getAddRoleToUserModel('@user.userId')"  data-toggle="modal" data-target="#exampleModal">
+						 	 افزودن نقش جدید به کاربر
+						</a>
+						
+						
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							
+						</div>
+					   
 
 					</td>
 				</tr>
@@ -104,24 +123,25 @@
 											$.ajax({
 												url: url,
 												type: "get",
-												beforeSend: function () {
+												beforeSend: function() {
 													$(".loading").show();
 												},
-												complete: function () {
+												complete: function() {
 													$(".loading").hide();
 												},
-												error: function (data) {
+												error: function(data) {
 													ErrorAlert("مشکلی در اعملیات رخ داده", "لطفا در زمان دیگری امتحان کنید");
 												}
-											}).done(function (result) {
+											}).done(function(result) {
 												{
+
 													if (result.success) {
-								Success(result.title, result.message);
+														Success(result.title, result.message);
 													} else {
-								ErrorAlert(result.title, result.message);
+														ErrorAlert(result.title, result.message);
 													}
 
-													setTimeout(function (parameters) {
+													setTimeout(function(parameters) {
 															location.reload();
 														},
 														2000);
@@ -132,8 +152,68 @@
 										}
 									});
 								}
+
+								function deleteUserRole(userId, roleId) {
+
+									Swal.fire({
+										title: "هشدار !!",
+										text: "آیا از انجام عملیات اطمینان دارید ؟",
+										icon: "warning",
+										confirmButtonText: "بله",
+										showCancelButton: true,
+										cancelButtonText: "خیر",
+										preConfirm: () => {
+											$.ajax({
+												url: `/Admin/Roles/DeleteUserRole?userId=${userId}&roleId=${roleId}`,
+												type: "get",
+												beforeSend: function() {
+													$(".loading").show();
+												},
+												complete: function() {
+													$(".loading").hide();
+												},
+												error: function(data) {
+													ErrorAlert("مشکلی در اعملیات رخ داده", "لطفا در زمان دیگری امتحان کنید");
+												}
+											}).done(function(result) {
+												{
+													if (result.success) {
+														Success(result.title, result.message);
+													} else {
+														ErrorAlert(result.title, result.message);
+													}
+
+													setTimeout(function(parameters) {
+															location.reload();
+														},
+														2000);
+												}
+											});
+
+
+										}
+									});
+								}
+
+
+								function getAddRoleToUserModel(userId) {
+
+
+									$.ajax({
+										url: `/Admin/Roles/GetRolesForAddRoleToUser?userId=${userId}`,
+										type: "get",
+										error: function(data) {
+											ErrorAlert("مشکلی در اعملیات رخ داده", "لطفا در زمان دیگری امتحان کنید");
+										}
+
+									}).done(function(data) {
+										$("#exampleModal").html('');
+										$("#exampleModal").append(data);
+
+									});
+								}
 							</script>
-							
-							
+
+
 
 						}

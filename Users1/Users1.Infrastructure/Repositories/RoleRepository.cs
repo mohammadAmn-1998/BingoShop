@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection.Metadata.Ecma335;
+using Microsoft.EntityFrameworkCore;
 using Shared.Domain.SeedWorks.Base;
 using Users1.Application.Contract.RoleService.Command;
 using Users1.Domain.UserAgg;
@@ -141,6 +142,37 @@ internal class RoleRepository : BaseRepository, IRoleRepository
 		catch (Exception e)
 		{
 			return false;
+		}
+	}
+
+	public async Task<UserRole?> GetUserRole(long userId, long roleId)
+	{
+		try
+		{
+			return Table<UserRole>().FirstOrDefault(x => x.RoleId == roleId && x.UserId == userId);
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
+	}
+
+	public async Task<bool> DeleteUserRole(long userId, long roleId)
+	{
+		try
+		{
+			var userRole = await GetUserRole(userId, roleId);
+			if (userRole is null) throw new NullReferenceException();
+
+			Delete(userRole);
+			return await Save() > 0;
+
+		}
+		catch (Exception e)
+		{
+	      
+			return false;
+
 		}
 	}
 }

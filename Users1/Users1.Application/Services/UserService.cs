@@ -29,6 +29,8 @@ namespace Users1.Application.Services
 		{
 			try
 			{
+				//change mobile number pattern to this pattern : 09xxxxxxxxx
+				command.Mobile = command.Mobile.Trim().ChangeToPersianMobileNumber();
 				var user = _userRepository.GetByMobile(command.Mobile.Trim());
 				var passkey = RandomGenerator.GenerateRandomUserTwoStepVerificationPassKey();
 
@@ -64,6 +66,8 @@ namespace Users1.Application.Services
 		{
 			try
 			{
+				//change mobile number pattern to this pattern : 09xxxxxxxxx
+				command.Mobile = command.Mobile.Trim().ChangeToPersianMobileNumber();
 				var user = _userRepository.GetByMobile(command.Mobile);
 				if (user == null) return new(Status.NotFound, ErrorMessages.MobileNotFound);
 
@@ -99,13 +103,13 @@ namespace Users1.Application.Services
 				var user = _userRepository.GetById(command.Id);
 				if (user == null) return new(Status.NotFound, ErrorMessages.UserNotFound);
 
-				if (command.Mobile.Trim() != user.Mobile)
+				if (command.Mobile.Trim().ChangeToPersianMobileNumber() != user.Mobile)
 				{
-					if (await MobileExists(command.Mobile))
+					if (await MobileExists(command.Mobile.Trim().ChangeToPersianMobileNumber()))
 						return new(Status.BadRequest, ErrorMessages.DuplicateMobileError);
 				}
 
-				if (!string.IsNullOrEmpty(command.Email?.Trim())&& command.Email?.Trim() != user.Email)
+				if (!string.IsNullOrEmpty(command.Email?.Trim()) && command.Email?.Trim() != user.Email.Trim())
 				{
 					
 					if (await EmailExists(command.Email!))

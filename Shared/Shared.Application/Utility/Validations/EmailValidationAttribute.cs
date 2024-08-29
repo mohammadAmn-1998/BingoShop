@@ -16,8 +16,8 @@ namespace Shared.Application.Utility.Validations
 
 			var email = value as string;
 
-			const string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-			return Regex.IsMatch(email!, pattern);
+			var regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+			return regex.IsMatch(email!);
 
 		}
 	}

@@ -17,9 +17,11 @@ namespace Users1.Application.Contract.UserService.Command
 		
 		[Display(Name = "شماره همراه")]
 		[MobileValidation(ErrorMessage = ErrorMessages.MobileIsInvalid)]
+		[Required(ErrorMessage = ErrorMessages.FieldIsRequired)]
 		public string Mobile { get; set; }
 
 		[Display(Name = "ایمیل")]
+		[EmailValidation(ErrorMessage = ErrorMessages.EmailIsInvalid)]
 		[MaxLength(200, ErrorMessage = ErrorMessages.MaxLengthError)]
 		public string? Email { get; set; }
 

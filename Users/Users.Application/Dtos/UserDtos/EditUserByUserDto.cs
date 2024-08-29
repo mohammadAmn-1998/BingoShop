@@ -48,7 +48,7 @@ namespace Users.Application.Dtos.UserDtos
         public string? Biography { get; set; }
 
         [Display(Name = "جنسیت")]
-        public Gender Gender { get; set; } = Gender.PreferNotToSay;
+        public Gender Gender { get; set; } = Gender.نامشخص;
 
 
     }

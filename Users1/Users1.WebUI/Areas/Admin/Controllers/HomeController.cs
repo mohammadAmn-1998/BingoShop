@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shared.Domain.Enums;
+using Users1.Application.Contract.RoleService.Command;
+using Users1.Application.Contract.RoleService.Query;
 using Users1.Application.Contract.UserService.Command;
 using Users1.Application.Contract.UserService.Query;
 using Users1.WebUI.Utility;
@@ -14,11 +16,13 @@ namespace Users1.WebUI.Areas.Admin.Controllers
 
 		private readonly IUserQuery _userQuery;
 		private readonly IUserService _userService;
+		private readonly IRoleQuery _roleQuery;
 
-		public HomeController(IUserQuery userQuery, IUserService userService)
+		public HomeController(IUserQuery userQuery, IUserService userService, IRoleQuery roleQuery)
 		{
 			_userQuery = userQuery;
 			_userService = userService;
+			_roleQuery = roleQuery;
 		}
 
 		public IActionResult Index()
@@ -26,8 +30,9 @@ namespace Users1.WebUI.Areas.Admin.Controllers
 			return View();
 		}
 
-		public IActionResult Users()
+		public async Task<IActionResult> Users()
 		{
+			 
 			var model = _userQuery.GetAll();
 
 			return View(model);
@@ -51,7 +56,7 @@ namespace Users1.WebUI.Areas.Admin.Controllers
 			var result = await _userService.Edit(model);
 
 			if (result.Status == Status.Success)
-			  return RedirectAndShowAlert(Redirect("../"), result);
+			  return RedirectAndShowAlert(Redirect("./"), result);
 				
 			ErrorAlert(result.Message);
 			return View(model);

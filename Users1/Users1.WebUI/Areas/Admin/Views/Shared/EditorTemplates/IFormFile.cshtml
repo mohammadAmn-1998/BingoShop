@@ -2,7 +2,7 @@
 <div class="form-group">
 	
 	<label asp-for="@Model"></label>
-	<input type="file" class="form-control" asp-for="@Model" accept="image/png, image/jpeg" />
+	<input type="file" class="form-control"  id="file_input" asp-for="@Model" placeholder="یک تصویر انتخاب کنید" accept="image/png, image/jpeg ,image/svg , image/webp ,image/jpg" />
 	<span asp-validation-for="@Model" class="text-danger"></span>
 
 </div>

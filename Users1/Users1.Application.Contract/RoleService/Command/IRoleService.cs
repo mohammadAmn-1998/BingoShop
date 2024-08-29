@@ -12,8 +12,12 @@ public interface IRoleService
 
     Task<OperationResult> EditRole(EditRole command);
 
+	Task<OperationResult> AddRoleToUser(long userId,long roleId);
+
     EditRole GetRoleForEdit(long roleId);
 
     Task<OperationResult> EditUserRole(long userId, List<long> roles);
+
+    Task<bool> DeleteUserRole(long userId, long roleId);
 
 }

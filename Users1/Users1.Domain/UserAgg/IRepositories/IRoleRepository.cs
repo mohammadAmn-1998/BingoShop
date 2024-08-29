@@ -11,4 +11,6 @@ public interface IRoleRepository
 	Task<bool> Edit(EditRole command);
 	Task<bool> AddRolesToUser(long userId, List<long> roles);
 	Task<bool> DeleteUserRoles(List<UserRole> userRoles);
+	Task<UserRole?> GetUserRole(long userId,long roleId);
+	Task<bool> DeleteUserRole(long userId,long roleId);
 }

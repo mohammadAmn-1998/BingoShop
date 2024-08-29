@@ -78,7 +78,7 @@ namespace Users1.Domain.UserAgg
 
 		public static User Register(string mobile,string passKey)
 		{
-			return new("", mobile, Guid.NewGuid().ToString(), "default.png",passKey , " ",Gender.PreferNotToSay," ",mobile,null);
+			return new("", mobile, Guid.NewGuid().ToString(), "default.png",passKey , " ",Gender.نامشخص," ",mobile,null);
 		}
 
 		public void ChangePassKey(string passKey)

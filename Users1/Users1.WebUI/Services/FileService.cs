@@ -19,9 +19,13 @@ namespace Users1.WebUI.Services
 		{
 			try
 			{
-				var extension = Path.GetExtension(file.Name);
+				var extension = Path.GetExtension(file.FileName);
 				var fileName = Guid.NewGuid() + extension;
-				var filePath = Path.Combine(_environment.WebRootPath, Path.Combine(folder, fileName));
+
+				if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), folder)))
+					Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), folder));
+
+				var filePath = Path.Combine(Directory.GetCurrentDirectory(), Path.Combine(folder, fileName)).Replace("/","\\");
 
 				using var str = File.Create(filePath);
 
@@ -38,8 +42,8 @@ namespace Users1.WebUI.Services
 
 		public bool ResizeImage(string imageName, string folder, int newSize)
 		{
-			var imageFilePath = Path.Combine(_environment.WebRootPath, folder) + $"/{imageName}";
-			var newDirectory = Path.Combine(_environment.WebRootPath, folder) + $"/{newSize}";
+			var imageFilePath = Path.Combine(Path.Combine(Directory.GetCurrentDirectory(), folder),imageName) ;
+			var newDirectory = Path.Combine(Directory.GetCurrentDirectory(), folder)+ newSize;
 
 			if (!Directory.Exists(newDirectory))
 				Directory.CreateDirectory(newDirectory);
@@ -62,7 +66,7 @@ namespace Users1.WebUI.Services
 		{
 			try
 			{
-				var filePath = Path.Combine(_environment.WebRootPath, Path.Combine(folder, fileName));
+				var filePath = Path.Combine(Directory.GetCurrentDirectory(), Path.Combine(folder, fileName));
 				File.Delete(filePath);
 				return true;
 

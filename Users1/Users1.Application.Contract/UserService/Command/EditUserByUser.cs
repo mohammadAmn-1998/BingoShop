@@ -19,14 +19,16 @@ namespace Users1.Application.Contract.UserService.Command
 		public string? FullName { get; set; }
 
 		public string AvatarName { get; set; }
-		[Display(Name = "تصویرکاربری")]
+		[Display(Name = "تصویر جدید کاربری")]
 		public IFormFile? AvatarFile { get; set; }
 
 		[Display(Name = "جنسیت")]
+		[UIHint("Gender")]
 		public Gender UserGender { get; set; }
 
 		[Display(Name = "بیوگرافی")]
 		[MaxLength(1000, ErrorMessage = ErrorMessages.MaxLengthError)]
+		[UIHint("MultilineText")]
 		public string? biography { get; set; }
 	}
 }

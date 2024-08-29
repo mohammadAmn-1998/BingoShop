@@ -1,0 +1,139 @@
+﻿@using Shared.Application.Utility
+@model List<Users1.Application.Contract.UserService.Query.UserQueryModel>?
+@{
+	ViewData["Title"] = "کاربران سایت";
+	ViewData["Selected"] = "Users";
+	var counter = 0;
+}
+
+
+<div class="table-responsive-md">
+	<table class="table table-bordered text-sm table-sm  table-hover ">
+
+		<thead class="">
+
+		<tr>
+			<th class="">#</th>
+			<th class="col-2">نام کابری</th>
+			<th class="col-2">موبایل</th>
+			<th class="col-2">آواتار</th>
+			<th class="col-1">نقش</th>
+			<th class="col-4">عملیات</th>
+		</tr>
+
+		</thead>
+		<tbody>
+
+		@if (Model !=null && Model.Any())
+		{
+			@foreach (var user in Model)
+			{
+				<tr>
+					<td>@(counter += 1)</td>
+
+					<td>
+						@user.UserName
+					</td>
+
+					<td>
+						@user.Mobile
+					</td>
+					<td class="mr-3 mt-3">
+						<img src="@Directories.GetUserAvatarFullPath(@user.Avatar,100)" width="100" height="100" alt="user-avatar" /></td>
+					
+					<td>
+						@foreach (var role in @user.Roles)
+						{
+							@role.Title
+						}
+					</td>
+
+					<td class="btn-group-sm">
+
+						<a class="btn   btn-primary mr-1" href="/Admin/Home/EditUser?userId=@user.userId" >
+							ویرایش
+						</a>
+						@if (@user.IsActive)
+						{
+							@* <ajax-change-activation-button url="/Admin/Home?handler=ChangeUserActivation&userId=@user.userId" error-text="عملیات انجام نشد " error-title="" btn-color="danger">غیر فعال کردن</ajax-change-activation-button> *@
+
+								<a class="btn btn-danger mr-1" onclick="changeActivation('/Admin/Home/ChangeUserActivation/@user.userId')"> غیر فعال کردن</a>
+						}
+						else
+						{
+							@* 	<ajax-change-activation-button url="/Admin/Home?handler=ChangeUserActivation&userId=@user.userId" btn-color="primary"> فعال کردن</ajax-change-activation-button> *@
+
+
+								<a class="btn btn-primary mr-1" onclick="changeActivation('/Admin/Home/ChangeUserActivation/@user.userId')">  فعال کردن</a>
+						}
+					
+
+					</td>
+				</tr>
+
+
+			}
+		}
+		else
+		{
+			<h1>چیزی برای نمایش وجود ندارد...</h1>
+		}
+
+		</tbody>
+	</table>
+</div>
+
+						@section Scripts
+						{
+							<script>
+								function changeActivation(url, errorTitle, errorText) {
+									if (errorTitle == null || errorTitle == "undefined") {
+										errorTitle = "عملیات ناموفق";
+									}
+									if (errorText == null || errorText == "undefined") {
+										errorText = "";
+									}
+									Swal.fire({
+										title: "هشدار !!",
+										text: "آیا از انجام عملیات اطمینان دارید ؟",
+										icon: "warning",
+										confirmButtonText: "بله",
+										showCancelButton: true,
+										cancelButtonText: "خیر",
+										preConfirm: () => {
+											$.ajax({
+												url: url,
+												type: "get",
+												beforeSend: function () {
+													$(".loading").show();
+												},
+												complete: function () {
+													$(".loading").hide();
+												},
+												error: function (data) {
+													ErrorAlert("مشکلی در اعملیات رخ داده", "لطفا در زمان دیگری امتحان کنید");
+												}
+											}).done(function (result) {
+												{
+													if (result.success) {
+								Success(result.title, result.message);
+													} else {
+								ErrorAlert(result.title, result.message);
+													}
+
+													setTimeout(function (parameters) {
+															location.reload();
+														},
+														2000);
+												}
+											});
+
+
+										}
+									});
+								}
+							</script>
+							
+							
+
+						}

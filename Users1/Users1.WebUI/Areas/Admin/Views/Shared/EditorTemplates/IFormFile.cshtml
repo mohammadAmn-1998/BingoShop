@@ -1,0 +1,8 @@
+﻿@model IFormFile
+<div class="form-group">
+	
+	<label asp-for="@Model"></label>
+	<input type="file" class="form-control" asp-for="@Model" accept="image/png, image/jpeg" />
+	<span asp-validation-for="@Model" class="text-danger"></span>
+
+</div>

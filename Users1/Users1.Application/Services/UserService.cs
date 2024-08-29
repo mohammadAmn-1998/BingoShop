@@ -99,6 +99,19 @@ namespace Users1.Application.Services
 				var user = _userRepository.GetById(command.Id);
 				if (user == null) return new(Status.NotFound, ErrorMessages.UserNotFound);
 
+				if (command.Mobile.Trim() != user.Mobile)
+				{
+					if (await MobileExists(command.Mobile))
+						return new(Status.BadRequest, ErrorMessages.DuplicateMobileError);
+				}
+
+				if (!string.IsNullOrEmpty(command.Email?.Trim())&& command.Email?.Trim() != user.Email)
+				{
+					
+					if (await EmailExists(command.Email!))
+						return new(Status.BadRequest, ErrorMessages.DuplicateEmailAddressError);
+				}
+
 				if (command.AvatarFile is not null)
 				{
 					if (!command.AvatarFile.IsImage())
@@ -107,8 +120,8 @@ namespace Users1.Application.Services
 					var imageName = _fileService.UploadFileAndReturnFileName(command.AvatarFile, Directories.UserAvatarDirectory);
 					if (imageName is null) throw new NullReferenceException();
 
-					_fileService.ResizeImage(imageName, Directories.UserAvatarDirectory100, 100);
-					_fileService.ResizeImage(imageName, Directories.UserAvatarDirectory400, 400);
+					_fileService.ResizeImage(imageName, Directories.UserAvatarDirectory, 100);
+					_fileService.ResizeImage(imageName, Directories.UserAvatarDirectory, 400);
 
 					command.AvatarName = imageName;
 					if (await _userRepository.EditByAdmin(command))
@@ -136,7 +149,7 @@ namespace Users1.Application.Services
 			}
 		}
 
-		public async Task<OperationResult> EditByUser(EditUserByUser command, int userId)
+		public async Task<OperationResult> EditByUser(EditUserByUser command, long userId)
 		{
 			try
 			{
@@ -151,8 +164,8 @@ namespace Users1.Application.Services
 					var imageName = _fileService.UploadFileAndReturnFileName(command.AvatarFile, Directories.UserAvatarDirectory);
 					if (imageName is null) throw new NullReferenceException();
 
-					_fileService.ResizeImage(imageName, Directories.UserAvatarDirectory100, 100);
-					_fileService.ResizeImage(imageName, Directories.UserAvatarDirectory400, 400);
+					_fileService.ResizeImage(imageName, Directories.UserAvatarDirectory, 100);
+					_fileService.ResizeImage(imageName, Directories.UserAvatarDirectory, 400);
 
 					//
 					command.AvatarName = imageName;
@@ -180,7 +193,7 @@ namespace Users1.Application.Services
 			}
 		}
 
-		public EditUserByUser GetForEditByUser(int userId)
+		public EditUserByUser GetForEditByUser(long userId)
 		{
 			try
 			{
@@ -203,7 +216,7 @@ namespace Users1.Application.Services
 			}
 		}
 
-		public EditUserByAdmin GetForEditByAdmin(int userId)
+		public EditUserByAdmin GetForEditByAdmin(long userId)
 		{
 			try
 			{
@@ -219,7 +232,9 @@ namespace Users1.Application.Services
 					AvatarName = user.Avatar,
 					AvatarFile = null,
 					UserGender = user.Gender,
-					biography = user.Biography
+					biography = user.Biography,
+					IsBanned = user.IsBanned,
+					IsActive = user.Active
 				};
 			}
 			catch (Exception e)
@@ -228,14 +243,24 @@ namespace Users1.Application.Services
 			}
 		}
 
-		public async Task<bool> ActivationChange(int id)
+		public async Task<bool> ActivationChange(long id)
 		{
 			return await _userRepository.ChangeActivation(id);
 		}
 
-		public async Task<bool> BanChange(int id)
+		public async Task<bool> BanChange(long id)
 		{
 			return await _userRepository.ChangeBan(id);
+		}
+
+		public async Task<bool> MobileExists(string mobile)
+		{
+			return await _userRepository.MobileExists(mobile);
+		}
+
+		public async Task<bool> EmailExists(string email)
+		{
+			return await _userRepository.EmailExists(email);
 		}
 
 		public bool Logout()

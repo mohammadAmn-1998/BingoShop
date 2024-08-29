@@ -21,5 +21,7 @@ public interface IUserRepository
 
 	Task<bool> EditByAdmin(EditUserByAdmin command);
 	Task<bool> EditByUser(EditUserByUser command);
+	Task<bool> MobileExists(string mobile);
+	Task<bool> EmailExists(string email);
 
 }

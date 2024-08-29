@@ -234,5 +234,52 @@ function deleteCookie(cookieName) {
 
             }
         });
+}
+
+function changeActivation(url, errorTitle, errorText) {
+    if (errorTitle == null || errorTitle == "undefined") {
+        errorTitle = "عملیات ناموفق";
     }
+    if (errorText == null || errorText == "undefined") {
+        errorText = "";
+    }
+    Swal.fire({
+        title: "هشدار !!",
+        text: "آیا از انجام عملیات اطمینان دارید ؟",
+        icon: "warning",
+        confirmButtonText: "بله",
+        showCancelButton: true,
+        cancelButtonText: "خیر",
+        preConfirm: () => {
+            $.ajax({
+                url: url,
+                type: "get",
+                beforeSend: function () {
+                    $(".loading").show();
+                },
+                complete: function () {
+                    $(".loading").hide();
+                },
+                error: function (data) {
+                    ErrorAlert("مشکلی در اعملیات رخ داده", "لطفا در زمان دیگری امتحان کنید");
+                }
+            }).done(function (result) {
+                {
+                    if (response.success) {
+                        Success(response.title,response.message);
+                    } else {
+                        ErrorAlert( response.title,response.message);
+                    }
+
+                    setTimeout(function (parameters) {
+                            location.reload();
+                        },
+                        2000);
+                }
+            });
+
+
+        }
+    });
+}
 

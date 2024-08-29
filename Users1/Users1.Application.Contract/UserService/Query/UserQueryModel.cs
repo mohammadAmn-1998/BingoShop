@@ -1,4 +1,5 @@
 ﻿using Shared.Domain.Enums;
+using Users1.Application.Contract.RoleService.Query;
 
 namespace Users1.Application.Contract.UserService.Query;
 
@@ -22,6 +23,12 @@ public class UserQueryModel
 	public string Mobile { get; set; }
 
 	public string Email { get; set; }
+
+	public List<RoleQueryModel> Roles { get; set; }
+
+	public bool IsActive { get; set; }
+
+
 
 
 

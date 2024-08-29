@@ -141,7 +141,7 @@ namespace Users1.Infrastructure.Repositories
 				if(user is null) return false;
 
 				user.EditByAdmin(command.FullName ?? "" ,command.Mobile,command.Email?? "",command.AvatarName,command.UserGender,command.biography);
-
+				Update(user);
 				return await Save() > 0;
 
 			}
@@ -163,6 +163,30 @@ namespace Users1.Infrastructure.Repositories
 
 				return await Save() > 0;
 
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
+
+		public async Task<bool> MobileExists(string mobile)
+		{
+			try
+			{
+				return await Table<User>().AnyAsync(x => x.Mobile == mobile);
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
+
+		public async Task<bool> EmailExists(string email)
+		{
+			try
+			{
+				return await Table<User>().AnyAsync(x => x.Email == email);
 			}
 			catch (Exception e)
 			{

@@ -38,7 +38,7 @@ namespace Users1.WebUI.Controllers
 			
 
 		}
-		public async void ErrorAlert(string message, bool isReload = false)
+		public async void ErrorAlert(string message , bool isReload = false)
 		{
 			var model = JsonConvert.SerializeObject(OperationResult.Error(message));
 			HttpContext.Response.Cookies.Append("SystemAlert", model);

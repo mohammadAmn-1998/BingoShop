@@ -2308,6 +2308,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\Shared\EditorTemplates\Boolean.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\EditorTemplates\CkEditor4.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\EditorTemplates\EmailAddress.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\EditorTemplates\Enum.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\EditorTemplates\IFormFile.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\EditorTemplates\Int32.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\EditorTemplates\MultilineText.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\EditorTemplates\String.cshtml" />
     <None Include="wwwroot\assets\admin\bower_components\.DS_Store" />
     <None Include="wwwroot\assets\admin\bower_components\bootstrap-colorpicker\CONTRIBUTING.md" />
     <None Include="wwwroot\assets\admin\bower_components\bootstrap-colorpicker\dist\css\bootstrap-colorpicker.css.map" />
@@ -7659,6 +7667,14 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="wwwroot\assets\admin\bower_components\moment\moment.d.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Admin\Views\Home\EditUser.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Admin\Views\Home\EditUser.cshtml" />
   </ItemGroup>
 
 </Project>

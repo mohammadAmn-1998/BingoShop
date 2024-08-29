@@ -22,8 +22,9 @@ namespace Users1.Application.Contract.UserService.Command
 		[Display(Name = "ایمیل")]
 		[MaxLength(200, ErrorMessage = ErrorMessages.MaxLengthError)]
 		public string? Email { get; set; }
-		
-		
-		
+
+		public bool IsActive { get; set; }
+		public bool IsBanned { get; set; }
+
 	}
 }

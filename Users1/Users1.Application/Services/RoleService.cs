@@ -35,7 +35,7 @@ namespace Users1.Application.Services
 			{
 
 				if (_roleRepository.ExistBy(command.Title.Trim()))
-					return new(Status.BadRequest, ErrorMessages.DuplicateError);
+					return new(Status.BadRequest, ErrorMessages.DuplicateTitleError);
 
 				if (await _roleRepository.Create(command))
 					return new(Status.Success);
@@ -60,7 +60,7 @@ namespace Users1.Application.Services
 				if (role.Title.Trim() != command.Title.Trim())
 				{
 					if (_roleRepository.ExistBy(command.Title.Trim()))
-						return new(Status.BadRequest, ErrorMessages.DuplicateError);
+						return new(Status.BadRequest, ErrorMessages.DuplicateTitleError);
 				}
 				
 
@@ -112,9 +112,10 @@ namespace Users1.Application.Services
 				{
 					Title = role.Title,
 					Id = role.Id,
-					Permissions = role.Permissions.Select(x=> new EditPermission()
+					EditPermissions = role.Permissions.Select(x=> new EditPermission()
 					{
-						UserPermission = x.UserPermission
+						UserPermission = x.UserPermission,
+						IsSelected = true,
 					}).ToList()
 				};
 			}

@@ -1,0 +1,41 @@
+﻿@using Shared.Domain.Enums
+@model Users1.Application.Contract.RoleService.Command.CreateRole
+@{
+	
+}
+
+<form action="/Admin/Roles/CreateRole"  method="post" class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="createRoleModalLabel">ویرایش نقش</h5>
+
+		</div>
+		<div class="modal-body">
+			@Html.EditorFor(x=> x.Title)
+			<div class="form-group">
+				
+				<label class="form-label" asp-for="Permissions"></label>
+				@foreach (var permission in Enum.GetValues(typeof(UserPermission)).Cast<UserPermission>())
+				{
+					<label class="form-label">@permission</label>
+					<input type="checkbox" class="form-check" id="Permissions" value="@permission"  name="Permissions" )/>
+				}
+			</div>
+			
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">انصراف</button>
+			<button type="submit" class="btn btn-primary">افزودن</button>
+		</div>
+	</div>
+
+</form>
+@section Scripts
+{
+	
+	<script>
+
+		
+	</script>
+
+}

@@ -13,6 +13,6 @@ namespace Users1.Application.Contract.RoleService.Command
 		
 
 		public UserPermission UserPermission { get; set; }
-
+		public bool IsSelected { get; set; }
 	}
 }

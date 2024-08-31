@@ -1,8 +1,11 @@
-﻿namespace Users1.Application.Contract.RoleService.Command;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Users1.Application.Contract.RoleService.Command;
 
 public class EditRole : CreateRole
 {
     public long Id { get; set; }
 
-    public List<EditPermission> Permissions { get; set; }
+    [Display(Name = "دسترسی ها")]
+	public List<EditPermission>? EditPermissions { get; set; }
 }

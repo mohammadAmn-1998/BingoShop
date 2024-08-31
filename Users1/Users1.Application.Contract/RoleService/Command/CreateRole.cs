@@ -18,6 +18,6 @@ namespace Users1.Application.Contract.RoleService.Command
         public string Title { get; set; }
 
         [Display(Name = "دسترسی ها")]
-        public List<UserPermission> Permissions { get; set; }
+        public List<UserPermission>? Permissions { get; set; }
     }
 }

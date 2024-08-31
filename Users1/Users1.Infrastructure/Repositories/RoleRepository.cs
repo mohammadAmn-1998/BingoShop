@@ -79,29 +79,31 @@ internal class RoleRepository : BaseRepository, IRoleRepository
 			var role = Table<Role>().Include(x => x.Permissions).SingleOrDefault(x => x.Id == command.Id);
 			if (role is null) throw new NullReferenceException();
 
-			role.Edit(command.Title);
-			if(await Save() <= 0) throw new Exception();
+			if (command.Title.Trim() != role.Title.Trim())
+			{
+				role.Edit(command.Title);
+				Update(role);
+				if (await Save() <= 0) throw new Exception();
+			}
 
-			var permissions = Table<Permission>().Where(x => x.RoleId == command.Id).ToList();
+			var permissions = Table<Permission>().Where(x => x.RoleId == command.Id);
 			if (permissions.Any())
 			{
 				Delete(permissions);
 				if (await Save() <= 0) throw new Exception();
 			}
 
-			if (command.Permissions.Any())
+			if (command.Permissions != null && command.Permissions.Any())
 			{
-				
 				foreach (var editedPermission in command.Permissions)
 				{
-					var permission = new Permission(role.Id, editedPermission.UserPermission);
-					Update(permission);
-
+					var permission = new Permission(role.Id, editedPermission);
+					Insert(permission);
+					if (await Save() <= 0) throw new Exception();
 				}
 
-				if (await Save() <= 0) throw new Exception();
-
 			}
+			
 
 			return true;
 

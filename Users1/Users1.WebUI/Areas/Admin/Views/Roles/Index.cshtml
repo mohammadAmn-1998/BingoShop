@@ -1,1 +1,186 @@
-﻿
+﻿@using Shared.Application.Utility
+@model List<Users1.Application.Contract.RoleService.Query.RoleQueryModel>?
+
+@{
+	ViewData["Title"] = "مدیریت نقش ها";
+	ViewData["Selected"] = "Roles";
+	var counter = 0;
+}
+<br>
+<div class="row">
+	<div class=" col-lg-3"></div>
+	<a class="btn   btn-primary mt-5 col-lg-6 " onclick="goToCreateRoleModal()"
+	   data-toggle="modal" data-target="#createRoleModal">
+		افزودن نقش جدید
+	</a>
+	<div class=" col-lg-3"></div>
+
+</div>
+<hr >
+
+<div class="table-responsive-md">
+	<table class="table table-bordered text-sm table-sm  table-hover ">
+
+		<thead class="">
+
+		<tr>
+			<th class="">#</th>
+			<th class="col-2">عنوان نقش </th>
+			<th class="col-2"> دسترسی های نقش </th>
+			<th class="col-2">کاربران</th>
+			<th class="col-4">عملیات</th>
+		</tr>
+
+		</thead>
+		<tbody>
+
+		@if (Model != null && Model.Any())
+		{
+			@foreach (var role in Model)
+			{
+				<tr>
+					<td>@(counter += 1)</td>
+
+					<td>
+						@role.Title
+					</td>
+					<td>
+
+					
+					@if (role.Permissions.Any())
+					{
+
+
+						<ul>
+							@foreach (var permission in @role.Permissions)
+							{
+
+								<li>
+									@permission.UserPermission
+								</li>
+
+							}
+						</ul>
+
+					}
+						</td>
+					<td>
+						<ul>
+							@if (role.UserRoles != null && role.UserRoles.Any())
+							{
+								@foreach (var userRole in @role.UserRoles)
+								{
+
+									<li>
+											@((userRole.User.FullName == " " ? userRole.User.UserName : userRole.User.FullName))
+									</li>
+
+								}
+							}
+						
+						</ul>
+							
+					</td>
+
+					<td class="btn-group-sm">
+
+						<a class="btn   btn-primary mr-1" onclick="getRoleForEdit('@role.Id')"
+						   data-toggle="modal" data-target="#editRoleModal">
+							ویرایش
+						</a>
+							
+						@* <!-- Button trigger modal --> *@
+						@* 	<a class="btn btn-primary"  data-toggle="modal" data-target="#editRoleModal"> *@
+						@* 	افزودن نقش جدید به کاربر *@
+						@* </a> *@
+
+						<div class="modal fade" id="editRoleModal"  tabindex="-1" role="dialog" aria-labelledby="editRoleModalLabel" aria-hidden="true">
+						</div>
+
+							<div class="modal fade" id="createRoleModal" tabindex="-1" role="dialog" aria-labelledby="createRoleModalLabel" aria-hidden="true">
+						</div>
+
+						
+
+					</td>
+				</tr>
+
+
+			}
+		}
+		else
+		{
+			<h1>چیزی برای نمایش وجود ندارد...</h1>
+		}
+
+		</tbody>
+	</table>
+</div>
+
+							@section Scripts
+							{
+
+								<script>
+
+//
+//									function editRole(event) {
+//										event.preventDefault();
+//										
+//										console.log(event);
+//										const Permissions = {};
+//										var permissions = [];
+//										document.querySelectorAll('.form-check').forEach(function(element) {
+//											console.log(element.value);
+//
+//											if (element.checked) {
+//												var value = element.value;
+//												Permissions[value] = value; // Correct way to add key-value pairs to an object
+//											}
+//										});
+//										permissions.push(Permissions); // Correct way to add an object to an array
+//
+//										console.log(permissions);
+//
+//									}
+
+									function getRoleForEdit(roleId) {
+
+										$.ajax(
+											{
+												url: `/Admin/Roles/EditRole?roleId=${roleId}`,
+												type: "get",
+												error: function(data) {
+													ErrorAlert("مشکلی در اعملیات رخ داده", "لطفا در زمان دیگری امتحان کنید");
+												}
+											}
+										).done(function(data) {
+
+			                            	$("#editRoleModal").html('');
+											$("#editRoleModal").append(data);
+
+										});
+
+									}
+
+function goToCreateRoleModal() {
+
+	$.ajax(
+		{
+			url: `/Admin/Roles/CreateRole`,
+			type: "get",
+			error: function(data) {
+				ErrorAlert("مشکلی در اعملیات رخ داده", "لطفا در زمان دیگری امتحان کنید");
+			}
+		}
+	).done(function(data) {
+
+		$("#createRoleModal").html('');
+		$("#createRoleModal").append(data);
+
+	});
+
+}
+
+								</script>
+
+							}

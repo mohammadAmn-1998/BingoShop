@@ -34,6 +34,7 @@ namespace Shared.Application.Utility
 		public const string UserNotFound = "کاربر پیدا نشد!";
 		public const string PasskeyIsInvalid = "رمز شما اشتباه است!";
 		public const string DuplicateUserRoleError = "این نقش قبلا برای این کاربر ثبت شده است!";
+		public const string DuplicateTitleError = "این عنوان قبلا ثبت شده است!عنوان دیگری انتخاب کنید";
 		#endregion
 
 		#region UserAddress

@@ -18,6 +18,8 @@ namespace Users1.Application.Contract.RoleService.Query
 
 		public List<UserQueryModel> Users { get; set; }
 
+		public List<UserRoleQueryModel>? UserRoles { get; set; }
+
 		public DateTime CreateDate { get; set; }
 
 		public DateTime? UpdateDate { get; set; }

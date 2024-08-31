@@ -6,6 +6,7 @@ using Shared.Application.Utility.Validations;
 using Shared.Domain.Enums;
 using Users1.Application.Contract.UserService.Command;
 using Users1.Application.Contract.UserService.Query;
+using Users1.WebUI.Utility;
 
 namespace Users1.WebUI.Controllers
 {
@@ -89,6 +90,17 @@ namespace Users1.WebUI.Controllers
 		public IActionResult LogOut(string returnUrl = "/")
 		{
 			return _authService.Logout() ? RedirectAndShowAlert(Redirect(returnUrl),new OperationResult(Status.Info,"شما از حساب کاربری خود خارج شدید!")) : Redirect("Home/Error");
+		}
+
+		public IActionResult Profile()
+		{
+			var userId = HttpContext.User.GetUserId();
+
+			if (userId == 0) return Redirect($"/Home/Error");
+
+			var model = _userQuery.GetUserBy(userId);
+
+			return View(model);
 		}
 
 	}

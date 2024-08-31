@@ -2,7 +2,7 @@
 @using Users.Domain.UserAgg
 @using Users1.Application.Contract.RoleService.Command
 @using Users1.Application.Contract.RoleService.Query
-@model List<Users1.Application.Contract.UserService.Query.UserQueryModel>?
+@model Users1.Application.Contract.UserService.Query.FilteredUsersQueryModel
 @{
 	ViewData["Title"] = "کاربران سایت";
 	ViewData["Selected"] = "Users";
@@ -11,7 +11,25 @@
 	
 }
 
+@section HeaderContent{
+	
+	
+	<form class="form-inline ml-3  float-sm" asp-action="Users"  method="get">
+		<div class="input-group input-group-sm " style=" display: flex;
+		                                                align-items: center; width: 300px; margin-right: 400px; padding : 10px"  >
+		
+			<input class="form-control "  type="search" placeholder="نام کاربری یا موبایل را وارد کنید..." aria-label="Search" name="q" value="@Model.FilterParams.Title">
+			<button class="btn btn-sm btn-success " style="margin-right: 6px" type="submit">
+				<i class="fa fa-search">جستجو</i>
+			</button>
+			<div class="input-group-append ">
 
+			</div>
+		</div>
+		<hr>
+	</form>
+
+}
 
 <div class="table-responsive-md">
 	<table class="table table-bordered text-sm table-sm  table-hover ">
@@ -30,9 +48,9 @@
 		</thead>
 		<tbody>
 
-		@if (Model !=null && Model.Any())
+		@if (  Model.Users.Any())
 		{
-			@foreach (var user in Model)
+			@foreach (var user in Model.Users)
 			{
 				<tr>
 					<td>@(counter += 1)</td>
@@ -90,6 +108,28 @@
 					</td>
 				</tr>
 
+
+			}
+
+			if (Model.TotalPages > 1)
+			{
+				<div class="row">
+					<ul class="pagination pagination-sm " style="margin-right: 500px">
+						@if (Model.CurrentPage > 1)
+						{
+							<li class="page-item"><a disabled class="page-link" asp-area="Admin" asp-controller="Home" asp-action="Users" asp-route-pageId="@(Model.CurrentPage-1)" asp-route-q="@Model.FilterParams.Title" >&laquo;</a></li>
+						}
+						@for (var i = Model.StartPage; i <= Model.EndPage; i++)
+						{
+								<li class="page-item"><a asp-area="Admin" asp-Controller="Home" asp-action="Users" asp-route-pageId="@i" class="page-link" asp-route-q="@Model.FilterParams.Title" @((i == Model.CurrentPage ? "class='disabled-link'" : ""))>@i</a></li>
+						}
+						@if (Model.CurrentPage < Model.EndPage)
+						{
+								<li class="page-item"><a class="page-link" asp-area="Admin" asp-controller="Home"  asp-action="Users"asp-route-pageId="@(Model.CurrentPage+1)" asp-route-q="@Model.FilterParams.Title">&raquo;</a></li>
+						}
+
+					</ul>
+				</div>
 
 			}
 		}

@@ -3,10 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Users1.WebUI</title>
+    <title>@ViewData["Title"] -تست </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Users1.WebUI.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="/assets/login/css/login.css"/>
     <link rel="stylesheet" href="/assets/sweet_alert/css/sweetalert2.css"/>
 </head>
@@ -31,6 +30,8 @@
 	                    <li class="nav-item">
 							@if (Context.User.Identity.IsAuthenticated)
 							{
+								<a class="nav-link text-dark" class="btn btn-primary" asp-area="" asp-controller="Account" asp-action="Profile">LogOut </a>
+
 								<a class="nav-link text-dark" class="btn btn-danger" asp-area="" asp-controller="Account" asp-action="LogOut">LogOut </a>
 							}
 							else

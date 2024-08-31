@@ -9,11 +9,18 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
+	
+
 
 	<partial name="_AdminMainHeader"/>
 	<partial name="_AdminSideBar"/>
+	
 
 	<div class="content-wrapper">
+
+		@await RenderSectionAsync("HeaderContent", false)
+
+
 		@RenderBody()
 	</div>
 

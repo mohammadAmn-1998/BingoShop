@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Shared.Application.Models;
 using Shared.Domain.Enums;
 using Shared.Domain.SeedWorks.Base;
 using Users1.Application.Contract.RoleService.Query;
@@ -114,6 +115,60 @@ namespace Users1.Query.Services
 			catch (Exception e)
 			{
 				return null;
+			}
+		}
+
+		public FilteredUsersQueryModel GetFilteredUsers(FilterParams filterParams)
+		{
+			try
+			{
+
+				var result = Table<User>().Include(x => x.UserRoles).ThenInclude(x => x.Role).AsQueryable();
+
+				if (!string.IsNullOrEmpty(filterParams.Title))
+				{
+					result = result.Where(x => (x.UserName.Contains(filterParams.Title)) || (!x.UserName.Contains(filterParams.Title )&& x.Mobile.Contains(filterParams.Title)));
+				}
+
+				var skip = (filterParams.PageId - 1) * filterParams.Take;
+
+				FilteredUsersQueryModel filteredUsers = new();
+
+				filteredUsers.GetBasePagination(result,filterParams.PageId,filterParams.Take);
+
+				result = result.Skip(skip).Take(filterParams.Take);
+
+				filteredUsers.FilterParams = filterParams;
+				filteredUsers.Users = result.Select(x => new UserQueryModel
+				{
+					userId = x.Id,
+					UserName = x.UserName,
+					FullName = x.FullName,
+					Avatar = x.Avatar,
+					UserUniqueCode = x.UserUniqueCode,
+					biography = x.Biography,
+					Gender = x.Gender,
+					Mobile = x.Mobile,
+					Email = x.Email,
+					Roles = x.UserRoles.Select(x => new RoleQueryModel()
+					{
+						Id = x.RoleId,
+						CreateDate = x.Role.CreateDate,
+						Title = x.Role.Title,
+						UpdateDate = x.Role.UpdateDate,
+						Permissions = new(),
+						Users = new()
+
+					}).ToList(),
+					IsActive = x.Active,
+					
+				}).ToList();
+
+				return filteredUsers;
+			}
+			catch (Exception e)
+			{
+				return new();
 			}
 		}
 	}

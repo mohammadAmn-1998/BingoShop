@@ -30,10 +30,15 @@ namespace Users1.WebUI.Areas.Admin.Controllers
 			return View();
 		}
 
-		public async Task<IActionResult> Users()
+		public async Task<IActionResult> Users(string q="",int pageId=1, int take=4)
 		{
-			 
-			var model = _userQuery.GetAll();
+
+			var model = _userQuery.GetFilteredUsers(new()
+			{
+				PageId = pageId,
+				Take = take,
+				Title = q.Trim()
+			});
 
 			return View(model);
 		}

@@ -1,5 +1,5 @@
-﻿using Shared.Application.Services;
-using Users.Infrastructure.Bootstrapper;
+﻿using Blogs.Infrastructure.Bootstrapper;
+using Shared.Application.Services;
 using Users1.Application.Bootstrapper;
 using Users1.Infrastructure.Bootstrapper;
 using Users1.Query.Bootstrapper;
@@ -15,6 +15,7 @@ namespace Users1.WebUI.Bootstrapper
 
 			services.AddTransient<IFileService, FileService>();
 			services.AddTransient<IAuthService, AuthService>();
+
 
 			UserInfrastructureBootstrapper.Config(services, connectionString);
 			UsersApplicationBootstrapper.Config(services);

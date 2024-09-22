@@ -1,0 +1,19 @@
+﻿@{
+	Layout = "_LoginLayout";
+	ViewData["Title"] = "ورود یا ثبت نام";
+}
+@model Users1.Application.Contract.UserService.Command.RegisterUser
+<div class="login-page">
+	<div class="form">
+
+		<form class="login-form" asp-action="Register" method="post">
+			<strong class="text-bold p-3">لطفا برای ورود یا ثبت نام اطلاعات حساب کاربری خود را وارد کنید</strong>
+			
+			<input type="hidden" asp-for="ReturnUrl"></input>
+			<input type="text" asp-for="Mobile" placeholder="شماره موبایل را وارد کنید..."/>
+			<span class="text-danger " asp-validation-for="Mobile"></span>
+			<button class="mt3" type="submit">ورود یا ثبت نام </button>
+
+		</form>
+	</div>
+</div>

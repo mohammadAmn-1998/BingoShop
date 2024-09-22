@@ -8,10 +8,12 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <NoWarn>1701;1702;0168;</NoWarn>
+    <WarningLevel>1</WarningLevel>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <NoWarn>1701;1702;0168;</NoWarn>
+    <WarningLevel>1</WarningLevel>
   </PropertyGroup>
 
   <ItemGroup>
@@ -2304,8 +2306,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Blogs\Blogs.Infrastructure\Blogs.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Shared\Shared.Application\Shared.Application.csproj" />
-    <ProjectReference Include="..\..\Users\Users.Infrastructure\Users.Infrastructure.csproj" />
     <ProjectReference Include="..\Users1.Application\Users1.Application.csproj" />
     <ProjectReference Include="..\Users1.Query\Users1.Query.csproj" />
   </ItemGroup>
@@ -7658,6 +7660,62 @@
     <None Include="wwwroot\assets\admin\plugins\.DS_Store" />
     <None Include="wwwroot\assets\admin\plugins\iCheck\.DS_Store" />
     <None Include="wwwroot\assets\admin\plugins\input-mask\.DS_Store" />
+    <None Include="wwwroot\assets\site\fonts\font-awesome\fa-brands-400.svg" />
+    <None Include="wwwroot\assets\site\fonts\font-awesome\fa-brands-400.woff2" />
+    <None Include="wwwroot\assets\site\fonts\font-awesome\fa-duotone-900.svg" />
+    <None Include="wwwroot\assets\site\fonts\font-awesome\fa-duotone-900.woff2" />
+    <None Include="wwwroot\assets\site\fonts\font-awesome\fa-light-300.svg" />
+    <None Include="wwwroot\assets\site\fonts\font-awesome\fa-light-300.woff2" />
+    <None Include="wwwroot\assets\site\fonts\font-awesome\fa-regular-400.svg" />
+    <None Include="wwwroot\assets\site\fonts\font-awesome\fa-regular-400.woff2" />
+    <None Include="wwwroot\assets\site\fonts\font-awesome\fa-solid-900.svg" />
+    <None Include="wwwroot\assets\site\fonts\font-awesome\fa-solid-900.woff2" />
+    <None Include="wwwroot\assets\site\fonts\nucleo-outline.woff2" />
+    <None Include="wwwroot\assets\site\fonts\shabnam\Shabnam-Bold.woff2" />
+    <None Include="wwwroot\assets\site\fonts\shabnam\Shabnam-Light.woff2" />
+    <None Include="wwwroot\assets\site\fonts\shabnam\Shabnam-Medium.woff2" />
+    <None Include="wwwroot\assets\site\fonts\shabnam\Shabnam-Thin.woff2" />
+    <None Include="wwwroot\assets\site\fonts\shabnam\Shabnam.woff2" />
+    <None Include="wwwroot\assets\site\img\cart\818e9426.svg" />
+    <None Include="wwwroot\assets\site\img\footer\1.svg" />
+    <None Include="wwwroot\assets\site\img\footer\2.svg" />
+    <None Include="wwwroot\assets\site\img\footer\3.svg" />
+    <None Include="wwwroot\assets\site\img\footer\4.svg" />
+    <None Include="wwwroot\assets\site\img\logo.svg" />
+    <None Include="wwwroot\assets\site\img\seller-logo-small.svg" />
+    <None Include="wwwroot\assets\site\img\svg\701f8a6b.svg" />
+    <None Include="wwwroot\assets\site\img\svg\9284f8d1.svg" />
+    <None Include="wwwroot\assets\site\img\svg\avatar-1.svg" />
+    <None Include="wwwroot\assets\site\img\svg\avatar-2.svg" />
+    <None Include="wwwroot\assets\site\img\svg\avatar-3.svg" />
+    <None Include="wwwroot\assets\site\img\svg\avatar-4.svg" />
+    <None Include="wwwroot\assets\site\img\svg\avatar-5.svg" />
+    <None Include="wwwroot\assets\site\img\svg\avatar-6.svg" />
+    <None Include="wwwroot\assets\site\img\svg\avatar-7.svg" />
+    <None Include="wwwroot\assets\site\img\svg\contact-us.svg" />
+    <None Include="wwwroot\assets\site\img\svg\d86ea8ec.svg" />
+    <None Include="wwwroot\assets\site\img\svg\delivery.svg" />
+    <None Include="wwwroot\assets\site\img\svg\origin-guarantee.svg" />
+    <None Include="wwwroot\assets\site\img\svg\payment-terms.svg" />
+    <None Include="wwwroot\assets\site\img\svg\return-policy.svg" />
+    <None Include="wwwroot\assets\site\img\svg\user.svg" />
+    <None Include="wwwroot\assets\site\js\core\bootstrap.min.js" />
+    <None Include="wwwroot\assets\site\js\core\jquery.3.2.1.min.js" />
+    <None Include="wwwroot\assets\site\js\core\popper.min.js" />
+    <None Include="wwwroot\assets\site\js\main.js" />
+    <None Include="wwwroot\assets\site\js\now-ui-kit.js" />
+    <None Include="wwwroot\assets\site\js\plugins\AddTags.js" />
+    <None Include="wwwroot\assets\site\js\plugins\bootstrap-datepicker.js" />
+    <None Include="wwwroot\assets\site\js\plugins\bootstrap-slider.min.js" />
+    <None Include="wwwroot\assets\site\js\plugins\bootstrap-switch.js" />
+    <None Include="wwwroot\assets\site\js\plugins\countdown.min.js" />
+    <None Include="wwwroot\assets\site\js\plugins\jquery.easing.1.3.min.js" />
+    <None Include="wwwroot\assets\site\js\plugins\jquery.ez-plus.js" />
+    <None Include="wwwroot\assets\site\js\plugins\jquery.sharrre.js" />
+    <None Include="wwwroot\assets\site\js\plugins\JsLocalSearch.js" />
+    <None Include="wwwroot\assets\site\js\plugins\nouislider.min.js" />
+    <None Include="wwwroot\assets\site\js\plugins\Obj.js" />
+    <None Include="wwwroot\assets\site\js\plugins\owl.carousel.min.js" />
   </ItemGroup>
 
   <ItemGroup>

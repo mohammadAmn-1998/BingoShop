@@ -6,6 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;0168;8618;</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;0168;8618;</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <Content Include="wwwroot\assets\admin\bower_components\bootstrap-colorpicker\.bower.json" />
     <Content Include="wwwroot\assets\admin\bower_components\bootstrap-colorpicker\bower.json" />
@@ -2297,7 +2305,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\assets\images\article_img\" />
-    <Folder Include="wwwroot\assets\images\blog_category_img\" />
     <Folder Include="wwwroot\assets\images\user_img\" />
   </ItemGroup>
 
@@ -7641,19 +7648,26 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0-preview.7.24405.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0-preview.6.24327.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0-preview.7.24413.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Blogs1\Blogs1.Domain\Blogs1.Domain.csproj" />
+    <ProjectReference Include="..\Blogs1\Blogs1.Infrastructure\Blogs1.Infrastructure.csproj" />
+    <ProjectReference Include="..\Blogs1\Blogs1.Query\Blogs1.Query.csproj" />
     <ProjectReference Include="..\Blogs\Blogs.Application\Blogs.Application.csproj" />
     <ProjectReference Include="..\Shared\Shared.Application\Shared.Application.csproj" />
-    <ProjectReference Include="..\Users\Users.Application\Users.Application.csproj" />
-    <ProjectReference Include="..\Users\Users.Infrastructure\Users.Infrastructure.csproj" />
+    <ProjectReference Include="..\Users1\Users1.Application.Contract\Users1.Application.Contract.csproj" />
+    <ProjectReference Include="..\Users1\Users1.Application\Users1.Application.csproj" />
+    <ProjectReference Include="..\Users1\Users1.Infrastructure\Users1.Infrastructure.csproj" />
+    <ProjectReference Include="..\Users1\Users1.Query\Users1.Query.csproj" />
   </ItemGroup>
 
   <ItemGroup>

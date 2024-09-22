@@ -8,11 +8,12 @@ namespace Shared.Application.Models
 {
 	public class AuthModel
 	{
-		public AuthModel(long userId, string userUniqueKey, string mobile)
+		public AuthModel(long userId, string userUniqueKey, string mobile, string fullName)
 		{
 			UserId = userId;
 			UserUniqueKey = userUniqueKey;
 			Mobile = mobile;
+			FullName = fullName;
 		}
 
 		public long UserId { get; set; }
@@ -20,6 +21,7 @@ namespace Shared.Application.Models
 		public string UserUniqueKey { get; set; }
 
 		public string Mobile { get; set; }
+		public string FullName { get; set; }
 
 
 

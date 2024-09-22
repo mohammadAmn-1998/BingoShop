@@ -39,6 +39,25 @@ namespace Shared.Application.Utility
 			return UserAvatarDirectory.Replace("wwwroot", "") + "/" + "Default.png";
 		}
 
+		public static string GetBlogCategoryImageFullPath(string? imageName, int? imageSize)
+		{
+
+			if (imageName is "Default.png" or " " or null)
+				return BlogCategoryImageDirectory.Replace("wwwroot", "") + "/" + "Default.png";
+
+			switch (imageSize)
+			{
+				case null:
+					return BlogCategoryImageDirectory.Replace("wwwroot", "") + "/" + imageName;
+				case 100:
+					return BlogCategoryImageDirectory100.Replace("wwwroot", "") + "/" + imageName;
+				case 400:
+					return BlogCategoryImageDirectory400.Replace("wwwroot", "") + "/" + imageName;
+			}
+
+			return BlogCategoryImageDirectory.Replace("wwwroot", "") + "/" + "Default.png";
+		}
+
 
 	}
 }

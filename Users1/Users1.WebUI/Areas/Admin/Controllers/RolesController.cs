@@ -45,11 +45,11 @@ namespace Users1.WebUI.Areas.Admin.Controllers
 
 		}
 
-		public async Task<IActionResult> EditRole(long roleId)
+		public IActionResult EditRole(long roleId)
 		{
 			var model = _roleService.GetRoleForEdit(roleId);
 
-			return PartialView("Modals/_EditRoleModal",model);
+			return PartialView("Modals/_EditRoleModal", model);
 		}
 		[HttpPost]
 		public async Task<IActionResult> EditRole(EditRole model)
@@ -81,7 +81,7 @@ namespace Users1.WebUI.Areas.Admin.Controllers
 			return Redirect("/Admin/Roles/Index");
 		}
 
-		public async Task<IActionResult> CreateRole()
+		public  IActionResult CreateRole()
 		{
 			return PartialView("Modals/_CreateRoleModal" );
 		}

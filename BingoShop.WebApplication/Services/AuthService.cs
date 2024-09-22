@@ -26,10 +26,11 @@ namespace BingoShop.WebApplication.Services
 				var claims = new List<Claim>()
 				{
 					new Claim(ClaimTypes.NameIdentifier, model.UserUniqueKey),
-					new Claim(ClaimTypes.Name, model.Mobile),
-					new Claim("user_id", model.UserId.ToString())
+					new Claim("MobileNumber", model.Mobile),
+					new Claim("user_id", model.UserId.ToString()),
+					new Claim(ClaimTypes.Name, model.FullName),
 				};
-				var identity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
+				var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 				var principal = new ClaimsPrincipal(identity);
 				var properties = new AuthenticationProperties()
 				{
@@ -37,14 +38,14 @@ namespace BingoShop.WebApplication.Services
 					AllowRefresh = true,
 				};
 
-				HttpContext!.SignInAsync( principal, properties);
+				HttpContext!.SignInAsync(principal, properties);
 				return true;
 			}
 			catch (Exception e)
 			{
 				return false;
 			}
-			
+
 		}
 
 		public string GetUserUniqueKey()
@@ -53,7 +54,7 @@ namespace BingoShop.WebApplication.Services
 			{
 				var userUniqueKey = HttpContext?.User.Claims.Single(x => x.Type == ClaimTypes.NameIdentifier).Value;
 
-				return userUniqueKey?? "";
+				return userUniqueKey ?? "";
 
 			}
 			catch (Exception e)
@@ -66,9 +67,24 @@ namespace BingoShop.WebApplication.Services
 		{
 			try
 			{
-				var mobile = HttpContext?.User.Claims.Single(x => x.Type == ClaimTypes.Name).Value;
+				var mobile = HttpContext?.User.Claims.Single(x => x.Type == "MobileNumber").Value;
 
 				return mobile ?? "";
+
+			}
+			catch (Exception e)
+			{
+				return "";
+			}
+		}
+
+		public string GetUserFullName()
+		{
+			try
+			{
+				var fullName = HttpContext?.User.Claims.Single(x => x.Type == ClaimTypes.Name).Value;
+
+				return fullName ?? "";
 
 			}
 			catch (Exception e)
@@ -109,7 +125,7 @@ namespace BingoShop.WebApplication.Services
 
 				return false;
 			}
-			
+
 		}
 	}
 }

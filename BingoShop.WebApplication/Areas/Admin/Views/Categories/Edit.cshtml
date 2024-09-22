@@ -1,0 +1,53 @@
+﻿@using Shared.Application.Utility
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Blogs.Application.Services.Interfaces
+@using Blogs1.Application.Contract.BlogCategoryService.Query
+@model Blogs1.Application.Contract.BlogCategoryService.Command.EditBlogCategory
+@inject IBlogCategoryQuery _BlogCategoryQuery 
+@{
+	var categoriesSelectList =await _BlogCategoryQuery.GetAllCategoriesAsSelectList();
+}
+<form class="" style="margin-right: 250px; margin-left: 250px; padding-top: 10px" asp-controller="Categories"  asp-action="Edit" method="Post"  enctype="mulitipart/form-data">
+	
+	@Html.HiddenFor(x=> x.Id)
+	@Html.HiddenFor(x=> x.ImageName)
+	
+	<div class="form-group">
+		<label asp-for="Title"></label>
+		<input asp-for="Title" class="form-control" onchange="makeSlug('Title','Slug')" />
+		<span class="text-danger" asp-validation-for="Title"  class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label asp-for="Slug"></label>
+		<input asp-for="Slug" class="form-control" />
+		<span class="text-danger" asp-validation-for="Slug" class="text-danger"></span>
+	</div>
+
+	@Html.EditorFor(x=> x.ImageFile)
+	@Html.EditorFor(x=> x.ImageAlt)
+	@if (Model.ParentId > 0)
+	{
+		<label class="form-label">دسته بندی والد</label>
+		<select class="form-control p-1" asp-for="ParentId"  asp-items="@categoriesSelectList">
+
+		</select>
+	}
+	
+
+	<br><br>
+	<img id="img_preview" src="@Directories.GetBlogCategoryImageFullPath(@Model?.ImageName ?? null,100)" height="100" width="100" alt="user-avatar" />
+	<br><br>
+	@if (Model!.IsActive)
+	{
+		<a class="btn btn-danger" asp-action="ChangeActivation" asp-route-categoryId="@Model.Id">غیر فعال کردن</a>
+	}
+	else
+	{
+		<a class="btn btn-success" asp-action="ChangeActivation" asp-route-categoryId="@Model.Id"> فعال کردن</a>
+
+	}
+	<hr>
+	<button type="submit" onclick="return confirmSubmission()" class="btn btn-success mr-1 ">ثبت ویرایش</button>
+	<a class="btn btn-danger m-3" href="./">انصراف</a>
+
+</form>

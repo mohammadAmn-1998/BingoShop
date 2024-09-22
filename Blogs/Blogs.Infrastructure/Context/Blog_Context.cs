@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using Blogs.Domain.Agg.ArticleAgg;
 using Blogs.Domain.Agg.CategoryAgg;
-using Blogs.Infrastructure.Context_Config;
+using Blogs.Infrastructure.EFConfigs;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blogs.Infrastructure.Context

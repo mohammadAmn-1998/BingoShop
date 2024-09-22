@@ -1,0 +1,48 @@
+﻿@using Shared.Domain.Enums
+@model Users1.Application.Contract.RoleService.Command.EditRole
+@{
+	var selectedPermissions = new List<string>();
+	foreach (var modelPermission in Model.EditPermissions)
+	{
+
+		if(modelPermission.IsSelected)
+		      selectedPermissions.Add(modelPermission.UserPermission.ToString());
+	}
+}
+
+<form action="/Admin/Roles/EditRole"  method="post" class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="editRoleModalLabel">ویرایش نقش</h5>
+
+		</div>
+		<div class="modal-body">
+			@Html.HiddenFor(x=> x.Id)
+			@Html.EditorFor(x=> x.Title)
+			<div class="form-group">
+				
+				<label class="form-label" asp-for="Permissions"></label>
+				@foreach (var permission in Enum.GetValues(typeof(UserPermission)).Cast<UserPermission>())
+				{
+					<label class="form-label">@permission</label>
+					<input type="checkbox" class="form-check" id="Permissions" value="@permission"  name="Permissions" @((selectedPermissions.Any(x=> x == permission.ToString() ) ? "checked" : ""))/>
+				}
+			</div>
+			
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">انصراف</button>
+			<button type="submit" class="btn btn-primary">افزودن</button>
+		</div>
+	</div>
+
+</form>
+@section Scripts
+{
+	
+	<script>
+
+		
+	</script>
+
+}

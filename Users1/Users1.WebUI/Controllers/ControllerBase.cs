@@ -11,7 +11,7 @@ namespace Users1.WebUI.Controllers
 
 		#region SuccessAlert
 
-		public async void SuccessAlert(bool isReload = false)
+		public  void SuccessAlert(bool isReload = false)
 		{
 
 			var model = JsonConvert.SerializeObject(OperationResult.Success());
@@ -19,7 +19,7 @@ namespace Users1.WebUI.Controllers
 
 		}
 
-		public async void SuccessAlert(string message, bool isReload = false)
+		public  void SuccessAlert(string message, bool isReload = false)
 		{
 
 			var model = JsonConvert.SerializeObject(OperationResult.Success(message));
@@ -31,14 +31,14 @@ namespace Users1.WebUI.Controllers
 
 		#region ErrorAlert
 
-		public async void ErrorAlert(bool isReload = false)
+		public  void ErrorAlert(bool isReload = false)
 		{
 			var model = JsonConvert.SerializeObject(OperationResult.Error());
 			HttpContext.Response.Cookies.Append("SystemAlert", model);
 			
 
 		}
-		public async void ErrorAlert(string message , bool isReload = false)
+		public  void ErrorAlert(string message , bool isReload = false)
 		{
 			var model = JsonConvert.SerializeObject(OperationResult.Error(message));
 			HttpContext.Response.Cookies.Append("SystemAlert", model);
@@ -50,14 +50,14 @@ namespace Users1.WebUI.Controllers
 
 		#region NotFoundAlert
 
-		public async void NotFoundAlert(bool isReload = false)
+		public  void NotFoundAlert(bool isReload = false)
 		{
 			var model = JsonConvert.SerializeObject(OperationResult.NotFound());
 			HttpContext.Response.Cookies.Append("SystemAlert", model);
 		
 
 		}
-		public async void NotFoundAlert(string message, bool isReload = false)
+		public  void NotFoundAlert(string message, bool isReload = false)
 		{
 			var model = JsonConvert.SerializeObject(OperationResult.NotFound(message));
 			HttpContext.Response.Cookies.Append("SystemAlert", model);

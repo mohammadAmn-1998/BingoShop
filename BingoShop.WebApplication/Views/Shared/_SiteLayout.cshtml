@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewData["Title"]</title>
+	<partial name="_Css"/>
+
+</head>
+
+<body class="index-page sidebar-collapse">
+
+<div class="loading">
+	<img src="/assets/images/loading.svg" alt="loading..." />
+</div>
+<partial name="_HeaderResponsive" />
+
+<div class="wrapper default">
+
+	<partial name="_Header"/>
+
+	@RenderBody()
+
+	<partial name="_Footer"/>
+</div>
+
+<partial name="_Js" />
+
+@await RenderSectionAsync("Scripts",false)
+
+</body>
+
+</html>

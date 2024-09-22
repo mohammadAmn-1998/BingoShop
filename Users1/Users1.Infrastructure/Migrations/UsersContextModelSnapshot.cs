@@ -49,7 +49,7 @@ namespace Users1.Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Permissions");
+                    b.ToTable("Permissions", (string)null);
                 });
 
             modelBuilder.Entity("Users1.Domain.UserAgg.Role", b =>
@@ -76,7 +76,7 @@ namespace Users1.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("Users1.Domain.UserAgg.User", b =>
@@ -146,7 +146,7 @@ namespace Users1.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Users1.Domain.UserAgg.UserRole", b =>
@@ -178,7 +178,7 @@ namespace Users1.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Users1.Domain.UserAgg.Permission", b =>

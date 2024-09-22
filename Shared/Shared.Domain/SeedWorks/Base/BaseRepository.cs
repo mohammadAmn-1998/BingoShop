@@ -125,9 +125,9 @@ namespace Shared.Domain.SeedWorks.Base
 		}
 
 
-		protected Task<int> Save()
+		protected async Task<int> Save()
 		{
-			var result = _context.SaveChangesAsync();
+			var result = await _context.SaveChangesAsync();
 
 			return result;
 		}
@@ -150,12 +150,12 @@ namespace Shared.Domain.SeedWorks.Base
 		}
 
 
-		protected virtual Task<T?> GetById<T>(int entityId) where T : BaseEntity<long>
+		protected virtual Task<T?> GetById<T>(long entityId) where T : BaseEntity<long>
 		{
 			return Table<T>().SingleOrDefaultAsync(x => x.Id == entityId);
 		}
 
-		protected virtual Task<T?> GetById<T>(int entityId, params string[] includs) where T : BaseEntity<long>
+		protected virtual Task<T?> GetById<T>(long entityId, params string[] includs) where T : BaseEntity<long>
 		{
 			IQueryable<T> table = _context.Set<T>();
 			foreach (var inc in includs)

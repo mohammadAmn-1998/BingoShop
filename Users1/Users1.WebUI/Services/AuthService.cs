@@ -66,9 +66,24 @@ namespace Users1.WebUI.Services
 		{
 			try
 			{
-				var mobile = HttpContext?.User.Claims.Single(x => x.Type == ClaimTypes.Name).Value;
+				var mobile = HttpContext?.User.Claims.Single(x => x.Type == "MobileNumber").Value;
 
 				return mobile ?? "";
+
+			}
+			catch (Exception e)
+			{
+				return "";
+			}
+		}
+
+		public string GetUserFullName()
+		{
+			try
+			{
+				var fullName = HttpContext?.User.Claims.Single(x => x.Type == ClaimTypes.Name).Value;
+
+				return fullName ?? "";
 
 			}
 			catch (Exception e)

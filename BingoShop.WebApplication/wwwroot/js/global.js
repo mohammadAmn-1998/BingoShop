@@ -295,11 +295,32 @@ function sweetAlertConfirmSubmit(event) {
         showCancelButton: true,
         cancelButtonText: "خیر",
     }).then((willConfirm) => {
-        if (willConfirm) {
-            event.submit();
+        if (willConfirm.value) {
+            console.log("hello");
+            event.target.submit();
         } else {
             return;
         }
     });
 }
+function sweetAlertConfirmLink(event, text) {
 
+    console.log(text);
+    event.preventDefault();
+    if (text == "")
+        text = "آیا از انجام عملیات اطمینان دارید ؟";
+    Swal.fire({
+        title: "هشدار !!",
+        text: text,
+        icon: "warning",
+        confirmButtonText: "بله",
+        showCancelButton: true,
+        cancelButtonText: "خیر",
+    }).then((willConfirm) => {
+        if (willConfirm.value) {
+            window.location.href = event.target.href;
+        } else {
+            return;
+        }
+    });
+}

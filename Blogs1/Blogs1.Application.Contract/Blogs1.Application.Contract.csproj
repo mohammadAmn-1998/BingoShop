@@ -14,7 +14,6 @@
   <ItemGroup>
     <Folder Include="BlogCategoryService\Query\" />
     <Folder Include="BlogService\Command\" />
-    <Folder Include="BlogService\Query\" />
   </ItemGroup>
 
   <ItemGroup>

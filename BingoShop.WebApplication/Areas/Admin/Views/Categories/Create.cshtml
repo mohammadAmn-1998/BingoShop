@@ -36,8 +36,8 @@
 
 		</div>
 		<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">انصراف</button>
-			<button type="submit" class="btn btn-primary">افزودن</button>
+			<button type="button" onclick="sweetAlertConfirmLink(event,'آیا مطمعنید؟')" class="btn btn-secondary" data-dismiss="modal">انصراف</button>
+			<button type="submit" onclick="sweetAlertConfirmSubmit(event)" class="btn btn-primary">افزودن</button>
 		</div>
 	</div>
 </form>
@@ -71,7 +71,29 @@
 			return false;
 		}
 	}
+	
 
+	function sweetAlertConfirmSubmit(event, text) {
+
+		console.log(text);
+		event.preventDefault();
+		if (text == "")
+			text = "آیا از انجام عملیات اطمینان دارید ؟";
+		Swal.fire({
+			title: "هشدار !!",
+			text: text,
+			icon: "warning",
+			confirmButtonText: "بله",
+			showCancelButton: true,
+			cancelButtonText: "خیر",
+		}).then((willConfirm) => {
+			if (willConfirm.value) {
+				event.target.submit();
+			} else {
+				return;
+			}
+		});
+	}
 
 </script>
 

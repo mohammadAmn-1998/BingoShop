@@ -17,7 +17,7 @@ namespace Blogs1.Infrastructure.EFConfigs
 			builder.HasKey(x => x.Id);
 			builder.Property(x => x.Title).IsRequired(true).HasMaxLength(1000);
 			builder.Property(x => x.ImageName).IsRequired(true).HasMaxLength(100);
-			builder.Property(x => x.ImageName).IsRequired(true).HasMaxLength(100);
+			builder.Property(x => x.ImageAlt).IsRequired(true).HasMaxLength(100);
 			builder.Property(x => x.Slug).IsRequired(true).HasMaxLength(200);
 			builder.Property(x => x.Author).IsRequired(true).HasMaxLength(200);
 			builder.Property(x => x.Summary).IsRequired(true).HasMaxLength(1000);

@@ -94,13 +94,13 @@
 										
 										@if (@subCategory.IsActive)
 										{
-												<a class="btn  btn-sm btn-danger " onclick="sweetAlertConfirmSubmit(event,'با این کار تمام زیر گروه های این دسته بندی غیر فعال میشوند. آیا مطمعنید؟')" asp-action="ChangeActivation" asp-route-categoryId="@subCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
+												<a class="btn  btn-sm btn-danger " onclick="sweetAlertConfirmLink(event,'با این کار تمام زیر گروه های این دسته بندی غیر فعال میشوند. آیا مطمعنید؟')" asp-action="ChangeActivation" asp-route-categoryId="@subCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
 												غیر فعال کردن
 											</a>
 										}
 										else
 										{
-												<a class="btn btn-sm  btn-success " onclick="sweetAlertConfirmSubmit(event)" asp-action="ChangeActivation" asp-route-categoryId="@subCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
+												<a class="btn btn-sm  btn-success " onclick="sweetAlertConfirmLink(event)" asp-action="ChangeActivation" asp-route-categoryId="@subCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
 												فعال کردن
 											</a>
 										}
@@ -119,13 +119,13 @@
 						
 						@if (@blogCategory.IsActive)
 						{
-								<a class="btn   btn-danger mr-1" onclick="sweetAlertConfirmSubmit(event,'با این کار تمام زیر گروه های این دسته بندی غیر فعال میشوند. آیا مطمعنید؟')" asp-action="ChangeActivation" asp-route-categoryId="@blogCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
+								<a class="btn   btn-danger mr-1" onclick="sweetAlertConfirmLink(event,'با این کار تمام زیر گروه های این دسته بندی غیر فعال میشوند. آیا مطمعنید؟')" asp-action="ChangeActivation" asp-route-categoryId="@blogCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
 								غیر فعال کردن
 							</a>
 						}
 						else
 						{
-								<a class="btn   btn-success mr-1" onclick="sweetAlertConfirmSubmit(event)" asp-action="ChangeActivation" asp-route-categoryId="@blogCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
+								<a class="btn   btn-success mr-1" onclick="sweetAlertConfirmLink(event)" asp-action="ChangeActivation" asp-route-categoryId="@blogCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
 								فعال کردن
 							</a>
 						}
@@ -172,7 +172,7 @@
 			}
 			@for (var i = Model.StartPage; i <= Model.EndPage; i++)
 			{
-				<li class="page-item "@((Model.CurrentPage == i ? "class='bg-primary'" : ""))><a href="/Admin/Categories?pageId=@i&q=@Model.FilterParams.Title" class="page-link"  @((i == Model.CurrentPage ? "class='disabled-link'" : ""))>@i</a></li>
+				<li class="page-item "><a href="/Admin/Categories?pageId=@i&q=@Model.FilterParams.Title" class="page-link" @((Model.CurrentPage == i ? "class='bg-primary'" : "")) @((i == Model.CurrentPage ? "class='disabled-link'" : ""))>@i</a></li>
 			}
 			@if (Model.CurrentPage < Model.EndPage)
 			{
@@ -206,7 +206,7 @@
 
 		}
 
-		function sweetAlertConfirmSubmit(event,text) {
+		function sweetAlertConfirmLink(event, text) {
 
 			console.log(text);
 			event.preventDefault();

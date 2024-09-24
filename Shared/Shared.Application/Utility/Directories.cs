@@ -19,6 +19,11 @@ namespace Shared.Application.Utility
 		public const string UserAvatarDirectory100 = "wwwroot/assets/images/user_img100";
 		public const string UserAvatarDirectory400 = "wwwroot/assets/images/user_img400";
 
+		public const string BlogImageDirectory = "wwwroot/assets/images/blog_img";
+		public const string BlogImageDirectory100 = "wwwroot/assets/images/blog_img";
+		public const string BlogImageDirectory400 = "wwwroot/assets/images/blog_img";
+
+
 
 		public static string GetUserAvatarFullPath(string? imageName,int? imageSize)
 		{
@@ -56,6 +61,25 @@ namespace Shared.Application.Utility
 			}
 
 			return BlogCategoryImageDirectory.Replace("wwwroot", "") + "/" + "Default.png";
+		}
+
+		public static string GetBlogImageFullPath(string? imageName, int? imageSize)
+		{
+
+			if (imageName is "Default.jpg" or " " or null)
+				return BlogImageDirectory.Replace("wwwroot", "") + "/" + "Default.jpg";
+
+			switch (imageSize)
+			{
+				case null:
+					return BlogImageDirectory.Replace("wwwroot", "") + "/" + imageName;
+				case 100:
+					return BlogImageDirectory100.Replace("wwwroot", "") + "/" + imageName;
+				case 400:
+					return BlogImageDirectory400.Replace("wwwroot", "") + "/" + imageName;
+			}
+
+			return BlogImageDirectory.Replace("wwwroot", "") + "/" + "Default.jpg";
 		}
 
 

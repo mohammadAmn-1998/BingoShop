@@ -21,6 +21,7 @@ public class CreateBlog
 	[Display(Name = "تصویر")]
 	public string? ImageName { get;  set; }
 
+	[Display(Name = "عکس پست")]
 	public IFormFile? ImageFile { get; set; }
 	
 	[Display(Name = "متن جایگزین تصویر")]
@@ -48,6 +49,7 @@ public class CreateBlog
 
 	[Display(Name = "محتوای پست")]
 	[Required(ErrorMessage = ErrorMessages.FieldIsRequired)]
+	[UIHint("CkEditor4")]
 	public string Content { get;  set; }
 
 	[Display(Name = "پست ویژه؟")]

@@ -14,7 +14,23 @@
         }
         deleteCookie("SystemAlert");
     }
+
+    loadCkeditor4();
 });
+
+
+function loadCkeditor4() {
+    if (!document.getElementById("CkEditor4"))
+        return;
+
+    $("body").append('<script src="/ckeditor4/ckeditor/ckeditor.js"></script>');
+
+    CKEDITOR.replace('CkEditor4', {
+        customConfig: '/ckeditor4/ckeditor/config.js'
+    });
+
+}
+
 
 
 function getCookie(cname) {

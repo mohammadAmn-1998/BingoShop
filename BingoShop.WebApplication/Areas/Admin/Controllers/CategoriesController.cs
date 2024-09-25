@@ -62,15 +62,7 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers
 
 			if (!ModelState.IsValid)
 			{
-				var errors = ModelState.Values.FirstOrDefault(x => x.ValidationState == ModelValidationState.Invalid)
-					?.Errors.Select(x => x.ErrorMessage).ToList();
-				var errorMessage = " ";
-
-				foreach (var error in errors!)
-				{
-					errorMessage += errorMessage + Environment.NewLine + error;
-				}
-				ErrorAlert(errorMessage);
+				
 				return View( model);
 			}
 

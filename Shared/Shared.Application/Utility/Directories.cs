@@ -23,7 +23,7 @@ namespace Shared.Application.Utility
 		public const string BlogImageDirectory100 = "wwwroot/assets/images/blog_img";
 		public const string BlogImageDirectory400 = "wwwroot/assets/images/blog_img";
 
-
+		public const string BlogContentImageDirectory = "wwwroot/assets/images/blog_content_img";
 
 		public static string GetUserAvatarFullPath(string? imageName,int? imageSize)
 		{
@@ -82,6 +82,12 @@ namespace Shared.Application.Utility
 			return BlogImageDirectory.Replace("wwwroot", "") + "/" + "Default.jpg";
 		}
 
+		public static string GetBlogContentImageFullPath(string imageName)
+		{
+
+			return BlogContentImageDirectory.Replace("wwwroot","") + "/"+ imageName;
+
+		}
 
 	}
 }

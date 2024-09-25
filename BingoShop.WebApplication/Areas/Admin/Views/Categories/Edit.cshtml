@@ -7,7 +7,7 @@
 @{
 	var categoriesSelectList =await _BlogCategoryQuery.GetAllCategoriesAsSelectList();
 }
-<form class="" style="margin-right: 250px; margin-left: 250px; padding-top: 10px" asp-controller="Categories"  asp-action="Edit" method="Post"  enctype="mulitipart/form-data">
+<form onsubmit="sweetAlertConfirmSubmit(event)" class="" style="margin-right: 250px; margin-left: 250px; padding-top: 10px" asp-controller="Categories"  asp-action="Edit" method="Post"  enctype="mulitipart/form-data">
 	
 	@Html.HiddenFor(x=> x.Id)
 	@Html.HiddenFor(x=> x.ImageName)
@@ -47,7 +47,7 @@
 
 	}
 	<hr>
-	<button type="submit" onclick="return confirmSubmission()" class="btn btn-success mr-1 ">ثبت ویرایش</button>
-	<a class="btn btn-danger m-3" href="./">انصراف</a>
+	<button type="submit"  class="btn btn-success mr-1 ">ثبت ویرایش</button>
+	<a onclick="sweetAlertConfirmLink(event,'آیا مطمعنید؟')" class="btn btn-danger m-3"  asp-action="Index">انصراف</a>
 
 </form>

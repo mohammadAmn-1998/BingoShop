@@ -8,107 +8,87 @@
 
 }
 
+
 <section class="content mx-auto">
-
-	<div class=" container d-flex">
-
+	<div class="container d-flex justify-content-center">
 		<!-- general form elements -->
-		<div class="card card-primary">
+		<div class="card card-primary w-100">
 			<div class="card-header">
-				<h3 class="card-title"> جدید</h3>
+				<h3 class="card-title">جدید</h3>
 			</div>
 			<!-- /.card-header -->
 			<!-- form start -->
-			<form class="col-lg-10" method="post" asp-area="Admin" asp-action="Create" enctype="multipart/form-data">
+			<form onsubmit=" sweetAlertConfirmSubmit(event)" class="col-lg-10 mx-auto" method="post" asp-area="Admin" asp-action="Create" enctype="multipart/form-data">
+				@Html.HiddenFor(x => x.UserId)
 
-				@Html.HiddenFor(x=> x.UserId)
-
-				<div class="col-md-5 mt-3">
-
+				<div class="form-group mt-3">
 					<label asp-for="Title"></label>
 					<input asp-for="Title" class="form-control" onchange="makeSlug('Title','Slug')" />
-					<span class="text-danger" asp-validation-for="Title" class="text-danger"></span>
-
+					<span class="text-danger" asp-validation-for="Title"></span>
 				</div>
 
-				<div class="col-md-5  mt-3">
-
+				<div class="form-group mt-3">
 					<label asp-for="Slug"></label>
 					<input asp-for="Slug" class="form-control" />
-					<span class="text-danger" asp-validation-for="Slug" class="text-danger"></span>
-
+					<span class="text-danger" asp-validation-for="Slug"></span>
 				</div>
 
-				<div class="col-md-10  mt-3">
-
-					@Html.EditorFor(m => m.Summary)
-
+				<div class="form-group mt-3">
+					@Html.EditorFor(m => m.Summary, new { htmlAttributes = new { @class = "form-control" } })
 				</div>
 
-				<div class="col-md-10  mt-3">
-
-					@Html.EditorFor(m => m.Content)
-
+				<div class="form-group mt-3">
+					@Html.EditorFor(m => m.Content, new { htmlAttributes = new { @class = "form-control" } })
 				</div>
 
-
-				<div class="col-md-5  mt-3 mb-3">
-
+				<div class="form-group mt-3">
 					<label asp-for="CategoryId"></label>
-					<select asp-for="CategoryId" id="CategoryId" asp-items="@Model.Categories" class="form-control">
-					</select>
-					<span asp-validation-for="CategoryId" class="text-danger"></span>
-
+					<select asp-for="CategoryId" id="CategoryId" asp-items="@Model.Categories" class="form-control"></select>
+					<span class="text-danger" asp-validation-for="CategoryId"></span>
 				</div>
 
-				<div class="col-md-5  mt-3 mb-3">
-
+				<div class="form-group mt-3">
 					<label asp-for="SubCategoryId"></label>
-					<span asp-validation-for="SubCategoryId" class="text-danger"></span>
 					<select asp-for="SubCategoryId" id="SubCategoryId" class="form-control"></select>
-					<span asp-validation-for="CategoryId" class="text-danger"></span>
-
-
+					<span class="text-danger" asp-validation-for="SubCategoryId"></span>
 				</div>
 
-				<div class="col-md-5  mt-3 mb-3">
-					<img class="mb-3"  src="@Directories.GetBlogImageFullPath(@Model.ImageName,100)" width="100" height="100" alt="@Model.ImageAlt" id="img_preview" />
-					@Html.EditorFor(m => m.ImageFile)
-
+				<div class="form-group mt-3">
+					<img class="mb-3" src="@Directories.GetBlogImageFullPath(@Model.ImageName, 100)" width="100" height="100" alt="@Model.ImageAlt" id="img_preview" />
+					@Html.EditorFor(m => m.ImageFile, new { htmlAttributes = new { @class = "form-control-file" } })
 				</div>
 
-				<div class="col-md-5  mt-3 mb-3">
-					@Html.EditorFor(m => m.ImageAlt)
-
-				</div>
-				<div class="col-md-5  mt-3">
-					@Html.EditorFor(m => m.IsSpecial)
-				</div>
-				
-				<div class="col-md-5 mt-3">
-
-					@Html.EditorFor(m => m.Author)
-
+				<div class="form-group mt-3">
+					@Html.EditorFor(m => m.ImageAlt, new { htmlAttributes = new { @class = "form-control" } })
 				</div>
 
-				<div class="col-md-10  mt-3">
+				<div class="form-group mt-3">
+					@Html.EditorFor(m => m.IsSpecial, new { htmlAttributes = new { @class = "form-check-input" } })
+				</div>
 
-					<button type="submit" onclick="sweetAlertConfirmSubmit(event)" class="btn btn-primary w-50 ">ثبت </button>
-					<a class="btn btn-danger" onclick="sweetAlertConfirmLink()" asp-action="Index">بازگشت</a>
+				<div class="form-group mt-3">
+					@Html.EditorFor(m => m.Author, new { htmlAttributes = new { @class = "form-control" } })
+				</div>
 
+				<div class="form-group mt-3">
+					<button type="submit"  class="btn btn-primary w-50">ثبت</button>
+					<a class="btn btn-danger" onclick="sweetAlertConfirmLink(event,'آیا مطمعنید؟')" asp-action="Index">بازگشت</a>
 				</div>
 				<!-- /.card-body -->
-
 			</form>
 		</div>
 		<!-- /.card -->
 	</div>
 </section>
 
-@section scripts
-{
 
+@section scripts {
+	
 	<script>
+
+		
+
+		
 
 		$(function () {
 			// Handle the change event on the select element with id "CategoryId"
@@ -118,7 +98,7 @@
 				// Send the AJAX request to the server
 				$.ajax({
 					url: `/Admin/Blogs/GetSubcategoriesSelectListItem/${parentId}`,
-					type: "Get"
+					type: "GET"
 				}).done(function (data) {
 					// The success callback
 					// data is the JSON object returned from the server
@@ -126,25 +106,21 @@
 					$("#SubCategoryId").empty();
 
 					for (var i in data) {
-
 						var category = data[i];
-						$("#SubCategoryId").append(`<option value='${category.value}'>${category.text}</option>`);
-
+						$("#SubCategoryId").append(`
+	<option value='${category.value}'>${category.text}</option>`);
 					}
-
 				});
-
 			});
 		});
 
-
-		//event listener for input type file for preventing choosing any file except image file before user submit the form
-		document.getElementById('file_input').addEventListener('change', function(event) {
+		// Event listener for input type file for preventing choosing any file except image file before user submit the form
+		document.getElementById('file_input').addEventListener('change', function (event) {
 			const file = event.target.files[0];
 			if (validateImageFile(file)) {
 				if (file && file.type.startsWith('image/')) {
 					const reader = new FileReader();
-					reader.onload = function(e) {
+					reader.onload = function (e) {
 						const img = document.getElementById('img_preview');
 						img.src = e.target.result;
 						img.style.display = 'block';
@@ -152,7 +128,6 @@
 					reader.readAsDataURL(file);
 				}
 			}
-			
 		});
 
 		function validateImageFile(file) {
@@ -161,12 +136,15 @@
 				return true;
 			} else {
 				ErrorAlert('تصویر نامعتبر!', 'لطفا تصویر معتبر که پسوند های jpeg,png,bmp,webp داشته باشد انتخاب کنید');
-			
+
 				return false;
 			}
 		}
-
 	</script>
 
-
 }
+	
+
+
+
+

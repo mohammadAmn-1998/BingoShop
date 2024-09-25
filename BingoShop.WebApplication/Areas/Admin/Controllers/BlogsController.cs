@@ -22,13 +22,15 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers
 		private IBlogCategoryQuery _blogCategoryQuery;
 		private readonly IBlogService _blogService;
 		private readonly IAuthService _authService;
+		private readonly IFileService _fileService;
 
-		public BlogsController(IBlogCategoryQuery blogCategoryQuery, IBlogService blogService, IAuthService authService, IBlogQuery blogQuery)
+		public BlogsController(IBlogCategoryQuery blogCategoryQuery, IBlogService blogService, IAuthService authService, IBlogQuery blogQuery, IFileService fileService)
 		{
 			_blogCategoryQuery = blogCategoryQuery;
 			_blogService = blogService;
 			_authService = authService;
 			_blogQuery = blogQuery;
+			_fileService = fileService;
 		}
 
 		public async Task<IActionResult> Index(string q="" , int pageId=1)
@@ -145,6 +147,8 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers
 
 		}
 
+
+		
 		#endregion
 
 	}

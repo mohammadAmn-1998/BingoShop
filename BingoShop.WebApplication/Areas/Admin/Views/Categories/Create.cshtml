@@ -4,7 +4,7 @@
 @{
 	long parentId = (long)(ViewData["ParentId"] ?? (long)0);
 }
-<form asp-action="Create" method="post"  enctype="multipart/form-data">
+<form asp-action="Create" onsubmit="sweetAlertConfirmSubmit(event)" method="post"  enctype="multipart/form-data">
 	<div class="modal-content">
 		<div class="modal-header">
 			<h5 class="modal-title" id="createBlogCategoryModal">دسته بندی جدید</h5>
@@ -36,8 +36,8 @@
 
 		</div>
 		<div class="modal-footer">
-			<button type="button" onclick="sweetAlertConfirmLink(event,'آیا مطمعنید؟')" class="btn btn-secondary" data-dismiss="modal">انصراف</button>
-			<button type="submit" onclick="sweetAlertConfirmSubmit(event)" class="btn btn-primary">افزودن</button>
+			<a type="button" asp-action="Index" onclick="sweetAlertConfirmLink(event,'آیا مطمعنید؟')" class="btn btn-secondary" data-dismiss="modal">انصراف</a>
+			<button type="submit"  class="btn btn-primary">افزودن</button>
 		</div>
 	</div>
 </form>

@@ -9,6 +9,8 @@ public interface IBlogService
 
 	Task<OperationResult> Create(CreateBlog command);
 
+	Task<EditBlog?> GetForEdit(long id);
+
 	Task<OperationResult> Edit(EditBlog  command);
 
 	Task<bool> ActivationChange(long blogId);

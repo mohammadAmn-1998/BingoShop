@@ -17,6 +17,7 @@ namespace Shared.Application.Utility
 		public const string MaxLengthError = "تعداد کاراکتر ها از حد مجاز بیشتر است";
 		public const string MinLengthError = "تعداد کاراکتر ها از حد مجاز کمتر است";
 		public const string UploadIsInvalid = "آپلود با مشکل مواجه شده است!";
+		public const string BadRequestError = "چیزی اشتباه است!";
 
 		#endregion
 
@@ -63,6 +64,7 @@ namespace Shared.Application.Utility
 
 		public const string BlogCategoryNotFound = "دسته بندی  پیدا نشد!";
 		public const string DuplicateSlugError = "اسلاگ تکراری است!";
+		public const string BlogNotFound = "پست مورد نظر پیدا نشد!";
 
 		#endregion
 

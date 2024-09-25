@@ -19,6 +19,38 @@ namespace Blogs1.Infrastructure.Repositories
 		{
 		}
 
+		public async Task<EditBlog?> GetForEdit(long blogId)
+		{
+			try
+			{
+				var blog = await GetById<Blog>(blogId);
+
+				if (blog == null)
+					throw new NullReferenceException();
+
+				return new EditBlog
+				{
+					Title = blog.Title,
+					Slug = blog.Slug,
+					ImageName = blog.ImageName,
+					ImageAlt = blog.ImageAlt,
+					UserId = blog.UserId,
+					Author = blog.Author,
+					CategoryId = blog.CategoryId,
+					SubCategoryId = blog.SubCategoryId,
+					Summary = blog.Summary,
+					Content = blog.Content,
+					IsSpecial = blog.IsSpecial,
+					Id = blog.Id
+				};
+
+			}
+			catch (Exception e)
+			{
+				return null;
+			}
+		}
+
 		public async Task<bool> Exists(Expression<Func<Blog, bool>> expression)
 		{
 			try
@@ -41,6 +73,28 @@ namespace Blogs1.Infrastructure.Repositories
 					command.Summary.Trim(), command.Content, command.IsSpecial);
 
 				Insert(blog);
+				return await Save() > 0;
+
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
+
+		public async Task<bool> Edit(EditBlog command)
+		{
+			try
+			{
+
+				var blog = await GetById<Blog>(command.Id);
+
+				if (blog == null)
+					throw new NullReferenceException();
+
+				blog.Edit(command.Title.Trim(),command.ImageName!,command.ImageAlt.Trim(),command.CategoryId,command.SubCategoryId,command.Slug.Trim(),command.Summary.Trim(),command.Content,command.IsSpecial);
+
+				Update(blog);
 				return await Save() > 0;
 
 			}

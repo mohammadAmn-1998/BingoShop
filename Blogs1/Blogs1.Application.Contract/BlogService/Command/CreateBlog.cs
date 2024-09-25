@@ -10,7 +10,6 @@ public class CreateBlog
 	[Display(Name = "عنوان")]
 	[Required(ErrorMessage = ErrorMessages.FieldIsRequired)]
 	[MaxLength(1000,ErrorMessage = ErrorMessages.MaxLengthError)]
-	
 	public string Title { get;  set; }
 
 	[Display(Name = "لینک سربرگ")]

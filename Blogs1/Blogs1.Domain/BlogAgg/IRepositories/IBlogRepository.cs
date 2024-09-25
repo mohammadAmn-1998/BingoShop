@@ -5,10 +5,12 @@ namespace Blogs1.Domain.BlogAgg.IRepositories;
 
 public interface IBlogRepository
 {
+	Task<EditBlog?> GetForEdit(long  blogId);
 
 	Task<bool> Exists(Expression<Func<Blog, bool>> expression);
 
 	Task<bool> Create(CreateBlog command);
+	Task<bool> Edit(EditBlog command);
 
 	Task<bool> ActivationChange(long blogId);
 

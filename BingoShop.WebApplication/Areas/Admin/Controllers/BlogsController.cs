@@ -65,12 +65,14 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(CreateBlog model)
 		{
-			if (model.CategoryId < 1)
-			{
-				ModelState.AddModelError("CategoryId",ErrorMessages.FieldIsRequired);
-			}
+			
+				if (model.CategoryId < 1)
+				{
+					ModelState.AddModelError(nameof(model.CategoryId), ErrorMessages.FieldIsRequired);
+					
+				}
 
-			List<SelectListItem>? categories;
+				List<SelectListItem>? categories;
 
 			if (!ModelState.IsValid)
 			{
@@ -103,6 +105,55 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers
 			}
 			model.Categories = categories;
 			return View(model);
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Edit(long id)
+		{
+
+			if (id < 1)
+				return RedirectAndShowAlert(RedirectToAction("Index"), OperationResult.NotFound());
+
+			var model = await _blogService.GetForEdit(id);
+
+			if (model == null)
+				return RedirectAndShowAlert(RedirectToAction("Index"),
+					OperationResult.Error(ErrorMessages.BadRequestError));
+
+			model.Categories = await _blogCategoryQuery.GetAllCategoriesAsSelectList();
+			if (model.SubCategoryId > 0)
+			{
+				model.SubCategories = await _blogCategoryQuery.GetSubCategoriesAsSelectList(model.CategoryId);
+			}
+
+			return View(model);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(EditBlog model)
+		{
+			if (model.CategoryId < 1)
+			{
+				ModelState.AddModelError(nameof(model.CategoryId), ErrorMessages.FieldIsRequired);
+			}
+
+			if (!ModelState.IsValid)
+			{
+				model.Categories = await _blogCategoryQuery.GetAllCategoriesAsSelectList();
+
+				if (model.SubCategoryId > 0)
+					model.SubCategories = await _blogCategoryQuery.GetSubCategoriesAsSelectList(model.CategoryId);
+				return View(model);
+			}
+			
+			var result = await _blogService.Edit(model);
+
+			if (result.Status == Status.Success)
+				return RedirectAndShowAlert(RedirectToAction("Index"), result);
+
+			ErrorAlert(result.Message);
+			return View(model);
+
 		}
 
 		public async Task<IActionResult> ChangeActivation(long blogId, int pageId = 1)

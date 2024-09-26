@@ -7,7 +7,7 @@ using Shared.Domain.SeedWorks.Base;
 
 namespace Users1.Domain.UserAgg
 {
-	public class UserRole : BaseEntity<long>
+	public class UserRole : BaseEntityUpdateActive<long>
 	{
 
 		public long UserId { get; private set; }

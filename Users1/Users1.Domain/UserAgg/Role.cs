@@ -8,7 +8,7 @@ using Shared.Domain.SeedWorks.Base;
 
 namespace Users1.Domain.UserAgg
 {
-	public class Role : BaseEntity<long>
+	public class Role : BaseEntityUpdateActive<long>
 	{
 
 		public string Title { get; private set; }

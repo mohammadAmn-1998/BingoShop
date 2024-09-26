@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Blogs1.Domain.BlogAgg
 {
-	public class Blog : BaseEntity<long>
+	public class Blog : BaseEntityUpdateActive<long>
 	{
 
 		public string Title { get; private set; }

@@ -7,7 +7,7 @@ using Shared.Domain.SeedWorks.Base;
 
 namespace Blogs.Domain.Agg.CategoryAgg
 {
-    public class BlogCategory : BaseEntity<int>
+    public class BlogCategory : BaseEntityUpdateActive<int>
     {
 
         public string Title { get; private set; }

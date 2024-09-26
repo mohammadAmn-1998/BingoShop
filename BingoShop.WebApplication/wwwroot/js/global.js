@@ -18,7 +18,6 @@
     loadCkeditor4();
 });
 
-
 function loadCkeditor4() {
     if (!document.getElementById("CkEditor4"))
         return;
@@ -30,8 +29,6 @@ function loadCkeditor4() {
     });
 
 }
-
-
 
 function getCookie(cname) {
         let name = cname + "=";
@@ -252,6 +249,7 @@ function deleteCookie(cookieName) {
         });
 }
 
+
 function changeActivation(url, errorTitle, errorText) {
     if (errorTitle == null || errorTitle == "undefined") {
         errorTitle = "عملیات ناموفق";
@@ -298,7 +296,6 @@ function changeActivation(url, errorTitle, errorText) {
         }
     });
 }
-
 function sweetAlertConfirmSubmit(event) {
 
     event.preventDefault();

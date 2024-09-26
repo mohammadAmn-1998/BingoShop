@@ -4,6 +4,7 @@ using Blogs.Infrastructure.Bootstrapper;
 using Blogs1.Application.Bootstrapper;
 using Blogs1.Infrastructure.Bootstrapper;
 using Blogs1.Query.Bootstrapper;
+using Comments.Infrastructure.Bootstrapper;
 using Shared.Application.Services;
 using Users1.Application.Bootstrapper;
 using Users1.Infrastructure.Bootstrapper;
@@ -32,6 +33,8 @@ namespace BingoShop.WebApplication.DependencyBootstrapper
 			Blog1ApplicationBootstrapper.Config(services);
 			Blog1QueryBootstrapper.Config(services);
 
+
+			CommentsInfrastructureBootstrapper.Config(services, connectionString);
 		}
 
 	}

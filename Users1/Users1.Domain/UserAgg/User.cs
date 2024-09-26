@@ -4,7 +4,7 @@ using Shared.Domain.SeedWorks.Base;
 
 namespace Users1.Domain.UserAgg
 {
-	public class User : BaseEntity<long>
+	public class User : BaseEntityUpdateActive<long>
 	{
 
 		public string FullName { get;private set; }

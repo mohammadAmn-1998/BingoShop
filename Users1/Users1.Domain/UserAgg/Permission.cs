@@ -8,7 +8,7 @@ using Shared.Domain.SeedWorks.Base;
 
 namespace Users1.Domain.UserAgg
 {
-	public class Permission : BaseEntity<long>
+	public class Permission : BaseEntityActive<long>
 	{
 
 		public long RoleId { get; private set; }

@@ -7,7 +7,7 @@ using Shared.Domain.SeedWorks.Base;
 
 namespace Blogs.Domain.Agg.ArticleAgg
 {
-    public class Article : BaseEntity<int>
+    public class Article : BaseEntityUpdateActive<int>
     {
 
         public string Title { get; private set; }
@@ -53,7 +53,6 @@ namespace Blogs.Domain.Agg.ArticleAgg
             Summary = summary;
             Content = content;
             IsSpecial = isSpecial;
-			CreateDate = DateTime.Now;
         }
 
         public void Edit(string title, string imageName, string imageAlt, int categoryId, int subCategoryId, string slug, string summary, string content, bool isSpecial)

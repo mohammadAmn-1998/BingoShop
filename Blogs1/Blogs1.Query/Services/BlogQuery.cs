@@ -8,6 +8,7 @@ using Blogs1.Domain.BlogAgg;
 using Blogs1.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Shared.Application.Models;
+using Shared.Application.Utility;
 using Shared.Domain.SeedWorks.Base;
 
 namespace Blogs1.Query.Services
@@ -56,8 +57,8 @@ namespace Blogs1.Query.Services
 						IsSpecial = x.IsSpecial,
 						Likes = x.Likes,
 						Dislikes = x.Dislikes,
-						CreateDate = x.CreateDate,
-						UpdateDate = x.UpdateDate,
+						CreateDate = x.CreateDate.ConvertToPersianDate(),
+						UpdateDate = x.UpdateDate.ConvertToPersianDate(),
 						Active = x.Active
 					}).ToListAsync();
 

@@ -24,17 +24,13 @@ namespace Shared.Domain.SeedWorks.Base
 	public class BaseEntityUpdate<TKey> : BaseEntity<TKey>
 	{
 
-		public DateTime UpdateDate { get; set; }
+		public DateTime? UpdateDate { get; set; }
 
-		public BaseEntityUpdate()
-		{
-			UpdateDate = DateTime.Now;
-		}
 
 		 public void UpdateEntity()
-        {
+         {
             UpdateDate = DateTime.Now;
-        }
+         }
 
 	}
 
@@ -59,10 +55,7 @@ namespace Shared.Domain.SeedWorks.Base
 
 		public DateTime? UpdateDate { get; set; }
 
-		public BaseEntityUpdateActive()
-		{
-			UpdateDate = DateTime.Now;
-		}
+		
 
 	}
 }

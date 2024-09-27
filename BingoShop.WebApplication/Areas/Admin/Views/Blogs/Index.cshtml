@@ -43,6 +43,8 @@
 			<th class="col-2">عکس</th>
 			<th class="col-2">عنوان</th>
 			<th class="col-2">دسته بندی</th>
+			<th class="col-2">تاریخ ثبت</th>
+			<th class="col-2">تاریخ ویرایش</th>
 			<th class="col-1">پست ویژه</th>
 			<th class="col-4">عملیات</th>
 		</tr>
@@ -67,12 +69,18 @@
 						<ul>
 
 							<strong>
-									@blog?.CategoryTitle
+								@blog?.CategoryTitle
 							</strong>
 							<li class="mr-5 p-2">
-								@blog.SubCategoryTitle
+								@blog?.SubCategoryTitle
 							</li>
 						</ul>
+					</td>
+					<td>
+						@blog.CreateDate
+					</td>
+					<td>
+						@blog.UpdateDate
 					</td>
 					<td class="mr-3 mt-3">
 						@if (blog.IsSpecial)

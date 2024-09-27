@@ -7,11 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="CommentService\Query\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Shared\Shared.Application\Shared.Application.csproj" />
+    <Folder Include="EmailAgg\" />
   </ItemGroup>
 
 </Project>

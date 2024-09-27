@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -12,8 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Comments.Application.Contract\Comments.Application.Contract.csproj" />
-    <ProjectReference Include="..\Comments.Domain\Comments.Domain.csproj" />
+    <ProjectReference Include="..\..\Shared\Shared.Domain\Shared.Domain.csproj" />
+    <ProjectReference Include="..\Seos.Application.Contract\Seos.Application.Contract.csproj" />
+    <ProjectReference Include="..\Seos.Application\Seos.Application.csproj" />
+    <ProjectReference Include="..\Seos.Domain\Seos.Domain.csproj" />
   </ItemGroup>
 
 </Project>

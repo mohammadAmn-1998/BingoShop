@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Comments.Domain.CommentAgg;
+using Comments.Infrastructure.EFConfigs;
 using Microsoft.EntityFrameworkCore;
 
 namespace Comments.Infrastructure.Context
@@ -15,9 +17,11 @@ namespace Comments.Infrastructure.Context
 			
 		}
 
+		public DbSet<Comment> Comments { get; set; }
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			var assembly = typeof(CommentContext).Assembly;
+			var assembly = typeof(CommentConfig).Assembly;
 			modelBuilder.ApplyConfigurationsFromAssembly(assembly);
 
 			base.OnModelCreating(modelBuilder);

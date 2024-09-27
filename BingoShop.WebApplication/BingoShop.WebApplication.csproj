@@ -7664,6 +7664,7 @@
     <ProjectReference Include="..\Blogs1\Blogs1.Query\Blogs1.Query.csproj" />
     <ProjectReference Include="..\Blogs\Blogs.Application\Blogs.Application.csproj" />
     <ProjectReference Include="..\Comments\Comments.Infrastructure\Comments.Infrastructure.csproj" />
+    <ProjectReference Include="..\Seos\Seos.Infrastructure\Seos.Infrastructure.csproj" />
     <ProjectReference Include="..\Shared\Shared.Application\Shared.Application.csproj" />
     <ProjectReference Include="..\Users1\Users1.Application.Contract\Users1.Application.Contract.csproj" />
     <ProjectReference Include="..\Users1\Users1.Application\Users1.Application.csproj" />

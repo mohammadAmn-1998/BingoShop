@@ -25,6 +25,44 @@ namespace Shared.Application.Utility
 
 		public const string BlogContentImageDirectory = "wwwroot/assets/images/blog_content_img";
 
+		public const string BanerImageDirectory = "wwwroot/assets/images/baner_img";
+		public const string BanerImageDirectory100 = "wwwroot/assets/images/baner_img100";
+		public const string BanerImageDirectory400 = "wwwroot/assets/images/baner_img400";
+
+
+		public const string ImageSiteDirectory = "wwwroot/assets/images/image_site_img";
+		public const string ImageSiteDirectory100 = "wwwroot/assets/images/image_site_img100";
+		public const string ImageSiteDirectory400 = "wwwroot/assets/images/image_site_img400";
+
+
+		public const string MenuImageDirectory = "wwwroot/assets/images/menu_img";
+		public const string MenuImageDirectory100 = "wwwroot/assets/images/menu_img100";
+		public const string MenuImageDirectory400 = "wwwroot/assets/images/menu_img400";
+
+
+		public const string ServiceImageDirectory = "wwwroot/assets/images/service_img";
+		public const string ServiceImageDirectory100 = "wwwroot/assets/images/service_img100";
+		public const string ServiceImageDirectory400 = "wwwroot/assets/images/service_img400";
+
+
+
+		public const string SiteSettingImageDirectory = "wwwroot/assets/images/site_setting_img";
+		public const string SiteSettingImageDirectory16 = "wwwroot/assets/images/site_setting_img16";
+		public const string SiteSettingImageDirectory32 = "wwwroot/assets/images/site_setting_img32";
+		public const string SiteSettingImageDirectory64 = "wwwroot/assets/images/site_setting_img64";
+		public const string SiteSettingImageDirectory100 = "wwwroot/assets/images/site_setting_img100";
+		public const string SiteSettingImageDirectory300 = "wwwroot/assets/images/site_setting_img300";
+		public const string SiteSettingImageDirectory400 = "wwwroot/assets/images/site_setting_img400";
+
+
+		public const string SliderImageDirectory = "wwwroot/assets/images/slider_img";
+		public const string SliderImageDirectory100 = "wwwroot/assets/images/slider_img100";
+		
+
+
+
+
+
 		public static string GetUserAvatarFullPath(string? imageName,int? imageSize)
 		{
 

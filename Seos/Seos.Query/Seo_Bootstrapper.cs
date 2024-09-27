@@ -3,11 +3,11 @@ using Seos.Infrastructure;
 
 namespace Seos.Query
 {
-    public static class Seo_Bootstrapper
+    public static class SeoQueryBootstrapper
     {
-        public static void Config(IServiceCollection services, string connection)
+        public static void Config(IServiceCollection services)
         {
-            SeoInfrastructureBootstrapper.Config(services, connection);
+			
         }
     }
 }

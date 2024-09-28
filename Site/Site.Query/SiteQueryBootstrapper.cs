@@ -8,11 +8,7 @@ using Site.Application.Contract.SiteSettingApplication.Query;
 using Site.Application.Contract.SliderApplication.Query;
 using Site.Infrastructure;
 using Site.Query.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Site.Query
 {

@@ -70,7 +70,7 @@ namespace Comments.Infrastructure.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Comment");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("Comments.Domain.CommentAgg.Comment", b =>

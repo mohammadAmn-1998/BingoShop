@@ -57,8 +57,10 @@ namespace Shared.Application.Utility
 
 		public const string SliderImageDirectory = "wwwroot/assets/images/slider_img";
 		public const string SliderImageDirectory100 = "wwwroot/assets/images/slider_img100";
-		
 
+		public const string PackageImageDirectory = "wwwroot/assets/images/package_img";
+		public const string PackageImageDirectory100 = "wwwroot/assets/images/package_img100";
+		public const string PackageImageDirectory400 = "wwwroot/assets/images/package_img400";
 
 
 

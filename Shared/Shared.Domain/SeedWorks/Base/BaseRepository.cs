@@ -137,6 +137,7 @@ namespace Shared.Domain.SeedWorks.Base
 			return Entities<T>().AsNoTracking();
 		}
 
+
 		protected virtual IQueryable<T> TableTracking<T>()
 			where T : BaseEntity<long>
 		{
@@ -154,6 +155,7 @@ namespace Shared.Domain.SeedWorks.Base
 		{
 			return Table<T>().SingleOrDefaultAsync(x => x.Id == entityId);
 		}
+		
 
 		protected virtual Task<T?> GetById<T>(long entityId, params string[] includs) where T : BaseEntity<long>
 		{

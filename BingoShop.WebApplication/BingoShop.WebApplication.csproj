@@ -7666,6 +7666,9 @@
     <ProjectReference Include="..\Comments\Comments.Application\Comments.Application.csproj" />
     <ProjectReference Include="..\Comments\Comments.Infrastructure\Comments.Infrastructure.csproj" />
     <ProjectReference Include="..\Comments\Comments.Query\Comments.Query.csproj" />
+    <ProjectReference Include="..\PostModule\PostModule.Application.Services\PostModule.Application.Services.csproj" />
+    <ProjectReference Include="..\PostModule\PostModule.Infrastracture.EF\PostModule.Infrastracture.EF.csproj" />
+    <ProjectReference Include="..\PostModule\PostModule.Query\PostModule.Query.csproj" />
     <ProjectReference Include="..\Seos\Seos.Application.Contract\Seos.Application.Contract.csproj" />
     <ProjectReference Include="..\Seos\Seos.Application\Seos.Application.csproj" />
     <ProjectReference Include="..\Seos\Seos.Infrastructure\Seos.Infrastructure.csproj" />

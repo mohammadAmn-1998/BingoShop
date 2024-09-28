@@ -20,6 +20,7 @@ namespace Shared.Domain.SeedWorks.Base
 
 
 		TEntity? GetBy(Expression<Func<TEntity, bool>> expression, bool eager = false);
+		TEntity? GetById(TKey id, bool eager = false);
 
 		bool Update(TEntity entity);
 		bool Insert(TEntity entity);
@@ -27,7 +28,7 @@ namespace Shared.Domain.SeedWorks.Base
 
 		bool IsExists(Expression<Func<TEntity, bool>> expression);
 
-		int Save();
+		bool Save();
 		void Dispose();
 
 	}

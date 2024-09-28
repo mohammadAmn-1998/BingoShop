@@ -54,8 +54,11 @@ namespace Shared.Domain.SeedWorks.Base
 	{
 
 		public DateTime? UpdateDate { get; set; }
+		public void UpdateEntity()
+		{
+			UpdateDate = DateTime.Now;
+		}
 
-		
 
 	}
 }

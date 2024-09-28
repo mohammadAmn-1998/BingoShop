@@ -107,6 +107,11 @@ public class Repository<TKey, TEntity> : IRepository<TKey, TEntity> where TEntit
 		}
 	}
 
+	public TEntity? GetById(TKey id, bool eager = false)
+	{
+		return GetBy(x => Equals(x.Id, id),eager);
+	}
+
 	public bool Update(TEntity entity)
 	{
 		try
@@ -114,7 +119,7 @@ public class Repository<TKey, TEntity> : IRepository<TKey, TEntity> where TEntit
 
 			DbSet.Update(entity);
 
-			return Save() > 0;
+			return Save();
 
 		}
 		catch (Exception e)
@@ -130,7 +135,7 @@ public class Repository<TKey, TEntity> : IRepository<TKey, TEntity> where TEntit
 
 			DbSet.Add(entity);
 
-			return Save() > 0;
+			return Save();
 
 		}
 		catch (Exception e)
@@ -146,7 +151,7 @@ public class Repository<TKey, TEntity> : IRepository<TKey, TEntity> where TEntit
 
 			DbSet.Remove(entity);
 
-			return Save() > 0;
+			return Save();
 
 		}
 		catch (Exception e)
@@ -169,9 +174,9 @@ public class Repository<TKey, TEntity> : IRepository<TKey, TEntity> where TEntit
 
 	}
 
-	public int Save()
+	public bool Save()
 	{
-		return _context.SaveChanges();
+		return _context.SaveChanges() > 0;
 	}
 
 	public void Dispose()

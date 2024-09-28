@@ -14,6 +14,7 @@ namespace Comments.Infrastructure.EFConfigs
 	{
 		public void Configure(EntityTypeBuilder<Comment> builder)
 		{
+			builder.ToTable("Comments");
 			builder.HasKey(x => x.Id);
 			builder.Property(x => x.Text).IsRequired(true).HasMaxLength(3000);
 			builder.Property(x => x.Email).IsRequired(false).HasMaxLength(200);

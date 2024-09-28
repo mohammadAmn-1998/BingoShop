@@ -1,6 +1,4 @@
 ﻿using BingoShop.WebApplication.Services;
-using Blogs.Application.Bootstrapper;
-using Blogs.Infrastructure.Bootstrapper;
 using Blogs1.Application.Bootstrapper;
 using Blogs1.Infrastructure.Bootstrapper;
 using Blogs1.Query.Bootstrapper;

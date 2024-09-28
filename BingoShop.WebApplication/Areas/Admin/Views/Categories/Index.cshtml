@@ -94,13 +94,13 @@
 										
 										@if (@subCategory.IsActive)
 										{
-												<a class="btn  btn-sm btn-danger " onclick="sweetAlertConfirmLink(event,'با این کار تمام زیر گروه های این دسته بندی غیر فعال میشوند. آیا مطمعنید؟')" asp-action="ChangeActivation" asp-route-categoryId="@subCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
+												<a class="btn  btn-sm btn-danger " onclick="sweetAlertConfirmLink(event)" asp-action="ChangeActivation" asp-route-categoryId="@subCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
 												غیر فعال کردن
 											</a>
 										}
 										else
 										{
-												<a class="btn btn-sm  btn-success " onclick="sweetAlertConfirmLink(event)" asp-action="ChangeActivation" asp-route-categoryId="@subCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
+												<a class="btn btn-sm  btn-success @((!blogCategory.IsActive ? "disabled" : "")) " onclick="sweetAlertConfirmLink(event)" asp-action="ChangeActivation" asp-route-categoryId="@subCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
 												فعال کردن
 											</a>
 										}

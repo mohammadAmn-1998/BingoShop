@@ -2306,7 +2306,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Blogs\Blogs.Infrastructure\Blogs.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Shared\Shared.Application\Shared.Application.csproj" />
     <ProjectReference Include="..\Users1.Application\Users1.Application.csproj" />
     <ProjectReference Include="..\Users1.Query\Users1.Query.csproj" />

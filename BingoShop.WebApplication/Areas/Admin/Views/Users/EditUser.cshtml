@@ -3,13 +3,14 @@
 
 @{
 	ViewData["Title"]= "ویرایش کاربر";
+	ViewData["Selected"] = "Users";
 	
 }
 
 <div style="margin-right: 200px; margin-left: 200px; " >
 
 	<br><br>
-	<form class=" mt-3" method="post" href="/Admin/Home/EditUser" enctype="multipart/form-data">
+	<form class=" mt-3" method="post" href="/Admin/Users/EditUser" enctype="multipart/form-data">
 	
 		@Html.HiddenFor(x=> x.Id)
 		@Html.HiddenFor(x=> x.AvatarName)
@@ -26,24 +27,24 @@
 	
 		@if (@Model.IsBanned)
 		{
-			<a class="btn btn-danger  mr-1" onclick="changeBan('/Admin/Home/ChangeUserBan/@Model.Id')">بــــن کردن</a>
+			<a class="btn btn-danger  mr-1" onclick="changeBan('/Admin/Users/ChangeUserBan/@Model.Id')">بــــن کردن</a>
 		}
 		else
 		{
-			<a class="btn btn-primary mr-1" onclick="changeBan('/Admin/Home/ChangeUserBan/@Model.Id')">از بن در آوردن</a>
+			<a class="btn btn-primary mr-1" onclick="changeBan('/Admin/Users/ChangeUserBan/@Model.Id')">از بن در آوردن</a>
 		}
 	
 		@if (Model.IsActive)
 		{
-			<a class="btn btn-danger mr-1" onclick="changeActivation('/Admin/Home/ChangeUserActivation/@Model.Id')"> غیر فعال کردن</a>
+			<a class="btn btn-danger mr-1" onclick="changeActivation('/Admin/Users/ChangeUserActivation/@Model.Id')"> غیر فعال کردن</a>
 		}
 		else
 		{
-			<a class="btn btn-primary mr-1" onclick="changeActivation('/Admin/Home/ChangeUserActivation/@Model.Id')">  فعال کردن</a>
+			<a class="btn btn-primary mr-1" onclick="changeActivation('/Admin/Users/ChangeUserActivation/@Model.Id')">  فعال کردن</a>
 		}
 		
 		<hr>
-		<button type="submit" onclick="return confirmSubmission()" class="btn btn-success mr-1 ">ثبت ویرایش</button>
+		<button type="submit" onclick="sweetAlertConfirmSubmit(event)" class="btn btn-success mr-1 ">ثبت ویرایش</button>
 		<a class="btn btn-danger m-3" href="./">انصراف</a>
 	</form>
 </div>
@@ -53,10 +54,7 @@
 {
 	
 	<script type="text/javascript">
-		function confirmSubmission() {
-			return confirm("آیا مطمعنید؟");
-		}
-
+		
 		function changeActivation(url, errorTitle, errorText) {
 			if (errorTitle == null || errorTitle == "undefined") {
 				errorTitle = "عملیات ناموفق";

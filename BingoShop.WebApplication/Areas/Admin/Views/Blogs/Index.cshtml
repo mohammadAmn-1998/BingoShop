@@ -8,9 +8,9 @@
 }
 
 
-<form class="form-inline ml-3  float-sm" asp-controller="Blogs
+<form class="form-inline ml-3  float-sm" 
 
-" asp-action="Index" method="get">
+ action="/admin/blogs" method="get">
 	<div class="input-group input-group-sm " style=" display: flex;
 	                                                align-items: center; width: 300px; margin-right: 400px; padding : 10px">
 
@@ -92,7 +92,7 @@
 						{
 							<i class="fa fa-close  bg-danger"></i>
 						}
-							<a class="btn btn-action" onclick="sweetAlertConfirmLink(event,'آیا مطمعنید؟')" asp-action="ChangeSpecialation" asp-route-blogId="@blog.Id" asp-route-pageId="@Model.FilterParams.PageId">تغییر؟</a>
+							<a class="btn btn-action" onclick="sweetAlertConfirmLink(event,'آیا مطمعنید؟ پست های ویژه در بخش ویژه نمایش داده میشوند')" asp-action="ChangeSpecialation" asp-route-blogId="@blog.Id" asp-route-pageId="@Model.FilterParams.PageId">تغییر؟</a>
 					</td>
 
 
@@ -105,13 +105,13 @@
 						@*	<a class="btn btn-danger mr-1" href="javascript:void(0);" onclick="Delete(@postDto?.Id)"> حذف</a>*@
 						@if (@blog.Active)
 						{
-								<a class="btn   btn-danger mr-1" onclick="sweetAlertConfirmLink(event)" asp-action="ChangeActivation" asp-route-blogId="@blog.Id" asp-route-pageId="@Model.FilterParams.PageId">
+								<a class="btn   btn-danger mr-1" onclick="sweetAlertConfirmLink(event,'با این کار این پست از حالت نمایش در سایت خارج میشود')" asp-action="ChangeActivation" asp-route-blogId="@blog.Id" asp-route-pageId="@Model.FilterParams.PageId">
 								غیر فعال کردن
 							</a>
 						}
 						else
 						{
-								<a class="btn   btn-success mr-1" onclick="sweetAlertConfirmLink(event)" asp-action="ChangeActivation" asp-route-blogId="@blog.Id" asp-route-pageId="@Model.FilterParams.PageId">
+								<a class="btn   btn-success mr-1" onclick="sweetAlertConfirmLink(event,'با انی کار این مقاله فعال شده و در وبلاگ نمایش داده میشود')" asp-action="ChangeActivation" asp-route-blogId="@blog.Id" asp-route-pageId="@Model.FilterParams.PageId">
 								فعال کردن
 							</a>
 						}

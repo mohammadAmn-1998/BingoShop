@@ -28,7 +28,7 @@ internal class SiteSettingApplication : ISiteSettingApplication
         if (site == null)
 	        return new(Status.BadRequest, ErrorMessages.BadRequestError);
         var logoName = site.LogoName;
-        string oldLogoName = site.LogoName;
+        var oldLogoName = site.LogoName;
         if (command.LogoFile != null)
         {
             if (!command.LogoFile.IsImage()) return new(Status.BadRequest, ErrorMessages.IsNotImage, nameof(command.LogoFile));
@@ -49,9 +49,9 @@ internal class SiteSettingApplication : ISiteSettingApplication
 				return new(Status.InternalServerError, ErrorMessages.InternalServerError, nameof(command.FavIconFile));
 			if (logoName == null)
                 return new(Status.InternalServerError, ErrorMessages.InternalServerError, nameof(command.FavIconFile));
-            _fileService.ResizeImage(favIconName, Directories.SiteSettingImageDirectory, 64);
-            _fileService.ResizeImage(favIconName, Directories.SiteSettingImageDirectory, 32);
-            _fileService.ResizeImage(favIconName, Directories.SiteSettingImageDirectory, 16);
+            _fileService.ResizeImage( Directories.SiteSettingImageDirectory,favIconName, 64);
+            _fileService.ResizeImage( Directories.SiteSettingImageDirectory, favIconName, 32);
+            _fileService.ResizeImage( Directories.SiteSettingImageDirectory, favIconName,16);
         }
         site.Edit(command.Instagram, command.WhatsApp, command.Telegram, command.Youtube, logoName,
             command.LogoAlt, favIconName, command.Enamad, command.SamanDehi, command.SeoBox,
@@ -67,16 +67,16 @@ internal class SiteSettingApplication : ISiteSettingApplication
         {
             if (command.LogoFile != null)
             {
-	            _fileService.DeleteFile(Directories.SiteSettingImageDirectory, logoName);
-	            _fileService.DeleteFile(Directories.SiteSettingImageDirectory300, logoName);
+	            _fileService.DeleteFile(logoName,Directories.SiteSettingImageDirectory );
+	            _fileService.DeleteFile(logoName, Directories.SiteSettingImageDirectory300);
 
             }
             if (command.FavIconFile != null)
             {
-	            _fileService.DeleteFile(Directories.SiteSettingImageDirectory, favIconName);
-	            _fileService.DeleteFile(Directories.SiteSettingImageDirectory16, favIconName);
-	            _fileService.DeleteFile(Directories.SiteSettingImageDirectory32, favIconName);
-	            _fileService.DeleteFile(Directories.SiteSettingImageDirectory64, favIconName);
+	            _fileService.DeleteFile(favIconName, Directories.SiteSettingImageDirectory);
+	            _fileService.DeleteFile(favIconName, Directories.SiteSettingImageDirectory16);
+	            _fileService.DeleteFile(favIconName, Directories.SiteSettingImageDirectory32);
+	            _fileService.DeleteFile(favIconName, Directories.SiteSettingImageDirectory64);
             }
             return new(Status.InternalServerError,ErrorMessages.InternalServerError,nameof(command.Instagram));
         }

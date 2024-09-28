@@ -7662,7 +7662,6 @@
     <ProjectReference Include="..\Blogs1\Blogs1.Domain\Blogs1.Domain.csproj" />
     <ProjectReference Include="..\Blogs1\Blogs1.Infrastructure\Blogs1.Infrastructure.csproj" />
     <ProjectReference Include="..\Blogs1\Blogs1.Query\Blogs1.Query.csproj" />
-    <ProjectReference Include="..\Blogs\Blogs.Application\Blogs.Application.csproj" />
     <ProjectReference Include="..\Comments\Comments.Application\Comments.Application.csproj" />
     <ProjectReference Include="..\Comments\Comments.Infrastructure\Comments.Infrastructure.csproj" />
     <ProjectReference Include="..\Comments\Comments.Query\Comments.Query.csproj" />

@@ -177,6 +177,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostModule.Application.Serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostModule.Query", "PostModule\PostModule.Query\PostModule.Query.csproj", "{FBADB8C7-D470-4D1A-8762-7583C069F47B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emails.Query", "Emails\Emails.Query\Emails.Query.csproj", "{E60BC402-E341-48D9-BD34-FC9BC3450B71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -351,6 +353,10 @@ Global
 		{FBADB8C7-D470-4D1A-8762-7583C069F47B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBADB8C7-D470-4D1A-8762-7583C069F47B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBADB8C7-D470-4D1A-8762-7583C069F47B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E60BC402-E341-48D9-BD34-FC9BC3450B71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E60BC402-E341-48D9-BD34-FC9BC3450B71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E60BC402-E341-48D9-BD34-FC9BC3450B71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E60BC402-E341-48D9-BD34-FC9BC3450B71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -433,6 +439,7 @@ Global
 		{75F12832-2338-4AE8-A7CF-EF137FAFA1DE} = {5F01DC38-B4DE-48CB-967E-E982D144B824}
 		{6B36DC32-F732-47A6-9B6E-0ED5ED649EFC} = {029735DC-91A5-4534-9338-7B985F911EAE}
 		{FBADB8C7-D470-4D1A-8762-7583C069F47B} = {8674358F-8ED4-4500-A4CA-416B4944DB17}
+		{E60BC402-E341-48D9-BD34-FC9BC3450B71} = {C18D8B75-F965-44D9-B3FA-952AC7DEB4B9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AD8F13B9-D3B0-4DC0-BB05-06177FFB7F76}

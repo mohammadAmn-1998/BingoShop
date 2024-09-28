@@ -18,7 +18,7 @@ internal class UserPostRepository : Repository<int, UserPost>, IUserPostReposito
         return await _context.UserPosts.SingleOrDefaultAsync(p => p.ApiCode == apiCode);
     }
 
-    public async Task<UserPost> GetForUser(int userId)
+    public async Task<UserPost> GetForUser(long userId)
     {
         UserPost userPost = await _context.UserPosts.SingleOrDefaultAsync(p => p.UserId == userId);
         if(userPost == null)

@@ -10,7 +10,7 @@ namespace PostModule.Domain.UserPostAgg
 {
     public class UserPost : BaseEntity<int>
     {
-        public UserPost(int userId, int count, string apiCode)
+        public UserPost(long userId, int count, string apiCode)
         {
             UserId = userId;
             Count = count;
@@ -24,7 +24,7 @@ namespace PostModule.Domain.UserPostAgg
         {
             Count = Count + count;
         }
-        public int UserId { get; private set; }
+        public long UserId { get; private set; }
         public int Count { get; private set; }
         public string ApiCode { get; private set; }
     }

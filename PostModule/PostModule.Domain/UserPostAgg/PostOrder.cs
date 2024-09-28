@@ -5,13 +5,13 @@ namespace PostModule.Domain.UserPostAgg
 {
     public class PostOrder : BaseEntity<int>
     {
-        public int UserId { get; private set; }
+        public long UserId { get; private set; }
         public int TransactionId { get; private set; }
         public int PackageId { get; private set; }
         public int Price { get; private set; }
         public PostOrderStatus Status { get; private set; }
         public Package Package { get; private set; }
-        public PostOrder(int packageId,int userId, int price)
+        public PostOrder(int packageId, long userId, int price)
         {
 
             PackageId = packageId;

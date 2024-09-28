@@ -7,6 +7,9 @@ using Blogs1.Query.Bootstrapper;
 using Comments.Application.Bootstrapper;
 using Comments.Infrastructure.Bootstrapper;
 using Comments.Query.Bootstrapper;
+using Emails.Application.Bootstrapper;
+using Emails.Infrastructure.Bootstrapper;
+using Emails.Query.Bootstrapper;
 using PostModule.Application.Services;
 using PostModule.Infrastracture.EF;
 using PostModule.Query;
@@ -59,6 +62,10 @@ namespace BingoShop.WebApplication.DependencyBootstrapper
 			PostInfrastructureBootstrapper.Config(services,connectionString);
 			PostApplicationBootstrapper.Config(services);
 			PostQueryBootstrapper.Config(services);
+
+			EmailInfrastructureBootstrapper.Config(services, connectionString);
+			EmailApplicationBootstrapper.Config(services);
+			EmailQueryBootstrapper.Config(services);
 		}
 
 	}

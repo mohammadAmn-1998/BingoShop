@@ -6,7 +6,7 @@ namespace PostModule.Domain.UserPostAgg
 {
     public interface IPackageRepository : IRepository<int,Package>
     {
-        Task<CreatePostOrder> GetCreatePostModelAsync(int userId, int packageId);
+        Task<CreatePostOrder> GetCreatePostModelAsync(long userId, int packageId);
         EditPackage GetForEdit(int id);
     }
 }

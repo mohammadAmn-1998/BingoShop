@@ -16,7 +16,7 @@ internal class PostOrderRepository : Repository<int, PostOrder>, IPOstOrderRepos
         _context = context;
     }
 
-    public async Task<PostOrderUserPanelModel> GetPostOrderNotPaymentForUser(int userId)
+    public async Task<PostOrderUserPanelModel> GetPostOrderNotPaymentForUser(long userId)
     {
         var postOrder = await GetPostOrderNotPaymentForUserAsync(userId);
         if (postOrder == null) return null;
@@ -30,7 +30,7 @@ internal class PostOrderRepository : Repository<int, PostOrder>, IPOstOrderRepos
             $"{Directories.PackageImageDirectory400}{package.ImageName}", package.ImageAlt, package.Count,package.Description);
     }
 
-    public async Task<PostOrder> GetPostOrderNotPaymentForUserAsync(int userId) =>
+    public async Task<PostOrder> GetPostOrderNotPaymentForUserAsync(long userId) =>
         await _context.PostOrders.SingleOrDefaultAsync(p => p.UserId == userId 
         && p.Status == Shared.Domain.Enums.PostOrderStatus.پرداخت_نشده);
 }

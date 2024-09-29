@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Blogs1.Application.Bootstrapper
 {
-	public static class Blog1ApplicationBootstrapper
+	public static class Blogs1ApplicationBootstrapper
 	{
 
 

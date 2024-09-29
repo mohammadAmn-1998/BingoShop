@@ -21,10 +21,12 @@ namespace Shared.Application.Utility
 
 		public int EndPage { get; set; }
 
-		public void GetBasePagination(IQueryable<object> data, int pageId, int take)
+		public int Skip { get; set; }
+
+		public void GetBasePagination(IQueryable<object>? data, int pageId, int take)
 		{
 
-			EntityCount = data.Count();
+			EntityCount = data?.Count() ?? 0;
 
 			Take = take;
 
@@ -36,7 +38,7 @@ namespace Shared.Application.Utility
 
 			EndPage = ((CurrentPage + 3) > TotalPages ? TotalPages : (CurrentPage + 3));
 
-
+			Skip = (pageId - 1) * take;
 
 		}
 

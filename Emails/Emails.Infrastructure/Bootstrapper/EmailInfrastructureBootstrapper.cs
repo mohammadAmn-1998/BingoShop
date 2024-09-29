@@ -7,7 +7,7 @@ using Emails.Domain.EmailUserAgg;
 using Emails.Domain.MessageUserAgg;
 using Emails.Domain.SendEmailAgg;
 using Emails.Infrastructure.Context;
-using Emails.Infrastructure.Services;
+using Emails.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

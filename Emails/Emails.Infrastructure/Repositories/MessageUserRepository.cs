@@ -3,7 +3,7 @@ using Emails.Infrastructure.Context;
 using Shared.Infrastructure;
 using Shared.Infrastructure.BaseRepository;
 
-namespace Emails.Infrastructure.Services;
+namespace Emails.Infrastructure.Repositories;
 
 internal class MessageUserRepository : Repository<long, MessageUser>, IMessageUserRepository
 {

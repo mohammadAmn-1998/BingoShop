@@ -11,6 +11,7 @@ using Emails.Query.Bootstrapper;
 using PostModule.Application.Services;
 using PostModule.Infrastracture.EF;
 using PostModule.Query;
+using Query.Services;
 using Seos.Application;
 using Seos.Infrastructure;
 using Seos.Query;
@@ -32,38 +33,11 @@ namespace BingoShop.WebApplication.DependencyBootstrapper
 		{
 
 
-
 			services.AddTransient<IFileService, FileService>();
 			services.AddTransient<IAuthService, AuthService>();
+			Moduls_Bootstrapper.Config(services, connectionString);
+			
 
-			UserInfrastructureBootstrapper.Config(services, connectionString);
-			UsersApplicationBootstrapper.Config(services);
-			UsersQueryBootstrapper.Config(services);
-
-
-			Blog1InfraBootstrapper.Config(services,connectionString);
-			Blog1ApplicationBootstrapper.Config(services);
-			Blog1QueryBootstrapper.Config(services);
-
-			CommentsInfrastructureBootstrapper.Config(services, connectionString);
-			CommentsApplicationBootstrapper.Config(services);
-			CommentsQueryBootstrapper.Config(services);
-
-			SeoInfrastructureBootstrapper.Config(services ,connectionString);
-			SeoApplicationBootstrapper.Config(services);
-			SeoQueryBootstrapper.Config(services);
-
-			SiteApplicationBootstraper.Config(services);
-			SiteInfrastructureBootstrapper.Config(services,connectionString);
-			SiteQueryBootstrapper.Config(services);
-
-			PostInfrastructureBootstrapper.Config(services,connectionString);
-			PostApplicationBootstrapper.Config(services);
-			PostQueryBootstrapper.Config(services);
-
-			EmailInfrastructureBootstrapper.Config(services, connectionString);
-			EmailApplicationBootstrapper.Config(services);
-			EmailQueryBootstrapper.Config(services);
 		}
 
 	}

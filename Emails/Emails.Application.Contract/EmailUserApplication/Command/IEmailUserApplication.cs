@@ -11,6 +11,6 @@ namespace Emails.Application.Contract.EmailUserApplication.Command
     public interface IEmailUserApplication
     {
         OperationResult Create(CreateEmailUser command);
-        bool ActivationChange(int id);
+        bool ActivationChange(long id);
     }
 }

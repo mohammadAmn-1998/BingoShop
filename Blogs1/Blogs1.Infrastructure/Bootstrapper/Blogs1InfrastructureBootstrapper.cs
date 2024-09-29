@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Blogs1.Infrastructure.Bootstrapper
 {
-	public static class Blog1InfraBootstrapper
+	public static class Blogs1InfrastructureBootstrapper
 	{
 
 		public static void Config(IServiceCollection services, string connectionString)

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using Emails.Infrastructure.Context;
 using Shared.Infrastructure.BaseRepository;
 
-namespace Emails.Infrastructure.Services;
+namespace Emails.Infrastructure.Repositories;
 
-internal class SendEmailRepository : Repository<long,SendEmail> , ISendEmailRepository
+internal class SendEmailRepository : Repository<long, SendEmail>, ISendEmailRepository
 {
 	private readonly EmailContext _context;
 

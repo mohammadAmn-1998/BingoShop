@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Blogs1.Query.Bootstrapper
 {
-	public class Blog1QueryBootstrapper
+	public class Blogs1QueryBootstrapper
 	{
 
 		public static void Config(IServiceCollection services)

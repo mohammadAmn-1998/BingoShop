@@ -20,11 +20,19 @@ namespace Emails.Application.Services
             _emailUserRepository = emailUserRepository;
         }
 
-        public bool ActivationChange(int id)
+        public bool ActivationChange(long id)
         {
-            var email = _emailUserRepository.GetById(id);
-            email.ActivationChange();
-            return _emailUserRepository.Save();
+	        try
+	        {
+		        var email = _emailUserRepository.GetById(id);
+		        email.ActivationChange();
+		        return _emailUserRepository.Save();
+}
+	        catch (Exception e)
+	        {
+		        return false;
+	        }
+           
         }
 
         public OperationResult Create(CreateEmailUser command)

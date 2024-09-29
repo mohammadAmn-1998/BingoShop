@@ -8,7 +8,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Emails.Application.Contract\Emails.Application.Contract.csproj" />
+    <ProjectReference Include="..\Emails.Application\Emails.Application.csproj" />
     <ProjectReference Include="..\Emails.Domain\Emails.Domain.csproj" />
+    <ProjectReference Include="..\Emails.Infrastructure\Emails.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

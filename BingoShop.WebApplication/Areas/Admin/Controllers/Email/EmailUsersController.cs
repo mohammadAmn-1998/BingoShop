@@ -11,13 +11,13 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Email
 {
 	[Area("Admin")]
 	[RequiredPermission(UserPermission.AdminPanel)]
-	public class EmailUserController : ControllerBase
+	public class EmailUsersController : ControllerBase
 	{
 
 		private readonly IEmailUserAdminQuery _emailUserAdminQuery;
 		private readonly IEmailUserApplication _emailUserApplication;
 
-		public EmailUserController(IEmailUserAdminQuery emailUserAdminQuery, IEmailUserApplication emailUserApplication)
+		public EmailUsersController(IEmailUserAdminQuery emailUserAdminQuery, IEmailUserApplication emailUserApplication)
 		{
 			_emailUserAdminQuery = emailUserAdminQuery;
 			_emailUserApplication = emailUserApplication;

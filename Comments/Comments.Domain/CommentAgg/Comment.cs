@@ -48,18 +48,19 @@ namespace Comments.Domain.CommentAgg
 			Text = text;
 			CommentFor = commentFor;
 			ParentId = parentId;
-			Status = CommentStatus.Not_Seen_Yet;
+			Status = CommentStatus.هنوز_دیده_نشده;
 			CommentFor = commentFor;
 		}
 
 		public void RejectedComment(string why)
 		{
-			Status = CommentStatus.Rejected;
+			Status = CommentStatus.رد_شده;
 			WhyRejected = why;
 		}
 		public void AcceptedComment()
 		{
-			Status = CommentStatus.Approved;
+			Status = CommentStatus.قبول_شده;
+			WhyRejected = null;
 		}
 	}
 }

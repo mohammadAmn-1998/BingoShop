@@ -24,6 +24,7 @@ namespace Emails.Infrastructure.Bootstrapper
 				options.UseSqlServer(connectionString);
 			});
 
+			
 
 			services.AddTransient<IEmailUserRepository, EmailUserRepository>();
 			services.AddTransient<IMessageUserRepository, MessageUserRepository>();

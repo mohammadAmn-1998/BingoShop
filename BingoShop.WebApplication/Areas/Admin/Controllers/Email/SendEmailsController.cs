@@ -1,4 +1,5 @@
-﻿using Emails.Application.Contract.SendEmailApplication.Command;
+﻿using BingoShop.WebApplication.Utility;
+using Emails.Application.Contract.SendEmailApplication.Command;
 using Microsoft.AspNetCore.Mvc;
 using Query.Contract.Admin.SendEmail;
 using Shared.Application.Utility;
@@ -7,11 +8,13 @@ using ControllerBase = BingoShop.WebApplication.Controllers.ControllerBase;
 
 namespace BingoShop.WebApplication.Areas.Admin.Controllers.Email
 {
-	public class SendEmailController : ControllerBase
+	[Area("Admin")]
+	[RequiredPermission(UserPermission.AddBlog)]
+	public class SendEmailsController : ControllerBase
 	{
 		private readonly ISendEmailAdminQuery _sendEmailAdminQuery;
 		private readonly ISendEmailApplication _sendEmailApplication;
-		public SendEmailController(ISendEmailAdminQuery sendEmailAdminQuery, ISendEmailApplication sendEmailApplication)
+		public SendEmailsController(ISendEmailAdminQuery sendEmailAdminQuery, ISendEmailApplication sendEmailApplication)
 		{
 			_sendEmailAdminQuery = sendEmailAdminQuery;
 			_sendEmailApplication = sendEmailApplication;

@@ -1,12 +1,18 @@
 
+using BingoShop.WebApplication.DependencyBootstrapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using DependencyBootstrapper = BingoShop.WebApplication.DependencyBootstrapper.DependencyBootstrapper;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 var services = builder.Services;
 services.AddControllersWithViews();
+
 var connectionString = builder.Configuration.GetConnectionString("default");
+DependencyBootstrapper.Config(services,connectionString!);
+
 services.AddHttpContextAccessor();
 services.AddAuthentication(opt =>
 {
@@ -23,7 +29,7 @@ services.AddAuthentication(opt =>
 
 });
 services.AddAuthorization();
-DependencyBootstrapper.Config(services, connectionString!);
+
 
 var app = builder.Build();
 

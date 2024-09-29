@@ -50,30 +50,52 @@
 				</a>
 				<ul class="treeview-menu">
 					<li class="@((selected == "BlogCategories" ? "active" : ""))"><a href="/Admin/Categories"><i class="fa fa-circle-o"></i>دسته بندی ها</a></li>
-					<li class="@((selected == "Blogs" ? "active" : ""))"><a href="/Admin/Blogs"><i class="fa fa-circle-o"></i>پست ها</a></li>
+					<li class="@((selected == "Blogs" ? "active" : ""))"><a href="/Admin/Blogs"><i class="fa fa-circle-o"></i>مقاله ها</a></li>
 				</ul>
 			</li>
 			<li>
-				<a href="pages/widgets.html">
-					<i class="fa fa-th"></i> <span>ویجت ها</span>
-					<span class="pull-left-container">
-						<small class="label pull-left bg-green">جدید</small>
-					</span>
-				</a>
+				<li class="@((selected == "Comments" ? "active" : ""))"><a href="/Admin/Comments"><i class="fa fa-circle-o"></i>مدیریت کامنت ها</a></li>
 			</li>
 			<li class="treeview">
 				<a href="#">
-					<i class="fa fa-pie-chart"></i>
-					<span>نمودارها</span>
+					<i class="fa fa-dashboard"></i> <span>مدیریت ایمیل ها</span>
 					<span class="pull-left-container">
 						<i class="fa fa-angle-right pull-left"></i>
 					</span>
 				</a>
 				<ul class="treeview-menu">
-					<li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i>نمودار ChartJS</a></li>
-					<li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i>نمودار Morris</a></li>
-					<li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i>نمودار Flot</a></li>
-					<li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i>نمودار Inline charts</a></li>
+					<li class="@((selected == "EmailUsers" ? "active" : ""))"><a href="/Admin/EmailUsers"><i class="fa fa-circle-o"></i>ایمیل های خبرنامه</a></li>
+					<li class="@((selected == "SendEmails" ? "active" : ""))"><a href="/Admin/SendEmails"><i class="fa fa-circle-o"></i>پیام های خبرنامه </a></li>
+					<li class="@((selected == "MessageUsers" ? "active" : ""))"><a href="/Admin/MessageUsers"><i class="fa fa-circle-o"></i>پیام های ارتباط با ما</a></li>
+				</ul>
+			</li>
+			<li class="treeview">
+				<a href="#">
+					<i class="fa fa-dashboard"></i> <span>مدیریت پست ها</span>
+					<span class="pull-left-container">
+						<i class="fa fa-angle-right pull-left"></i>
+					</span>
+				</a>
+
+				<li class="@((selected == "Seos" ? "active" : ""))"><a href="/Admin/Seos"><i class="fa fa-circle-o"></i>Seo</a></li>
+			</li>
+
+			<li class="treeview">
+				<a href="#">
+					<i class="fa fa-pie-chart"></i>
+					<span>تنظیمات سایت</span>
+					<span class="pull-left-container">
+						<i class="fa fa-angle-right pull-left"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu">
+					<li class="@((selected == "Baners" ? "active" : ""))"><a href="/Admin/EmailUsers"><i class="fa fa-circle-o"></i> مدیریت بنرها </a></li>
+					<li class="@((selected == "ImageSites" ? "active" : ""))"><a href="/Admin/EmailUsers"><i class="fa fa-circle-o"></i> مدیریت تصاویر سایت </a></li>
+					<li class="@((selected == "Menu" ? "active" : ""))"><a href="/Admin/EmailUsers"><i class="fa fa-circle-o"></i> مدیریت منو </a></li>
+					<li class="@((selected == "SitePage" ? "active" : ""))"><a href="/Admin/EmailUsers"><i class="fa fa-circle-o"></i> مدیریت پیج </a></li>
+					<li class="@((selected == "SiteService" ? "active" : ""))"><a href="/Admin/EmailUsers"><i class="fa fa-circle-o"></i> مدیریت سایت سرویس </a></li>
+					<li class="@((selected == "Sliders" ? "active" : ""))"><a href="/Admin/EmailUsers"><i class="fa fa-circle-o"></i> مدیریت اسلایدها </a></li>
+					<li class="@((selected == "SiteSetting" ? "active" : ""))"><a href="/Admin/EmailUsers"><i class="fa fa-circle-o"></i> تنظیمات کلی سایت </a></li>
 				</ul>
 			</li>
 			<li class="treeview">

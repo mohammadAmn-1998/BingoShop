@@ -17,9 +17,9 @@ namespace Emails.Application.Bootstrapper
 		public static void Config(IServiceCollection services)
 		{
 
+			services.AddTransient<ISendEmailApplication, SendEmailApplication>();
 			services.AddTransient<IEmailUserApplication, EmailUserApplication>();
 			services.AddTransient<IMessageUserApplication, MessageUserApplication>();
-			services.AddTransient<ISendEmailApplication, SendEmailApplication>();
 
 		}
 

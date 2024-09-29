@@ -1,4 +1,5 @@
-﻿using Emails.Application.Bootstrapper;
+﻿
+using Emails.Application.Bootstrapper;
 using Emails.Infrastructure.Bootstrapper;
 using Microsoft.Extensions.DependencyInjection;
 

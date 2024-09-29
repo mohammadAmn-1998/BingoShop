@@ -3,8 +3,8 @@
 public enum CommentStatus
 {
 
-	Not_Seen_Yet,
-	Approved,
-	Rejected,
+	هنوز_دیده_نشده,
+	قبول_شده,
+	رد_شده,
 
 }

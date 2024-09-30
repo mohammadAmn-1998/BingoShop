@@ -1,12 +1,14 @@
 ﻿@using Shared.Application.Utility
-
+@using Shared.Application.Services
+@inject IAuthService _AuthService;
 @model Users1.Application.Contract.UserService.Query.FilteredUsersQueryModel
 @{
 	ViewData["Title"] = "کاربران سایت";
 	ViewData["Selected"] = "Users";
 	
 	var counter = 0;
-	
+
+	var loggedUserId = _AuthService.GetUserId();
 }
 
 @section HeaderContent{
@@ -78,19 +80,29 @@
 						<a class="btn   btn-primary mr-1" href="/Admin/Users/EditUser?userId=@user.userId" >
 							ویرایش
 						</a>
-						@if (@user.IsActive)
+						@if (loggedUserId == user.userId)
+							{
+								<i>(خودم هستم)</i>
+							}
+							else
 						{
+							@if (@user.IsActive)
+							{
 							@* <ajax-change-activation-button url="/Admin/Home?handler=ChangeUserActivation&userId=@user.userId" error-text="عملیات انجام نشد " error-title="" btn-color="danger">غیر فعال کردن</ajax-change-activation-button> *@
 
 								<a class="btn btn-danger" onclick="changeActivation('/Admin/Users/ChangeUserActivation/@user.userId')"> غیر فعال کردن کاربر</a>
-						}
-						else
-						{
+							}
+							else
+							{
 							@* 	<ajax-change-activation-button url="/Admin/Home?handler=ChangeUserActivation&userId=@user.userId" btn-color="primary"> فعال کردن</ajax-change-activation-button> *@
 
 
 								<a class="btn btn-primary " onclick="changeActivation('/Admin/Users/ChangeUserActivation/@user.userId')">  فعال کردن کاربر</a>
+							}
 						}
+
+						
+					
 						
 						<!-- Button trigger modal -->
 						<a  class="btn btn-primary" onclick="getAddRoleToUserModel('@user.userId')"  data-toggle="modal" data-target="#exampleModal">

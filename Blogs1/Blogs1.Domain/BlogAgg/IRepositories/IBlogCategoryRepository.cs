@@ -15,4 +15,6 @@ public interface IBlogCategoryRepository
 	Task<bool> ChangeActivation(long categoryId);
 
 	Task<bool> Update(EditBlogCategory command);
+
+	Task<BlogCategory?> GetById(long categoryId);
 }

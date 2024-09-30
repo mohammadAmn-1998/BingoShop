@@ -105,5 +105,17 @@ namespace Blogs1.Infrastructure.Repositories
 				return false;
 			}
 		}
+
+		public async Task<BlogCategory?> GetById(long categoryId)
+		{
+			try
+			{
+				return await GetById<BlogCategory>(categoryId);
+			}
+			catch (Exception e)
+			{
+				return null;
+			}
+		}
 	}
 }

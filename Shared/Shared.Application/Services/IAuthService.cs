@@ -12,4 +12,5 @@ public interface IAuthService
 	int GetUserId();
 	bool Logout();
 
+	string GetUserAvatar();
 }

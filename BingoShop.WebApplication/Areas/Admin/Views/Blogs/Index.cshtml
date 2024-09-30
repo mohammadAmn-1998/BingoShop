@@ -1,8 +1,9 @@
 ﻿@using Shared.Application.Utility
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Shared.Domain.Enums
 @model Blogs1.Application.Contract.BlogService.Query.FilteredBlogQueryModel?
 @{
-	ViewData["Title"] = "مدیریت پست ها";
+	ViewData["Title"] = "مدیریت مقاله ها";
 	ViewData["Selected"] = "Blogs";
 	var counter = 0;
 }
@@ -27,8 +28,15 @@
 <br>
 <div class="row">
 	<div class=" col-lg-3"></div>
-	<a class="btn btn-primary col-lg-6" asp-action="Create">افزودن پست جدید</a>
-	<div class=" col-lg-3"></div>
+	<a class="btn btn-primary col-lg-6" asp-action="Create">افزودن مقاله جدید</a>
+	
+	
+	<div class=" col-lg-3">
+		<a class="btn btn-primary col-lg-3 " href="/admin/seo/0/@WhereSeo.Blog">
+			SEO
+		</a>
+	</div>
+
 
 </div>
 <hr>
@@ -101,6 +109,11 @@
 						<a class="btn   btn-primary mr-1" asp-action="Edit" asp-route-id="@blog.Id" >
 							ویرایش
 						</a>
+
+						<a class="btn   btn-primary mr-1" href="/admin/seo/@blog.Id/@WhereSeo.Blog">
+							seo
+						</a>
+
 						<a class="btn btn-info mr-1 pr-3 pl-3" >دیدن مقاله</a>
 						@*	<a class="btn btn-danger mr-1" href="javascript:void(0);" onclick="Delete(@postDto?.Id)"> حذف</a>*@
 						@if (@blog.Active)

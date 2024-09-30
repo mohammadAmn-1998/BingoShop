@@ -7,6 +7,8 @@ public interface IBlogRepository
 {
 	Task<EditBlog?> GetForEdit(long  blogId);
 
+	Task<Blog?> GetById(long id);
+
 	Task<bool> Exists(Expression<Func<Blog, bool>> expression);
 
 	Task<bool> Create(CreateBlog command);

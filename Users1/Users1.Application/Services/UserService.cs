@@ -77,7 +77,7 @@ namespace Users1.Application.Services
 				}
 					
 
-				var ok = _authService.Login(new(user.Id, user.UserUniqueCode, user.Mobile,user.FullName));
+				var ok = _authService.Login(new(user.Id, user.UserUniqueCode, user.Mobile,user.FullName,user.Avatar));
 				if (!ok)
 				{
 					throw new Exception();

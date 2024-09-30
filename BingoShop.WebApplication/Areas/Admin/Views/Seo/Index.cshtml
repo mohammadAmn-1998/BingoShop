@@ -1,0 +1,57 @@
+﻿@model Seos.Application.Contract.CreateSeo
+@{
+
+}
+
+
+<form class="form-horizontal " style="margin-right: 200px; "  asp-action="Index" asp-controller="Seo" method="post">
+	@Html.HiddenFor(x => x.OwnerId)
+	@Html.HiddenFor(x => x.Where)
+	<br/>
+	<div class="form-group">
+		<div class="col-md-10">
+			@Html.EditorFor(x => x.MetaTitle, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter meta title" } })
+		</div>
+	</div>
+
+	<div class="form-group">
+		
+		<div class="col-md-10">
+			@Html.EditorFor(x => x.MetaDescription, "MultilineText", new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter meta description" } })
+		</div>
+	</div>
+
+	<div class="form-group">
+		
+		<div class="col-md-10">
+			@Html.EditorFor(x => x.MetaKeyWords, "MultilineText", new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter meta keywords" } })
+		</div>
+	</div>
+
+	<div class="form-group">
+		
+		<div class="col-md-10">
+			@Html.EditorFor(x => x.Canonical, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter canonical URL" } })
+		</div>
+	</div>
+
+	<div class="form-group">
+		
+		<div class="col-md-10">
+			@Html.EditorFor(x => x.Schema, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter schema" } })
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-md-10">
+			@Html.EditorFor(x => x.IndexPage, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter index page" } })
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-md-offset-2 col-md-10">
+			<button type="submit"  class="btn btn-success">ثبت</button>
+			<a class="btn btn-danger mr-1" href="/admin" onclick="sweetAlertConfirmLink(event, 'آیا مطمعنید؟')">انصراف</a>
+		</div>
+	</div>
+</form>

@@ -10,8 +10,14 @@ namespace Shared.Domain.Enums
 	{
 
 		Blog,
+		BlogCategory,
 		Product,
+		ProductCategory,
 		Home,
+		Contact,
+		AboutUs,
+		Page,
+		PostPackage
 
 	}
 }

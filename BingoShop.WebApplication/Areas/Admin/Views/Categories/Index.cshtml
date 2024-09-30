@@ -1,4 +1,5 @@
 ﻿@using Shared.Application.Utility
+@using Shared.Domain.Enums
 @model Blogs1.Application.Contract.BlogCategoryService.Query.FilteredBlogCategoryQueryModel?
 
 
@@ -28,7 +29,11 @@
 	<a class="btn   btn-primary mt-5 col-lg-6 " asp-action="Create">
 		افزودن دسته بندی جدید
 	</a>
-	<div class=" col-lg-3"></div>
+	<div class=" col-lg-3">
+		<a class="btn    btn-primary mt-5 col-lg-3" href="/admin/seo/0/@WhereSeo.BlogCategory">
+			SEO
+		</a>
+	</div>
 
 </div>
 <hr>
@@ -104,9 +109,12 @@
 												فعال کردن
 											</a>
 										}
-											<a class="btn   btn-sm btn-primary mr-1 col-1" asp-action="Edit" asp-route-id="@subCategory.Id">
-												ویرایش
-											</a>
+										<a class="btn   btn-sm btn-primary mr-1 col-1" asp-action="Edit" asp-route-id="@subCategory.Id">
+											ویرایش
+										</a>
+										<a class="btn    btn-primary mt-5 " href="/admin/seo/@subCategory.Id/@WhereSeo.BlogCategory">
+											seo
+										</a>
 									</li>
 								
 								
@@ -117,15 +125,17 @@
 
 					<td class="btn-group-sm">
 						
+						
+
 						@if (@blogCategory.IsActive)
 						{
-								<a class="btn   btn-danger mr-1" onclick="sweetAlertConfirmLink(event,'با این کار تمام زیر گروه های این دسته بندی غیر فعال میشوند. آیا مطمعنید؟')" asp-action="ChangeActivation" asp-route-categoryId="@blogCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
+								<a class="btn   btn-danger " onclick="sweetAlertConfirmLink(event,'با این کار تمام زیر گروه های این دسته بندی غیر فعال میشوند. آیا مطمعنید؟')" asp-action="ChangeActivation" asp-route-categoryId="@blogCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
 								غیر فعال کردن
 							</a>
 						}
 						else
 						{
-								<a class="btn   btn-success mr-1" onclick="sweetAlertConfirmLink(event)" asp-action="ChangeActivation" asp-route-categoryId="@blogCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
+								<a class="btn   btn-success " onclick="sweetAlertConfirmLink(event)" asp-action="ChangeActivation" asp-route-categoryId="@blogCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
 								فعال کردن
 							</a>
 						}
@@ -133,11 +143,13 @@
 						<a class="btn   btn-primary mr-1" asp-action="Edit" asp-route-id ="@blogCategory.Id" >
 							ویرایش
 						</a>
-
+							<a class="btn    btn-primary mr-1 ml-2" href="/admin/seo/@blogCategory.Id/@WhereSeo.BlogCategory">
+								seo
+							</a>
 							<a class="btn   btn-success mr-1" asp-action="Create" asp-route-parentId="@blogCategory.Id">
 								افزودن زیرگروه
 							</a>
-							
+						
 
 						<div class="modal fade" id="createBlogCategoryModal" tabindex="-1" role="dialog" aria-labelledby="createBlogCategoryModal" aria-hidden="true">
 						</div>

@@ -8,6 +8,7 @@ using Query.Contract.Admin.Comment;
 using Query.Contract.Admin.EmailUser;
 using Query.Contract.Admin.MessageUser;
 using Query.Contract.Admin.SendEmail;
+using Query.Contract.Admin.Seo;
 using Query.Services.Services;
 using Seos.Query;
 using Site.Query;
@@ -24,6 +25,7 @@ namespace Query.Services
 			services.AddTransient<IEmailUserAdminQuery, EmailUserAdminQuery>();
 			services.AddTransient<IMessageUserAdminQuery,MessageUserAdminQuery>();
 			services.AddTransient<ISendEmailAdminQuery,SendEmailAdminQuery>();
+			services.AddTransient<ISeoAdminQuery,SeoAdminQuery>();
 
 			Blogs1Module_Bootstrapper.Config(services, connectionString);
 			SiteModule_Bootstrapper.Config(services, connectionString);

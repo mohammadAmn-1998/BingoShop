@@ -51,6 +51,18 @@ namespace Blogs1.Infrastructure.Repositories
 			}
 		}
 
+		public async Task<Blog?> GetById(long id)
+		{
+			try
+			{
+				return await GetById<Blog>(id);
+			}
+			catch (Exception e)
+			{
+				return null;
+			}
+		}
+
 		public async Task<bool> Exists(Expression<Func<Blog, bool>> expression)
 		{
 			try

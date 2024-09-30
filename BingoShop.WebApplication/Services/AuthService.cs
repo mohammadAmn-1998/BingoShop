@@ -29,6 +29,7 @@ namespace BingoShop.WebApplication.Services
 					new Claim("MobileNumber", model.Mobile),
 					new Claim("user_id", model.UserId.ToString()),
 					new Claim(ClaimTypes.Name, model.FullName),
+					new Claim("user_avatar",model.Avatar)
 				};
 				var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 				var principal = new ClaimsPrincipal(identity);
@@ -112,7 +113,7 @@ namespace BingoShop.WebApplication.Services
 		{
 			try
 			{
-				if (HttpContext.User.Identity.IsAuthenticated)
+				if (HttpContext?.User.Identity != null && HttpContext != null && HttpContext.User.Identity.IsAuthenticated)
 				{
 					HttpContext.SignOutAsync();
 					return true;
@@ -126,6 +127,21 @@ namespace BingoShop.WebApplication.Services
 				return false;
 			}
 
+		}
+
+		public string GetUserAvatar()
+		{
+			try
+			{
+				var userAvatar = HttpContext?.User.Claims.Single(x => x.Type == "user_avatar").Value;
+
+				return userAvatar ?? "Default.png";
+
+			}
+			catch (Exception e)
+			{
+				return "Default.png";
+			}
 		}
 	}
 }

@@ -126,5 +126,10 @@ namespace Users1.WebUI.Services
 			}
 
 		}
+
+		public string GetUserAvatar()
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

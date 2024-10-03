@@ -6,7 +6,7 @@ namespace Query.Contract.Admin.Comment;
 
 public interface ICommentAdminQuery
 {
-	Task<CommentAdminFilteredPaging> GetCommentsForAdmin(FilterParams  filterParams,CommentStatus? status = null , CommentFor? commentFor = null);
+	Task<CommentAdminFilteredPaging> GetCommentsForAdmin(FilterParams  filterParams,CommentStatus status  , CommentFor commentFor  );
 
-	Task<CommentAdminQueryModel> GetCommentDetailForAdmin(long id);
+	Task<CommentAdminQueryModel?> GetCommentDetailForAdmin(long id);
 }

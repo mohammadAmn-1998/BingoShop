@@ -27,7 +27,7 @@ namespace Comments.Domain.CommentAgg
 
 		public string? WhyRejected { get; private set; }
 
-		public long ParentId { get; private set; }
+		public long? ParentId { get; private set; }
 
 		public Comment? ParentComment { get; private set; }
 

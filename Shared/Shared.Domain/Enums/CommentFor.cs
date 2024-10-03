@@ -8,10 +8,10 @@ namespace Shared.Domain.Enums
 {
 	public enum CommentFor
 	{
-
-		Blog,
-		Product,
-		Page	
+		همه,
+		بلاگ,
+		محصول,
+		صفحه	
 
 	}
 }

@@ -14,6 +14,11 @@ namespace Comments.Application.Services
 	{
 		private readonly ICommentRepository _commentRepository;
 
+		public CommentService(ICommentRepository commentRepository)
+		{
+			_commentRepository = commentRepository;
+		}
+
 		public async Task<OperationResult> Create(CreateComment command)
 			=>await _commentRepository.Create(command)
 				? new(Status.Success)

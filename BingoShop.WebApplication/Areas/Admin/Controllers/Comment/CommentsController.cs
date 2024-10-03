@@ -23,12 +23,17 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Comment
 			_CommentAdminQuery = CommentAdminQuery;
 			_CommentApplication = CommentApplication;
 		}
-
-		public async Task<IActionResult> Index(int pageId = 1, string q = "", int take = 10,
-			CommentFor? commentFor = null, CommentStatus? commentStatus = null)
+		
+		public async Task<IActionResult> Index( CommentFor commentFor, CommentStatus commentStatus , int take = 10, int pageId = 1, string q = ""
+			)
 		{
 			return View(await _CommentAdminQuery.GetCommentsForAdmin(new FilterParams(pageId, take, q), commentStatus,
 				commentFor));
+		}
+
+		public async Task<IActionResult> Detail(long id)
+		{
+			return View( await _CommentAdminQuery.GetCommentDetailForAdmin(id));
 		}
 
 		public IActionResult ChangeStatus(long id)

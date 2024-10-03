@@ -18,7 +18,9 @@ public class CommentAdminQueryModel
 
 	public string? WhyRejected { get; set; }
 
-	public long ParentId { get; set; }
+	public long? ParentId { get; set; }
+
+	public string CreateDate { get; set; }
 
 	public CommentStatus CommentStatus { get; set; }
 

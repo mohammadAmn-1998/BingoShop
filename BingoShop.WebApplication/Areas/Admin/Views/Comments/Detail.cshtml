@@ -1,0 +1,105 @@
+﻿@using Shared.Domain.Enums
+@model Query.Contract.Admin.Comment.CommentAdminQueryModel?
+@{
+	ViewData["Title"] = "جزییات کامنت ";
+	ViewData["Selected"] = "Comments";
+
+}
+@if (Model != null)
+{	
+	<div class="row" style="margin-right: 250px; margin-left: 250px;">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header">
+				</div>
+				<div class="box-body">
+					<hr />
+
+					<dl class="dl-horizontal">
+
+						<dt>
+							کاربر سایت ؟
+						</dt>
+						<dd>
+							@if (Model.UserId > 0)
+							{
+								<p class="text-success">بله</p>
+
+							}
+							else
+							{
+								<p>کاربر سایت نیست</p>
+							}
+						</dd>
+						<dt>
+							نام کامل
+						</dt>
+						<dd>
+							@Html.DisplayFor(model => model.FullName)
+							<a class="btn btn-primary" href="#">دیدن پروفایل</a>
+						</dd>
+						<dt>
+							نوع کامنت
+						</dt>
+						<dd>
+							@Html.DisplayFor(model => model.CommentFor)
+						</dd>
+						<dd>
+							@Html.DisplayFor(model => model.Email)
+							@if (Model.OwnerId > 0 && Model.CommentFor == CommentFor.بلاگ)
+							{
+								<a class="btn btn-secondary">دیدن مقاله </a>
+							} else if (Model.OwnerId > 0 && Model.CommentFor == CommentFor.محصول)
+							 {
+								 <a class="btn btn-secondary">دیدن محصول </a>
+							 }
+						</dd>
+						
+						
+						<dt>
+							متن کامنت
+						</dt>
+						<dd>
+							@Html.DisplayFor(model => model.Text)
+						</dd>
+						<dt>
+							ایمیل
+						</dt>
+						<dd>
+							@Html.DisplayFor(model => model.Email)
+						</dd>
+						<dt>
+							تاریخ ثبت
+						</dt>
+						<dd>
+							@Html.DisplayFor(model => model.CreateDate)
+						</dd>
+						<dt>
+							وضعیت
+						</dt>
+						<dd>
+							@Model.CommentStatus.ToString().Replace("_", " ")
+							<a class="btn btn-primary" asp-action="ChangeStatus">تغییر وضعیت</a>
+						</dd>
+						@if (Model.CommentStatus == CommentStatus.رد_شده)
+						{
+							<dt>
+								دلیل رد شدن کامنت
+							</dt>
+							<dd>
+								@Html.DisplayFor(model => model.WhyRejected)
+							</dd>
+						}
+
+					</dl>
+				</div>
+			</div>
+		</div>
+		
+		<a class="btn btn-danger" asp-action="Index">بازگشت</a>
+	</div>
+}
+else
+{
+	<h1>مشکلی پیش آمده.. دوباره امتحان کنید</h1>
+}

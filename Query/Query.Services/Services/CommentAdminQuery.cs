@@ -8,6 +8,7 @@ using Comments.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Query.Contract.Admin.Comment;
 using Shared.Application.Models;
+using Shared.Application.Utility;
 using Shared.Domain.Enums;
 using Shared.Domain.SeedWorks.Base;
 
@@ -21,12 +22,12 @@ namespace Query.Services.Services
 			
 		}
 
-		public async Task<CommentAdminFilteredPaging> GetCommentsForAdmin(FilterParams filterParams, CommentStatus? status = null, CommentFor? commentFor = null)
+		public async Task<CommentAdminFilteredPaging> GetCommentsForAdmin(FilterParams filterParams, CommentStatus status , CommentFor commentFor )
 		{
 			try
 			{
 
-				var result = Table<Comment>().Include(x => x.ChildComments).Include(c => c.CommentFor).AsQueryable();
+				var result = Table<Comment>().Include(x => x.ChildComments).Include(c => c.ParentComment).AsQueryable();
 
 				if (!string.IsNullOrEmpty(filterParams.Title))
 				{
@@ -36,12 +37,12 @@ namespace Query.Services.Services
 						 x.Text.ToLower().Contains(filterParams.Title.ToLower()));
 				}
 
-				if (status != null)
+				if (status != CommentStatus.همه)
 				{
 					result = result.Where(x => x.Status == status);
 				}
 
-				if (commentFor != null)
+				if (commentFor != CommentFor.همه)
 				{
 					result = result.Where(x => x.CommentFor == commentFor);
 				}
@@ -49,8 +50,8 @@ namespace Query.Services.Services
 				CommentAdminFilteredPaging model = new();
 				model.GetBasePagination(result,filterParams.PageId,filterParams.Take);
 				model.FilterParams = filterParams;
-				model.CommentStatus = status ?? new();
-				model .CommentFor = commentFor ?? new();
+				model.CommentStatus = status;
+				model.CommentFor = commentFor;
 				model.Comments = new();
 
 				if (result.Count() > 0)
@@ -67,6 +68,7 @@ namespace Query.Services.Services
 							Email = x.Email,
 							Text = x.Text,
 							WhyRejected = x.WhyRejected,
+							CreateDate = x.CreateDate.ConvertToPersianDate(),
 							ParentId = x.ParentId,
 							ParentComment = x.ParentComment !=null ? new CommentAdminQueryModel
 							{
@@ -94,7 +96,7 @@ namespace Query.Services.Services
 			}
 		}
 
-		public async Task<CommentAdminQueryModel> GetCommentDetailForAdmin(long id)
+		public async Task<CommentAdminQueryModel?> GetCommentDetailForAdmin(long id)
 		{
 			try
 			{
@@ -115,11 +117,12 @@ namespace Query.Services.Services
 					Text = result.Text,
 					WhyRejected = result.WhyRejected,
 					ParentId = result.ParentId,
+					CreateDate = result.CreateDate.ConvertToPersianDate(),
 				};
 			}
 			catch (Exception e)
 			{
-				return new();
+				return null;
 			}
 		}
 	}

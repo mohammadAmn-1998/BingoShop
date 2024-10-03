@@ -1,5 +1,73 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Shared.Domain.Enums
+@model Comments.Application.Contract.CommentService.Command.ChangeCommentStatus
 @{
+	ViewData["Title"] = " تغییر وضعیت کامنت";
+	ViewData["Selected"] = "Comments";
 }
+
+<form class="col col-12" style="margin-right: 200px; margin-left: 200px" asp-action="ChangeStatus" method="post" onsubmit="sweetAlertConfirmSubmit(event)" >
+	<div clas="col col-lg-6">
+		@Html.HiddenFor(x => x.Id)
+	</div>
+	
+	
+	<div class="form-select" >
+		<label class="text-center" asp-for="CommentStatus"></label>
+		<br/>
+		<div >
+			<select class="form-control text-center" onchange="ShowOrHideWhyRejectedInput()" asp-for="CommentStatus" id="comment_status">
+				@foreach (var item in Enum.GetValues(typeof(CommentStatus)).Cast<CommentStatus>())
+				{
+					if(item == CommentStatus.هنوز_دیده_نشده|| item == CommentStatus.همه)
+						continue;
+					<option class="form-control" value="@item">@item.ToString().Replace("_", " ")</option>
+				}
+			</select>
+		</div>
+		
+
+	</div>
+	<div class="form-group invisible" id="why_rejected_text">
+		<label asp-for="WhyRejected"></label>
+		<textarea class="form-control" style="width: 650px; height:150px" asp-for="WhyRejected"></textarea>
+		<span class="text-danger" asp-validation-for="WhyRejected" class="text-danger"></span>
+	</div>
+	
+	<button type="submit" class="btn btn-success">
+		ثبت
+	</button>
+	<a class="btn btn-danger "asp-action="Index" onclick="sweetAlertConfirmLink(event,'آیا مطمعنید؟')">
+		انصراف
+	</a>
+
+</form>
+
+			
+			@section Scripts{
+
+				<script>
+
+					$(document).ready(() => {
+
+						ShowOrHideWhyRejectedInput();
+
+					});
+
+					function ShowOrHideWhyRejectedInput() {
+						var status = $("#comment_status").val();
+
+			if (status == "قبول_شده") {
+
+				        document.getElementById("why_rejected_text").classList.add(`invisible`);
+
+			        }
+			if (status == "رد_شده") {
+
+				        document.getElementById("why_rejected_text").classList.remove(`invisible`);
+			        }
+					}
+
+
+				</script>
+
+			}

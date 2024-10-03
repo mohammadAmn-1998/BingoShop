@@ -1,5 +1,114 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
+@using Shared.Application.Utility
+@using PostModule.Application.Contract.StateApplication
+@using PostModule.Application.Contract.StateQuery
+@using Shared.Domain.Enums
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<PostModule.Application.Contract.CityApplication.CityViewModel>
+
 @{
+	var stateId = ViewData["StateId"] as int? ;
+	var stateTitle = ViewData["StateTitle"] as string;
+	ViewData["Title"] = "مدیریت شهر های استان  "+ stateTitle ;
+	ViewData["Selected"] = "Cities";
+	var counter = 1;
 }
+<br>
+<div class="row">
+	<div class=" col-lg-3"></div>
+	<a class="btn   btn-success mt-5 col-lg-6 fa fa-plus" asp-action="Create"asp-route-stateId="@stateId">
+		افزودن شهر جدید
+	</a>
+	<div class=" col-lg-3">
+		<a class="btn   btn-danger mt-5 col-lg-6 fa fa-arrow-alt-left" asp-controller="States" asp-action="Index">
+			بازگشت به استان ها
+		</a>
+	</div>
+
+</div>
+<hr>
+
+<div class="table-responsive-md">
+	<table class="table table-bordered text-sm table-sm  table-hover ">
+
+		<thead class="">
+
+		<tr>
+			<th class="col-2">#</th>
+			<th class="col-2"> نام شهر </th>
+			<th class="col-2">   </th>
+			<th class="col-2">وضعیت</th>
+			<th class="col-4">عملیات</th>
+				
+		</tr>
+
+		</thead>
+		<tbody>
+
+		@if (Model.Any())
+		{
+			@foreach (var city in Model)
+			{
+				<tr>
+						<td>@((counter++))</td>
+					<td >@city.Title
+						<td>
+							<a style="align-content:first" class="btn btn-danger"href="/Admin/Cities/DeleteCity/{@city.Id}" onclick="sweetAlertConfirmLink(event,'با این کار این شهر برای همیشه حذف خواهد شد. اگر به اشتباه شهری وارد کردید آن را حذف کنید!')">حذف؟</a>
+						</td>
+					
+						</td>
+					<td>@city.Status</td>
+					<td>
+							@if (city.Status != CityStatus.شهرستان_معمولی)
+							{
+								<a class="btn btn-info" onclick="ajaxSweetAlertRefresh(
+                                 'شهرستان معمولی شود',
+                                 'شهرستان معمولی شود',
+                             
+                                 'شهرستان معمولی شود',
+                                  'انصراف',
+                                   '/Admin/Cities/ChangeStatus/@city.Id?status=@CityStatus.شهرستان_معمولی')">
+									شهرستان معمولی
+								</a>
+							}
+							@if (city.Status != CityStatus.تهران && stateTitle == "تهران")
+							{
+								<a class="btn btn-default" onclick="ajaxSweetAlertRefresh(
+                                 'تهران شود',
+                                 'اگر این شهرستان به عنوان تهران معرفی شود . هر شهرستان دیگری که تهران باشد به وضعیت شهرستان معمولی باز میگردد',
+                               
+                                 'تهران شود',
+                                  'انصراف',
+                                   '/Admin/Cities/ChangeStatus/@city.Id?status=@CityStatus.تهران')">
+									تهران ؟
+								</a>
+							}
+							@if (city.Status != CityStatus.مرکز_استان && stateTitle != "تهران")
+							{
+								<a class="btn btn-primary" onclick="ajaxSweetAlertRefresh(
+                                 'مرکز استان شود',
+                                 'اگر این شهرستان به عنوان مرکز @stateTitle معرفی شود . هر شهرستان دیگری که مرکز @stateTitle  باشد به وضعیت شهرستان معمولی باز میگردد',
+                                
+                                 'مرکز استان  شود',
+                                  'انصراف',
+                                   '/Admin/Cities/ChangeStatus/@city.Id?status=@CityStatus.مرکز_استان')">
+									مرکز استان
+								</a>
+							}
+
+					</td>
+
+
+				</tr>
+
+
+			}
+		}
+		else
+		{
+			<h1>چیزی برای نمایش وجود ندارد...</h1>
+		}
+
+		</tbody>
+	</table>
+</div>

@@ -60,10 +60,36 @@ namespace PostModule.Query.Services
 				Id = s.Id,
                 Title = s.Title,
                 CreateDate = s.CreateDate.ConvertToPersianDate(),
-                CityCount = s.Cities.Count()
+                CityCount = s.Cities.Count(),
+				CloseStates =s.CloseStates
 			}).ToList();
 
-        public List<StateForChooseQueryModel> GetStatesForChoose()
+		public string GetCloseStateTitlesByCloseStateIds(string closeStateIds)
+		{
+			try
+			{
+				StringBuilder builder = new();
+
+				foreach (var item in closeStateIds.Split("-"))
+				{
+					var id = int.Parse(item);
+					var stateTitle = _post_Context.States.FirstOrDefault(s => s.Id == id)?.Title.Trim();
+					if (stateTitle != null)
+					{
+						builder.Append(stateTitle);
+						builder.Append("-");
+					}
+				}
+
+				return builder.ToString();
+			}
+			catch (Exception e)
+			{
+				return " ";
+			}
+		}
+
+		public List<StateForChooseQueryModel> GetStatesForChoose()
         {
             return _post_Context.States.Select(s => new StateForChooseQueryModel
             {
@@ -94,5 +120,8 @@ namespace PostModule.Query.Services
 
         public bool IsStateCorrect(int stateId) =>
             _post_Context.States.Any(s => s.Id == stateId);
-    }
+
+       
+
+	}
 }

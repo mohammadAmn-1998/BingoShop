@@ -1,1 +1,34 @@
-﻿
+﻿@using Shared.Domain.Enums
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Shared.Application.Utility
+@model Site.Application.Contract.BanerApplication.Command.EditBaner
+@{
+	ViewData["Selected"] = " ویرایش بنر ";
+}
+<br/>
+<form class="" style="margin-right: 200px; margin-left: 200px" asp-action="Edit" method="post" onsubmit="sweetAlertConfirmSubmit(event)" enctype="multipart/form-data">
+	@Html.HiddenFor(x=> x.Id)
+	@Html.HiddenFor(x=> x.ImageName)
+	@Html.EditorFor(x => x.ImageFile)
+	<img id="img_preview" src="@Directories.GetBanerImageFullPath(@Model.ImageName ?? "",null)" alt="@Model.ImageAlt" width="300px" height="150px" />
+	@Html.EditorFor(x => x.ImageAlt)
+	<div class="form-select">
+		
+		<select class="form-control" asp-for="State">
+			@foreach (var item in Enum.GetValues(typeof(BanerState)).Cast<BanerState>())
+			{
+				<option value="@item">@item.ToString().Replace("_", " ")</option>
+			}
+		</select>
+
+	</div>
+	@Html.EditorFor(x => x.Url)
+
+	<button type="submit" class="btn btn-success">
+		ثبت
+	</button>
+	<a class="btn btn-danger " asp-action="Index" onclick="sweetAlertConfirmLink(event,'آیا مطمعنید؟')">
+		انصراف
+	</a>
+
+</form>

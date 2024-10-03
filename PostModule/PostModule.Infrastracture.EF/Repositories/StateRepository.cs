@@ -38,7 +38,8 @@ internal class StateRepository : Repository<int, State>, IStateRepository
         return new()
         {
             Id=state.Id,
-            Title=state.Title
+            Title=state.Title,
+			CloseStates = state.CloseStates == "" ? new List<int>(): state.CloseStates.Split("-").Select(int.Parse).ToList() 
         };
     }
 }

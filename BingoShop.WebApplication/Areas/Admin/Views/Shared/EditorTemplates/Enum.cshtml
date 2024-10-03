@@ -1,10 +1,11 @@
 ﻿@model Enum
 @{
-	var type = Model.GetType();
+	var enumValues = Enum.GetValues(Model.GetType()).Cast<Enum>();
 }
-<div class="form-group">
-	<label asp-for="@Model"></label>
-	<select class="form-control" asp-for="@Model" asp-items="Html.GetEnumSelectList(type)"></select>
-	<span class="text-danger" asp-validation-for="@Model"></span>
 
-</div>
+<select asp-for="@Model" class="form-control">
+	@foreach (var value in enumValues)
+	{
+		<option value="@value">@value</option>
+	}
+</select>

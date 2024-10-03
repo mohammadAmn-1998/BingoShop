@@ -17,23 +17,24 @@ namespace PostModule.Infrastracture.EF.Repositories
 		public async Task<bool> ChangeStatus(int id, CityStatus status)
 		{
 			var city = GetBy(x => x.Id == id);
-            List<City> cities = new();
+            List<City>? cities = new();
             if(status == CityStatus.تهران)
             {
-                 cities = GetAll().Where(c => c.Status == CityStatus.تهران).ToList();
+                 cities = GetAll()?.Where(c => c.Status == CityStatus.تهران).ToList();
             }
             else if(status == CityStatus.مرکز_استان)
             {
-                cities = GetAll().Where(c => c.Status == CityStatus.مرکز_استان && c.StateId == city.StateId).ToList();
+                cities = GetAll()?.Where(c => c.Status == CityStatus.مرکز_استان && c.StateId == city!.StateId).ToList();
 			}
-            city.ChangeStatus(status);
-            
-            if(cities.Count() > 0)
+            city!.ChangeStatus(status);
+           
+            if(cities?.Count() > 0)
 			foreach (var item in cities)
 			{
 				item.ChangeStatus(CityStatus.شهرستان_معمولی);
+				if (!Update(item)) return false;
 			}
-            return Save();
+			return Update(city);
 		}
 
 		public List<CityViewModel> GetAllForState(int stateId)
@@ -43,7 +44,8 @@ namespace PostModule.Infrastracture.EF.Repositories
                 CreateDate=c.CreateDate.ToString(),
                 Id=c.Id,
                 Status=c.Status,
-                Title=c.Title
+                Title=c.Title,
+				StateId = c.StateId
             }).ToList();
         }
 

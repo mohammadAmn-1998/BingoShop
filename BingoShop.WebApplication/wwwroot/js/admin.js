@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    console.log("sdfsdfsdfdsfdsfsdfsdfsdfsd");
+   
     loadCkeditor4();
 });
 
@@ -42,6 +42,7 @@ document.getElementById('file_input').addEventListener('change', function (event
     }
 
 });
+
 
 function validateImageFile(file) {
     const allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp'];
@@ -146,4 +147,60 @@ function changeBan(url, errorTitle, errorText) {
 
         }
     });
+}
+
+function ajaxSweetAlertRefresh(title,text,confirmText,cancelText,url) {
+
+    if (title == null || title == "undefined") {
+        title = "آیا مطمعنید؟";
+    }
+    if (text == null || text == "undefined") {
+        text = "";
+    }
+
+    if (confirmText == null || confirmText == "undefined") {
+        confirmText = "انجام شود؟";
+    }
+
+    if (cancelText == null || cancelText == "undefined") {
+        cancelText = " همینطور باقی بماند؟";
+    }
+
+    Swal.fire({
+        title: title,
+        text: text,
+        icon: "warning",
+        confirmButtonText: confirmText,
+        showCancelButton: true,
+        cancelButtonText: cancelText,
+        preConfirm: () => {
+            $.ajax({
+                url: url,
+                type: "get",
+                beforeSend: function () {
+                    $(".loading").show();
+                },
+                complete: function () {
+                    $(".loading").hide();
+                },
+                error: function (data) {
+                    ErrorAlert("مشکلی در اعملیات رخ داده", "لطفا در زمان دیگری امتحان کنید");
+                }
+            }).done(function(ok) {
+
+               if (ok) {
+
+                   Success('انجام شد!', '', true);
+                   
+
+               } else {
+                   ErrorAlert('انجام نشد!', 'مشکلی در عملیات رخ داده لطفا در زمان دیگری امتحان کنید!', true);
+               }
+
+            });
+
+
+        }
+    });
+
 }

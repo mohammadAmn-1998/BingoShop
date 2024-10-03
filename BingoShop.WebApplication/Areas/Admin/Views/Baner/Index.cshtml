@@ -1,1 +1,104 @@
-﻿
+﻿@using Shared.Application.Utility
+@model List<Site.Application.Contract.BanerApplication.Query.BanerForAdminQueryModel>
+
+@{
+	ViewData["Title"] = "مدیریت بنر ها";
+	ViewData["Selected"] = "Baners";
+	var counter = 0;
+}
+<br>
+<div class="row">
+	<div class=" col-lg-3"></div>
+	<a class="btn   btn-primary mt-5 col-lg-6 " asp-action ="Create"
+	>
+		افزودن بنر جدید
+	</a>
+	<div class=" col-lg-3"></div>
+
+</div>
+<hr>
+
+<div class="table-responsive-md">
+	<table class="table table-bordered text-sm table-sm  table-hover ">
+
+		<thead class="">
+
+			<tr>
+				<th class="">#</th>
+				<th class="col-2"> تصویر </th>
+				<th class="col-2">Alt تصویر</th>
+				<th class="col-2"> تاریخ ایجاد</th>
+				<th class="col-2">لینک مقصد</th>
+				<th class="col-2">جایگاه</th>
+				<th class="col-2">عملیات</th>
+			</tr>
+
+		</thead>
+		<tbody>
+
+			@if ( Model.Any())
+			{
+				@foreach (var baner in Model)
+				{
+					<tr>
+						<td>@(counter += 1)</td>
+
+						<td class="text-@((baner.Active  ? "success" : "danger" ))">
+							<img src="@Directories.GetBanerImageFullPath(@baner.ImageName,100)" alt="@baner.ImageAlt" />
+							@((baner.Active ? "( فعال)" : "(غیر فعال)"))
+						</td>
+						
+							
+						<td>
+							@baner.ImageAlt
+						</td>
+						<td>
+							@baner.CreationDate
+						</td>
+						<td>
+							<a title="@baner.Url" href="@baner.Url">@baner.Url</a>
+						</td>
+						<td>
+								@baner.State.ToString()
+						</td>
+
+						<td class="btn-group-sm">
+
+							<a class="btn   btn-primary mr-1" asp-action="Edit" asp-route-id="@baner.Id">
+								ویرایش
+							</a>
+							@{
+								string title = baner.Active ? "غیر فعال شود؟" : "فعال شود؟";
+								string text = baner.Active ? "در این صورت این بنر دیگر نمایش داده نمیشود" : "در این صورت این بنر نمایش داده میشود";
+								string confirmText = baner.Active ? "غیر فعال شود" : "فعال شود";
+								string cancelText = baner.Active ? "فعال بماند" : "غیر فعال بماند";
+							}
+							@if (baner.Active)
+							{
+								<a class="btn   btn-danger mr-1" onclick="ajaxSweetAlertRefresh('@title','@text','@confirmText','@cancelText','/Admin/Baner/ChangeActivation/@baner.Id')" >
+									غیر فعال کردن
+								</a>
+							}
+							else
+							{
+								<a class="btn   btn-success mr-1" onclick="ajaxSweetAlertRefresh('@title','@text','@confirmText','@cancelText','/Admin/Baner/ChangeActivation/@baner.Id')">
+									فعال کردن
+								</a>
+							}
+
+
+
+						</td>
+					</tr>
+
+
+				}
+			}
+			else
+			{
+				<h1>چیزی برای نمایش وجود ندارد...</h1>
+			}
+
+		</tbody>
+	</table>
+</div>

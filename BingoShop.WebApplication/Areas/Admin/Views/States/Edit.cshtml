@@ -1,5 +1,59 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Shared.Domain.Enums
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using PostModule.Application.Contract.StateApplication
+@using Shared.Application.Utility
+@inject IStateApplication _StateApplication;
+@model PostModule.Application.Contract.StateApplication.EditStateModel
 @{
+	ViewData["Title"] = " ویرایش استان " +Model.Title;
+	var states = _StateApplication.GetAll();
 }
+
+
+<br/>
+<br/>
+<form class="" style="margin-right: 200px; margin-left: 200px" asp-action="Edit" method="post" onsubmit="sweetAlertConfirmSubmit(event)" enctype="multipart/form-data">
+	@Html.HiddenFor(x=> x.Id)
+	@Html.EditorFor(x=> x.Title)
+	<table class="table table-responsive">
+		<thead>
+		<th>
+			#
+		</th>
+		<th>
+			استان های همجوار را تیک بزنید 
+		</th>
+		<th class="fa fa-check">
+			
+		</th>
+		</thead>
+
+		<tbody>
+		
+		@foreach (var state in states)
+		{   
+			@if (state.Id == Model.Id)
+			{
+				continue;
+			}
+			<tr>
+			<td>@state.Id</td>
+			     <td>@state.Title</td>
+				 
+		<td><input type="checkbox" name="CloseStates" value="@state.Id" @(Model.CloseStates != null && (Model.CloseStates.Any(x=> x== state.Id)) ? "checked" : " ")/></td>
+		     </tr>
+		}
+
+		</tbody>
+
+	</table>
+	
+
+	<button type="submit" class="btn btn-success">
+		 ثبت 
+	</button>
+	<a class="btn btn-danger " asp-action="Index" onclick="sweetAlertConfirmLink(event,'آیا مطمعنید؟')">
+		انصراف
+	</a>
+
+</form>

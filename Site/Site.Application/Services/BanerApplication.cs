@@ -37,8 +37,10 @@ namespace Site.Application.Services
             command.ImageName = imageName;
 
             _fileService.ResizeImage(imageName, Directories.BanerImageDirectory, 100);
+
             if ( await _banerRepository.Create(command))
                 return new(Status.Success);
+
             _fileService.DeleteFile(imageName, Directories.BanerImageDirectory);
             _fileService.DeleteFile(imageName, Directories.BanerImageDirectory100);
             _fileService.DeleteFile(imageName, Directories.BanerImageDirectory400);

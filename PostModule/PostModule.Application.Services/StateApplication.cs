@@ -20,7 +20,8 @@ namespace PostModule.Application.Services
             if (stateCloses.Count() < 1) return false;
             var state = _stateRepository.GetById(id);
             state.ChangeCloseStates(stateCloses);
-            return _stateRepository.Save();
+            return _stateRepository.Update(state);
+           
 		}
 
 		public OperationResult Create(CreateStateModel command)
@@ -38,7 +39,8 @@ namespace PostModule.Application.Services
 				return new(Status.BadRequest, ErrorMessages.DuplicateTitleError, nameof(command.Title));
             State state = _stateRepository.GetById(command.Id);
             state.Edit(command.Title);
-			if (_stateRepository.Save()) return new(Status.Success);
+			state.ChangeCloseStates(command.CloseStates!);
+            if (_stateRepository.Update(state)) return new(Status.Success);
 			return new(Status.InternalServerError, ErrorMessages.InternalServerError, nameof(command.Title));
 		}
 

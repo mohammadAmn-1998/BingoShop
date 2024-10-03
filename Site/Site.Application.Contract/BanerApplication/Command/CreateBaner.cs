@@ -23,8 +23,9 @@ namespace Site.Application.Contract.BanerApplication.Command
 
         [Display(Name = "جایگاه")]
         [Required(ErrorMessage = ErrorMessages.FieldIsRequired)]
-        public BanerState State { get; set; }
+        public BanerState State { get; set; } 
 
+		[Display(Name = "نام تصویر")]
         public string? ImageName { get; set; }
-    }
+}
 }

@@ -13,6 +13,7 @@ namespace PostModule.Application.Contract.StateQuery
         List<StateAdminQueryModel> GetStatesForAdmin();
 		StateDetailQueryModel GetStateDetail(int id);
         string GetStateTitle(int id);
+        string GetCloseStateTitlesByCloseStateIds(string closeStateIds);
         List<StateForChooseQueryModel> GetStatesForChoose();
         List<CityForChooseQueryModel> GetCitiesForChoose(int stateId);
         bool IsStateCorrect(int stateId);

@@ -1,6 +1,7 @@
 ﻿using BingoShop.WebApplication.Utility;
 using Blogs1.Application.Contract.BlogCategoryService.Command;
 using Blogs1.Application.Contract.BlogCategoryService.Query;
+using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Application.Models;
 using Shared.Application.Utility;
@@ -24,18 +25,13 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 			_banerApplication = banerApplication;
 		}
 
-		public async Task<IActionResult> Index(int pageId = 1, string q = "", int take = 2)
-		{
-			var model =  _banerQuery.GetAllForAdmin();
+		public async Task<IActionResult> Index() 
+			=> View(_banerQuery.GetAllForAdmin());
 
-			return View(model);
-		}
-
-		public async Task<IActionResult> Create()
-		{
-			
-			return View();
-		}
+		
+		public  IActionResult Create()
+			=>  View();
+		
 
 		[HttpPost]
 		public async Task<IActionResult> Create(CreateBaner model)
@@ -50,7 +46,7 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 			if (result.Status == Status.Success)
 			{
 				SuccessAlert("بنر ایجاد شد!");
-				return View(model);
+				return RedirectToAction("Index");
 			}
 
 			ErrorAlert(result.Message);
@@ -83,19 +79,11 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 			return View(model);
 
 		}
-
-		public async Task<IActionResult> ChangeActivation(long banerId, int pageId = 1)
+		[Route("Admin/Baner/ChangeActivation/{id}")]
+		public async Task<bool> ChangeActivation(long id)
 		{
-			if (await _banerApplication.ActivationChange(banerId))
-			{
-				SuccessAlert();
-			}
-			else
-			{
-				ErrorAlert(ErrorMessages.InternalServerError);
-			}
 
-			return RedirectToAction("Index", new { pageId });
+			return await _banerApplication.ActivationChange(id);
 		}
 
 	}

@@ -23,13 +23,21 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Post
 			_cityApplication = cityApplication;
 		}
 
-		public IActionResult Index(int id) => View(_cityApplication.GetAllForState(id));
+		public IActionResult Index(int id)
+		{
+			ViewData["StateId"] = id;
+			ViewData["StateTitle"] = _stateQuery.GetStateTitle(id);
+			return View(_cityApplication.GetAllForState(id));
+		}
 
-		public IActionResult Create(int stateId) =>
-			View(new CreateCityModel()
+		public IActionResult Create(int stateId)
+		{
+			ViewData["StateTitle"] = _stateQuery.GetStateTitle(stateId);
+			return View(new CreateCityModel()
 			{
 				StateId = stateId
 			});
+		}
 
 		[HttpPost]
 		public IActionResult Create(CreateCityModel model)
@@ -82,20 +90,18 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Post
 			ErrorAlert(result.Message);
 			return View(model);
 		}
-
-		public async Task<IActionResult> ChangeStatus(int id, CityStatus status)
+		[Route("Admin/Cities/DeleteCity/{id}")]
+		public IActionResult DeleteCity(int id)
 		{
-			if (await _cityApplication.ChangeStatus(id, status))
-			{
-				SuccessAlert();
-			}
-			else
-			{
-				ErrorAlert(ErrorMessages.InternalServerError);
-			}
 
-			return RedirectToAction("Index", new { id = id });
+			ErrorAlert("متاسفیم شهر ها پاک نمیشوند مگر با بمب اتمی چیزی! با مدیر بانک اطلاعاتی تماس بگیرید!");
+			return Redirect("/Admin/States/Index");
+
 		}
+
+		public async Task<bool> ChangeStatus(int id, CityStatus status)
+			=> await _cityApplication.ChangeStatus(id, status);
+
 
 
 	}

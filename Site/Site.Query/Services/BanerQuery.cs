@@ -25,6 +25,7 @@ public List<BanerForAdminQueryModel> GetAllForAdmin()
             ImageName = b.ImageName,
             State = b.State,
             ImageAlt = b.ImageAlt,
+			Url = b.Url
         }).ToList();
     }
 

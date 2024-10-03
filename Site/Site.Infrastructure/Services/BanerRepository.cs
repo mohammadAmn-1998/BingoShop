@@ -20,7 +20,8 @@ internal class BanerRepository : BaseRepository, IBanerRepository
 			Id = s.Id,
 			ImageFile = null,
 			ImageName = s.ImageName,
-			Url = s.Url
+			Url = s.Url,
+			State = s.State
 		}).SingleOrDefault(s => s.Id == id);
 
 	public async Task<bool> ChangeActivation(long id)
@@ -67,7 +68,7 @@ internal class BanerRepository : BaseRepository, IBanerRepository
 			if (baner == null)
 				throw new NullReferenceException();
 
-			baner.Edit(command.ImageName,command.ImageAlt,command.Url);
+			baner.Edit(command.ImageName,command.ImageAlt,command.Url,command.State);
 			Update(baner);
 			return await Save() > 0;
 		}

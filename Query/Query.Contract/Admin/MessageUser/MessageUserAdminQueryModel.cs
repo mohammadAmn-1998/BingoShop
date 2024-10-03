@@ -17,7 +17,7 @@ public class MessageUserAdminQueryModel
 	public MessageStatus Status { get;  set; }
 
 	[Display(Name = "نام کامل")]
-	public string FullName { get; set; }
+	public string UserName { get; set; }
 
 	[Display(Name = "عنوان")]
 	public string Subject { get; set; }

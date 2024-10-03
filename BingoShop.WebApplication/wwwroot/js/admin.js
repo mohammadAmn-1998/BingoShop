@@ -14,15 +14,70 @@ function makeSlug(source, destination) {
     $('#' + destination).val(titleStr);
 }
 
-function loadCkeditor4() {
-    if (!document.getElementById("CkEditor4"))
+
+
+function loadAnswerMessageCKEditor() {
+
+    var status = document.getElementById("message_status").value;
+    console.log(status);
+    if (status == 'پاسخ_داده_شد_email')
+    {
+        console.log('answer by email');
+        document.getElementById("answer_email").classList.remove(`invisible`);
+        document.getElementById("answer_sms").classList.add(`invisible`);
+        loadCkeditor4();
+        console.log('answer by email');
+        console.log('input founded!');
+
+        
         return;
+    }
+    if (status == 'پاسخ_داده_شد_sms')
+    {
+        console.log('answer by sms');
+        document.getElementById("answer_sms").classList.remove(`invisible`);
+        document.getElementById("answer_email").classList.add(`invisible`);
+        unloadCkEditor('answer_email');
+        console.log('answer by sms');
+        return;
+    }
+    if (status == 'پاسخ_داده_شد') {
+        console.log('answer by call');
+        document.getElementById("answer_sms").classList.add(`invisible`);
+        document.getElementById("answer_email").classList.add(`invisible`);
+        unloadCkEditor('answer_email');
+        console.log('answer by call');
+        return;
+    }
+
+}
+
+function loadCkeditor4() {
 
     $("body").append('<script src="/ckeditor4/ckeditor/ckeditor.js"></script>');
 
-    CKEDITOR.replace('CkEditor4', {
-        customConfig: '/ckeditor4/ckeditor/config.js'
-    });
+    if (document.getElementById("CkEditor4")) {
+        CKEDITOR.replace('CkEditor4', {
+            customConfig: '/ckeditor4/ckeditor/config.js'
+        });
+    }
+    if (document.getElementById("answer_email")) {
+        
+        CKEDITOR.replace('answer_email', {
+            customConfig: '/ckeditor4/ckeditor/config.js'
+        });
+    }
+    
+
+   
+
+}
+
+function unloadCkEditor(id) {
+
+    if (CKEDITOR.instances[id]) {
+        CKEDITOR.instances[id].destroy(true);
+    }
 
 }
 

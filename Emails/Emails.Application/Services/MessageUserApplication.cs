@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Shared.Application.Utility;
 using Shared.Domain.Enums;
 
@@ -23,7 +24,7 @@ namespace Emails.Application.Services
         {
             var messageUser = _messageUserRepository.GetById(id);
             messageUser.AnswerByCall();
-            return _messageUserRepository.Save();
+            return _messageUserRepository.Update(messageUser);
         }
 
         public OperationResult AnsweredByEmail(long id, string mailMessage)
@@ -32,7 +33,8 @@ namespace Emails.Application.Services
 			{
 				var messageUser = _messageUserRepository.GetById(id);
 				messageUser.AnswerEmailSend(mailMessage);
-				_messageUserRepository.Save();
+				if (!_messageUserRepository.Update(messageUser))
+					return new(Status.InternalServerError);
 				//
 				// send sms
 				//
@@ -51,7 +53,9 @@ namespace Emails.Application.Services
             {
 				var messageUser = _messageUserRepository.GetById(id);
 				messageUser.AnswerSmsSend(message);
-				_messageUserRepository.Save();
+				if (!_messageUserRepository.Update(messageUser))
+					return new(Status.InternalServerError);
+
 				//
 				// send sms
 				//

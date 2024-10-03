@@ -8,6 +8,6 @@ public class EmailUserAdminFilteredPaging : BasePagination
 
 	public FilterParams FilterParams { get; set; }
 
-	public List<EmailUserAdminQueryModel>? Emails { get; set; }
+	public List<EmailUserAdminQueryModel> Emails { get; set; }
 
 }

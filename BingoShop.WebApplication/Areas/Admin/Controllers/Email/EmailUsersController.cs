@@ -29,20 +29,8 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Email
 		}
 
 
-		public IActionResult ChangeActivation(long id,string q ="", int pageId=1)
-		{
+		public bool ChangeActivation(long id)
+			=> _emailUserApplication.ActivationChange(id);
 
-			if (_emailUserApplication.ActivationChange(id))
-			{
-				SuccessAlert();
-			}
-			else
-			{
-				ErrorAlert(ErrorMessages.InternalServerError);
-			}
-
-			return RedirectToAction("Index", new { pageId = pageId, q = q });
-
-		}
 	}
 }

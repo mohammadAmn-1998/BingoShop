@@ -1,5 +1,137 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Shared.Domain.Enums
+@model Query.Contract.Admin.MessageUser.MessageUserAdminQueryModel?
 @{
+	ViewData["Title"] = "جزییات پیام ";
+	ViewData["Selected"] = "MessageUsers";
+	
 }
+@if (Model != null)
+{
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+			</div>
+			<div class="box-body">
+				<hr />
+				
+				<dl class="dl-horizontal">
+       
+					<dt>
+						کاربر سایت ؟
+					</dt>
+					<dd>
+						@if (string.IsNullOrEmpty(Model.UserName))
+						{
+							<p>@Model.UserName</p>
+						}
+						else
+						{
+							<p>کاربر سایت نیست</p>
+						}
+					</dd>
+					<dt>
+						وضعیت
+					</dt>
+					<dd>
+						@Model.Status.ToString().Replace("_"," ")
+					</dd>
+					<dt>
+						نام کامل
+					</dt>
+					<dd>
+						@Html.DisplayFor(model => model.UserName)
+					</dd>
+					<dt>
+						موضوع پیام
+					</dt>
+					<dd>
+						@Html.DisplayFor(model => model.Subject)
+					</dd>
+					<dt>
+						شماره تماس
+					</dt>
+					<dd>
+						@Html.DisplayFor(model => model.PhoneNumber)
+					</dd>
+					<dt>
+						ایمیل
+					</dt>
+					<dd>
+						@Html.DisplayFor(model => model.Email)
+					</dd>
+					<dt>
+						تاریخ ثبت
+					</dt>
+					<dd>
+						@Html.DisplayFor(model => model.CreateDate)
+					</dd>
+					<dt>
+						متن پیام
+					</dt>
+					<dd>
+						@Html.DisplayFor(model => model.Message)
+					</dd>
+					<dt>
+						متن پاسخ در  sms
+					</dt>
+					<dd>
+						@Html.DisplayFor(model => model.AnswerSms)
+					</dd>
+					<dt>
+						متن پاسخ در  ایمیل
+					</dt>
+					<dd>
+						@Html.Raw(Model.AnswerEmail)
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	@if (Model.Status == MessageStatus.دیده_نشده)
+	{
+			<form style="margin-right: 200px; margin-left: 200px" asp-action="ChangeStatus" onsubmit="sweetAlertConfirmSubmit(event)" enctype="multipart/form-data" method="post">
+		
+			@Html.HiddenFor(x=> x.Id)
+			
+			<div class="form-group mt-3">
+				<label >وضعیت جواب دادن را مشخص کنید</label>
+				<select onchange="loadAnswerMessageCKEditor()" name="Status" id="message_status">
+					
+					<option value="@MessageStatus.پاسخ_داده_شد_email">پاسخ دادن با email</option>
+					<option value="@MessageStatus.پاسخ_داده_شد_sms">پاسخ دادن با sms</option>
+					<option value="@MessageStatus.پاسخ_داده_شد">تماس گرفتن</option>
+					
+				</select>
+				
+			</div>
+				<label asp-for="AnswerSms"></label>
+			<div class="form-group" >
+
+					<textarea type="text" name="AnswerSms" id="answer_sms" class="form-control invisible"></textarea>
+
+			</div>
+
+			<div class="form-group">
+
+					<textarea type="text" name="AnswerEmail" id="answer_email" class="form-control invisible"></textarea>
+
+			</div>
+			
+			<button type="submit" class="btn btn-success">
+				ثبت
+			</button>
+			<a class="btn btn-danger "asp-action="Index" onclick="sweetAlertConfirmLink(event,'آیا مطمعنید؟')">
+				انصراف
+			</a>
+
+			</form>
+	}
+	
+</div>
+				}
+else
+{
+	<h1 >مشکلی پیش آمده.. دوباره امتحان کنید</h1>
+}
+				

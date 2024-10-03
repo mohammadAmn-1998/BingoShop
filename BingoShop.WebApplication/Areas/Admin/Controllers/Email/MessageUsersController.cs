@@ -28,27 +28,32 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Email
 			return View(await _MessageUserAdminQuery.GetMessageUsersForAdmin( new FilterParams(pageId,take,q),status));
 		}
 
-		public IActionResult MessageDetail(long id)
+		public async Task<IActionResult> MessageDetail(long id)
 		{
-			return View( _MessageUserAdminQuery.GetMessageUserDetailForAdmin(id));
+			return View(await _MessageUserAdminQuery.GetMessageUserDetailForAdmin(id));
 
 		}
 
-
-		public IActionResult ChangeStatus(long id, string text, MessageStatus status)
+		[HttpPost]
+		public IActionResult ChangeStatus(  AnswerMessageUser model)
 		{
 			OperationResult result;
-			switch (status)
+			switch (model.Status)
 			{
 				case MessageStatus.پاسخ_داده_شد_sms:
-
+					if (string.IsNullOrEmpty(model.AnswerSms?.Trim()))
+					{
+						ErrorAlert("متن جواب خالی است!");
+						break;
+					}
 					//
 					//
 					//send sms...
 					// 
 					//
 					//
-					 result = _MessageUserApplication.AnsweredBySMS(id,text);
+
+					result = _MessageUserApplication.AnsweredBySMS(model.Id, model.AnswerSms);
 					if(result.Status == Status.Success)
 						SuccessAlert("جواب  با موفقیت فرستاده شد!");
 					else
@@ -57,6 +62,12 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Email
 
 				case MessageStatus.پاسخ_داده_شد_email:
 
+					if (string.IsNullOrEmpty(model.AnswerEmail?.Trim()))
+					{
+						ErrorAlert("متن جواب خالی است!");
+						break;
+					}
+
 					//
 					//
 					//send email...
@@ -64,7 +75,7 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Email
 					//
 					//
 
-					result = _MessageUserApplication.AnsweredByEmail(id, text);
+					result = _MessageUserApplication.AnsweredByEmail(model.Id, model.AnswerEmail);
 					if (result.Status == Status.Success)
 						SuccessAlert("جواب با موفقیت فرستاده شد!");
 					else
@@ -73,7 +84,7 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Email
 					break;
 
 				 default:
-					 if( _MessageUserApplication.AnswerByCall(id))
+					 if( _MessageUserApplication.AnswerByCall(model.Id))
 						  SuccessAlert("وضعیت جواب : تماس گرفته شده");
 					 else
 						  ErrorAlert(ErrorMessages.InternalServerError);
@@ -81,7 +92,7 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Email
 					 break;
 			}
 
-			return RedirectToAction("MessageDetail", new { id = id });
+			return RedirectToAction("MessageDetail", new { id = model.Id });
 
 
 

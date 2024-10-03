@@ -7,6 +7,7 @@ namespace Emails.Application.Contract.SendEmailApplication.Command
 	public class CreateSendEmail
 	{
 		[Display(Name = "متن ایمیل")]
+		[UIHint("CkEditor4")]
 		[Required(ErrorMessage = ErrorMessages.FieldIsRequired)]
 		public string Text { get; set; }
 		[Display(Name = "عنوان ایمیل")]

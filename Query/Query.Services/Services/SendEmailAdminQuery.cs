@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Emails.Domain.SendEmailAgg;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Query.Contract.Admin.SendEmail;
 using Shared.Application.Models;
@@ -26,7 +27,13 @@ namespace Query.Services.Services
 			{
 				var result = _sendEmailRepository.GetAsQueryable();
 
+				if (!string.IsNullOrEmpty(filterParams.Title))
+				{
+					result = result?.Where(x => x.Title.Trim().ToLower().Contains(filterParams.Title.Trim().ToLower()));
+				}
+
 				SendEmailAdminFilteredPaging model = new();
+				model.GetBasePagination(result,filterParams.PageId,filterParams.Take);
 				model.FilterParams = filterParams;
 				model.SendEmails = new();
 

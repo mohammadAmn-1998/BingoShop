@@ -35,12 +35,13 @@ namespace Query.Services.Services
 					result = result?.Where(x => x.Subject.ToLower().Contains(filterParams.Title.ToLower()) || x.Message.ToLower().Contains(filterParams.Title.ToLower()) || x.FullName.ToLower().Contains(filterParams.Title.ToLower()));
 				}
 
-				if (messageStatus != null)
+				if (messageStatus != null ||messageStatus == MessageStatus.همه)
 					result = result?.Where(x => x.Status == messageStatus);
 
 				MessageUserAdminFilteredPaging model = new();
 				model.GetBasePagination(result, filterParams.PageId, filterParams.Take);
 				model.FilterParams = filterParams;
+				model.MessageStatus = messageStatus;
 				model.Messages = new();
 
 				if (result != null)

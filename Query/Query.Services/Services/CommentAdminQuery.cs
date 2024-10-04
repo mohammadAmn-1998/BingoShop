@@ -27,7 +27,7 @@ namespace Query.Services.Services
 			try
 			{
 
-				var result = Table<Comment>().Include(x => x.ChildComments).Include(c => c.ParentComment).AsQueryable();
+				var result = Table<Comment>().Include(x => x.ChildComments).Include(c => c.ParentComment).OrderBy(x=> x.Status == CommentStatus.هنوز_دیده_نشده).AsQueryable();
 
 				if (!string.IsNullOrEmpty(filterParams.Title))
 				{

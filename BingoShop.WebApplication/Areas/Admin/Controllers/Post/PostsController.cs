@@ -27,7 +27,6 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Post
 		public IActionResult Index() => View(_postQuery.GetAllPostsForAdmin());
 
 
-
 		public IActionResult Create() => View();
 
 		[HttpPost]
@@ -53,53 +52,23 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Post
 			var res = _postApplication.Edit(model);
 			if (res.Status == Status.Success)
 			{
-				TempData["ok"] = true;
+				SuccessAlert("پست ویرایش شد!");
 				return Redirect($"/Admin/Post/Edit/{id}");
 			}
 			ModelState.AddModelError(res.ModelName, res.Message);
+			ErrorAlert(res.Message);
 			return View(model);
 		}
-		public IActionResult Active(int id)
-		{
 
-			if (_postApplication.ActivationChange(id))
-			{
-				SuccessAlert();
-			}
-			else
-			{
-				ErrorAlert(ErrorMessages.InternalServerError);
-			}
+		public bool Active(int id)
+			=> _postApplication.ActivationChange(id);
 
-			return RedirectToAction("Index");
-		}
+		public bool Inside(int id)
+			=> _postApplication.InsideCityChange(id);
+			
 
-		public IActionResult Inside(int id)
-		{
-			if (_postApplication.InsideCityChange(id))
-			{
-				SuccessAlert();
-			}
-			else
-			{
-				ErrorAlert(ErrorMessages.InternalServerError);
-			}
-
-			return RedirectToAction("Index");
-		}
-
-		public IActionResult Outside(int id)
-		{
-			if (_postApplication.OutSideCityChange(id))
-			{
-				SuccessAlert();
-			}
-			else
-			{
-				ErrorAlert(ErrorMessages.InternalServerError);
-			}
-			return RedirectToAction("Index");
-		}
+		public bool Outside(int id)
+			=> _postApplication.OutSideCityChange(id);
 
 
 		public IActionResult Setting() => View(_postSettingApplication.GetForUbsert());
@@ -114,6 +83,7 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Post
 				return Redirect("/Admin/Post/Setting/");
 			}
 			ModelState.AddModelError(res.ModelName, res.Message);
+			ErrorAlert(res.Message);
 			return View(model);
 		}
 	}

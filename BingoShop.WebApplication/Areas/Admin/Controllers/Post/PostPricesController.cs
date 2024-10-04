@@ -36,6 +36,7 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Post
 				return Redirect($"/Admin/PostPrice/Index/{id}");
 			}
 			ModelState.AddModelError(res.ModelName, res.Message);
+			ErrorAlert(res.Message);
 			return View(model);
 		}
 
@@ -51,6 +52,7 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Post
 				return Redirect($"/Admin/PostPrice/Edit/{id}");
 			}
 			ModelState.AddModelError(res.ModelName, res.Message);
+			ErrorAlert(res.Message);
 			return View(model);
 		}
 

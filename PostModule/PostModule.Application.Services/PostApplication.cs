@@ -24,7 +24,7 @@ namespace PostModule.Application.Services
         {
             var post = _postRepository.GetById(id);
             post.ActivationChange();
-            return _postRepository.Save();
+            return _postRepository.Update(post);
         }
 
         public OperationResult Create(CreatePost command)
@@ -48,7 +48,7 @@ namespace PostModule.Application.Services
              post.Edit(command.Title, command.Status, command.TehranPricePlus, command.StateCenterPricePlus,
                command.CityPricePlus, command.InsideStatePricePlus, command.StateClosePricePlus,
                command.StateNonClosePricePlus,command.Description);
-            if (_postRepository.Save())
+            if (_postRepository.Update(post))
                 return new(Status.Success);
 
             return new OperationResult(Status.InternalServerError, ErrorMessages.InternalServerError, "Title");
@@ -63,14 +63,14 @@ namespace PostModule.Application.Services
         {
             var post = _postRepository.GetById(id);
             post.InsideCityChange();
-            return _postRepository.Save();
+            return _postRepository.Update(post);
         }
 
         public bool OutSideCityChange(int id)
         {
             var post = _postRepository.GetById(id);
             post.OutSideCityChange();
-            return _postRepository.Save();
+            return _postRepository.Update(post);
         }
     }
 }

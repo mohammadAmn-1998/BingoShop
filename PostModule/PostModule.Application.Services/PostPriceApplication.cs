@@ -31,7 +31,7 @@ namespace PostModule.Application.Services
             postPrice.Edit(command.Start, command.End, command.TehranPrice,
                 command.StateCenterPrice, command.CityPrice, command.InsideStatePrice,
                 command.StateClosePrice, command.StateNonClosePrice);
-            if (_postPriceRepository.Save())
+            if (_postPriceRepository.Update(postPrice))
                 return new(Status.Success);
 
             return new(Status.InternalServerError, ErrorMessages.InternalServerError, "Start");

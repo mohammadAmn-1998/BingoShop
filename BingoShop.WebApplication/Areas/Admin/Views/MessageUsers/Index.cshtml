@@ -23,10 +23,10 @@
 	<span>
 		<label asp-for="MessageStatus">
 		</label>
-		<select name="status" class="form-select">
+		<select name="status" asp-for="MessageStatus"  class="form-select">
 			@foreach (var status in Enum.GetValues(typeof(MessageStatus)).Cast<MessageStatus>())
 			{
-				<option value="@status">@status.ToString().Replace("-"," ")</option>
+				<option value="@status">@status.ToString().Replace("_"," ")</option>
 			}
 			
 		</select>

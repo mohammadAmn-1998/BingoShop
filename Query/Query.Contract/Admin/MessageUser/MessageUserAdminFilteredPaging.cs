@@ -1,4 +1,5 @@
-﻿using Shared.Application.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using Shared.Application.Models;
 using Shared.Application.Utility;
 using Shared.Domain.Enums;
 
@@ -10,5 +11,6 @@ public class MessageUserAdminFilteredPaging : BasePagination
 
 	public List<MessageUserAdminQueryModel> Messages { get; set; }
 
-	public MessageStatus MessageStatus { get; set; }
+	[Display(Name = "جستجو بر اساس وضعیت")]
+	public MessageStatus? MessageStatus { get; set; }
 }

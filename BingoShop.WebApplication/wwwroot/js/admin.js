@@ -73,6 +73,20 @@ function loadCkeditor4() {
 
 }
 
+function loadCkEditor4ById(editorId) {
+
+
+    if (document.getElementById(editorId)) {
+
+        $("body").append('<script src="/ckeditor4/ckeditor/ckeditor.js"></script>');
+
+        CKEDITOR.replace(editorId, {
+            customConfig: '/ckeditor4/ckeditor/config.js'
+        });
+    }
+
+}
+
 function unloadCkEditor(id) {
 
     if (CKEDITOR.instances[id]) {
@@ -98,6 +112,26 @@ document.getElementById('file_input').addEventListener('change', function (event
 
 });
 
+
+function readImageURL(img_tag_id, file_input_id) {
+
+    //event listener for input type file for preventing choosing any file except image file before user submit the form
+    document.getElementById(file_input_id).addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (validateImageFile(file)) {
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = document.getElementById(img_tag_id);
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+    });
+}
 
 function validateImageFile(file) {
     const allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp'];

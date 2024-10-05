@@ -143,6 +143,25 @@ namespace Shared.Application.Utility
 		public const string ImageSiteDirectory400 = "wwwroot/assets/images/image_site_img400";
 
 
+		public static string GetImageSiteFullPath(string? imageName, int? imageSize)
+		{
+
+			if (imageName is "Default.jpg" or " " or null)
+				return ImageSiteDirectory.Replace("wwwroot", "") + "/" + "Default.jpg";
+
+			switch (imageSize)
+			{
+				case null:
+					return ImageSiteDirectory.Replace("wwwroot", "") + "/" + imageName;
+				case 100:
+					return ImageSiteDirectory100.Replace("wwwroot", "") + "/" + imageName;
+				case 400:
+					return ImageSiteDirectory400.Replace("wwwroot", "") + "/" + imageName;
+			}
+
+			return ImageSiteDirectory.Replace("wwwroot", "") + "/" + "Default.jpg";
+		}
+
 		#endregion
 
 		#region ManuImage
@@ -151,6 +170,25 @@ namespace Shared.Application.Utility
 		public const string MenuImageDirectory100 = "wwwroot/assets/images/menu_img100";
 		public const string MenuImageDirectory400 = "wwwroot/assets/images/menu_img400";
 
+		public static string GetMenuImageFullPath(string? imageName, int? imageSize)
+		{
+
+			if (imageName is "Default.jpg" or " " or null)
+				return MenuImageDirectory.Replace("wwwroot", "") + "/" + "Default.jpg";
+
+			switch (imageSize)
+			{
+				case null:
+					return MenuImageDirectory.Replace("wwwroot", "") + "/" + imageName;
+				case 100:
+					return MenuImageDirectory100.Replace("wwwroot", "") + "/" + imageName;
+				case 400:
+					return MenuImageDirectory400.Replace("wwwroot", "") + "/" + imageName;
+			}
+
+			return MenuImageDirectory.Replace("wwwroot", "") + "/" + "Default.jpg";
+		}
+
 		#endregion
 
 		#region ServiceImage
@@ -158,6 +196,25 @@ namespace Shared.Application.Utility
 		public const string ServiceImageDirectory = "wwwroot/assets/images/service_img";
 		public const string ServiceImageDirectory100 = "wwwroot/assets/images/service_img100";
 		public const string ServiceImageDirectory400 = "wwwroot/assets/images/service_img400";
+
+		public static string GetSiteServiceImageFullPath(string? imageName, int? imageSize)
+		{
+
+			if (imageName is "Default.png" or " " or null)
+				return ServiceImageDirectory.Replace("wwwroot", "") + "/" + "Default.png";
+
+			switch (imageSize)
+			{
+				case null:
+					return ServiceImageDirectory.Replace("wwwroot", "") + "/" + imageName;
+				case 100:
+					return ServiceImageDirectory100.Replace("wwwroot", "") + "/" + imageName;
+				case 400:
+					return ServiceImageDirectory400.Replace("wwwroot", "") + "/" + imageName;
+			}
+
+			return ServiceImageDirectory.Replace("wwwroot", "") + "/" + "Default.png";
+		}
 
 		#endregion
 
@@ -173,12 +230,70 @@ namespace Shared.Application.Utility
 		public const string SiteSettingImageDirectory400 = "wwwroot/assets/images/site_setting_img400";
 
 
+		public static string GeLogoImageFullPath(string? imageName, int? imageSize)
+		{
+
+			if (imageName is "Default.png" or " " or null)
+				return SiteSettingImageDirectory.Replace("wwwroot", "") + "/" + "Default.png";
+
+			switch (imageSize)
+			{
+				case null:
+					return SiteSettingImageDirectory.Replace("wwwroot", "") + "/" + imageName;
+				case 100:
+					return SiteSettingImageDirectory100.Replace("wwwroot", "") + "/" + imageName;
+				case 300:
+					return SiteSettingImageDirectory300.Replace("wwwroot", "") + "/" + imageName;
+			}
+
+			return SiteSettingImageDirectory.Replace("wwwroot", "") + "/" + "Default.png";
+		}
+
+		public static string GetFavIconImageFullPath(string? imageName, int? imageSize)
+		{
+
+			if (imageName is "Default.png" or " " or null)
+				return SiteSettingImageDirectory.Replace("wwwroot", "") + "/" + "Default.png";
+
+			switch (imageSize)
+			{
+				case null:
+					return SiteSettingImageDirectory.Replace("wwwroot", "") + "/" + imageName;
+				case 16:
+					return SiteSettingImageDirectory16.Replace("wwwroot", "") + "/" + imageName;
+				case 32:
+					return SiteSettingImageDirectory32.Replace("wwwroot", "") + "/" + imageName;
+				case 64:
+					return SiteSettingImageDirectory64.Replace("wwwroot", "") + "/" + imageName;
+			}
+
+			return SiteSettingImageDirectory.Replace("wwwroot", "") + "/" + "Default.png";
+		}
+
 		#endregion
 
 		#region Slider
 
 		public const string SliderImageDirectory = "wwwroot/assets/images/slider_img";
 		public const string SliderImageDirectory100 = "wwwroot/assets/images/slider_img100";
+
+		public static string GetSliderImageFullPath(string? imageName, int? imageSize)
+		{
+
+			if (imageName is "Default.png" or " " or null)
+				return SliderImageDirectory.Replace("wwwroot", "") + "/" + "Default.png";
+
+			switch (imageSize)
+			{
+				case null:
+					return SliderImageDirectory.Replace("wwwroot", "") + "/" + imageName;
+				case 100:
+					return SliderImageDirectory100.Replace("wwwroot", "") + "/" + imageName;
+				
+			}
+
+			return SliderImageDirectory.Replace("wwwroot", "") + "/" + "Default.png";
+		}
 
 		#endregion
 

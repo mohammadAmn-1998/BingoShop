@@ -24,7 +24,7 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 			_SliderApplication = SliderApplication;
 		}
 
-		public async Task<IActionResult> Index()
+		public IActionResult Index()
 		{
 			var model =  _SliderQuery.GetAllForAdmin();
 
@@ -84,19 +84,8 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 
 		}
 
-		public async Task<IActionResult> ChangeActivation(long sliderId, int pageId = 1)
-		{
-			if (await _SliderApplication.ActivationChange(sliderId))
-			{
-				SuccessAlert();
-			}
-			else
-			{
-				ErrorAlert(ErrorMessages.InternalServerError);
-			}
-
-			return RedirectToAction("Index", new { pageId });
-		}
+		public async Task<bool> ChangeActivation(long id, int pageId = 1)
+			=> await _SliderApplication.ActivationChange(id);
 
 	}
 }

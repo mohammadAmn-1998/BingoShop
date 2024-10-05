@@ -27,4 +27,33 @@ internal class ImageSiteRepository : BaseRepository, IImageSiteRepository
 			return false;
 		}
 	}
+
+	public async Task<SiteImage?> GetById(int id)
+	{
+		try
+		{
+			return await GetById<SiteImage>(id);
+		}
+		catch (Exception e)
+		{
+
+			return null;
+		}
+	}
+
+	public async Task<bool> Delete(int id)
+	{
+		try
+		{
+			var siteImage = await GetById<SiteImage>(id);
+			if (siteImage == null) throw new NullReferenceException();
+
+			_context.Remove(siteImage);
+			return await _context.SaveChangesAsync() > 0;
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
+	}
 }

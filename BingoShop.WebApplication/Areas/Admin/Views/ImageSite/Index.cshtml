@@ -1,1 +1,135 @@
-﻿
+﻿@model Site.Application.Contract.ImageSiteApplication.Query.ImageAdminPaging
+@using Shared.Domain.Enums;
+@using Shared.Application;
+@using Shared.Application.Utility
+@inject IHttpContextAccessor _accessor;
+@{
+    ViewData["Title"] = "لیست عکس ها";
+	ViewData["Selected"]= "ImageSite";
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <div >
+					<form class="col-12">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>جست و جو بر اساس عنوان</label>
+                            <input type="text" class="form-control" name="q" value="@Model.Filter">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>تعداد نمایش در هر صفحه</label>
+                            <input type="number" id="chooseImage" class="form-control" name="take" value="@Model.Take">
+                        </div>
+                        </div>
+						<div class="col-md-4 "style="margin-top:25px">
+							
+							<button type="submit" class="btn btn-info">
+								جست و جو
+							</button>
+						</div>
+						<hr />  <hr />
+                    </form>
+                </div>
+	            <hr />
+	            <div class="col-md-6">
+					
+		            <a class="btn btn-success" asp-action="Create">
+			            <i class=" fa fa-plus mx-2"></i> عکس جدید
+		            </a>
+	            </div>
+              
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th> تصویر</th>
+                            <th> عنوان</th>
+                            <th>تاریخ ثبت</th>
+                            <th>لینک عکس</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(Model.Images.Count() > 0)
+                        {
+                            foreach(var item in Model.Images)
+                            {
+                                <tr id="Deleted_@item.Id">
+                                    <td>
+                                        <img width="100px" src="@Directories.GetImageSiteFullPath(item.ImageName,100)" />
+                                    </td>
+                                    <td>
+                                        @item.Title
+                                    </td>
+                                    <td>
+                                        @item.CreateDate
+                                    </td>
+	                                <td>
+										    
+		                                <input class="form-control" readonly
+		                                       value="@_accessor.HttpContext?.Request.Scheme.ToString()://@_accessor.HttpContext?.Request.Host.ToString()@Directories.GetImageSiteFullPath(@item.ImageName, null)" id="img_@item.Id">
+
+
+
+	                                </td>
+                                    <td>
+	                                    <a class="btn btn-danger" title="حذف این عکس" onclick="ajaxSweetAlertRefresh(
+		'حذف عکس ؟؟',
+		'بعد از حذف این عکس کاملا از سایت ما حذف میشود !!!1',
+		'کلا حذف شود ',
+		'حذف نشود میخوامش',
+	'/Admin/ImageSite/DeleteImage?id=@item.Id')">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+	                                    <a class="btn btn-secondary" title="کپی کردن لینک عکس" onclick="copy('img_@item.Id')">
+		                                    <i class="fa fa-copy"></i>
+	                                    </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+
+                </table>
+                <div class="col-12 text-center">
+                    @if (Model.TotalPages > 1)
+                    {
+                        <ul class="pagination pagination-sm no-margin pull-right">
+                            @if (Model.CurrentPage > 1)
+                            {
+                                <li><a href="/Admin/ImageSite?pageid=@(Model.CurrentPage - 1)&take=@Model.Take&filter=@Model.Filter">«</a></li>
+                            }
+                            @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+                            {
+                                if (i == Model.CurrentPage)
+                                {
+                                    <li class="bg-info"><a>@i</a></li>
+                                }
+                                else
+                                {
+									<li><a href="/Admin/ImageSite?pageid=@i&take=@Model.Take&q=@Model.Filter">@i</a></li>
+                                }
+                            }
+                            @if (Model.CurrentPage < Model.TotalPages)
+                            {
+								<li><a href="/Admin/ImageSite/?pageid=@(Model.CurrentPage + 1)&take=@Model.Take&q=@Model.Filter">»</a></li>
+                            }
+                            @if (Model.TotalPages > Model.EndPage)
+                            {
+								<li><a href="/Admin/ImageSite/Index?pageid=@Model.CurrentPage&take=@Model.Take&q=@Model.Filter">@Model.TotalPages</a></li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+}

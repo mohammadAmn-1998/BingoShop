@@ -51,6 +51,11 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Email
 			return RedirectToAction("Index");
 		}
 
+		public  IActionResult Detail(long id)
+		{
+
+			return View(_sendEmailAdminQuery.GetSendEmailDetailForAdmin(id));
+		}
 
 	}
 }

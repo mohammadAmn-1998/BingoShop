@@ -24,7 +24,7 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 			_SiteServiceApplication = SiteServiceApplication;
 		}
 
-		public async Task<IActionResult> Index(int pageId = 1, string q = "", int take = 2)
+		public async Task<IActionResult> Index(int pageId = 1, string q = "", int take = 10)
 		{
 			var model =  _SiteServiceQuery.GetAllForAdmin();
 
@@ -80,22 +80,12 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 
 			ErrorAlert(result.Message);
 			return View(model);
-
+			
 		}
 
-		public async Task<IActionResult> ChangeActivation(long siteServiceId, int pageId = 1)
-		{
-			if (await _SiteServiceApplication.ActivationChange(siteServiceId))
-			{
-				SuccessAlert();
-			}
-			else
-			{
-				ErrorAlert(ErrorMessages.InternalServerError);
-			}
+		public async Task<bool> ChangeActivation(long id, int pageId = 1)
+			=> await _SiteServiceApplication.ActivationChange(id);
 
-			return RedirectToAction("Index", new { pageId });
-		}
 
 	}
 }

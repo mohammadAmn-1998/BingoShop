@@ -16,7 +16,7 @@ namespace Shared.Application.Utility
 
 			try
 			{
-
+				
 				using var imageFile = System.Drawing.Image.FromStream(file.OpenReadStream());
 				return true;
 

@@ -35,7 +35,7 @@ namespace Query.Services.Services
 					result = result?.Where(x => x.Subject.ToLower().Contains(filterParams.Title.ToLower()) || x.Message.ToLower().Contains(filterParams.Title.ToLower()) || x.FullName.ToLower().Contains(filterParams.Title.ToLower()));
 				}
 
-				if (messageStatus != null ||messageStatus == MessageStatus.همه)
+				if (messageStatus != null && messageStatus != MessageStatus.همه)
 					result = result?.Where(x => x.Status == messageStatus);
 
 				MessageUserAdminFilteredPaging model = new();

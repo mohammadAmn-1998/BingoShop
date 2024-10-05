@@ -34,7 +34,8 @@
 		<!-- sidebar menu: : style can be found in sidebar.less -->
 		<ul class="sidebar-menu" data-widget="tree">
 			<li class="header">منو</li>
-			<li class="active treeview">
+			<li class="@((selected == "Users" || selected == "Roles" ? "active" : "")) treeview">
+
 				<a href="#">
 					<i class="fa  fa-user"></i> <span>مدیریت کاربران</span>
 					<span class="pull-left-container">
@@ -46,7 +47,7 @@
 					<li class="@((selected == "Roles" ? "active" : ""))"><a href="/Admin/Roles"><i class="fa fa-hand-paper-o"></i>نقش ها</a></li>
 				</ul>
 			</li>
-			<li class="treeview">
+			<li class="@((selected == "Blogs" || selected == "BlogCategories" ? "active" : "")) treeview">
 				<a href="#">
 					<i class="fa fa-sticky-note"></i> <span>مدیریت بلاگ</span>
 					<span class="pull-left-container">
@@ -62,7 +63,7 @@
 			<li class="@((selected == "Comments" ? "active" : ""))"><a href="/Admin/Comments"><i class="fa fa-commenting"></i>مدیریت کامنت ها</a></li>
 			</li>
 			
-			<li class="treeview">
+			<li class="@((selected == "Posts" || selected == "States" ? "active" : "")) treeview">
 				<a href="#">
 					<i class="fa fa-truck"></i> <span>مدیریت پست </span>
 					<span class="pull-left-container">
@@ -75,7 +76,7 @@
 				</ul>
 
 			</li>
-			<li class="treeview">
+			<li class="@((selected == "EmailUsers" || selected == "SendEmails" || selected == "MessageUsers" ? "active" : "")) treeview">
 				<a href="#">
 					<i class="fa fa-paper-plane"></i> <span>  خبرنامه</span>
 					<span class="pull-left-container">
@@ -88,7 +89,8 @@
 					<li class="@((selected == "MessageUsers" ? "active" : ""))"><a href="/Admin/MessageUsers"><i class="fa fa-circle-o"></i>پیام های ارتباط با ما</a></li>
 				</ul>
 			</li>
-			<li class="treeview">
+			<li class="@((selected == "Baners" || selected == "ImageSites" || selected == "Menu" || selected == "SitePage"|| selected == "SiteService"|| selected == "Slider"|| selected == "SiteSetting" ? "active" : "")) treeview">
+
 				<a href="#">
 					<i class="fa fa-cog"></i>
 					<span>تنظیمات سایت</span>
@@ -102,7 +104,7 @@
 					<li class="@((selected == "Menu" ? "active" : ""))"><a href="/Admin/Menu"><i class="fa fa-circle-o"></i> مدیریت منو </a></li>
 					<li class="@((selected == "SitePage" ? "active" : ""))"><a href="/Admin/SitePage"><i class="fa fa-circle-o"></i> مدیریت پیج </a></li>
 					<li class="@((selected == "SiteService" ? "active" : ""))"><a href="/Admin/SiteService"><i class="fa fa-circle-o"></i> مدیریت سایت سرویس </a></li>
-					<li class="@((selected == "Sliders" ? "active" : ""))"><a href="/Admin/slider"><i class="fa fa-circle-o"></i> مدیریت اسلایدها </a></li>
+					<li class="@((selected == "Slider" ? "active" : ""))"><a href="/Admin/slider"><i class="fa fa-circle-o"></i> مدیریت اسلایدها </a></li>
 					<li class="@((selected == "SiteSetting" ? "active" : ""))"><a href="/Admin/SiteSetting"><i class="fa fa-circle-o"></i> تنظیمات کلی سایت </a></li>
 				</ul>
 			</li>

@@ -5,11 +5,13 @@
 @inject IBlogCategoryQuery _BlogCategoryQuery 
 @{
 	var categoriesSelectList =await _BlogCategoryQuery.GetAllCategoriesAsSelectList();
+	ViewData["Title"] = "ویرایش دسته بندی  " + Model.Title;
 }
 <form onsubmit="sweetAlertConfirmSubmit(event)" class="" style="margin-right: 250px; margin-left: 250px; padding-top: 10px" asp-controller="Categories"  asp-action="Edit" method="Post"  enctype="mulitipart/form-data">
 	
 	@Html.HiddenFor(x=> x.Id)
 	@Html.HiddenFor(x=> x.ImageName)
+	
 	
 	<div class="form-group">
 		<label asp-for="Title"></label>
@@ -21,8 +23,12 @@
 		<input asp-for="Slug" class="form-control" />
 		<span class="text-danger" asp-validation-for="Slug" class="text-danger"></span>
 	</div>
-
+	
+	<br><br>
+	<img id="img_preview" alt="تصویر دسته بندی" src="@Directories.GetBlogCategoryImageFullPath(@Model?.ImageName ?? null,100)" height="150" width="300" alt="user-avatar" />
+	<br><br>
 	@Html.EditorFor(x=> x.ImageFile)
+
 	@Html.EditorFor(x=> x.ImageAlt)
 	@if (Model.ParentId > 0)
 	{
@@ -33,20 +39,18 @@
 	}
 	
 
-	<br><br>
-	<img id="img_preview" src="@Directories.GetBlogCategoryImageFullPath(@Model?.ImageName ?? null,100)" height="100" width="100" alt="user-avatar" />
-	<br><br>
+	
 	@if (Model!.IsActive)
 	{
-		<a class="btn btn-danger" asp-action="ChangeActivation" asp-route-categoryId="@Model.Id">غیر فعال کردن</a>
+		<a class="btn btn-danger" asp-action="ChangeActivation" onclick="sweetAlertConfirmSubmit(event)" asp-route-categoryId="@Model.Id">غیر فعال کردن</a>
 	}
 	else
 	{
-		<a class="btn btn-success" asp-action="ChangeActivation" asp-route-categoryId="@Model.Id"> فعال کردن</a>
+		<a class="btn btn-success" asp-action="ChangeActivation" asp-route-categoryId="@Model.Id" onclick="sweetAlertConfirmSubmit(event)"> فعال کردن</a>
 
 	}
 	<hr>
-	<button type="submit"  class="btn btn-success mr-1 ">ثبت ویرایش</button>
+	<button type="submit"  class="btn btn-success mr-1 ">ثبت </button>
 	<a onclick="sweetAlertConfirmLink(event,'آیا مطمعنید؟')" class="btn btn-danger m-3"  asp-action="Index">انصراف</a>
 
 </form>

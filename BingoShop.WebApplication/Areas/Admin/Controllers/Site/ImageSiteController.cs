@@ -57,6 +57,8 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 			return View(model);
 		}
 
+		public async Task<bool> DeleteImage(int id) => await _ImageSiteApplication.DeleteFromDataBase(id);
+
 
 	}
 }

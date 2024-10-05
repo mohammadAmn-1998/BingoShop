@@ -57,6 +57,21 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 			return View(model);
 		}
 
+		public async Task<IActionResult> CreateSub(int id) => View(await _MenuApplication.GetForCreate(id));
+		[HttpPost]
+		public async Task<IActionResult> CreateSub(int id, CreateSubMenu model)
+		{
+			if (!ModelState.IsValid) return View(model);
+			var res =await _MenuApplication.CreateSub(model);
+			if (res.Status == Status.Success)
+			{
+				SuccessAlert($"منو با نام {model.Title} ایجاد شد!");
+				return Redirect($"/Admin/Menu/Index/{id}");
+			}
+			ModelState.AddModelError(res.ModelName, res.Message);
+			return View(model);
+		}
+
 		[HttpGet]
 		public async Task<IActionResult> Edit(long id)
 		{
@@ -75,7 +90,7 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 			var result = await _MenuApplication.Edit(model);
 			if (result.Status == Status.Success)
 			{
-				result.Message = "بنر ویرایش شد!";
+				result.Message = $"منوی {model.Title} ویرایش شد!";
 				return RedirectAndShowAlert(RedirectToAction("Index"), result);
 			}
 
@@ -84,19 +99,10 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 
 		}
 
-		public async Task<IActionResult> ChangeActivation(long menuId, int pageId = 1)
-		{
-			if (await _MenuApplication.ActivationChange(menuId))
-			{
-				SuccessAlert();
-			}
-			else
-			{
-				ErrorAlert(ErrorMessages.InternalServerError);
-			}
+		public async Task<bool> ChangeActivation(long id, int pageId = 1)
+			=> await _MenuApplication.ActivationChange(id);
 
-			return RedirectToAction("Index", new { pageId });
-		}
+
 
 	}
 }

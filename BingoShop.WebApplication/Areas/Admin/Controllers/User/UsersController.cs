@@ -63,28 +63,18 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.User
 
 		}
 
-
 		#region Handlers
 
-		[Route("/Admin/Users/ChangeUserActivation/{userId}")]
-		public async Task<JsonResult> ChangeUserActivation(long userId)
-		{
+		[Route("/Admin/Users/ChangeActivation/{userId}")]
+		public async Task<bool> ChangeActivation(long userId)
+			=> await _userService.ActivationChange(userId);
 
-			return await _userService.ActivationChange(userId)
-				? Json(new { Success = true, Title = "انجام شد!" })
-				: Json(new { Success = false, Title = "مشکلی به وجود آمد.لطفا در زمان دیگری تلاش کنید" });
 
-		}
+		
 
-		[Route("/Admin/Users/ChangeUserBan/{userId}")]
-		public async Task<JsonResult> ChangeUserBan(long userId)
-		{
-
-			return await _userService.BanChange(userId)
-				? Json(new { Success = true, Title = "انجام شد!" })
-				: Json(new { Success = false, Title = "مشکلی به وجود آمد.لطفا در زمان دیگری تلاش کنید" });
-
-		}
+		[Route("/Admin/Users/ChangeBan/{userId}")]
+		public async Task<bool> ChangeBan(long userId)
+			=> await _userService.BanChange(userId);
 
 
 		#endregion

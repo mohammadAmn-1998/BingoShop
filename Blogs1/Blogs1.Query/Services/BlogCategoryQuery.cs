@@ -203,5 +203,19 @@ namespace Blogs1.Query.Services
 				return null;
 			}
 		}
+
+		public async Task<string> GetBlogCategoryTitle(long id)
+		{
+			try
+			{
+				var blogCategory= await Table<BlogCategory>().FirstOrDefaultAsync(x=> x.Id == id);
+
+				return blogCategory?.Title ?? "";
+			}
+			catch
+			{
+				return "";
+			}
+		}
 	}
 }

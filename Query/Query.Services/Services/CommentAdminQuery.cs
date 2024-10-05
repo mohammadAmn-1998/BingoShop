@@ -22,12 +22,17 @@ namespace Query.Services.Services
 			
 		}
 
-		public async Task<CommentAdminFilteredPaging> GetCommentsForAdmin(FilterParams filterParams, CommentStatus status , CommentFor commentFor )
+		public async Task<CommentAdminFilteredPaging>  GetCommentsForAdmin(FilterParams filterParams, CommentStatus status , CommentFor commentFor ,long? ownerId)
 		{
 			try
 			{
 
-				var result = Table<Comment>().Include(x => x.ChildComments).Include(c => c.ParentComment).OrderBy(x=> x.Status == CommentStatus.هنوز_دیده_نشده).AsQueryable();
+				var result = Table<Comment>().Include(x => x.ChildComments).Include(c => c.ParentComment).OrderByDescending(x=> x.Status == CommentStatus.هنوز_دیده_نشده).AsQueryable();
+
+				if (ownerId != null)
+				{
+					result = result.Where(x => x.OwnerId == ownerId);
+				}
 
 				if (!string.IsNullOrEmpty(filterParams.Title))
 				{
@@ -36,6 +41,8 @@ namespace Query.Services.Services
 						 (x.Email != null && x.Email.ToLower().Contains(filterParams.Title.ToLower())) ||
 						 x.Text.ToLower().Contains(filterParams.Title.ToLower()));
 				}
+
+				
 
 				if (status != CommentStatus.همه)
 				{

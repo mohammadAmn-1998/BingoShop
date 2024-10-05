@@ -8,5 +8,8 @@ namespace Site.Domain.SiteImageAgg
 
 		Task<bool> Create(CreateImageSite command);
 
+		Task<SiteImage?> GetById(int id);
+
+		Task<bool> Delete(int id);
 	}
 }

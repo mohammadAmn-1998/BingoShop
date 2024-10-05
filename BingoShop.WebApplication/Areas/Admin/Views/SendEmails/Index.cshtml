@@ -43,8 +43,8 @@
 			<tr>
 				<th class="">#</th>
 				<th class="col-2"> عنوان</th>
-				<th class="col-7">متن</th>
 				<th class="col-2"> تاریخ ثبت</th>
+				<th class="col-7">--</th>
 				
 			</tr>
 
@@ -63,10 +63,10 @@
 							@sendEmail.Title
 						</td>
 						<td>
-							@Html.Raw(sendEmail.Text)
+							@sendEmail.CreateDate
 						</td>
 						<td>
-							@sendEmail.CreateDate
+							<a class="btn btn-info" asp-action="Detail" asp-Route-id="@sendEmail.Id">خواندن متن</a>
 						</td>
 
 					</tr>

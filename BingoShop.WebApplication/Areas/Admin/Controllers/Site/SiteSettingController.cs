@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Shared.Application.Models;
 using Shared.Application.Utility;
 using Shared.Domain.Enums;
+using Site.Application.Contract.ImageSiteApplication.Command;
+using Site.Application.Contract.ImageSiteApplication.Query;
 using Site.Application.Contract.SiteSettingApplication.Command;
 using Site.Application.Contract.SiteSettingApplication.Query;
 using ControllerBase = BingoShop.WebApplication.Controllers.ControllerBase;
@@ -17,11 +19,15 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 	{
 		private readonly ISiteSettingQuery _SiteSettingQuery;
 		private readonly ISiteSettingApplication _SiteSettingApplication;
+		private readonly IImageSiteApplication _imageSiteApplication;
+		private readonly IImageSiteQuery _imageSiteQuery;
 
-		public SiteSettingController(ISiteSettingQuery SiteSettingQuery, ISiteSettingApplication SiteSettingApplication)
+		public SiteSettingController(ISiteSettingQuery SiteSettingQuery, ISiteSettingApplication SiteSettingApplication, IImageSiteApplication imageSiteApplication, IImageSiteQuery imageSiteQuery)
 		{
 			_SiteSettingQuery = SiteSettingQuery;
 			_SiteSettingApplication = SiteSettingApplication;
+			_imageSiteApplication = imageSiteApplication;
+			_imageSiteQuery = imageSiteQuery;
 		}
 
 		public async Task<IActionResult> Index()
@@ -51,6 +57,11 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 			return View(model);
 		}
 
+		
+
+		
+
+		
 
 	}
 }

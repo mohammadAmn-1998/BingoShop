@@ -55,5 +55,28 @@ namespace Query.Services.Services
 				return new();
 			}
 		}
+
+		public SendEmailAdminQueryModel GetSendEmailDetailForAdmin(long id)
+		{
+			try
+			{
+				var result = _sendEmailRepository.GetById(id);
+				if (result == null)
+					throw new NullReferenceException();
+
+				return new()
+				{
+					CreateDate = result.CreateDate.ConvertToPersianDate(),
+					Id = result.Id,
+					Text = result.Text,
+					Title = result.Title
+
+				};
+			}
+			catch
+			{
+				return null;
+			}
+		}
 	}
 }

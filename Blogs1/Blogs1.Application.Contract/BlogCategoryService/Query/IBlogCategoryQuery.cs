@@ -14,4 +14,5 @@ public interface IBlogCategoryQuery
 
 	Task<List<SelectListItem>?> GetAllCategoriesAsSelectList();
 	Task<List<SelectListItem>?> GetSubCategoriesAsSelectList(long parentId);
+	Task<string> GetBlogCategoryTitle(long id);
 }

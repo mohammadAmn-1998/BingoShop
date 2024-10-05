@@ -11,6 +11,6 @@ namespace Site.Application.Contract.ImageSiteApplication.Command
 	public interface IImageSiteApplication
 	{
 		Task<OperationResult> Create(CreateImageSite command);
-		
+		Task<bool> DeleteFromDataBase(int id);
 	}
 }

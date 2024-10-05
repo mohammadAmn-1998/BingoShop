@@ -3,11 +3,17 @@
 @model Blogs1.Application.Contract.BlogCategoryService.Command.CreateBlogCategory
 @{
 	long parentId = (long)(ViewData["ParentId"] ?? (long)0);
+
+	ViewData["Title"] = " دسته بندی جدید";
+	if (parentId > 0)
+	{
+		ViewData["Title"] = "زیر دسته جدید برای " + ViewData["ParentTitle"];
+	}
 }
 <form asp-action="Create" onsubmit="sweetAlertConfirmSubmit(event)" method="post"  enctype="multipart/form-data">
 	<div class="modal-content">
 		<div class="modal-header">
-			<h5 class="modal-title" id="createBlogCategoryModal">دسته بندی جدید</h5>
+			
 
 		</div>
 		<div class="modal-body">
@@ -18,7 +24,7 @@
 				}
 				<div class="form-group">
 					<label asp-for="Title"></label>
-					<input asp-for="Title" class="form-control" onchange="makeSlu3g('Title','Slug')" />
+					<input asp-for="Title" class="form-control" onchange="makeSlug('Title','Slug')" />
 					<span class="text-danger" asp-validation-for="Title"  class="text-danger"></span>
 				</div>
 				<div class="form-group">
@@ -27,7 +33,7 @@
 					<span class="text-danger" asp-validation-for="Slug" class="text-danger"></span>
 				</div>
 				<br><br>
-				<img id="img_preview" src="@Directories.GetBlogCategoryImageFullPath(@Model?.ImageName ?? null, 100)" height="100" width="100"  />
+				<img id="img_preview" alt="تصویر دسته بندی" src="@Directories.GetBlogCategoryImageFullPath(@Model?.ImageName ?? null, 100)" height="150" width="300"  />
 				<br><br>
 				@Html.EditorFor(x => x.ImageFile)
 				@Html.EditorFor(x => x.ImageAlt)
@@ -36,8 +42,8 @@
 
 		</div>
 		<div class="modal-footer">
-			<a type="button" asp-action="Index" onclick="sweetAlertConfirmLink(event,'آیا مطمعنید؟')" class="btn btn-secondary" data-dismiss="modal">انصراف</a>
-			<button type="submit"  class="btn btn-primary">افزودن</button>
+			<button type="submit"  class="btn btn-success">افزودن</button>
+			<a type="button" asp-action="Index" onclick="sweetAlertConfirmLink(event,'آیا مطمعنید؟')" class="btn btn-danger" data-dismiss="modal">انصراف</a>
 		</div>
 	</div>
 </form>
@@ -60,7 +66,6 @@
 		}
 			
 	});
-
 	function validateImageFile(file) {
 		const allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp'];
 		if (allowedImageTypes.includes(file.type)) {
@@ -71,8 +76,6 @@
 			return false;
 		}
 	}
-	
-
 	function sweetAlertConfirmSubmit(event, text) {
 
 		console.log(text);

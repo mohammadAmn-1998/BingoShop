@@ -48,6 +48,8 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Blog
                 var subCategories = await _blogCategoryQuery.GetSubCategoriesAsSelectList(parentId);
 
                 ViewData["ParentId"] = parentId;
+                ViewData["ParentTitle"] = await _blogCategoryQuery.GetBlogCategoryTitle(parentId);
+
             }
 
 
@@ -60,8 +62,9 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Blog
 
             if (!ModelState.IsValid)
             {
-
-                return View(model);
+	            ViewData["ParentId"] = model.ParentId;
+	            ViewData["ParentTitle"] = await _blogCategoryQuery.GetBlogCategoryTitle(model.ParentId);
+				return View(model);
             }
 
             var result = await _blogCategoryService.CreateCategory(model);
@@ -73,7 +76,9 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Blog
             }
 
             ErrorAlert(result.Message);
-            return View(model);
+            ViewData["ParentId"] = model.ParentId;
+            ViewData["ParentTitle"] = await _blogCategoryQuery.GetBlogCategoryTitle(model.ParentId);
+			return View(model);
         }
 
         [HttpGet]

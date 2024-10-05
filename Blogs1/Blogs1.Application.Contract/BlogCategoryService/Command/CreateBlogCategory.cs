@@ -24,7 +24,7 @@ namespace Blogs1.Application.Contract.BlogCategoryService.Command
 
 		public long ParentId { get; set; }
 
-		[Display(Name = "اسلاگ")]
+		[Display(Name = "لینک سربرگ")]
 		[Required(ErrorMessage = ErrorMessages.FieldIsRequired)]
 		[MaxLength(200, ErrorMessage = ErrorMessages.MaxLengthError)]
 		public string Slug { get; set; }

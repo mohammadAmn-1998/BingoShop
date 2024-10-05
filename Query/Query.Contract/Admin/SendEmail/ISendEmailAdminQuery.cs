@@ -5,4 +5,6 @@ namespace Query.Contract.Admin.SendEmail;
 public interface ISendEmailAdminQuery
 {
 	Task<SendEmailAdminFilteredPaging> GetSendEmailsForAdmin(FilterParams  filterParams);
+
+	SendEmailAdminQueryModel GetSendEmailDetailForAdmin(long id);
 }

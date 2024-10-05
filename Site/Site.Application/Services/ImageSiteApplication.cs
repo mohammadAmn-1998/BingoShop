@@ -5,6 +5,7 @@ using Shared.Application.Utility;
 using Shared.Domain.Enums;
 using Site.Application.Contract.ImageSiteApplication.Command;
 using Site.Domain.SiteImageAgg;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Site.Application.Services;
 
@@ -38,5 +39,27 @@ internal class ImageSiteApplication : IImageSiteApplication
 		return new(Status.InternalServerError, ErrorMessages.InternalServerError);
 	}
 
-	
+	public async Task<bool> DeleteFromDataBase(int id)
+	{
+		try
+		{
+			var imageSite = await _imageSiteRepository.GetById(id);
+			if (imageSite == null) throw new NullReferenceException();
+			var imageName = imageSite.ImageName;
+
+			if (await _imageSiteRepository.Delete(id))
+			{
+				_fileService.DeleteFile(imageName, Directories.ImageSiteDirectory);
+				_fileService.DeleteFile(imageName, Directories.ImageSiteDirectory100);
+
+				return true;
+			}
+
+			return false;
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
+	}
 }

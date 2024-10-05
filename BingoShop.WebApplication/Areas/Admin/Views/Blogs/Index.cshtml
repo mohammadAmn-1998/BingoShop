@@ -5,7 +5,9 @@
 @{
 	ViewData["Title"] = "مدیریت مقاله ها";
 	ViewData["Selected"] = "Blogs";
-	var counter = 0;
+
+	var counter = Model?.Skip ?? 0;
+
 }
 
 

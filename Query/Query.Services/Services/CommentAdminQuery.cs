@@ -59,6 +59,7 @@ namespace Query.Services.Services
 				model.FilterParams = filterParams;
 				model.CommentStatus = status;
 				model.CommentFor = commentFor;
+				model.OwnerId = ownerId;
 				model.Comments = new();
 
 				if (result.Count() > 0)

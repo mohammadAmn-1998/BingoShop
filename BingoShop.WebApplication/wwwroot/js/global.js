@@ -318,7 +318,7 @@ function sweetAlertConfirmSubmit(event) {
 }
 function sweetAlertConfirmLink(event, text) {
 
-    console.log(text);
+    
     event.preventDefault();
     if (text == "")
         text = "آیا از انجام عملیات اطمینان دارید ؟";

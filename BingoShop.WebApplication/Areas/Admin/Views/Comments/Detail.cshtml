@@ -10,13 +10,12 @@
 	<div class="row" style="margin-right: 250px; margin-left: 250px;">
 		<div class="col-xs-12">
 			<div class="box">
-				<div class="box-header">
-				</div>
+				
 				<div class="box-body">
-					<hr />
+				
 
 					<dl class="dl-horizontal">
-
+						<br/>
 						<dt>
 							کاربر سایت ؟
 						</dt>
@@ -31,73 +30,87 @@
 								<p>کاربر سایت نیست</p>
 							}
 						</dd>
+						<hr />
 						<dt>
-							نام کامل
+							نام کامل :
 						</dt>
 						<dd>
 							@Html.DisplayFor(model => model.FullName)
-							<a class="btn btn-primary" href="#">دیدن پروفایل</a>
+							<a class="btn btn-sm btn-warning" href="#"> <i class="fa fa-user" aria-hidden="true"></i></a>
 						</dd>
+						<hr />
 						<dt>
-							نوع کامنت
+							نوع کامنت :
 						</dt>
 						<dd>
 							@Html.DisplayFor(model => model.CommentFor)
-						</dd>
-						<dd>
-							@Html.DisplayFor(model => model.Email)
+						
+						
+							
 							@if (Model.OwnerId > 0 && Model.CommentFor == CommentFor.بلاگ)
 							{
-								<a class="btn btn-secondary">دیدن مقاله </a>
+								<a class="btn btn-sm btn-info">دیدن مقاله </a>
 							} else if (Model.OwnerId > 0 && Model.CommentFor == CommentFor.محصول)
-							 {
-								 <a class="btn btn-secondary">دیدن محصول </a>
-							 }
+							{
+								<a class="btn btn-sm btn-info">دیدن محصول </a>
+							}
 						</dd>
-						
-						
+
+						<hr />
 						<dt>
-							متن کامنت
+							متن کامنت :
 						</dt>
-						<dd>
+						<dd style="height:100px">
 							@Html.DisplayFor(model => model.Text)
 						</dd>
+						<hr />
 						<dt>
-							ایمیل
+							ایمیل :
 						</dt>
 						<dd>
 							@Html.DisplayFor(model => model.Email)
 						</dd>
+						<hr />
 						<dt>
-							تاریخ ثبت
+							تاریخ ثبت :
 						</dt>
 						<dd>
 							@Html.DisplayFor(model => model.CreateDate)
 						</dd>
+						<hr />
 						<dt>
-							وضعیت
+							وضعیت :
 						</dt>
 						<dd>
 							@Model.CommentStatus.ToString().Replace("_", " ")
-							<a class="btn btn-primary" asp-action="ChangeStatus">تغییر وضعیت</a>
+							<a class="btn btn-sm btn-primary" asp-action="ChangeStatus">تغییر وضعیت</a>
 						</dd>
+						<hr />
 						@if (Model.CommentStatus == CommentStatus.رد_شده)
 						{
 							<dt>
-								دلیل رد شدن کامنت
+								دلیل رد شدن کامنت :
 							</dt>
-							<dd>
+							
+							<dd style="height:100px">
 								@Html.DisplayFor(model => model.WhyRejected)
 							</dd>
 						}
 
 					</dl>
+					<hr/>
+					<div class=" text-center">
+						<a class="btn btn-danger col col-12 " asp-action="Index">بازگشت</a>
+
+
+					</div>
 				</div>
 			</div>
 		</div>
 		
-		<a class="btn btn-danger" asp-action="Index">بازگشت</a>
 	</div>
+
+	
 }
 else
 {

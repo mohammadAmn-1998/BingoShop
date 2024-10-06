@@ -196,7 +196,7 @@
 											}
 											@for (var i = Model.StartPage; i <= Model.EndPage; i++)
 											{
-												<li class="page-item "><a href="/Admin/Categories?pageId=@i&q=@Model.FilterParams.Title" class="page-link" @((Model.CurrentPage == i ? "class='bg-primary'" : "")) @((i == Model.CurrentPage ? "class='disabled-link'" : ""))>@i</a></li>
+									<li class="page-item  @((Model.CurrentPage == i ? "active" : " ")) "><a href="/Admin/Categories?pageId=@i&q=@Model.FilterParams.Title" class="page-link" @((Model.CurrentPage == i ? "class='bg-primary'" : "")) @((i == Model.CurrentPage ? "class='disabled-link'" : ""))>@i</a></li>
 											}
 											@if (Model.CurrentPage < Model.EndPage)
 											{

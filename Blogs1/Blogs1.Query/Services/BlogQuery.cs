@@ -35,9 +35,9 @@ namespace Blogs1.Query.Services
 				FilteredBlogQueryModel model = new();
 				model.GetBasePagination(result,filterParams.PageId,filterParams.Take);
 
-				var skip = (filterParams.PageId - 1) * filterParams.Take;
+				
 
-				var blogs = await result.Skip(skip).Take(filterParams.Take).Select(x =>
+				var blogs = await result.Skip(model.Skip).Take(filterParams.Take).Select(x =>
 					new BlogQueryModel
 					{
 						Id = x.Id,

@@ -37,7 +37,7 @@ namespace Query.Services.Services
 				model.FilterParams = filterParams;
 				model.SendEmails = new();
 
-				if (result != null)
+				if (result != null && result.Any())
 					model.SendEmails = await result.Skip(model.Skip).Take(model.Take)
 					.OrderByDescending(x => x.CreateDate)
 					.Select(x => new SendEmailAdminQueryModel

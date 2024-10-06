@@ -7,114 +7,127 @@
 }
 
 
-<form class="form-inline ml-3  float-sm"
-	  action="/admin/MessageUsers" method="get">
-	<div class="input-group input-group-sm " style=" display: flex;
-	                                                align-items: center; width: 300px; margin-right: 400px; padding : 10px">
-
-		<input class="form-control " type="search" placeholder="جستجو کنید..." aria-label="Search" name="q" value="@Model?.FilterParams.Title">
-		<button class="btn btn-sm btn-success " style="margin-right: 6px" type="submit">
-			<i class="fa fa-search">جستجو</i>
-		</button>
-		<div class="input-group-append ">
-		</div>
-	</div>
-	<hr>
-	<span>
-		<label asp-for="MessageStatus">
-		</label>
-		<select name="status" asp-for="MessageStatus"  class="form-select">
-			@foreach (var status in Enum.GetValues(typeof(MessageStatus)).Cast<MessageStatus>())
-			{
-				<option value="@status">@status.ToString().Replace("_"," ")</option>
-			}
-			
-		</select>
-	</span>
-</form>
-
-<br>
 <div class="row">
-	
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<div>
+					<form class="form-inline ml-3  float-sm">
+
+						<label asp-for="MessageStatus">
+						</label>
+						<select name="status" asp-for="MessageStatus" class="form-control text-center" >
+							@foreach (var status in Enum.GetValues(typeof(MessageStatus)).Cast<MessageStatus>())
+							{
+								<option value="@status">@status.ToString().Replace("_", " ")</option>
+							}
+
+						</select>
+						<div class="form-group">
+							<label asp-for="FilterParams.Take"></label>
+							<input type="number" min="1" class="form-control" value="@Model?.FilterParams.Take" name="take" />
+						</div>
+						<input class="form-control " type="search" placeholder="جستجو کنید..." aria-label="Search" name="q" value="@Model?.FilterParams.Title">
+						<button class="btn btn-sm btn-primary " type="submit">
+							<i class="fa fa-search">جستجو</i>
+						</button>
+						
+					</form>
+
+				</div>
+
+				<hr />
+				<div class="row">
+				</div>
 
 
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body">
+				<div class="table-responsive-md">
+					<div class="table-responsive-md">
 
+						<div class="table-responsive-md">
+							<div class="table-responsive-md">
+								<table class="table table-bordered text-sm table-sm  table-hover ">
 
-</div>
-<hr>
+									<thead class="">
 
-<div class="table-responsive-md">
-	<table class="table table-bordered text-sm table-sm  table-hover ">
+									<tr>
+										<th class="">#</th>
+										<th class="col-2">نام کامل</th>
+										<th class="col-2">عنوان</th>
+										<th class="col-2">شماره موبایل </th>
+										<th class="col-2"> ایمیل</th>
+										<th class="col-2"> تاریخ ثبت</th>
+										<th class="col-4">وضعیت</th>
+										<th class="col-4">عملیات</th>
+									</tr>
 
-		<thead class="">
+									</thead>
+									<tbody>
 
-			<tr>
-				<th class="">#</th>
-				<th class="col-2">نام کامل</th>
-				<th class="col-2">عنوان</th>
-				<th class="col-2">شماره موبایل </th>
-				<th class="col-2"> ایمیل</th>
-				<th class="col-2"> تاریخ ثبت</th>
-				<th class="col-4">وضعیت</th>
-				<th class="col-4">عملیات</th>
-			</tr>
-
-		</thead>
-		<tbody>
-
-			@if (Model?.Messages != null && Model.Messages.Any())
-			{
-				@foreach (var messageUser in Model.Messages)
-				{
-					<tr>
-						<td>@(counter += 1)</td>
+									@if (Model?.Messages != null && Model.Messages.Any())
+									{
+										@foreach (var messageUser in Model.Messages)
+										{
+											<tr>
+												<td>@(counter += 1)</td>
 
 						
-						<td>
-							@messageUser.UserName
-						</td>
+												<td>
+													@messageUser.UserName
+												</td>
 
-						<td>
-							@messageUser.Subject
-						</td>
-						<td>
-							@messageUser.PhoneNumber
-						</td>
-						<td>
-							@messageUser.Email
-						</td>
+												<td>
+													@messageUser.Subject
+												</td>
+												<td>
+													@messageUser.PhoneNumber
+												</td>
+												<td>
+													@messageUser.Email
+												</td>
 
-						<td>
-							@messageUser.CreateDate
-						</td>
-						<td>
-							@messageUser.Status
-						</td>
-						<td class="mr-3 mt-3">
+												<td>
+													@messageUser.CreateDate
+												</td>
+												<td>
+													@messageUser.Status
+												</td>
+												<td class="mr-3 mt-3">
 
-							<a class="btn   btn-primary mr-1" asp-action="MessageDetail" asp-route-id="@messageUser.Id">
-								دیدن جزییات
-							</a>
+													<a class="btn   btn-primary mr-1" asp-action="MessageDetail" asp-route-id="@messageUser.Id">
+														دیدن جزییات
+													</a>
 							
-						</td>
+												</td>
 
 
-						<td class="btn-group-sm">
+												<td class="btn-group-sm">
 
-						</td>
-					</tr>
+												</td>
+											</tr>
 
 
-				}
-			}
-			else
-			{
-				<h1>چیزی برای نمایش وجود ندارد...</h1>
-			}
+										}
+									}
+									else
+									{
+										<h1>چیزی برای نمایش وجود ندارد...</h1>
+									}
 
-		</tbody>
-	</table>
-</div>
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class=" text-start">
 
 @if (Model?.TotalPages > 1)
 {
@@ -122,15 +135,15 @@
 		<ul class="pagination pagination-sm " style="margin-right: 500px">
 			@if (Model.CurrentPage > 1)
 			{
-				<li class="page-item"><a disabled class="page-link" asp-area="Admin" asp-controller="MessageUsers" asp-action="Index" asp-route-pageId="@(Model.CurrentPage-1)" asp-route-q="@Model.FilterParams.Title" asp-route-status="@Model.MessageStatus">&laquo;</a></li>
+				<li class="page-item"><a disabled class="page-link" asp-area="Admin" asp-controller="MessageUsers" asp-action="Index" asp-route-pageId="@(Model.CurrentPage-1)" asp-route-q="@Model.FilterParams.Title" asp-route-status="@Model.MessageStatus" asp-route-take="@Model.FilterParams.Take">&laquo;</a></li>
 			}
 			@for (var i = Model.StartPage; i <= Model.EndPage; i++)
 			{
-				<li class="page-item "><a href="/Admin/MessageUsers?pageId=@i&q=@Model.FilterParams.Title&status=@Model.MessageStatus" class="page-link" @((Model.CurrentPage == i ? "class='bg-primary'" : "")) @((i == Model.CurrentPage ? "class='disabled-link'" : ""))>@i</a></li>
+				<li class="page-item "><a href="/Admin/MessageUsers?pageId=@i&q=@Model.FilterParams.Title&status=@Model.MessageStatus&take=@Model.FilterParams.Take" class="page-link" @((Model.CurrentPage == i ? "class='bg-primary'" : "")) @((i == Model.CurrentPage ? "class='disabled-link'" : ""))>@i</a></li>
 			}
 			@if (Model.CurrentPage < Model.EndPage)
 			{
-				<li class="page-item"><a disabled class="page-link" asp-area="Admin" asp-controller="Blogs" asp-action="Index" asp-route-pageId="@(Model.CurrentPage+1)" asp-route-q="@Model.FilterParams.Title" asp-route-status="@Model.MessageStatus">&raquo;</a></li>
+									<li class="page-item"><a disabled class="page-link" asp-area="Admin" asp-controller="Blogs" asp-action="Index" asp-route-pageId="@(Model.CurrentPage+1)" asp-route-q="@Model.FilterParams.Title" asp-route-status="@Model.MessageStatus" asp-route-take="@Model.FilterParams.Take">&raquo;</a></li>
 			}
 
 		</ul>
@@ -138,4 +151,10 @@
 
 }
 
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 

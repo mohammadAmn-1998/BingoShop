@@ -20,10 +20,10 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Email
 			_sendEmailApplication = sendEmailApplication;
 		}
 
-		public async Task<IActionResult> Index(int pageId = 1,int take = 10)
+		public async Task<IActionResult> Index(int pageId = 1,int take = 10,string q="")
 		{
 
-			return View(await _sendEmailAdminQuery.GetSendEmailsForAdmin(new(pageId,take,"")));
+			return View(await _sendEmailAdminQuery.GetSendEmailsForAdmin(new(pageId,take,q)));
 		}
 
 

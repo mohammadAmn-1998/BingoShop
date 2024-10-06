@@ -14,6 +14,8 @@ public class CommentAdminFilteredPaging : BasePagination
 
 	public CommentFor CommentFor { get; set; }
 
+	public long? OwnerId { get; set; }
+
 	public List<CommentAdminQueryModel>? Comments { get; set; }
 
 }

@@ -16,7 +16,8 @@ namespace Shared.Application.Utility
 
 			try
 			{
-				
+				if (Path.GetExtension(file.FileName) is ".webp" or ".jpeg")
+					return true;
 				using var imageFile = System.Drawing.Image.FromStream(file.OpenReadStream());
 				return true;
 

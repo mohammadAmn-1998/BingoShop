@@ -28,7 +28,7 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Blog
 
         #endregion
 
-        public async Task<IActionResult> Index(int pageId = 1, string q = "", int take = 2)
+        public async Task<IActionResult> Index(int pageId = 1, string q = "", int take = 10)
         {
             var model = await _blogCategoryQuery.GetFilteredBlogCategories(new FilterParams
             {

@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model Blogs1.Application.Contract.BlogService.Command.EditBlog
 @{
-	ViewData["Title"] = "ویرایش پست";
+	ViewData["Title"] = "ویرایش مقاله";
 	ViewData["Selected"] = "Blogs";
 
 }
@@ -12,15 +12,13 @@
 	<div class="container d-flex justify-content-center">
 		<!-- general form elements -->
 		<div class="card card-primary w-100">
-			<div class="card-header">
-				<h3 class="card-title">ویرایش پست</h3>
-			</div>
+			
 			<!-- /.card-header -->
 			<!-- form start -->
 			<form onsubmit=" sweetAlertConfirmSubmit(event)" class="col-lg-10 mx-auto" method="post" asp-area="Admin" asp-action="Edit" enctype="multipart/form-data">
 				@Html.HiddenFor(x => x.UserId)
 				@Html.HiddenFor(x=> x.ImageName)
-
+				@Html.HiddenFor(x=> x.Author)
 				<div class="form-group mt-3">
 					<label asp-for="Title"></label>
 					<input asp-for="Title" class="form-control" onchange="makeSlug('Title','Slug')" />

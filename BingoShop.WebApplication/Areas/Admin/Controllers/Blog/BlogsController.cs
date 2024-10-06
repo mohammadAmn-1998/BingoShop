@@ -31,13 +31,13 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Blog
             _fileService = fileService;
         }
 		
-        public async Task<IActionResult> Index(string q = "", int pageId = 1)
+        public async Task<IActionResult> Index(string q = "", int pageId = 1 , int take=10)
         {
 
             var model = await _blogQuery.GetFilteredPosts(new FilterParams
             {
                 PageId = pageId,
-                Take = 2,
+                Take = take,
                 Title = q.Trim()
             });
             return View(model);
@@ -67,7 +67,8 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Blog
             if (model.CategoryId < 1)
             {
                 ModelState.AddModelError(nameof(model.CategoryId), ErrorMessages.FieldIsRequired);
-
+				model.Categories = await _blogCategoryQuery.GetAllCategoriesAsSelectList();
+				return View(model);
             }
 
             List<SelectListItem>? categories;
@@ -82,14 +83,12 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Blog
                     model.SubCategories = subCategories;
 
                 }
-                model.Categories = categories;
 
+                model.Categories = categories;
                 return View(model);
             }
 
-
             var result = await _blogService.Create(model);
-
             if (result.Status == Status.Success)
                 return RedirectAndShowAlert(RedirectToAction("Index"), result);
 
@@ -133,7 +132,8 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Blog
             if (model.CategoryId < 1)
             {
                 ModelState.AddModelError(nameof(model.CategoryId), ErrorMessages.FieldIsRequired);
-            }
+               
+			}
 
             if (!ModelState.IsValid)
             {
@@ -150,7 +150,10 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Blog
                 return RedirectAndShowAlert(RedirectToAction("Index"), result);
 
             ErrorAlert(result.Message);
-            return View(model);
+            model.Categories = await _blogCategoryQuery.GetAllCategoriesAsSelectList();
+            if (model.SubCategoryId > 0)
+	            model.SubCategories = await _blogCategoryQuery.GetSubCategoriesAsSelectList(model.CategoryId);
+			return View(model);
 
         }
 

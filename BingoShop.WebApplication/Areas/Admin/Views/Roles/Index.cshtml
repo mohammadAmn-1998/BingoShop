@@ -84,7 +84,7 @@
 
 													<li>
 														@((userRole.User.FullName == "" ? userRole.User.UserName : userRole.User.FullName))
-														<a class=" btn btn-primary" asp-controller="Users" asp-route-q="@userRole.User.Mobile.Trim()">دیدن کاربر</a>
+														<a class=" btn btn-primary" asp-controller="Users" asp-route-q="@userRole.User.Mobile.Trim()"> <i class="fa fa-user"></i></a>
 													</li>
 
 												}

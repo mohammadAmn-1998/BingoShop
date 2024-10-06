@@ -4,188 +4,200 @@
 @{
 	ViewData["Title"] = "مدیریت کامنت ها";
 	ViewData["Selected"] = "Comments";
-	
+	var counter = Model.Skip +1;
 }
-<form class="form-inline ml-3  float-sm"
-	  action="/admin/Comments" method="get">
-	<div class="input-group input-group-sm " style=" display: flex;
-	                                                align-items: center; width: 300px; margin-right: 400px; padding : 10px">
-	
-		<input type="hidden" value="1" name="pageId"/> 
-		<input type="hidden" value="10" name="take"/>
-		<input class="form-control " type="search" placeholder="جستجو کنید..." aria-label="Search" name="q" value="@Model?.FilterParams.Title">
-		<button class="btn btn-sm btn-success " style="margin-right: 6px" type="submit">
-			<i class="fa fa-search">جستجو</i>
-		</button>
-		<div class="input-group-append ">
-		</div>
-	</div>
-	<hr>
-	<div class="form-control">
-	
-		<label>بخش کامنت را انتخاب کنید</label>
-		@* <select  asp-for="CommentFor"> *@
-		@* 	@foreach (var commentFor in Enum.GetValues(typeof(CommentStatus)).Cast<CommentStatus>()) *@
-		@* 	{ *@
-		@* 		<option value="@commentFor">@commentFor.ToString().Replace("-", " ")</option> *@
-		@* 	} *@
-		@* </select> *@
-		
-		@Html.EditorFor(x=> x.CommentFor)
-	</div>
-	<div class="form-control" >
-		<label>وضعیت کامنت را انتخاب کنید</label>
-	@* <select   asp-for="CommentStatus" > *@
-	@* 	@foreach (var commentStatus in Enum.GetValues(typeof(CommentFor)).Cast<CommentFor>()) *@
-	@* 	{ *@
-	@* 		<option value="@commentStatus">@commentStatus.ToString().Replace("-", " ")</option> *@
-	@* 	} *@
-	@* </select> *@
-	
-		
-	@Html.EditorFor(x=> x.CommentStatus)
-	</div>
-	<br/>
-	
-	
-</form>
-
-<br>
 <div class="row">
-</div>
-<hr>
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<div>
+					<form class="form-inline ml-3  float-sm" asp-controller="Comments" asp-action="Index" method="get">
+					
+                        <input type="hidden" value="1" name="pageId"/> 
+                        <input type="hidden" value="10" name="take"/>
+                        @if (Model.OwnerId != null && Model.OwnerId > 0)
+                        {
+                            <input type="hidden" value="@Model,OwnerId" name="ownerId"/>
+                    
+                        }
 
-<div class="table-responsive-md">
-	<table class="table table-bordered text-sm table-sm  table-hover ">
+                        <div class="form-control">
+                    
+                        <label>بخش کامنت را انتخاب کنید</label>
+	                    @Html.EditorFor(x=> x.CommentFor)
+                    </div>
+                        <div class="form-control" >
+	                        <label>وضعیت کامنت را انتخاب کنید</label>
+	                        @Html.EditorFor(x=> x.CommentStatus)
+                        </div>
+						
+                        <input class="form-control " type="search" placeholder="جستجو کنید..." aria-label="Search" name="q" value="@Model?.FilterParams.Title">
+                        <button class="btn btn-sm btn-primary " type="submit">
+	                        <i class="fa fa-search">جستجو</i>
+                        </button>
+					</form>
 
-		<thead class="">
+				</div>
 
-			<tr>
-				<th class="">#</th>
-				<th class="col-2">نام</th>
-				<th class="col-2">ایمیل</th>
-				<th class="col-2">تاریخ ایجاد</th>
-				<th class="col-2">متن</th>
-				<th class="col-2">کامنت پدر</th>
-				<th class="col-2"> کامنت های جواب</th>
-				<th class="col-1">نوع کامنت</th>
-				<th class="col-1">وضعیت</th>
-				<th class="col-4">عملیات</th>
-			</tr>
-
-		</thead>
-		<tbody>
-
-			@if (Model?.Comments != null && Model.Comments.Any())
-			{
-				@foreach (var comment in Model.Comments)
-				{
-					<tr>
-						<td>@comment.Id</td>
-
-						<td>
-							@comment.FullName
-							@if (comment.UserId < 1)
-							{
-								<i class="text-info">(عضو نیست!)</i>
-							}
-							else
-							{
-								<i class="text-primary">(عضو است )</i>
-							}
-						</td>
-						<td>
-							@((comment.Email ?? "ننوشته"))
-						</td>
-						<td>
-							@comment.CreateDate 
-						</td>
-
-						<td>
-							@comment.Text
-						</td>
-						<td>
-							@if (comment.ParentComment != null)
-							{
-								<i class="text-primary">دارد</i>
-								<a class="btn btn-primary mr-2" asp-action="Detail" asp-route-id="@comment.ParentComment.Id">جزییات</a>
-							}
-							else
-							{
-								<i class="text-danger">ندارد</i>
-							}
-						</td>
-						<td>
-							@if (comment.ChildComments != null && comment.ChildComments.Any())
-							{
-								<ul>
-									@foreach (var child in comment.ChildComments)
-									{
-										<li>
-											@child.Text.ToShortText()
-											<a class="btn btn-primary mr-2" asp-action="Detail" asp-route-id="@child.Id">جزییات</a>
-										</li>
-									}
-								</ul>
-
-							}
-							else
-							{
-								<i class="text-danger">ندارد</i>
-							}
-						</td>
-						<td class="mr-3 mt-3">
-							@comment.CommentFor
-						</td>
-
-						<td class="mr-3 mt-3">
-							@if (comment.CommentStatus == CommentStatus.هنوز_دیده_نشده)
-							{
-								<p class="text-info fa-eye" >@comment.CommentStatus.ToString().Replace("-"," ")</p>
-							}
-							else if (comment.CommentStatus == CommentStatus.رد_شده)
-							{
-								<p class="text-danger fa-cross">@comment.CommentStatus.ToString().Replace("-", " ")</p>
-							}
-							else if (comment.CommentStatus == CommentStatus.قبول_شده)
-							{
-								<p class="text-success fa-check">@comment.CommentStatus.ToString().Replace("-", " ")</p>
-							}
-							
-						</td>
+				<hr/>
+				<div class="row">
+					
+				</div>
 
 
-						<td class="btn-group-sm">
-							
-							@if (comment.CommentStatus == CommentStatus.هنوز_دیده_نشده)
-							{
-								<a class="btn   btn-success mr-1" asp-action="ChangeStatus" asp-route-id="@comment.Id">
-									تعیین وضعیت
-								</a>
-							}
-							else
-							{
-								<a class="btn   btn-primary mr-1" asp-action="ChangeStatus" asp-route-id="@comment.Id">
-									تغییر وضعیت
-								</a>
-							}
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body">
+				<div class="table-responsive-md">
+					<div class="table-responsive-md">
+						
+                        <div class="table-responsive-md">
+                            <table class="table table-bordered text-sm table-sm  table-hover ">
+                        
+                                <thead class="">
+                        
+                                    <tr>
+                                        <th class="">#</th>
+                                        <th class="col-2">نام</th>
+                                        <th class="col-2">ایمیل</th>
+                                        <th class="col-2">تاریخ ایجاد</th>
+                                        <th class="col-2">متن</th>
+                                        <th class="col-2">کامنت پدر</th>
+                                        <th class="col-2"> کامنت های جواب</th>
+                                        <th class="col-1">نوع کامنت</th>
+                                        <th class="col-1">وضعیت</th>
+                                        <th class="col-4">عملیات</th>
+                                    </tr>
+                        
+                                </thead>
+                                <tbody>
+                        
+                                    @if (Model?.Comments != null && Model.Comments.Any())
+                                    {
+                                        @foreach (var comment in Model.Comments)
+                                        {
+                                            <tr>
+                                                <td>@(counter++)</td>
+                        
+	                                            <td>
+		                                            <b>@comment.FullName</b>
+		                                            <br/>
+		                                            @if (comment.UserId < 1)
+		                                            {
+			                                            <i class="text-info">(عضو نیست!)</i>
+		                                            }
+		                                            else
+		                                            {
+			                                            <i class="text-success">(عضو است )</i>
+		                                            }
+	                                            </td>
+                                                <td>
+                                                    @((comment.Email ?? "ننوشته"))
+                                                </td>
+                                                <td>
+                                                    @comment.CreateDate 
+                                                </td>
+                        
+                                                <td>
+													@comment.Text.ToShortText()
+                                                </td>
+                                                <td>
+                                                    @if (comment.ParentComment != null)
+                                                    {
+                                                        <i class="text-primary">دارد</i>
+                                                        <a title="دیدن جزییات" class="btn btn-sm btn-info mr-2" asp-action="Detail" asp-route-id="@comment.ParentComment.Id"><i class="fa fa-info"></i></a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="text-danger">ندارد</i>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @if (comment.ChildComments != null && comment.ChildComments.Any())
+                                                    {
+                                                        <ul>
+                                                            @foreach (var child in comment.ChildComments)
+                                                            {
+                                                                <li>
+                                                                    @child.Text.ToShortText()
+																	<a class="btn btn-sm btn-info mr-2" asp-action="Detail" asp-route-id="@child.Id"><i class="fa fa-info"></i></a>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                        
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="text-danger">ندارد</i>
+                                                    }
+                                                </td>
+                                                <td class="mr-3 mt-3">
+                                                    @comment.CommentFor
+                                                </td>
+                        
+                                                <td class="mr-3 mt-3">
+                                                    @if (comment.CommentStatus == CommentStatus.هنوز_دیده_نشده)
+                                                    {
+														<i class="fa fa-eye"></i>
 
-						</td>
-					</tr>
+														<i class="text-bold">	@comment.CommentStatus.ToString().Replace("_", " ")</i>
 
+													
+                                                    }
+                                                    else if (comment.CommentStatus == CommentStatus.رد_شده)
+                                                    {
+														<i class="fa fa-cross"></i>
 
-				}
-			}
-			else
-			{
-				<h1>چیزی برای نمایش وجود ندارد...</h1>
-			}
+														<i class="text-danger text-bold">@comment.CommentStatus.ToString().Replace("_", " ")</i>
+                                                    }
+                                                    else if (comment.CommentStatus == CommentStatus.قبول_شده)
+                                                    {
+														<i class="fa fa-check"></i>
 
-		</tbody>
-	</table>
-</div>
+														<i class="text-success text-bold">@comment.CommentStatus.ToString().Replace("_", " ")</i>
+                                                    }
+                                                    
+                                                </td>
+                        
+                        
+                                                <td class="btn-group-sm">
+                                                    
+                                                    @if (comment.CommentStatus == CommentStatus.هنوز_دیده_نشده)
+                                                    {
+                                                        <a class="btn   btn-success mr-1" asp-action="ChangeStatus" asp-route-id="@comment.Id">
+                                                            تعیین وضعیت
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a class="btn   btn-primary mr-1" asp-action="ChangeStatus" asp-route-id="@comment.Id">
+                                                            تغییر وضعیت
+                                                        </a>
+                                                    }
+                        
+                                                </td>
+                                            </tr>
+                        
+                        
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <h1>چیزی برای نمایش وجود ندارد...</h1>
+                                    }
+                        
+                                </tbody>
+                            </table>
+                        </div>
+                        
+					</div>
 
-@if (Model?.TotalPages > 1)
+				</div>
+
+				<div class=" text-start">
+					
+					
+                    @if (Model?.TotalPages > 1)
 {
 	<div class="row">
 		<ul class="pagination pagination-sm " style="margin-right: 500px">
@@ -206,3 +218,8 @@
 	</div>
 
 }
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

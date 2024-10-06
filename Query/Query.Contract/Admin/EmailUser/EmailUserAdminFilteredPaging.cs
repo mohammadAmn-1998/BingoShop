@@ -10,4 +10,6 @@ public class EmailUserAdminFilteredPaging : BasePagination
 
 	public List<EmailUserAdminQueryModel> Emails { get; set; }
 
+	
+
 }

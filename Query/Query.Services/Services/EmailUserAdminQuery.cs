@@ -34,9 +34,10 @@ namespace Query.Services.Services
 				EmailUserAdminFilteredPaging model = new();
 				model.GetBasePagination(result,filterParams.PageId,filterParams.Take);
 				model.FilterParams = filterParams;
+				
 				model.Emails = new();
 
-				if(result != null)
+				if(result != null && result.Any())
 					model.Emails = await result.Skip(model.Skip).Take(model.Take).OrderByDescending(x => x.CreateDate)
 					.Select(x => new EmailUserAdminQueryModel
 					{

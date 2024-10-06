@@ -44,7 +44,7 @@ namespace Query.Services.Services
 				model.MessageStatus = messageStatus;
 				model.Messages = new();
 
-				if (result != null)
+				if (result != null && result.Any())
 					model.Messages = await result.Skip(model.Skip).Take(model.Take).OrderByDescending(x => x.CreateDate)
 						.Select(x => new MessageUserAdminQueryModel
 						{

@@ -14,33 +14,38 @@
 				<div class="box-header">
 				</div>
 				<div class="box-body">
-					<hr />
+					
 
 					<dl class="dl-horizontal">
-
+						<hr/>
 						<dt>
-							عنوان
+							عنوان :
 						</dt>
 						<dd>
 							@Model.Title
 						</dd>
+						<hr />
+
 						<dt>
-							تاریخ نوشته شدن ایمیل
+							تاریخ نوشته شدن ایمیل :
 						</dt>
 						<dd>
 							@Model.CreateDate
 						</dd>
+						<hr />
+
 						<dt>
-							متن کامل
+							متن کامل :
 						</dt>
 						<dd>
 							@Html.Raw(@Model.Text)
 						</dd>
-						
+						<hr/>
+
 					</dl>
 				</div>
 				<hr/>
-				<a class="btn btn-danger" asp-action="Index">بازگشت</a>
+				<a class="btn btn-danger col-lg-6 "style="margin-right : 10px" asp-action="Index">بازگشت</a>
 			</div>
 		</div>
 		

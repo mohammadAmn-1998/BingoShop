@@ -17,58 +17,61 @@
 
 </div>
 <hr>
+<div class="box">
+	<div class="box-body">
+		<div class="table-responsive-md">
+			<table class="table table-bordered text-sm table-sm  table-hover  table-striped">
 
-<div class="table-responsive-md">
-	<table class="table table-bordered text-sm table-sm  table-hover ">
+				<thead class="">
 
-		<thead class="">
-
-			<tr>
-				<th class="col-2">#</th>
-				<th class="col-2"> نام استان </th>
-				<th class="col-2">تعداد شهر ها</th>
-				<th class="col-2">استان های همجوار</th>
-				<th class="col-4">عملیات</th>
+				<tr>
+					<th class="col-2">#</th>
+					<th class="col-2"> نام استان </th>
+					<th class="col-2">تعداد شهر ها</th>
+					<th class="col-2">استان های همجوار</th>
+					<th class="col-4">عملیات</th>
 				
-			</tr>
+				</tr>
 
-		</thead>
-		<tbody>
+				</thead>
+				<tbody>
 
-			@if (Model.Any())
-			{
-				@foreach (var state in Model)
+				@if (Model.Any())
 				{
-					<tr>
-						<td>@state.Id</td>
-						<td>@state.Title</td>
+					@foreach (var state in Model)
+					{
+						<tr>
+							<td>@state.Id</td>
+							<td>@state.Title</td>
 
-						<td>@state.CityCount
-							<a class="btn   btn-info mr-1" asp-controller="Cities" asp-action="Index" asp-route-id="@state.Id">
-								دیدن شهر ها
-							</a>
+							<td>@state.CityCount
+								<a class="btn  btn-sm btn-info mr-1" asp-controller="Cities" asp-action="Index" asp-route-id="@state.Id">
+									شهر ها
+								</a>
 							</td>
-						<td>@state.CloseStates.Replace("-",",")</td>
-						<td>
+							<td>@state.CloseStates.Replace("-",",")</td>
+							<td>
 							
-							<a class="btn   btn-primary mr-1" asp-action="Edit" asp-route-id="@state.Id">
-								ویرایش
-							</a>
+								<a class="btn   btn-warning mr-1" asp-action="Edit" asp-route-id="@state.Id">
+									<i class="fa fa-edit"></i>
+								</a>
 							
 
-						</td>
+							</td>
 
 
-					</tr>
+						</tr>
 
 
+					}
 				}
-			}
-			else
-			{
-				<h1>چیزی برای نمایش وجود ندارد...</h1>
-			}
+				else
+				{
+					<h1>چیزی برای نمایش وجود ندارد...</h1>
+				}
 
-		</tbody>
-	</table>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>

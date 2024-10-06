@@ -293,3 +293,25 @@ function ajaxSweetAlertRefresh(title,text,confirmText,cancelText,url) {
     });
 
 }
+
+function sweetAlertConfirm(title, text, confirmText, cancelText, event) {
+
+    event.preventDefault();
+
+    Swal.fire({
+            title: title,
+            text: text,
+            icon: "warning",
+            confirmButtonText: confirmText,
+            showCancelButton: true,
+            cancelButtonText: cancelText,
+    }).then((willConfirm) => {
+        if (willConfirm.value) {
+            window.location.href = event.target.href;
+        } else {
+            return;
+        }
+    });
+
+
+}

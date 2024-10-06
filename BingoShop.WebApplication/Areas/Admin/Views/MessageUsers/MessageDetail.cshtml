@@ -24,60 +24,80 @@
 						@if (string.IsNullOrEmpty(Model.UserName))
 						{
 							<p>@Model.UserName</p>
+							<a href="#" class="btn btn-info"><i class="fa fa-user"></i></a>
 						}
 						else
 						{
 							<p>کاربر سایت نیست</p>
 						}
 					</dd>
+					<hr/>
 					<dt>
 						وضعیت
 					</dt>
 					<dd>
 						@Model.Status.ToString().Replace("_"," ")
 					</dd>
+						<hr />
+
 					<dt>
 						نام کامل
 					</dt>
 					<dd>
 						@Html.DisplayFor(model => model.UserName)
 					</dd>
+						<hr />
+
 					<dt>
 						موضوع پیام
 					</dt>
 					<dd>
 						@Html.DisplayFor(model => model.Subject)
 					</dd>
+						<hr />
+
 					<dt>
 						شماره تماس
 					</dt>
 					<dd>
 						@Html.DisplayFor(model => model.PhoneNumber)
 					</dd>
+						<hr />
+
 					<dt>
 						ایمیل
 					</dt>
 					<dd>
 						@Html.DisplayFor(model => model.Email)
 					</dd>
+						<hr />
+
 					<dt>
 						تاریخ ثبت
 					</dt>
 					<dd>
 						@Html.DisplayFor(model => model.CreateDate)
 					</dd>
+						<hr />
+
 					<dt>
 						متن پیام
 					</dt>
 					<dd>
 						@Html.DisplayFor(model => model.Message)
 					</dd>
+						<hr />
+
 					<dt>
 						متن پاسخ در  sms
 					</dt>
+						<hr />
+
 					<dd>
 						@Html.DisplayFor(model => model.AnswerSms)
 					</dd>
+						<hr />
+
 					<dt>
 						متن پاسخ در  ایمیل
 					</dt>

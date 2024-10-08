@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	@await Component.InvokeAsync("FavIcon")
 	<title>@ViewData["Title"]</title>
 	<partial name="_Css"/>
 
@@ -13,9 +14,8 @@
 
 <body class="index-page sidebar-collapse">
 
-<div class="loading">
-	<img src="/assets/images/loading.svg" alt="loading..." />
-</div>
+<partial name="_Loading"/>
+
 <partial name="_HeaderResponsive" />
 
 <div class="wrapper default">

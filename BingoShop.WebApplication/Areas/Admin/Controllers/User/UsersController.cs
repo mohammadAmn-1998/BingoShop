@@ -9,7 +9,7 @@ using ControllerBase = BingoShop.WebApplication.Controllers.ControllerBase;
 namespace BingoShop.WebApplication.Areas.Admin.Controllers.User
 {
 	[Area("Admin")]
-	[RequiredPermission(UserPermission.AdminPanel)]
+	[RequiredPermission(UserPermission.پنل_کاربران)]
 	public class UsersController : ControllerBase
 	{
 		private readonly IUserQuery _userQuery;

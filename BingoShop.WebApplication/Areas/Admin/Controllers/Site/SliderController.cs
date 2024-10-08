@@ -12,7 +12,7 @@ using ControllerBase = BingoShop.WebApplication.Controllers.ControllerBase;
 namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 {
 	[Area("Admin")]
-	[RequiredPermission(UserPermission.AdminPanel)]
+	[RequiredPermission(UserPermission.پنل_بنرها)]
 	public class SliderController : ControllerBase
 	{
 		private readonly ISliderQuery _SliderQuery;

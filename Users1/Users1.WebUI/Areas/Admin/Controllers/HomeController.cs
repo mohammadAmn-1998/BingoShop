@@ -10,7 +10,7 @@ using ControllerBase = Users1.WebUI.Controllers.ControllerBase;
 namespace Users1.WebUI.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[RequiredPermission(UserPermission.AdminPanel)]
+	[RequiredPermission(UserPermission.پنل_ادمین)]
 	public class HomeController : ControllerBase
 	{
 

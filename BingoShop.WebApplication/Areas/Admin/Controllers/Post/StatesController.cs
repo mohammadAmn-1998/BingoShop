@@ -9,7 +9,7 @@ using ControllerBase = BingoShop.WebApplication.Controllers.ControllerBase;
 namespace BingoShop.WebApplication.Areas.Admin.Controllers.Post
 {
 	[Area("Admin")]
-	[RequiredPermission(UserPermission.AdminPanel)]
+	[RequiredPermission(UserPermission.پنل_پست_ها)]
 	public class StatesController : ControllerBase
 	{
 		private readonly IStateQuery _stateQuery;

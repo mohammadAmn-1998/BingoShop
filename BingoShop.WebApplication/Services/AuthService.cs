@@ -100,6 +100,9 @@ namespace BingoShop.WebApplication.Services
 			{
 				var userId = HttpContext?.User.Claims.Single(x => x.Type == "user_id").Value;
 
+				if (userId == null)
+					return 0;
+
 				return int.Parse(userId!);
 
 			}

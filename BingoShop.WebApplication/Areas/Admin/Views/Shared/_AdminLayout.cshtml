@@ -17,8 +17,21 @@
 	
 
 	<div class="content-wrapper">
-		
-		<h2 class="display-2 " style="margin-right: 10px">@ViewData["Title"]</h2>
+
+			<section class="content-header ">
+				
+				<div class="align-items-center">
+					
+					<h2 class="display-2 " style="margin-right: 10px">@ViewData["Title"]</h2>
+
+					<ol class="breadcrumb">
+						<li><a href="/"><i class="fa fa-dashboard"></i> خانه</a></li>
+						<li class="active">@ViewData["Title"]</li>
+					</ol>
+
+				</div>
+					
+			</section>
 
 		@await RenderSectionAsync("HeaderContent", false)
 

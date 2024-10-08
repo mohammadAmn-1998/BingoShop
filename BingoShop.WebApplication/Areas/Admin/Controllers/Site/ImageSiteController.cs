@@ -12,7 +12,7 @@ using ControllerBase = BingoShop.WebApplication.Controllers.ControllerBase;
 namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 {
 	[Area("Admin")]
-	[RequiredPermission(UserPermission.AdminPanel)]
+	[RequiredPermission(UserPermission.پنل_ادمین)]
 	public class ImageSiteController : ControllerBase
 	{
 		private readonly IImageSiteQuery _ImageSiteQuery;

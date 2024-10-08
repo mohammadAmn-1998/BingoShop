@@ -230,7 +230,7 @@ namespace Shared.Application.Utility
 		public const string SiteSettingImageDirectory400 = "wwwroot/assets/images/site_setting_img400";
 
 
-		public static string GeLogoImageFullPath(string? imageName, int? imageSize)
+		public static string GetLogoImageFullPath(string? imageName, int? imageSize)
 		{
 
 			if (imageName is "Default.png" or " " or null)

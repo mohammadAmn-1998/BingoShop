@@ -11,6 +11,6 @@ public interface IAuthService
 	string GetUserFullName();
 	int GetUserId();
 	bool Logout();
-
+	
 	string GetUserAvatar();
 }

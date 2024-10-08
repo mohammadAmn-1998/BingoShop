@@ -14,7 +14,7 @@ using ControllerBase = BingoShop.WebApplication.Controllers.ControllerBase;
 namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 {
 	[Area("Admin")]
-	[RequiredPermission(UserPermission.AdminPanel)]
+	[RequiredPermission(UserPermission.پنل_ادمین)]
 	public class SiteSettingController : ControllerBase
 	{
 		private readonly ISiteSettingQuery _SiteSettingQuery;

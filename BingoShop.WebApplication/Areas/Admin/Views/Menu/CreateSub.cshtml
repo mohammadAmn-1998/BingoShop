@@ -23,7 +23,7 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="Number"></label>
-                                <input class="form-control" asp-for="Number">
+                                <input class="form-control" min="1" asp-for="Number">
                                 <span class="text-danger" asp-validation-for="Number"></span>
                             </div>
                                 @if (Model.ParentStatus == MenuStatus.منوی_وبلاگ_با_زیر_منوی_عکس_دار)

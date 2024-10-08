@@ -13,7 +13,7 @@ using ControllerBase = BingoShop.WebApplication.Controllers.ControllerBase;
 namespace BingoShop.WebApplication.Areas.Admin.Controllers.Blog
 {
     [Area("Admin")]
-    [RequiredPermission(UserPermission.AddBlog)]
+    [RequiredPermission(UserPermission.پنل_مقالات)]
     public class BlogsController : ControllerBase
     {
         private readonly IBlogQuery _blogQuery;

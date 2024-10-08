@@ -12,7 +12,7 @@ using ControllerBase = BingoShop.WebApplication.Controllers.ControllerBase;
 namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 {
 	[Area("Admin")]
-	[RequiredPermission(UserPermission.AdminPanel)]
+	[RequiredPermission(UserPermission.پنل_ادمین)]
 	public class MenuController : ControllerBase
 	{
 		private readonly IMenuQuery _MenuQuery;
@@ -24,9 +24,9 @@ namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 			_MenuApplication = MenuApplication;
 		}
 
-		public async Task<IActionResult> Index(int parentId = 0)
+		public async Task<IActionResult> Index(int id = 0)
 		{
-			var model =  await _MenuQuery.GetForAdmin(parentId);
+			var model =  await _MenuQuery.GetForAdmin(id);
 
 			return View(model);
 		}

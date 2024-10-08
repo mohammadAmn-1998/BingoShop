@@ -9,9 +9,9 @@
 <br>
 <div class="row">
 	<div class=" col-lg-3"></div>
-	<a class="btn   btn-primary mt-5 col-lg-6 " asp-action ="Create"
-	>
-		افزودن بنر جدید
+	<a class="btn   btn-success mt-5 col-lg-6 " asp-action ="Create"
+	><i class="fa fa-plus"></i>
+		 بنر جدید
 	</a>
 	<div class=" col-lg-3"></div>
 
@@ -56,7 +56,10 @@
 							@baner.CreationDate
 						</td>
 						<td>
-							<a title="@baner.Url" href="@baner.Url">@baner.Url</a>
+						
+							
+							<input class="form-control" readonly
+							       value="@baner.Url">
 						</td>
 						<td>
 								@baner.State.ToString()

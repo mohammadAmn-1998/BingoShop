@@ -29,6 +29,9 @@ internal class SiteSettingApplication : ISiteSettingApplication
 	        return new(Status.BadRequest, ErrorMessages.BadRequestError);
         var logoName = site.LogoName;
         var oldLogoName = site.LogoName;
+        if (!string.IsNullOrEmpty(command.LogoAlt))
+	        command.LogoAlt = command.LogoAlt.Trim().Replace(" ", "_");
+	        
         if (command.LogoFile != null)
         {
             if (!command.LogoFile.IsImage()) return new(Status.BadRequest, ErrorMessages.IsNotImage, nameof(command.LogoFile));
@@ -50,8 +53,8 @@ internal class SiteSettingApplication : ISiteSettingApplication
 			if (logoName == null)
                 return new(Status.InternalServerError, ErrorMessages.InternalServerError, nameof(command.FavIconFile));
             _fileService.ResizeImage( Directories.SiteSettingImageDirectory,favIconName, 64);
-            _fileService.ResizeImage( Directories.SiteSettingImageDirectory, favIconName, 32);
-            _fileService.ResizeImage( Directories.SiteSettingImageDirectory, favIconName,16);
+            _fileService.ResizeImage(favIconName, Directories.SiteSettingImageDirectory, 32);
+            _fileService.ResizeImage( favIconName, Directories.SiteSettingImageDirectory,16);
         }
         site.Edit(command.Instagram, command.WhatsApp, command.Telegram, command.Youtube, logoName,
             command.LogoAlt, favIconName, command.Enamad, command.SamanDehi, command.SeoBox,

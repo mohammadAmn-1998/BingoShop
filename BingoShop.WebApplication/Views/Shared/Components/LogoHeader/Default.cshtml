@@ -1,0 +1,11 @@
+﻿@using Shared.Application.Utility
+@model Site.Application.Contract.SiteSettingApplication.Query.LogoForUiQueryModel
+
+@if(!string.IsNullOrEmpty(Model.LogoName))
+{
+    <div class="logo-area default">
+        <a href="/">
+			<img src="@Directories.GetLogoImageFullPath(Model.LogoName,100)" @(string.IsNullOrEmpty(Model.LogoAlt) ? "" : $"alt={Model.LogoAlt}")>
+        </a>
+    </div>
+}

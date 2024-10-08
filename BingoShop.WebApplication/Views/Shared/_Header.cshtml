@@ -1,10 +1,21 @@
-﻿@* @inject Shared.Application.Services.Auth.IAuthService _auth; *@
+﻿@using Users1.Application.Contract.UserService.Query
+@using Shared.Domain.Enums
+ @inject Shared.Application.Services.IAuthService _auth;
+@inject IUserQuery _userQuery;
+@{
+	List<UserPermission> userPermissions = new();
+	var userId = _auth.GetUserId();
+	if (userId > 0)
+	{
+		userPermissions = _userQuery.GetUserPermissionsById(userId);
+	}
+}
 <header class="main-header default">
     <div class="container">
         <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-4 col-5">
 
-                @* @await Component.InvokeAsync("LogoHeader") *@
+                 @await Component.InvokeAsync("LogoHeader")  
                
             </div>
             <div class="col-lg-6 col-md-5 col-sm-8 col-7">
@@ -45,65 +56,114 @@
                             </li>
                         </ul>
                         <div class="localSearchSimple"></div>
-                        <button type="submit"><img src="/Assets/img/search.png" alt=""></button>
+                        <button type="submit"><img src="/assets/site/img/search.png" alt=""></button>
                     </form>
                 </div>
             </div>
             <div class="col-md-4 col-sm-12">
                 <div class="user-login dropdown">
-                    @* @if (_auth.IsUserLogin()) *@
-                    @* { *@
-                    @*     <a href="#" class="btn btn-neutral dropdown-toggle" data-toggle="dropdown" *@
-                    @*        id="navbarDropdownMenuLink1"> *@
-                    @*         داشبرد کاربر *@
-                    @*     </a> *@
-                    @*     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1"> *@
-                    @*         <div class="dropdown-item"> *@
-                    @*             <a class="btn btn-info" asp-area="UserPanel" asp-controller="Home" asp-action="Index">پنل کاربری</a> *@
-                    @*         </div> *@
-                    @*         <div class="dropdown-item font-weight-bold"> *@
-                    @*             <span>کاربر جدید هستید؟</span> <a class="register" href="#">ثبت‌نام</a> *@
-                    @*         </div> *@
-                    @*         <hr> *@
-                    @*         <div class="dropdown-item"> *@
-                    @*             <a href="#" class="dropdown-item-link"> *@
-                    @*                 <i class="now-ui-icons users_single-02"></i> *@
-                    @*                 پروفایل *@
-                    @*             </a> *@
-                    @*         </div> *@
-                    @*         <div class="dropdown-item"> *@
-                    @*             <a asp-area="" asp-controller="Auth" asp-action="Logout" class="dropdown-item-link"> *@
-                    @*                 <i class="now-ui-icons shopping_bag-16"></i> *@
-                    @*                 خروج از سایت *@
-                    @*             </a> *@
-                    @*         </div> *@
-                    @*     </ul> *@
-                    @* } *@
-                    @* else *@
-                    @* { *@
-                    @*     <a href="#" class="btn btn-neutral dropdown-toggle" data-toggle="dropdown" *@
-                    @*        id="navbarDropdownMenuLink1"> *@
-                    @*         ورود / ثبت نام *@
-                    @*     </a> *@
-                    @*     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1"> *@
-                    @*         <div class="dropdown-item"> *@
-                    @*             <a class="btn btn-info" asp-area="" asp-controller="Auth" asp-action="Login">ورود به سایت</a> *@
-                    @*         </div> *@
-                    @*         <hr> *@
-                    @*         <div class="dropdown-item"> *@
-                    @*             <a href="#" class="dropdown-item-link"> *@
-                    @*                 <i class="now-ui-icons users_single-02"></i> *@
-                    @*                 پروفایل *@
-                    @*             </a> *@
-                    @*         </div> *@
-                    @*         <div class="dropdown-item"> *@
-                    @*             <a href="#" class="dropdown-item-link"> *@
-                    @*                 <i class="now-ui-icons shopping_bag-16"></i> *@
-                    @*                 پیگیری سفارش *@
-                    @*             </a> *@
-                    @*         </div> *@
-                    @*     </ul> *@
-                    @* } *@
+                    @if (_auth.GetUserId() > 0)
+                    {
+                        <a href="#" class="btn btn-neutral dropdown-toggle" data-toggle="dropdown"
+                           id="navbarDropdownMenuLink1">
+                            داشبرد کاربر
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+	                        <div class="dropdown-item">
+		                        <a class="btn btn-info"  asp-controller="Home" asp-action="Index">پنل کاربری</a>
+	                        </div>
+							@if (userPermissions.Any())
+							{
+								if (userPermissions.Any(x => x == UserPermission.پنل_ادمین))
+								{
+									<div class="dropdown-item">
+								
+							<a class="btn btn-info" asp-area="Admin"  asp-controller="Home" asp-action="Index"> پنل مدیریت</a>
+									</div>
+								}
+								else if(userPermissions.Any(x=> x == UserPermission.پنل_مقالات))
+								{
+									
+									<div class="dropdown-item">
+								
+										<a class="btn btn-info" asp-area="Admin"  asp-controller="Blogs" asp-action="Create"> پنل نویسنده</a>
+									</div>
+
+								}else if (userPermissions.Any(x => x == UserPermission.پنل_کامنت_ها))
+								{
+									<div class="dropdown-item">
+
+										<a class="btn btn-info" asp-area="Admin" asp-controller="Comments" asp-action="Index"> پنل کامنت ها</a>
+									</div>
+								}
+							}
+							else if (userPermissions.Any(x => x == UserPermission.پنل_سئو))
+							{
+								<div class="dropdown-item">
+
+									<a class="btn btn-info" asp-area="Admin" asp-controller="Seo" asp-action="Index"> پنل کامنت ها</a>
+								</div>
+							}
+							else if (userPermissions.Any(x => x == UserPermission.پنل_خبرنامه))
+							{
+								<div class="dropdown-item">
+
+									<a class="btn btn-info" asp-area="Admin" asp-controller="MessageUsers" asp-action="Index"> پنل خبرنامه </a>
+								</div>
+							}
+							else if (userPermissions.Any(x => x == UserPermission.پنل_کاربران))
+							{
+								<div class="dropdown-item">
+
+									<a class="btn btn-info" asp-area="Admin" asp-controller="MessageUsers" asp-action="Index"> پنل کاربران سایت </a>
+								</div>
+							}
+							}
+	                        
+	                    
+                            <div class="dropdown-item font-weight-bold">
+                                <span>کاربر جدید هستید؟</span> <a class="register" href="#">ثبت‌نام</a>
+                            </div>
+                            <hr>
+                            <div class="dropdown-item">
+                                <a href="#" class="dropdown-item-link">
+                                    <i class="now-ui-icons users_single-02"></i>
+                                    پروفایل
+                                </a>
+                            </div>
+                            <div class="dropdown-item">
+                                <a asp-area="" asp-controller="Account" asp-action="Logout" class="dropdown-item-link">
+                                    <i class="now-ui-icons shopping_bag-16"></i>
+                                    خروج از سایت
+                                </a>
+                            </div>
+                        </ul>
+                    }
+                    else
+                    {
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-neutral dropdown-toggle" data-toggle="dropdown"
+                           id="navbarDropdownMenuLink1">
+                            ورود / ثبت نام
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                            <div class="dropdown-item">
+                                <a class="btn btn-info" asp-area="" asp-controller="Account" asp-action="Login">ورود به سایت</a>
+                            </div>
+                            <hr>
+                            <div class="dropdown-item">
+                                <a href="#" class="dropdown-item-link">
+                                    <i class="now-ui-icons users_single-02"></i>
+                                    پروفایل
+                                </a>
+                            </div>
+                            <div class="dropdown-item">
+                                <a href="#" class="dropdown-item-link">
+                                    <i class="now-ui-icons shopping_bag-16"></i>
+                                    پیگیری سفارش
+                                </a>
+                            </div>
+                        </ul>
+                    }
                     
                     
                 </div>
@@ -178,7 +238,7 @@
     </div>
     <nav class="main-menu">
         <div class="container">
-            @* @await Component.InvokeAsync("MenuIndex") *@
+             @await Component.InvokeAsync("MenuIndex") 
             
         </div>
     </nav>

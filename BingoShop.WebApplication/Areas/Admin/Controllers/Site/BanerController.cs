@@ -13,7 +13,7 @@ using ControllerBase = BingoShop.WebApplication.Controllers.ControllerBase;
 namespace BingoShop.WebApplication.Areas.Admin.Controllers.Site
 {
 	[Area("Admin")]
-	[RequiredPermission(UserPermission.AdminPanel)]
+	[RequiredPermission(UserPermission.پنل_بنرها)]
 	public class BanerController : ControllerBase
 	{
 		private readonly IBanerQuery _banerQuery;

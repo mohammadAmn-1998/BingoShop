@@ -38,7 +38,7 @@ namespace Emails.Application.Services
         public OperationResult Create(CreateEmailUser command)
         {
             if (_emailUserRepository.IsExists(e => e.Email.Trim().ToLower() == command.Email.Trim().ToLower()))
-                return new(Status.BadRequest, ErrorMessages.DuplicateError);
+                return new(Status.BadRequest, ErrorMessages.DuplicateEmailAddressError);
             EmailUser emailUser = new(command.Email.Trim().ToLower(), command.UserId);
             if (_emailUserRepository.Insert(emailUser))
                 return new(Status.Success);

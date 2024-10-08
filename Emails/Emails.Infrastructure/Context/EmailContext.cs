@@ -17,11 +17,13 @@ namespace Emails.Infrastructure.Context
         {
             
         }
+		
         public DbSet<EmailUser> EmailUsers { get; set; }
         public DbSet<SendEmail> SendEmails { get; set; }
         public DbSet<MessageUser> MessageUsers { get; set; }
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			
 			modelBuilder.ApplyConfigurationsFromAssembly(typeof(SendEmailConfig).Assembly);
 			base.OnModelCreating(modelBuilder);
 		}

@@ -10,7 +10,7 @@ using ControllerBase = BingoShop.WebApplication.Controllers.ControllerBase;
 namespace BingoShop.WebApplication.Areas.Admin.Controllers.User
 {
     [Area("Admin")]
-    [RequiredPermission(UserPermission.AdminPanel)]
+    [RequiredPermission(UserPermission.پنل_ادمین)]
 
     public class RolesController : ControllerBase
     {

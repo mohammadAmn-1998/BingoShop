@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+#Site Uploaded Images Like Banners And Sliders
+wwwroot/assets/images/*
+

@@ -249,7 +249,6 @@ function deleteCookie(cookieName) {
         });
 }
 
-
 function changeActivation(url, errorTitle, errorText) {
     if (errorTitle == null || errorTitle == "undefined") {
         errorTitle = "عملیات ناموفق";
@@ -336,4 +335,81 @@ function sweetAlertConfirmLink(event, text) {
             return;
         }
     });
+}
+
+
+//success
+//question
+//info
+//warning
+//error
+function AlertSweet(title, message, icon) {
+    Swal.fire(title, message, icon)
+}
+function AlertSweetTimer(title, icon, time) {
+    Swal.fire({
+        position: 'top-end',
+        icon: icon,
+        title: title,
+        showConfirmButton: true,
+        timer: time
+    })
+}
+
+function AddEmailUser() {
+
+    var mail = $("input#inputEmailUser").val();
+    var emailValidate = $("span#inputEmailUserValid");
+
+    if (mail === null || mail === "" || ValidateEmail(mail) === false) {
+
+        emailValidate.text('لطفا ایمیل معتبر وارد کنید!');
+        AlertSweetTimer("عملیات ناموفق", 'error', 3000);
+    } else {
+        Loading();
+        $.ajax({
+            
+            url: "/Home/AddUserEmail",
+            type: 'Post',
+            data: { email: mail },
+            beforeSend: function () {
+                $(".loading").show();
+            },
+            complete: function () {
+                $(".loading").hide();
+            },
+            error: function (data) {
+                ErrorAlert("مشکلی در اعملیات رخ داده", "لطفا در زمان دیگری امتحان کنید");
+            }
+
+        }).done(function(result) {
+
+            if (result.ok ) {
+                AlertSweetTimer("شما عضو خبرنامه شدید!", 'success', 3000);
+                emailValidate.text('');
+                mail.val('');
+            } else {
+                AlertSweetTimer(result.message, 'error', 3000);
+                emailValidate.text(result.message);
+
+            }
+            EndLoading();
+        });
+
+    }
+
+    function ValidateEmail(email) {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailRegex.test(email);
+    }
+
+
+    function Loading() {
+        $(".loading").show();
+    }
+    function EndLoading() {
+        $(".loading").hide();
+    }
+
+  
 }

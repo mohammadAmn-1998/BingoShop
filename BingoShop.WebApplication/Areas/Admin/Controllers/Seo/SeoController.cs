@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BingoShop.WebApplication.Utility;
+using Microsoft.AspNetCore.Mvc;
 using Query.Contract.Admin.Seo;
 using Seos.Application.Contract;
 using Shared.Domain.Enums;
@@ -7,6 +8,7 @@ using ControllerBase = BingoShop.WebApplication.Controllers.ControllerBase;
 namespace BingoShop.WebApplication.Areas.Admin.Controllers.Seo
 {
 	[Area("Admin")]
+	[RequiredPermission(UserPermission.پنل_سئو)]
 	public class SeoController : ControllerBase
 	{
 		private readonly ISeoApplication _seoApplication;

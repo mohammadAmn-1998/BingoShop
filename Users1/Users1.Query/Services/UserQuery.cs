@@ -171,5 +171,49 @@ namespace Users1.Query.Services
 				return new();
 			}
 		}
+
+		public List<UserPermission> GetUserPermissionsById(long userId)
+		{
+			try
+			{
+				List<UserPermission> userPermissions = new();
+				var userRoles = Table<UserRole>().Include(x => x.Role).ThenInclude(x => x.Permissions)
+					.Where(x => x.UserId == userId);
+
+				if (userRoles.Any())
+				{
+					userPermissions = userRoles.SelectMany(x => x.Role.Permissions.Select(p => p.UserPermission)).ToList();
+				}
+
+				return userPermissions;
+
+			}
+			catch (Exception e)
+			{
+				return new();
+			}
+		}
+
+		public List<string> GetUserRolesTitleBy(long userId)
+		{
+			try
+			{
+				List<string> roles = new();
+				var userRoles = Table<UserRole>().Include(x => x.Role)
+					.Where(x => x.UserId == userId);
+
+				if (userRoles.Any())
+				{
+					roles = userRoles.Select(x=> x.Role.Title).ToList();
+				}
+
+				return roles;
+
+			}
+			catch (Exception e)
+			{
+				return new();
+			}
+		}
 	}
 }

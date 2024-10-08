@@ -11,7 +11,7 @@ using IBlogCategoryService = Blogs1.Application.Contract.BlogCategoryService.Com
 namespace BingoShop.WebApplication.Areas.Admin.Controllers.Blog
 {
     [Area("Admin")]
-    [RequiredPermission(UserPermission.AdminPanel)]
+    [RequiredPermission(UserPermission.پنل_ادمین)]
     public class CategoriesController : ControllerBase
     {
 

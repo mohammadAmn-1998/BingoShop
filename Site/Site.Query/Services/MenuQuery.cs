@@ -10,11 +10,12 @@ namespace Site.Query.Services;
 
 internal class MenuQuery : BaseRepository, IMenuQuery
 {
+	private readonly SiteContext _context;
 
 	public MenuQuery(SiteContext context) : base(context)
-    {
-        ;
-    }
+	{
+		_context = context;
+	}
 
     public async Task<MenuPageAdminQueryModel> GetForAdmin(int parentId)
     {
@@ -127,7 +128,7 @@ internal class MenuQuery : BaseRepository, IMenuQuery
     public List<MenuForUi> GetForIndex()
     {
         List<MenuForUi> model = new();
-        var menus = Table<Menu>().Where(b => b.Active &&
+        var menus = _context.Menus.Where(b => b.Active &&
         (b.Status == MenuStatus.منوی_اصلی
         || b.Status == MenuStatus.منوی_اصلی_با_زیر_منو
         ));
@@ -143,7 +144,7 @@ internal class MenuQuery : BaseRepository, IMenuQuery
                 Childs = new(),
                 Status = item.Status
             };
-            if (Table<Menu>().Any(m => m.ParentId == item.Id && m.Active))
+            if (_context.Menus.Any(m => m.ParentId == item.Id && m.Active))
                 menu.Childs = Table<Menu>().Where(m => m.Active && m.ParentId == item.Id)
                 .Select(m => new MenuForUi
                 {

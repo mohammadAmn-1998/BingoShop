@@ -9,7 +9,7 @@ using ControllerBase = BingoShop.WebApplication.Controllers.ControllerBase;
 namespace BingoShop.WebApplication.Areas.Admin.Controllers.Email
 {
 	[Area("Admin")]
-	[RequiredPermission(UserPermission.AddBlog)]
+	[RequiredPermission(UserPermission.پنل_خبرنامه)]
 	public class SendEmailsController : ControllerBase
 	{
 		private readonly ISendEmailAdminQuery _sendEmailAdminQuery;

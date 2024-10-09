@@ -8,13 +8,15 @@
 
 
 	<!-- Css -->
-	<link rel="stylesheet" href="/assets/blog/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/assets/blog/css/bootstrap.min.css" />	
 	<link rel="stylesheet" href="/assets/blog/css/font-icons.css" />
 	<link rel="stylesheet" href="/assets/blog/css/style.css" />
 	<link rel="stylesheet" href="/assets/site/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="/assets/sweet_alert/css/sweetalert2.css">
 	<!-- Favicons -->
-	<link rel="shortcut icon" href="/assets/blog/img/favicon.png">
-	<link rel="apple-touch-icon" href="/assets/blog/img/apple-icon.png">
+	
+	@await Component.InvokeAsync("FavIcon")
+
 
 	<!-- Lazyload (must be placed in head in order to work) -->
 	<script src="assets/blog/js/lazysizes.min.js"></script>

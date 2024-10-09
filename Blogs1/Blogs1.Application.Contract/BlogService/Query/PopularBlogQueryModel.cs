@@ -1,5 +1,7 @@
-﻿namespace Blogs1.Application.Contract.BlogService.Query
-{
+﻿using Blogs1.Application.Contract.BlogCategoryService.Query;
+
+namespace Blogs1.Application.Contract.BlogService.Query;
+
 	public class PopularBlogQueryModel
 	{
 
@@ -15,5 +17,17 @@
 
 		public string ImageAlt { get; set; }
 
+		public long  Likes { get; set; }
+
+		public string Slug { get; set; }
+
+
 	}
+
+public class SpecialBlogForUIQueryModel : PopularBlogQueryModel
+{
+	public BlogCategoryQueryModel Category { get; set; }
+	public BlogCategoryQueryModel? SubCategory { get; set; }
+
+
 }

@@ -4,4 +4,5 @@
 @if(!string.IsNullOrEmpty(Model.FavIcon))
 {
 	<link rel="icon" type="image/png" href="@Directories.GetFavIconImageFullPath(Model.FavIcon,32)">
+	<link rel="apple-touch-icon" href="@Directories.GetFavIconImageFullPath(Model.FavIcon,32)">
 }

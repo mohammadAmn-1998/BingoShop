@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Blogs1.Application.Contract.BlogCategoryService.Query;
 using Blogs1.Application.Contract.BlogService.Query;
 using Blogs1.Domain.BlogAgg;
 using Blogs1.Infrastructure.Context;
@@ -86,7 +87,9 @@ namespace Blogs1.Query.Services
 						Author = x.Author,
 						ImageName = x.ImageName,
 						ImageAlt = x.ImageAlt,
-						CreateDate = x.CreateDate.ConvertToPersianDate()
+						CreateDate = x.CreateDate.ConvertToPersianDate(),
+						Likes = x.Likes,
+						Slug = x.Slug
 					}).ToList();
 
 				
@@ -106,6 +109,50 @@ namespace Blogs1.Query.Services
 					{
 						Id = x.Id,
 						Title = x.Title,
+						Slug = x.Slug
+					}).ToList();
+
+
+			}
+			catch (Exception e)
+			{
+				return new();
+			}
+		}
+
+		public List<SpecialBlogForUIQueryModel> GetSpecialBlogsForUI()
+		{
+			try
+			{
+				return Table<Blog>().Where(x=> x.IsSpecial).Take(4).Select(x =>
+					new SpecialBlogForUIQueryModel()
+					{
+						Id = x.Id,
+						Title = x.Title,
+						ImageName = x.ImageName,
+						Author = x.Author,
+						ImageAlt = x.ImageAlt,
+						Slug = x.Slug,
+						Likes= x.Likes,
+						Category = Table<BlogCategory>().Select(c=> new BlogCategoryQueryModel
+						{
+							Id = c.Id,
+							CreateDate = c.CreateDate,
+							Title = c.Title,
+							ParentId = c.ParentId,
+							Slug = c.Slug,
+							IsActive = c.Active,
+						}).First(c=> c.Id == x.CategoryId),
+
+						SubCategory = x.SubCategoryId == 0 ? null : Table<BlogCategory>().Select(c => new BlogCategoryQueryModel
+						{
+							Id = c.Id,
+							CreateDate = c.CreateDate,
+							Title = c.Title,
+							ParentId = c.ParentId,
+							Slug = c.Slug,
+							IsActive = c.Active,
+						}).First(c => c.Id == x.SubCategoryId),
 					}).ToList();
 
 

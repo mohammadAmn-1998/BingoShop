@@ -352,9 +352,20 @@ function AlertSweetTimer(title, icon, time) {
         icon: icon,
         title: title,
         showConfirmButton: true,
-        timer: time
+        confirmButtonText: 'باشه',
+        timerProgressBar: true,
+        customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger",
+           
+
+        },
+        timer: time,
+       
     })
 }
+
+
 
 function AddEmailUser() {
 
@@ -364,7 +375,7 @@ function AddEmailUser() {
     if (mail === null || mail === "" || ValidateEmail(mail) === false) {
 
         emailValidate.text('لطفا ایمیل معتبر وارد کنید!');
-        AlertSweetTimer("عملیات ناموفق", 'error', 3000);
+        AlertSweetTimer("لطفا ایمیل معتبر وارد کنید", 'error', 3000);
     } else {
         Loading();
         $.ajax({
@@ -383,7 +394,7 @@ function AddEmailUser() {
             }
 
         }).done(function(result) {
-
+            EndLoading();
             if (result.ok ) {
                 AlertSweetTimer("شما عضو خبرنامه شدید!", 'success', 3000);
                 emailValidate.text('');
@@ -393,7 +404,7 @@ function AddEmailUser() {
                 emailValidate.text(result.message);
 
             }
-            EndLoading();
+           
         });
 
     }

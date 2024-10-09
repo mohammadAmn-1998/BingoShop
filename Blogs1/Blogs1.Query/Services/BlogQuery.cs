@@ -73,5 +73,47 @@ namespace Blogs1.Query.Services
 				return null;
 			}
 		}
+
+		public List<PopularBlogQueryModel> GetPopularBlogsForUI()
+		{
+			try
+			{
+				  return Table<Blog>().OrderByDescending(x => x.Likes).Take(6).Select(x =>
+					new PopularBlogQueryModel
+					{
+						Id = x.Id,
+						Title = x.Title,
+						Author = x.Author,
+						ImageName = x.ImageName,
+						ImageAlt = x.ImageAlt,
+						CreateDate = x.CreateDate.ConvertToPersianDate()
+					}).ToList();
+
+				
+			}
+			catch (Exception e)
+			{
+				return new();
+			}
+		}
+
+		public List<LastBlogQueryModel> GetLastBlogsForUI()
+		{
+			try
+			{
+				return Table<Blog>().OrderByDescending(x => x.Likes).Take(6).Select(x =>
+					new LastBlogQueryModel()
+					{
+						Id = x.Id,
+						Title = x.Title,
+					}).ToList();
+
+
+			}
+			catch (Exception e)
+			{
+				return new();
+			}
+		}
 	}
 }

@@ -1,0 +1,45 @@
+﻿
+<header class="nav">
+
+	<div class="nav__holder nav--sticky">
+		<div class="container relative">
+			<div class="flex-parent">
+
+				<!-- Side Menu Button -->
+				<button class="nav-icon-toggle" id="nav-icon-toggle" aria-label="Open side menu">
+					<span class="nav-icon-toggle__box">
+						<span class="nav-icon-toggle__inner"></span>
+					</span>
+				</button>
+
+				<!-- Logo -->
+				@await Component.InvokeAsync("BlogLogoHeader")
+
+				<!-- Nav-wrap -->
+				@await Component.InvokeAsync("BlogTopNavMenu")
+
+				<!-- Nav Right -->
+				<div class="nav__right">
+
+					<!-- Search -->
+					<div class="nav__right-item nav__search">
+						<a href="#" class="nav__search-trigger" id="nav__search-trigger">
+							<i class="ui-search nav__search-trigger-icon"></i>
+						</a>
+						<div class="nav__search-box" id="nav__search-box">
+							<form class="nav__search-form">
+								<input type="text" placeholder="جستجو مقالات"  class="nav__search-input">
+								<button type="submit" class="search-button btn btn-lg btn-color btn-button">
+									<i class="ui-search nav__search-icon"></i>
+								</button>
+							</form>
+						</div>
+					</div>
+
+				</div> 
+
+			</div> 
+		</div> 
+
+	</div>
+</header> 

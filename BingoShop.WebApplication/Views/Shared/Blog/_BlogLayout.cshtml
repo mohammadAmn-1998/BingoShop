@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<partial name="Blog/_BlogHead" />
+
+<body class="bg-light style-default style-rounded">
+
+<partial name="Blog/_BlogLoading"/>
+
+    <div class="content-overlay"></div>
+
+	<partial name="Blog/_BlogSideNav" />
+
+
+<main class="main oh" id="main">
+
+        <!-- Top Bar -->
+        <div class="top-bar d-none d-lg-block">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Top menu -->
+                    <div class="col-lg-6">
+                        <ul class="top-menu">
+                            <li><a href="/">صفحه اصلی</a></li>
+                            <li><a href="#">تبلیغات</a></li>
+                            <li><a href="#">تماس با ما</a></li>
+                        </ul>
+                    </div>
+
+                   @await Component.InvokeAsync("BlogSocial")
+
+                </div>
+            </div>
+        </div> 
+
+      <partial name="Blog/_BlogTopNav"/>
+
+
+@await Component.InvokeAsync("LastBlogs")
+
+
+@RenderBody()
+
+
+		<partial name="Blog/_BlogFooter" />
+
+    </main>
+
+
+	<partial name="Blog/_BlogScripts" />
+
+</body>
+
+</html>

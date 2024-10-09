@@ -7,7 +7,9 @@ public interface IBlogQuery
 {
 	
 	Task<FilteredBlogQueryModel?> GetFilteredPosts(FilterParams  filterParams);
-	
+
+	List<PopularBlogQueryModel> GetPopularBlogsForUI();
+	List<LastBlogQueryModel> GetLastBlogsForUI();
 
 
 }

@@ -1,0 +1,35 @@
+﻿@model Site.Application.Contract.SiteSettingApplication.Query.SocialForUiQueryModel
+
+
+<div class="col-lg-6">
+	<div class="socials nav__socials socials--nobase socials--white justify-content-start">
+		
+		
+		@if (!string.IsNullOrEmpty(Model.Instagram))
+		{
+			<a class="social social-instagram" href="@Model.Instagram" target="_blank" aria-label="instagram">
+				<i class="ui-instagram"></i>
+			</a>
+		}
+		@if (!string.IsNullOrEmpty(Model.Telegram))
+		{
+			<a class="social  fab fa-telegram" href="@Model.Telegram" target="_blank" aria-label="twitter">
+				
+			</a>
+		}
+		@if (!string.IsNullOrEmpty(Model.WhatsApp))
+		{
+			<a class="social  fab fa-whatsapp" href="@Model.WhatsApp" target="_blank" aria-label="facebook">
+				
+			</a>
+		}
+		@if (!string.IsNullOrEmpty(Model.Youtube))
+		{
+
+			<a class="social social-youtube" href="@Model.Youtube" target="_blank" aria-label="youtube">
+				<i class="ui-youtube"></i>
+			</a>
+		}
+
+	</div>
+</div>

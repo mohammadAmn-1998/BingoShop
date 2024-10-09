@@ -20,3 +20,10 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.custom-swal {
+    font-size: 10px;
+    width: 250px ;
+    height: 100px;
+}
+

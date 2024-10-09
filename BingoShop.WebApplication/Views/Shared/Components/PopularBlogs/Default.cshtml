@@ -1,0 +1,46 @@
+﻿@using Shared.Application.Utility
+@model List<Blogs1.Application.Contract.BlogService.Query.PopularBlogQueryModel>
+
+
+@if (Model.Count() > 0)
+{
+	<aside class="widget widget-popular-posts">
+		<h4 class="widget-title">محبوب ترین مقالات</h4>
+
+		<ul class="post-list-small">
+			
+			@foreach (var blog in Model.Take(4))
+			{
+				<li class="post-list-small__item">
+					<article class="post-list-small__entry clearfix">
+						<div class="post-list-small__img-holder">
+							<div class="thumb-container thumb-100">
+								<a href="#">
+									<img data-src="@Directories.GetBlogImageFullPath(blog.ImageName,100)" src="/assets/blog/img/empty.png" alt="@blog.ImageAlt" class="post-list-small__img--rounded lazyload">
+								</a>
+							</div>
+						</div>
+						<div class="post-list-small__body">
+							<h3 class="post-list-small__entry-title">
+								<a href="#">@blog.Title</a>
+							</h3>
+							<ul class="entry__meta">
+								<li class="entry__meta-author">
+									<span>نویسنده:</span>
+									<a href="#">@blog.Author</a>
+								</li>
+								<li class="entry__meta-date">
+									@blog.CreateDate
+								</li>
+							</ul>
+						</div>
+					</article>
+				</li>
+			}
+			
+
+		</ul>
+	</aside>
+
+}
+

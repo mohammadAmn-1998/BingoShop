@@ -9,8 +9,8 @@
   <ItemGroup>
     <Folder Include="Admin\Seo\" />
     <Folder Include="Admin\SendEmail\" />
+    <Folder Include="Ui\Blog\" />
     <Folder Include="UserPanel\" />
-    <Folder Include="Ui\" />
   </ItemGroup>
 
   <ItemGroup>

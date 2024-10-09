@@ -1,0 +1,48 @@
+﻿@model List<Blogs1.Application.Contract.BlogCategoryService.Query.BlogCategoryQueryModel>
+@{
+	var selected = ViewData["Selected"] as string;
+}
+
+<nav class="flex-child nav__wrap d-none d-lg-block">
+	<ul class="nav__menu">
+
+		<li class="@((selected == "Blog" ? "active" : ""))">
+			<a href="/blog">صفحه اصلی</a>
+		</li>
+		@if (Model.Any())
+		{
+			@foreach (var category in Model.Where(x=> x.ParentId==0))
+			{
+
+				if (category.SubCategories != null && category.SubCategories.Any())
+				{
+					<li class="nav__dropdown">
+						<a href="#">@category.Title</a>
+						<ul class="nav__dropdown-menu">
+							@foreach (var subCategory in category.SubCategories)
+							{
+								<li><a href="#">@subCategory.Title</a></li>
+
+							}
+						</ul>
+					</li>
+				}
+
+			}
+		}
+
+		<li class="nav__dropdown">
+			<a href="#">صفحات</a>
+			<ul class="nav__dropdown-menu">
+				<li><a href="about.html">درباره ما</a></li>
+				<li><a href="contact.html">تماس با ما</a></li>
+				<li><a href="search-results.html">نتایج جستجو</a></li>
+				<li><a href="categories.html">دسته بندی مطالب</a></li>
+				<li><a href="single-post.html">نمایش مطلب</a></li>
+				<li><a href="404.html">404</a></li>
+			</ul>
+		</li>
+
+
+	</ul> <!-- end menu -->
+</nav> <!-- end nav-wrap -->

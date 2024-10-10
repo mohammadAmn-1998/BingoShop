@@ -1,0 +1,20 @@
+﻿@using Shared.Application.Utility
+@model List<Site.Application.Contract.BanerApplication.Query.BanerForUiQueryModel>
+
+@if (Model.Any())
+{
+	var baner = Model.Single();
+
+	<aside class="widget widget_media_image">
+		<a href="@baner.Url">
+			<img src="@Directories.GetBanerImageFullPath(baner.ImageName,null)" alt="@baner.ImageAlt">
+		</a>
+	</aside> <!-- end widget ad 300 -->
+}
+
+
+
+
+
+
+

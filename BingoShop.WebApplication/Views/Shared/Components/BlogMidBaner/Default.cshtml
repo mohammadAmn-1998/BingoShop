@@ -1,0 +1,16 @@
+﻿@using Shared.Application.Utility
+@model List<Site.Application.Contract.BanerApplication.Query.BanerForUiQueryModel>
+
+
+@if (Model.Any())
+{
+	var baner = Model.First();
+
+	<div class="text-center pb-48">
+		<a href="@baner.Url">
+			<img src="@Directories.GetBanerImageFullPath(baner.ImageName,null)" alt="@baner.ImageAlt">
+		</a>
+	</div>
+}
+
+	

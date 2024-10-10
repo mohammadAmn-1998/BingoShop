@@ -217,5 +217,27 @@ namespace Blogs1.Query.Services
 				return "";
 			}
 		}
+
+		public async Task<List<WidgetCategoryForUIQueryModel>> GetCategoriesForWidgetForUi(int count)
+		{
+
+			try
+			{
+				var categories =await Table<BlogCategory>().Where(x => x.ParentId == 0 && x.Active).Select(x =>
+					new WidgetCategoryForUIQueryModel
+					{
+						Title = x.Title,
+						Slug = x.Slug,
+						BlogsCount = Table<Blog>().Count(b => b.CategoryId == x.Id)
+					}).ToListAsync();
+
+				return categories;
+			}
+			catch (Exception e)
+			{
+				return new();
+			}
+
+		}
 	}
 }

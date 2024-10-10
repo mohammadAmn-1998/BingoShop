@@ -1,0 +1,21 @@
+﻿@model List<Blogs1.Application.Contract.BlogCategoryService.Query.WidgetCategoryForUIQueryModel>
+
+@if ( Model.Any())
+{
+	<aside class="widget widget_categories">
+	<h4 class="widget-title">دسته بندی نوشته ها</h4>
+
+		<ul>
+		@foreach (var category in Model)
+		{
+			<li><a href="#">@category.Title <span class="categories-count">@category.BlogsCount</span></a></li>
+
+		}
+		</ul>
+	</aside> <!-- end widget categories -->
+	}
+<!-- Widget Categories -->
+
+	
+	
+	

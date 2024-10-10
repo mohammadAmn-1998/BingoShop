@@ -1,0 +1,89 @@
+﻿@using Shared.Application.Utility
+@using BingoShop.WebApplication.Utility
+@model Blogs1.Application.Contract.BlogService.Query.LastBlogTitleQueryModel
+
+@if (Model.Categories.Any())
+{
+	<div class="title-wrap title-wrap--line">
+		<h3 class="section-title">آخرین عنوان ها</h3>
+
+		<div class="tabs tab-post__tabs">
+			<ul class="tabs__list">
+				<li class="tabs__item  tabs__item--active">
+					<a href="#tab_0" class="tabs__trigger">همه</a>
+				</li>
+				
+				@foreach (var category in Model.Categories)
+				{
+					if (category.Title == "همه")
+						continue;
+
+					<li class="tabs__item">
+						<a href="#tab_@category.Id" class="tabs__trigger">@category.Title</a>
+					</li>
+				}
+			
+			</ul> <!-- end tabs -->
+		</div>
+	</div>
+
+}
+@if (Model.Blogs.Any())
+{
+	<section class="section tab-post mb-16">
+	<div class="tabs__content tabs__content-trigger tab-post__tabs-content">
+	@foreach (var category in Model.Categories)
+	{
+				<div class="tabs__content-pane @((category.Id ==0 ? "tabs__content-pane--active" : "")) " id="tab_@category.Id">
+	<div class="row card-row">
+	
+	@foreach (var blog in Model.Blogs.Where(b=> b.CategoryTitle == category.Title))
+	{
+
+						<div class="col-md-6">
+							<article class="entry card">
+								<div class="entry__img-holder card__img-holder">
+									<a href="#">
+										<div class="thumb-container thumb-70">
+											<img data-src="@Directories.GetBlogImageFullPath(blog.ImageName,null)" src="/assets/blog/img/empty.png" class="entry__img lazyload" alt="@blog.ImageAlt" />
+										</div>
+									</a>
+									<a href="#" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@blog.CategoryTitle</a>
+								</div>
+
+								<div class="entry__body card__body">
+									<div class="entry__header">
+
+										<h2 class="entry__title">
+											<a href="#">@blog.Title</a>
+										</h2>
+										<ul class="entry__meta">
+											<li class="entry__meta-author">
+												<span>نویسنده:</span>
+												<a href="#">@blog.Author</a>
+											</li>
+											<li class="entry__meta-date">
+												@blog.CreateDate
+											</li>
+										</ul>
+									</div>
+									<div class="entry__excerpt">
+										<p>@blog.Summary</p>
+									</div>
+								</div>
+							</article>
+						</div>
+						
+					
+
+
+	}
+	
+	</div>
+	</div> 
+	}
+			</div>
+		</section>
+	
+}
+

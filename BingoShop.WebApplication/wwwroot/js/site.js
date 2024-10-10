@@ -62,3 +62,31 @@ function AjaxCreateEmailUser(event) {
     }
 
 }
+
+function AjaxBlogPagination(pageId) {
+
+    if (pageId == null  || pageId <1)
+        return;
+
+    $.ajax({
+        url: `/Blog/ChangePage/${pageId}`,
+        type: 'get',
+        error: function (data) {
+            return;
+        }
+
+
+    }).done(function(data) {
+
+        if (data) {
+            console.log(data);
+            $("#NewsBlogs").html('');
+            $("#NewsBlogs").append(data);
+        }
+      
+
+
+    });
+
+
+}

@@ -162,5 +162,80 @@ namespace Blogs1.Query.Services
 				return new();
 			}
 		}
+
+		public LastBlogTitleQueryModel GetBlogLastTitles()
+		{
+			try
+			{
+				List<BlogCategoryQueryModel> categories = new()
+				{
+					new()
+					{
+						Id = 0,
+						Title = "همه",
+					}
+				};
+
+				categories.AddRange(Table<BlogCategory>().Where(x => x.ParentId == 0 && x.Active).Take(4).Select(c =>
+					new BlogCategoryQueryModel()
+					{
+						Title = c.Title,
+						Id = c.Id,
+						Slug = c.Slug
+
+					}).ToList());
+
+				
+
+				List<LastBlogQueryModel> blogs = new();
+
+				
+
+				foreach (var category in categories)
+				{
+
+					if (category.Id == 0)
+					{
+						blogs.AddRange(Table<Blog>().Where(x => x.Active).OrderByDescending(x => x.CreateDate).Take(4).Select(b => new LastBlogQueryModel
+						{
+							Id = b.Id,
+							Title = b.Title,
+							Slug = b.Slug,
+							CategoryTitle = category.Title,
+							ImageName = b.ImageName,
+							ImageAlt = b.ImageAlt,
+							CreateDate = b.CreateDate.ConvertToPersianDate(),
+							Author = b.Author,
+							Summary = b.Summary
+						}).ToList());
+					}
+
+					blogs.AddRange(Table<Blog>().Where(x=> x.CategoryId == category.Id && x.Active).OrderByDescending(x=> x.CreateDate).Take(4).Select(b=> new LastBlogQueryModel
+					{
+						Id = b.Id,
+						Title = b.Title,
+						Slug = b.Slug,
+						CategoryTitle = category.Title,
+						ImageName= b.ImageName,
+						ImageAlt = b.ImageAlt,
+						CreateDate = b.CreateDate.ConvertToPersianDate(),
+						Author = b.Author,
+						Summary = b.Summary
+					}).ToList());
+
+				}
+
+				return new()
+				{
+					Categories = categories,
+					Blogs = blogs
+				};
+
+			}
+			catch
+			{
+				return new();
+			}
+		}
 	}
 }

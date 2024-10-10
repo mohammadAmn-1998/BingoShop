@@ -13,10 +13,10 @@ namespace BingoShop.WebApplication.ViewComponents
 			_blogQuery = blogQuery;
 		}
 
-		public IViewComponentResult Invoke()
+		public async Task<IViewComponentResult> InvokeAsync()
 		{
 
-			return View(_blogQuery.GetPopularBlogsForUI());
+			return View(await _blogQuery.GetPopularBlogsForUI());
 
 		}
 	}

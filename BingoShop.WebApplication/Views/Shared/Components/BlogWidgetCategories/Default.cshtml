@@ -8,7 +8,7 @@
 		<ul>
 		@foreach (var category in Model)
 		{
-			<li><a href="#">@category.Title <span class="categories-count">@category.BlogsCount</span></a></li>
+			<li><a href="/blog/Blogs?slug=@category.Slug">@category.Title <span class="categories-count">@category.BlogsCount</span></a></li>
 
 		}
 		</ul>

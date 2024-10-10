@@ -39,7 +39,7 @@
 							<div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url(@Directories.GetBlogImageFullPath(smallPosts[0].ImageName,null))">
 								<a href="#" class="thumb-url"></a>
 								<img src="@Directories.GetBlogImageFullPath(smallPosts[0].ImageName,null)" alt="@smallPosts[0].ImageAlt" class="entry__img d-none">
-								<a href="#" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@((smallPosts[0].SubCategory != null ? smallPosts[0].SubCategory.Title : smallPosts[0].Category.Title))</a>
+								<a href="/blog/blogs?slug=@(smallPosts[0].SubCategory != null ? smallPosts[0].SubCategory.Slug : smallPosts[0].Category.Slug)" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@((smallPosts[0].SubCategory != null ? smallPosts[0].SubCategory.Title : smallPosts[0].Category.Title))</a>
 							</div>
 						</article>
 						
@@ -47,7 +47,7 @@
 							<div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url(@Directories.GetBlogImageFullPath(smallPosts[1].ImageName,null))">
 								<a href="#" class="thumb-url"></a>
 								<img src="@Directories.GetBlogImageFullPath(smallPosts[1].ImageName,null)" alt="@smallPosts[1].ImageAlt" class="entry__img d-none">
-								<a href="#" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@((smallPosts[1].SubCategory != null ? smallPosts[1].SubCategory.Title : smallPosts[1].Category.Title))</a>
+								<a href="/blog/blogs?slug=@(smallPosts[1].SubCategory != null ? smallPosts[1].SubCategory.Slug : smallPosts[1].Category.Slug)" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@((smallPosts[1].SubCategory != null ? smallPosts[1].SubCategory.Title : smallPosts[1].Category.Title))</a>
 							</div>
 
 							<div class="entry__body post-list__body card__body">
@@ -70,7 +70,7 @@
 							<div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url(@Directories.GetBlogImageFullPath(smallPosts[2].ImageName,null))">
 								<a href="#" class="thumb-url"></a>
 								<img src="@Directories.GetBlogImageFullPath(smallPosts[2].ImageName,null)" alt="@smallPosts[2].ImageAlt" class="entry__img d-none">
-								<a href="#" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@((smallPosts[2].SubCategory != null ? smallPosts[2].SubCategory.Title : smallPosts[2].Category.Title))</a>
+								<a href="/blog/blogs?slug=@(smallPosts[2].SubCategory != null ? smallPosts[2].SubCategory?.Slug : smallPosts[2].Category.Slug)" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@((smallPosts[2].SubCategory != null ? smallPosts[2].SubCategory?.Title : smallPosts[2].Category.Title))</a>
 							</div>
 
 							<div class="entry__body post-list__body card__body">
@@ -101,7 +101,7 @@
 								<a href="#">
 									<img src="@Directories.GetBlogImageFullPath(largePost.ImageName,null)" alt="@largePost.ImageAlt" class="entry__img">
 								</a>
-								<a href="#" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--green">@((largePost.SubCategory != null ? largePost.SubCategory.Title : largePost.Category.Title))</a>
+								<a href="/blog/blogs?slug=@(largePost.SubCategory != null ? largePost.SubCategory.Slug : largePost.Category.Slug)" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@((largePost.SubCategory != null ? largePost.SubCategory.Title : largePost.Category.Title))</a>
 							</div>
 
 							<div class="entry__body card__body">

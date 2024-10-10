@@ -75,11 +75,11 @@ namespace Blogs1.Query.Services
 			}
 		}
 
-		public List<PopularBlogQueryModel> GetPopularBlogsForUI()
+		public async Task<List<PopularBlogQueryModel>> GetPopularBlogsForUI()
 		{
 			try
 			{
-				  return Table<Blog>().OrderByDescending(x => x.Likes).Take(6).Select(x =>
+				  return await Table<Blog>().OrderByDescending(x => x.Likes).Take(6).Select(x =>
 					new PopularBlogQueryModel
 					{
 						Id = x.Id,
@@ -90,7 +90,7 @@ namespace Blogs1.Query.Services
 						CreateDate = x.CreateDate.ConvertToPersianDate(),
 						Likes = x.Likes,
 						Slug = x.Slug
-					}).ToList();
+					}).ToListAsync();
 
 				
 			}

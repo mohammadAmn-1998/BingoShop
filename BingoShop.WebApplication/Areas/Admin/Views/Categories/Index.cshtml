@@ -112,7 +112,7 @@
 
 															@if (@subCategory.IsActive)
 															{
-																<a class="btn  btn-sm btn-danger " onclick="sweetAlertConfirmLink(event)" asp-action="ChangeActivation" asp-route-categoryId="@subCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
+																<a class="btn  btn-sm btn-danger " onclick="sweetAlertConfirmLink(event,'با این کار این دسته بندی و تمام پست های مربوط به آن در سایت نمایش داده نمیشوند.')" asp-action="ChangeActivation" asp-route-categoryId="@subCategory.Id" asp-route-pageId="@Model.FilterParams.PageId">
 																	غیر فعال کردن
 																</a>
 															}
@@ -159,10 +159,9 @@
 											<a class="btn    btn-warning  mr-1 ml-2" href="/admin/seo/@blogCategory.Id/@WhereSeo.BlogCategory">
 												seo
 											</a>
-											<a class="btn   btn-success mr-1" asp-action="Create" asp-route-parentId="@blogCategory.Id">
-												افزودن زیرگروه
+											<a class="btn   btn-success mr-1" asp-action="Create" asp-route-parentId="@blogCategory.Id"><i class="fa fa-plus"></i>
+												 زیرگروه
 											</a>
-
 
 											<div class="modal fade" id="createBlogCategoryModal" tabindex="-1" role="dialog" aria-labelledby="createBlogCategoryModal" aria-hidden="true">
 											</div>

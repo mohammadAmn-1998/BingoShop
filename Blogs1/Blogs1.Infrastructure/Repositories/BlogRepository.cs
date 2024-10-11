@@ -147,5 +147,21 @@ namespace Blogs1.Infrastructure.Repositories
 				return false;
 			}
 		}
+
+		public async Task<bool> IncreaseVisits(string slug)
+		{
+			try
+			{
+				var blog = Table<Blog>().First(x => x.Slug == slug);
+
+				blog.IncreaseTotalVisits();
+				Update(blog);
+				return await Save() > 0;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
 	}
 }

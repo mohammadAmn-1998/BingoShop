@@ -1,4 +1,5 @@
-﻿<header class="sidenav" id="sidenav">
+﻿@model List<Blogs1.Application.Contract.BlogCategoryService.Query.BlogCategoryQueryModel>?
+<header class="sidenav" id="sidenav">
 
 	<!-- close -->
 	<div class="sidenav__close">
@@ -19,23 +20,39 @@
 				<ul class="sidenav__menu-dropdown">
 					<li><a href="about.html" class="sidenav__menu-url">درباره ما</a></li>
 					<li><a href="contact.html" class="sidenav__menu-url">تماس با ما</a></li>
-					<li><a href="search-results.html" class="sidenav__menu-url">نتایج جستجو</a></li>
-					<li><a href="categories.html" class="sidenav__menu-url">دسته بندی مطالب</a></li>
-					<li><a href="single-post.html" class="sidenav__menu-url">نمایش مطلب</a></li>
-					<li><a href="404.html" class="sidenav__menu-url">404</a></li>
 				</ul>
 			</li>
 
 			<!-- Categories -->
-			<li>
-				<a href="#" class="sidenav__menu-url">تکنولوژی</a>
-			</li>
-			<li>
-				<a href="#" class="sidenav__menu-url">زیبایی و سلامت</a>
-			</li>
-			<li>
-				<a href="#" class="sidenav__menu-url">موبایل</a>
-			</li>
+			@if (Model != null && Model.Any())
+			{
+
+				@foreach (var category in Model.Where(x=> x.ParentId ==0 && x.IsActive))
+				{
+					if (category.SubCategories != null && category.SubCategories.Any())
+					{
+						<li>
+
+							<a href="/blog/blogs?slug=@category.Slug" class="sidenav__menu-url">@category.Title</a>
+							<button class="sidenav__menu-toggle" aria-haspopup="true" aria-label="Open dropdown"><i class="ui-arrow-down"></i></button>
+							<ul class="sidenav__menu-dropdown">
+
+								@foreach (var subCategory in category.SubCategories.Where(x=> x.IsActive))
+								{
+									<li><a href="/blog/blogs?slug=@subCategory.Slug" class="sidenav__menu-url">@subCategory.Title</a></li>
+
+								}
+
+							</ul>
+						</li>
+					}
+					else
+					{
+						<a href="/blog/blogs?slug=@category.Slug" class="sidenav__menu-url">@category.Title</a>
+					}
+				}
+
+			}
 		</ul>
 	</nav>
 

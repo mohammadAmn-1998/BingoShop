@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Comments.Application.Contract.CommentService.Command;
 using Comments.Domain.CommentAgg;
 using Comments.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
+using Shared.Domain.Enums;
 using Shared.Domain.SeedWorks.Base;
 
 namespace Comments.Infrastructure.Repositories
@@ -68,6 +70,18 @@ namespace Comments.Infrastructure.Repositories
 			catch (Exception e)
 			{
 				return false;
+			}
+		}
+
+		public long GetCommentsCountForUi(long ownerId, CommentFor commentFor)
+		{
+			try
+			{
+				return Table<Comment>().Count(x => x.OwnerId == ownerId && x.CommentFor == commentFor && x.Status == CommentStatus.قبول_شده);
+			}
+			catch (Exception e)
+			{
+				return 0;
 			}
 		}
 	}

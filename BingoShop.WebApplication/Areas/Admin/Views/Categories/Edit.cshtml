@@ -33,7 +33,7 @@
 	@if (Model.ParentId > 0)
 	{
 		<label class="form-label">دسته بندی والد</label>
-		<select class="form-control p-1" asp-for="ParentId"  asp-items="@categoriesSelectList">
+		<select class="form-control p-1" asp-for="ParentId" style="padding: 3px"  asp-items="@categoriesSelectList">
 
 		</select>
 	}
@@ -42,15 +42,15 @@
 	
 	@if (Model!.IsActive)
 	{
-		<a class="btn btn-danger" asp-action="ChangeActivation" onclick="sweetAlertConfirmSubmit(event)" asp-route-categoryId="@Model.Id">غیر فعال کردن</a>
+		<a class="btn btn-danger " style="margin-top:20px" asp-action="ChangeActivation" onclick="sweetAlertConfirmLink(event,'با این کار این دسته بندی و پست های مربوط به آن ذر سایت نمایش داده نمیشوند')" asp-route-categoryId="@Model.Id">غیر فعال کردن</a>
 	}
 	else
 	{
-		<a class="btn btn-success" asp-action="ChangeActivation" asp-route-categoryId="@Model.Id" onclick="sweetAlertConfirmSubmit(event)"> فعال کردن</a>
+		<a class="btn btn-success mt-5" style="margin-top:20px" asp-action="ChangeActivation" asp-route-categoryId="@Model.Id" onclick="sweetAlertConfirmLink(event)"> فعال کردن</a>
 
 	}
 	<hr>
-	<button type="submit"  class="btn btn-success mr-1 ">ثبت </button>
+	<button type="submit"   class="btn btn-success mr-1 ">ثبت </button>
 	<a onclick="sweetAlertConfirmLink(event,'آیا مطمعنید؟')" class="btn btn-danger m-3"  asp-action="Index">انصراف</a>
 
 </form>

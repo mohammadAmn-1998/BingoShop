@@ -1,7 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using Blogs1.Application.Contract.BlogCategoryService.Query
+@inject IBlogCategoryQuery _BlogCategoryQuery;
+@{
+	var categories =await _BlogCategoryQuery.GetAllCategories();
+}
+<!DOCTYPE html>
 <html lang="en">
 
 <partial name="Blog/_BlogHead" />
+
+@await RenderSectionAsync("Seo",false)
 
 <body class="bg-light style-default style-rounded">
 
@@ -9,7 +16,7 @@
 
     <div class="content-overlay"></div>
 
-	<partial name="Blog/_BlogSideNav" />
+	<partial name="Blog/_BlogSideNav" model="categories"/>
 
 
 <main class="main oh" id="main">

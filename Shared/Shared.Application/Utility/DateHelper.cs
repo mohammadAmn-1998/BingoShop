@@ -19,7 +19,7 @@ namespace Shared.Application.Utility
 		private static readonly string[] Pn = { "۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹" };
 		private static readonly string[] En = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-		public static string ConvertToPersianDate(this DateTime? time)
+		public static string ConvertToPersianDate(this DateTime? time )
 		{
 			if (time == null)
 				return "";
@@ -27,23 +27,44 @@ namespace Shared.Application.Utility
 			return time.Value.ConvertToPersianDate();
 		}
 
-		public static string ConvertToPersianDate(this DateTime time)
+
+
+
+		public static string ConvertToPersianDateWithMonthName(this DateTime time)
 		{
 
 			if (time == new DateTime())
 				return "";
 
+
+
+
+			return
+				$"{PersianCalendar.GetYear(time)} {MonthNames[PersianCalendar.GetMonth(time)]} {PersianCalendar.GetDayOfMonth(time):0}"
+					.ToPersianNumbers();
+		}
+
+
+		public static string ConvertToPersianDate(this DateTime time)
+		{
+
+			if (time == new DateTime())
+				return "";
 			StringBuilder builder = new();
-		    builder.Append(PersianCalendar.GetYear(time));
-		    builder.Append("/");
-		    builder.Append(PersianCalendar.GetMonth(time));
-		    builder.Append("/");
-		    builder.Append(PersianCalendar.GetDayOfMonth(time));
+
+			
+			
+				builder.Append(PersianCalendar.GetYear(time));
+				builder.Append("/");
+				builder.Append($"{PersianCalendar.GetMonth(time)}");
+		     	builder.Append("/");
+				builder.Append($"{PersianCalendar.GetDayOfMonth(time)}");
+			
 
 		    return builder.ToString().ToPersianNumbers();
 		}
 
-		private static string ToPersianNumbers(this string stringNumber)
+		public static string ToPersianNumbers(this string stringNumber)
 		{
 			
 			for (var i = 0; i < 10; i++)

@@ -17,11 +17,11 @@
 				if (category.SubCategories != null && category.SubCategories.Any())
 				{
 					<li class="nav__dropdown">
-						<a href="#">@category.Title</a>
+						<a href="/blog/blogs?slug=@category.Slug">@category.Title</a>
 						<ul class="nav__dropdown-menu">
 							@foreach (var subCategory in category.SubCategories)
 							{
-								<li><a href="#">@subCategory.Title</a></li>
+								<li><a href="/blog/blogs?slug=@subCategory.Slug">@subCategory.Title</a></li>
 
 							}
 						</ul>

@@ -365,3 +365,5 @@ FodyWeavers.xsd
 #Site Uploaded Images Like Banners And Sliders
 wwwroot/assets/images/*
 
+.editorconfig
+/BingoShop.WebApplication/wwwroot/assets/images

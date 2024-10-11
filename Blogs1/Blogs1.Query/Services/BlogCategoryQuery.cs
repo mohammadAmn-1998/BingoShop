@@ -231,6 +231,7 @@ namespace Blogs1.Query.Services
 						BlogsCount = Table<Blog>().Count(b => b.CategoryId == x.Id)
 					}).ToListAsync();
 
+
 				return categories;
 			}
 			catch (Exception e)

@@ -1,12 +1,20 @@
 ﻿@model FilteredBlogQueryModel
-
+@inject ISeoUIQuery _SeoUiQuery;
 @using Blogs1.Application.Contract.BlogService.Query
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Query.Contract.Ui.Seo
+@using Shared.Domain.Enums
 @{
 	ViewData["Title"] = "مقالات";
 	ViewData["Selected"] = "Blog";
 	Layout = "Blog/_BlogLayout";
+	var seo =await _SeoUiQuery.GetSeoForUI(0, WhereSeo.Blog, "bingoShopBlog");
+}
+
+@section Seo
+{
 	
+	<partial name="Blog/_SeoPartial" model="seo"/>
 }
 
 <!-- Featured Posts Grid -->
@@ -32,7 +40,7 @@
 	<partial name="Blog/_BlogNewsLetter" />
 	@await Component.InvokeAsync("BlogLeftBaner")
 
-</aside> <!-- end sidebar -->
+</aside> <!-- end sidebar -->	 
 	
 </div>
 	<!-- Ad Banner 728 -->
@@ -59,5 +67,6 @@
 
 	@section Scripts
 	{
+	
 
 	}

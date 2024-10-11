@@ -169,13 +169,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostModule.Application.Serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostModule.Query", "PostModule\PostModule.Query\PostModule.Query.csproj", "{FBADB8C7-D470-4D1A-8762-7583C069F47B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emails.Query", "Emails\Emails.Query\Emails.Query.csproj", "{E60BC402-E341-48D9-BD34-FC9BC3450B71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emails.Query", "Emails\Emails.Query\Emails.Query.csproj", "{E60BC402-E341-48D9-BD34-FC9BC3450B71}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Query", "Query", "{3D464EE4-6A1E-4587-B91F-3C5E13AC0D7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Query.Contract", "Query\Query.Contract\Query.Contract.csproj", "{356C2FA6-DA8E-4E82-9D41-9C27D387AD56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Query.Contract", "Query\Query.Contract\Query.Contract.csproj", "{356C2FA6-DA8E-4E82-9D41-9C27D387AD56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Query.Services", "Query\Query.Services\Query.Services.csproj", "{F66FDB3C-15D7-4D7B-9EF6-4FF293BFBC40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Query.Services", "Query\Query.Services\Query.Services.csproj", "{F66FDB3C-15D7-4D7B-9EF6-4FF293BFBC40}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{57090D82-F392-4088-8A3D-422B88C38A94}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

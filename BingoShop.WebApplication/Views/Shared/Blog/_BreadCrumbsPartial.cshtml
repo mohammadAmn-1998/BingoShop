@@ -1,0 +1,27 @@
+﻿@model List<Query.Contract.Ui.Blog.BreadCrumbUiQueryModel>
+
+<div class="container">
+	<ul class="breadcrumbs">
+		
+		@if (Model.Any())
+		{
+			@foreach (var breadCrumb in Model.OrderBy(x => x.Number))
+			{
+
+				if (string.IsNullOrEmpty(breadCrumb.Url))
+				{
+					<li class="breadcrumbs__item breadcrumbs__item--current">
+						@breadCrumb.Title
+					</li>
+				}
+				else
+				{
+					<li class="breadcrumbs__item">
+						<a href="@breadCrumb.Url" class="breadcrumbs__url">@breadCrumb.Title</a>
+					</li>
+				}
+				
+			}
+		}
+	</ul>
+</div>

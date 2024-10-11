@@ -7,33 +7,16 @@
 	Layout = "Blog/_BlogLayout";
 
 }
-<div class="container">
-	<ul class="breadcrumbs">
-		<li class="breadcrumbs__item">
-			<a href="/blog" class="breadcrumbs__url">خانه</a>
-		</li>
-		@if (Model.BreadCrumbs.Any())
-		{
-			@foreach (var breadCrumb in Model.BreadCrumbs.OrderBy(x => x.Number))
-			{
 
-				if (string.IsNullOrEmpty(breadCrumb.Url))
-					{
-						<li class="breadcrumbs__item breadcrumbs__item--current">
-						@breadCrumb.Title
-						</li>
-					}
-					else
-					{
-						<li class="breadcrumbs__item">
-						<a href="@breadCrumb.Url" class="breadcrumbs__url">@breadCrumb.Title</a>
-						</li>
-					}
-				
-			}
-		}
-	</ul>
-</div>
+@section Seo
+{
+
+	<partial name="Blog/_SeoPartial" model="Model.Seo" />
+}
+
+
+<partial name="Blog/_BreadCrumbsPartial" model="Model.BreadCrumbs"/>
+
 <div class="main-container container" id="main-container">
 
 	
@@ -46,17 +29,17 @@
 			<div class="row card-row">
 				@if (Model.Blogs.Any())
 				{
-					@foreach (var blog in Model.Blogs)
+					foreach (var blog in Model.Blogs)
 					{
 						<div class="col-md-6">
 							<article class="entry card">
 								<div class="entry__img-holder card__img-holder">
-									<a href="single-post.html">
+									<a href="/blog/@blog.Slug">
 										<div class="thumb-container thumb-70">
 											<img data-src="@Directories.GetBlogImageFullPath(blog.ImageName, null)" src="@Directories.GetBlogImageFullPath(blog.ImageName,null)" class="entry__img lazyloaded" alt="@blog.ImageAlt">
 										</div>
 									</a>
-									<a href="#" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@blog.Category.Title</a>
+									<a href="/blog/blogs?slug=@blog.Category.Slug" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@blog.Category.Title</a>
 								</div>
 
 								<div class="entry__body card__body">
@@ -82,9 +65,9 @@
 							</article>
 						</div>
 
-					}
+					}}
 
-				}
+				
 				
 			</div>
 
@@ -107,15 +90,24 @@
 		
 				</nav>
 			}
-		</div> <!-- end posts -->
+		</div> 
 		
 		<aside class="col-lg-4 sidebar sidebar--right">
 
 			@await Component.InvokeAsync("PopularBlogs")
+
 			<partial name="Blog/_BlogNewsLetter" />
+
 			@await Component.InvokeAsync("BlogLeftBaner")
 
 		</aside> 
 
 	</div> 
 </div>
+
+					@section Scripts
+					{
+						
+						<script src="/assets/sweet_alert/js/sweetalert2.js"></script>
+
+					}

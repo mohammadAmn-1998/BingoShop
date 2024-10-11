@@ -75,6 +75,7 @@ namespace Blogs1.Query.Services
 			}
 		}
 
+		
 		public async Task<List<PopularBlogQueryModel>> GetPopularBlogsForUI()
 		{
 			try
@@ -185,11 +186,7 @@ namespace Blogs1.Query.Services
 
 					}).ToList());
 
-				
-
 				List<LastBlogQueryModel> blogs = new();
-
-				
 
 				foreach (var category in categories)
 				{

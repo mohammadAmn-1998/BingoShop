@@ -16,6 +16,5 @@ public interface IBlogService
 	Task<bool> ActivationChange(long blogId);
 
 	Task<bool> SpecialationChange(long blogId);
-
-	
+	Task<bool> IncreaseVisits(string slug);
 }

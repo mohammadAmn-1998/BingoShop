@@ -151,5 +151,10 @@ namespace Blogs1.Application.Services
 		public async Task<bool> SpecialationChange(long blogId)
 			=> await _blogRepository.SpecialationChange(blogId);
 
+		public async Task<bool> IncreaseVisits(string slug)
+			=>await _blogRepository.IncreaseVisits(slug);
+
+
+
 	}
 }

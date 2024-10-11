@@ -18,76 +18,34 @@
 					<div class="featured-posts-grid__item featured-posts-grid__item--sm">
 				
 					
-						<article class="entry card post-list featured-posts-grid__entry mt-2">
-							
+						@foreach (var blog in smallPosts)
+						{
+							<article class="entry card post-list featured-posts-grid__entry mt-2">
 
-							<div class="entry__body post-list__body card__body">
-								<h2 class="entry__title">
-									<a href="#">@smallPosts[0].Title</a>
-								</h2>
-								<ul class="entry__meta">
-									<li class="entry__meta-author">
-										<span>نویسنده:</span>
-										<a href="#">@smallPosts[0].Author</a>
-									</li>
-									<li class="entry__meta-date">
-										@smallPosts[0].CreateDate
-									</li>
-								</ul>
-							</div>
+								<div class="entry__body post-list__body card__body">
+									<h2 class="entry__title">
+										<a href="/blog/@blog.Slug">@blog.Title</a>
+									</h2>
+									<ul class="entry__meta">
+										<li class="entry__meta-author">
+											<span>نویسنده:</span>
+											<a href="#">@blog.Author</a>
+										</li>
+										<li class="entry__meta-date">
+											@blog.CreateDate
+										</li>
+									</ul>
+								</div>
 
-							<div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url(@Directories.GetBlogImageFullPath(smallPosts[0].ImageName,null))">
-								<a href="#" class="thumb-url"></a>
-								<img src="@Directories.GetBlogImageFullPath(smallPosts[0].ImageName,null)" alt="@smallPosts[0].ImageAlt" class="entry__img d-none">
-								<a href="/blog/blogs?slug=@(smallPosts[0].SubCategory != null ? smallPosts[0].SubCategory.Slug : smallPosts[0].Category.Slug)" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@((smallPosts[0].SubCategory != null ? smallPosts[0].SubCategory.Title : smallPosts[0].Category.Title))</a>
-							</div>
-						</article>
-						
-						<article class="entry card post-list featured-posts-grid__entry mt-2">
-							<div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url(@Directories.GetBlogImageFullPath(smallPosts[1].ImageName,null))">
-								<a href="#" class="thumb-url"></a>
-								<img src="@Directories.GetBlogImageFullPath(smallPosts[1].ImageName,null)" alt="@smallPosts[1].ImageAlt" class="entry__img d-none">
-								<a href="/blog/blogs?slug=@(smallPosts[1].SubCategory != null ? smallPosts[1].SubCategory.Slug : smallPosts[1].Category.Slug)" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@((smallPosts[1].SubCategory != null ? smallPosts[1].SubCategory.Title : smallPosts[1].Category.Title))</a>
-							</div>
+								<div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url(@Directories.GetBlogImageFullPath(blog.ImageName,null))">
+									<a href="/blog/@blog.Slug" class="thumb-url"></a>
+									<img src="@Directories.GetBlogImageFullPath(blog.ImageName,null)" alt="@blog.ImageAlt" class="entry__img d-none">
+									<a href="/blog/blogs?slug=@(blog.SubCategory != null ? blog.SubCategory.Slug : blog.Category.Slug)" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@((blog.SubCategory != null ? blog.SubCategory.Title : blog.Category.Title))</a>
+								</div>
+							</article>
+						}
 
-							<div class="entry__body post-list__body card__body">
-								<h2 class="entry__title">
-									<a href="#">@smallPosts[1].Title</a>
-								</h2>
-								<ul class="entry__meta">
-									<li class="entry__meta-author">
-										<span>نویسنده:</span>
-										<a href="#">@smallPosts[1].Author</a>
-									</li>
-									<li class="entry__meta-date">
-										@smallPosts[1].CreateDate
-									</li>
-								</ul>
-							</div>
-						</article>
-						
-						<article class="entry card post-list featured-posts-grid__entry mt-2">
-							<div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url(@Directories.GetBlogImageFullPath(smallPosts[2].ImageName,null))">
-								<a href="#" class="thumb-url"></a>
-								<img src="@Directories.GetBlogImageFullPath(smallPosts[2].ImageName,null)" alt="@smallPosts[2].ImageAlt" class="entry__img d-none">
-								<a href="/blog/blogs?slug=@(smallPosts[2].SubCategory != null ? smallPosts[2].SubCategory?.Slug : smallPosts[2].Category.Slug)" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@((smallPosts[2].SubCategory != null ? smallPosts[2].SubCategory?.Title : smallPosts[2].Category.Title))</a>
-							</div>
 
-							<div class="entry__body post-list__body card__body">
-								<h2 class="entry__title">
-									<a href="#">@smallPosts[2].Title</a>
-								</h2>
-								<ul class="entry__meta">
-									<li class="entry__meta-author">
-										<span>نویسنده:</span>
-										<a href="#">@smallPosts[2].Author</a>
-									</li>
-									<li class="entry__meta-date">
-										@smallPosts[2].CreateDate
-									</li>
-								</ul>
-							</div>
-						</article>
 				
 					</div> 
 
@@ -98,7 +56,7 @@
 					<div class="featured-posts-grid__item featured-posts-grid__item--lg mt-2">
 						<article class="entry card featured-posts-grid__entry">
 							<div class="entry__img-holder card__img-holder">
-								<a href="#">
+								<a href="/blog/@largePost.Slug">
 									<img src="@Directories.GetBlogImageFullPath(largePost.ImageName,null)" alt="@largePost.ImageAlt" class="entry__img">
 								</a>
 								<a href="/blog/blogs?slug=@(largePost.SubCategory != null ? largePost.SubCategory.Slug : largePost.Category.Slug)" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@((largePost.SubCategory != null ? largePost.SubCategory.Title : largePost.Category.Title))</a>
@@ -106,7 +64,7 @@
 
 							<div class="entry__body card__body">
 								<h2 class="entry__title">
-									<a href="#">@largePost.Title</a>
+									<a href="/blog/@largePost.Slug">@largePost.Title</a>
 								</h2>
 								<ul class="entry__meta">
 									<li class="entry__meta-author">

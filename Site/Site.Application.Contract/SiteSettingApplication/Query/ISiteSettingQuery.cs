@@ -13,4 +13,5 @@ public interface ISiteSettingQuery
     FavIconForUiQueryModel GetFavIconForUi();
     FooterUiQueryModel GetFooter();
     ContactFooterUiQueryModel GetContactDataForFooter();
+    Task<ContactUIQueryModel> GetContactDataForContactUs();
 }

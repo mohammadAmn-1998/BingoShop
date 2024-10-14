@@ -5,6 +5,7 @@ using Comments.Application.Contract.CommentService.Command;
 using Microsoft.AspNetCore.Mvc;
 using Query.Contract.Ui.Blog;
 using Shared.Application.Models;
+using Shared.Domain.Enums;
 
 namespace BingoShop.WebApplication.Controllers
 {
@@ -34,7 +35,7 @@ namespace BingoShop.WebApplication.Controllers
 
 		}
 
-		
+			
 		public async Task<IActionResult> Blogs(string slug = "", int pageId = 1, string q = "")
 		{
 
@@ -42,11 +43,19 @@ namespace BingoShop.WebApplication.Controllers
 
 		}
 
-		[Route("/Blog/{slug}")]
+		[Route("/Blogs/Blog/{slug}")]
 		public async Task<IActionResult> Blog(string slug)
 		{
 			await _blogService.IncreaseVisits(slug);
 			return View(await _blogUiQuery.GetSingleBlog(slug));
+
+		}
+
+		[Route("/Blogs")]
+		public async Task<IActionResult> Blog(long id)
+		{
+			
+			return View(await _blogUiQuery.GetSingleBlog(id));
 
 		}
 	}

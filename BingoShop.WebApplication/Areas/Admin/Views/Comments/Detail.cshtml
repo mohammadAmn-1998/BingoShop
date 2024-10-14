@@ -49,7 +49,7 @@
 							
 							@if (Model.OwnerId > 0 && Model.CommentFor == CommentFor.بلاگ)
 							{
-								<a class="btn btn-sm btn-info">دیدن مقاله </a>
+								<a class="btn btn-sm btn-info" href="/Blogs?id=@Model.OwnerId" >دیدن مقاله </a>
 							} else if (Model.OwnerId > 0 && Model.CommentFor == CommentFor.محصول)
 							{
 								<a class="btn btn-sm btn-info">دیدن محصول </a>
@@ -83,7 +83,7 @@
 						</dt>
 						<dd>
 							@Model.CommentStatus.ToString().Replace("_", " ")
-							<a class="btn btn-sm btn-primary" asp-action="ChangeStatus">تغییر وضعیت</a>
+							<a class="btn btn-sm btn-primary" asp-action="ChangeStatus" asp-route-id="@Model.Id">تغییر وضعیت</a>
 						</dd>
 						<hr />
 						@if (Model.CommentStatus == CommentStatus.رد_شده)

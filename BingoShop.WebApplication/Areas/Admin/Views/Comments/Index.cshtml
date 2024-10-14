@@ -61,12 +61,12 @@
                                         <th class="col-2">نام</th>
                                         <th class="col-2">ایمیل</th>
                                         <th class="col-2">تاریخ ایجاد</th>
-                                        <th class="col-2">متن</th>
-                                        <th class="col-2">کامنت پدر</th>
-                                        <th class="col-2"> کامنت های جواب</th>
-                                        <th class="col-1">نوع کامنت</th>
-                                        <th class="col-1">وضعیت</th>
-                                        <th class="col-4">عملیات</th>
+                                        <th class="col-1">متن</th>
+                                        <th class="col-2">--</th>
+	                                    <th class="col-1">نوع کامنت</th>
+	                                    <th class="col-1">-</th>
+                                        <th class="col-3">وضعیت</th>
+                                      
                                     </tr>
                         
                                 </thead>
@@ -100,42 +100,27 @@
                         
                                                 <td>
 													@comment.Text.ToShortText()
+													
                                                 </td>
-                                                <td>
-                                                    @if (comment.ParentComment != null)
-                                                    {
-                                                        <i class="text-primary">دارد</i>
-                                                        <a title="دیدن جزییات" class="btn btn-sm btn-info mr-2" asp-action="Detail" asp-route-id="@comment.ParentComment.Id"><i class="fa fa-info"></i></a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <i class="text-danger">ندارد</i>
-                                                    }
-                                                </td>
-                                                <td>
-                                                    @if (comment.ChildComments != null && comment.ChildComments.Any())
-                                                    {
-                                                        <ul>
-                                                            @foreach (var child in comment.ChildComments)
-                                                            {
-                                                                <li>
-                                                                    @child.Text.ToShortText()
-																	<a class="btn btn-sm btn-info mr-2" asp-action="Detail" asp-route-id="@child.Id"><i class="fa fa-info"></i></a>
-                                                                </li>
-                                                            }
-                                                        </ul>
-                        
-                                                    }
-                                                    else
-                                                    {
-                                                        <i class="text-danger">ندارد</i>
-                                                    }
-                                                </td>
+	                                            <td class="mr-3 mt-3">
+		                                          <a class="btn btn-warning" asp-action="Detail" asp-route-id="@comment.Id" title="متن کامل">
+														<i class="fa fa-info" ></i>
+													</a>
+	                                            </td>
                                                 <td class="mr-3 mt-3">
                                                     @comment.CommentFor
                                                 </td>
                         
-                                                <td class="mr-3 mt-3">
+	                                            <td class="btn-group-sm">
+		                                            @if (comment.ChildComments != null && comment.ChildComments.Any())
+		                                            {
+			                                            <a class="btn btn-primary" asp-action="Index" asp-route-parentId="@comment.Id">پاسخ ها</a>
+                        
+		                                            }
+	                                           
+	                                            </td>
+
+	                                            <td class="mr-3 mt-3">
                                                     @if (comment.CommentStatus == CommentStatus.هنوز_دیده_نشده)
                                                     {
 														<i class="fa fa-eye"></i>
@@ -146,9 +131,9 @@
                                                     }
                                                     else if (comment.CommentStatus == CommentStatus.رد_شده)
                                                     {
-														<i class="fa fa-cross"></i>
+														<i class=" fa fa-window-close"></i>
 
-														<i class="text-danger text-bold">@comment.CommentStatus.ToString().Replace("_", " ")</i>
+														<i class="text-danger text-bold ">@comment.CommentStatus.ToString().Replace("_", " ")</i>
                                                     }
                                                     else if (comment.CommentStatus == CommentStatus.قبول_شده)
                                                     {
@@ -156,26 +141,22 @@
 
 														<i class="text-success text-bold">@comment.CommentStatus.ToString().Replace("_", " ")</i>
                                                     }
-                                                    
-                                                </td>
-                        
-                        
-                                                <td class="btn-group-sm">
-                                                    
                                                     @if (comment.CommentStatus == CommentStatus.هنوز_دیده_نشده)
                                                     {
-                                                        <a class="btn   btn-success mr-1" asp-action="ChangeStatus" asp-route-id="@comment.Id">
-                                                            تعیین وضعیت
-                                                        </a>
+	                                                    <a class="btn   btn-success mr-1" asp-action="ChangeStatus" asp-route-id="@comment.Id">
+		                                                    تعیین 
+	                                                    </a>
                                                     }
                                                     else
                                                     {
-                                                        <a class="btn   btn-primary mr-1" asp-action="ChangeStatus" asp-route-id="@comment.Id">
-                                                            تغییر وضعیت
-                                                        </a>
+	                                                    <a class="btn   btn-primary mr-1" asp-action="ChangeStatus" asp-route-id="@comment.Id">
+		                                                    اصلاح 
+	                                                    </a>
                                                     }
-                        
                                                 </td>
+                        
+                        
+                                               
                                             </tr>
                         
                         

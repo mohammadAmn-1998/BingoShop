@@ -4,10 +4,10 @@
 }
 @model Users1.Application.Contract.UserService.Command.RegisterUser
 <div class="login-page">
-	<div class="form">
+	<div class="form" style="margin-top:100px">
 
-		<form class="login-form" asp-action="Register" method="post">
-			<strong class="text-bold p-3">لطفا برای ورود یا ثبت نام اطلاعات حساب کاربری خود را وارد کنید</strong>
+		<form class="login-form" asp-action="Register" method="post" >
+			<strong class="text-bold p-3">لطفا برای ورود یا ثبت نام شماره موبایل خود را وارد کنید</strong>
 			
 			<input type="hidden" asp-for="ReturnUrl"></input>
 			<input type="text" asp-for="Mobile" placeholder="شماره موبایل را وارد کنید..."/>

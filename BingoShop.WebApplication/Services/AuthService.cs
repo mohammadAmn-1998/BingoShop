@@ -94,7 +94,7 @@ namespace BingoShop.WebApplication.Services
 			}
 		}
 
-		public int GetUserId()
+		public long GetUserId()
 		{
 			try
 			{
@@ -103,7 +103,7 @@ namespace BingoShop.WebApplication.Services
 				if (userId == null)
 					return 0;
 
-				return int.Parse(userId!);
+				return long.Parse(userId!);
 
 			}
 			catch (Exception e)

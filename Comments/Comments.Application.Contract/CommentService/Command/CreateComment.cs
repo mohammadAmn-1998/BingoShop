@@ -10,7 +10,7 @@ public class CreateComment
 	[Display(Name = "نام شما")]
 	[Required(ErrorMessage = ErrorMessages.FieldIsRequired)]
 	[MaxLength(100,ErrorMessage = ErrorMessages.MaxLengthError)]
-	public string UserFullName { get; set; }
+	public string FullName { get; set; }
 
 	public long UserId { get; set; }
 
@@ -23,10 +23,10 @@ public class CreateComment
 	[MaxLength(3000,ErrorMessage = ErrorMessages.MaxLengthError)]
 	public string Text { get; set; }
 
-	public long ParentId { get; set; }
+	public long? ParentId { get; set; }
 
 	public long OwnerId { get; set; }
 
-	public CommentFor CommentFor { get; set; }
+	public CommentFor For { get; set; }
 
 }

@@ -1,0 +1,96 @@
+﻿@using Site.Application.Contract.SiteSettingApplication.Query
+@using Shared.Application.Services
+@model Emails.Application.Contract.MessageUserApplication.Command.CreateMessageUser
+@inject ISiteSettingQuery _SettingQuery;
+@inject IAuthService _AuthService;
+
+@{
+	ViewData["Title"] = "تماس با ما";
+	Layout = "Blog/_BlogLayout";
+	var siteSetting = await _SettingQuery.GetContactDataForContactUs();
+	var userId = _AuthService.GetUserId();
+}
+@section seo {
+
+	<partial name="Blog/_SeoPartial" model="siteSetting.Seo" />
+
+}
+<partial name="Blog/_BreadCrumbsPartial" model="siteSetting.BreadCrumbs" />
+<div class="row" style="margin-top:25px">
+	<div class="col-2"></div>
+	<div class="col-8">
+		<div class="card " style="margin-right: 10px">
+			<h3>
+				با ما در تماس باشید :
+			</h3>
+
+			@if (!string.IsNullOrEmpty(siteSetting.Address))
+			{
+				<div class="col-3">
+					<label class="label-info">
+						آدرس :
+					</label>
+					<a class="link-info">@siteSetting.Address</a>
+				</div>
+			}
+			@if (!string.IsNullOrEmpty(siteSetting.Phone1))
+			{
+				<div class="col-3">
+					<label class="label-info">
+						شماره تماس 1  :
+					</label>
+					<a class="link-info">@siteSetting.Phone1</a>
+				</div>
+			}
+			@if (!string.IsNullOrEmpty(siteSetting.Phone2))
+			{
+				<div class="col-3">
+					<label class="label-info">
+						شماره تماس 2  :
+					</label>
+					<a class="link-info">@siteSetting.Phone2</a>
+				</div>
+			}
+			@if (!string.IsNullOrEmpty(siteSetting.Email1))
+			{
+				<div class="col-3">
+					<label class="label-info">
+						ایمیل  1  :
+					</label>
+					<a class="link-info">@siteSetting.Email1</a>
+				</div>
+			}
+			@if (!string.IsNullOrEmpty(siteSetting.Email2))
+			{
+				<div class="col-3">
+					<label class="label-info">
+						ایمیل  2  :
+					</label>
+					<a class="link-info">@siteSetting.Email2</a>
+				</div>
+			}
+			<hr/>
+			<div class="col-11">
+				<div class="form ">
+					<form class=""  method="post" onsubmit="sweetAlertConfirmSubmit(event)">
+						
+						@Html.EditorFor(x => x.FullName)
+						@Html.EditorFor(x => x.Email)
+						@Html.EditorFor(x => x.PhoneNumber)
+						@Html.EditorFor(x => x.Subject)
+						@Html.EditorFor(x => x.Message, "MultilineText")
+						<hr />
+						<button style="padding: 5px; background-color: green; border-style: solid 3px 3px 3px 3px;" type="submit">ثبت</button>
+
+					</form>
+				</div>
+			</div>
+
+
+		</div>
+
+	</div>
+	<div class="col-2"></div>
+
+</div>
+

@@ -55,7 +55,7 @@ namespace BingoShop.WebApplication.Controllers
 				{
 					Mobile = model.Mobile,
 					ReturnUrl = model.ReturnUrl,
-					PassKey = ""
+					
 				});
 			}
 

@@ -12,7 +12,7 @@
 				
 					@foreach (var blog in Model)
 					{
-					<li class="newsticker__item"><a href="#" class="newsticker__item-url">@blog.Title</a></li>
+					<li class="newsticker__item"><a href="/blogs/blog/@blog.Slug" class="newsticker__item-url">@blog.Title</a></li>
 					}
 				</ul>
 			</div>

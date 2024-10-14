@@ -43,12 +43,16 @@
 						<div class="col-md-6">
 							<article class="entry card">
 								<div class="entry__img-holder card__img-holder">
-										<a href="/blog/@blog.Slug">
+									<a href="/blogs/blog/@blog.Slug">
 										<div class="thumb-container thumb-70">
 											<img data-src="@Directories.GetBlogImageFullPath(blog.ImageName,null)" src="/assets/blog/img/empty.png" class="entry__img lazyload" alt="@blog.ImageAlt" />
 										</div>
 									</a>
-									<a href="/blog/blogs?slug=@category.Slug" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@blog.CategoryTitle</a>
+									@if (blog.CategoryTitle != "همه")
+									{
+										<a href="/blog/blogs?slug=@category.Slug" class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--@RandomCategoryColorMaker.GenerateRandomColor()">@blog.CategoryTitle</a>
+									}
+								
 								</div>
 
 								<div class="entry__body card__body">

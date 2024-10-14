@@ -44,11 +44,7 @@ namespace Query.Services.Services
 				var blogs = Table<Blog>().Where(x => x.Active);
 				if (!string.IsNullOrEmpty(categorySlug))
 				{
-					
-					
 					var category = Table<BlogCategory>().FirstOrDefault(x => x.Slug == categorySlug);
-
-					
 
 					if (category != null)
 					{
@@ -94,6 +90,7 @@ namespace Query.Services.Services
 				model.FilterParams = filterParams;
 				model.Blogs = new();
 				model.GetBasePagination(blogs,filterParams.PageId,4);
+				
 				if (blogs.Count() > 0)
 				{
 					model.Blogs = await blogs.Skip(model.Skip).Take(model.Take).Select(x => new BlogUiQueryModel
@@ -151,7 +148,6 @@ namespace Query.Services.Services
 			{
 
 				List<BreadCrumbUiQueryModel> breadCrumbs = new();
-				
 				CategoryUIQueryModel categoryUi = new();
 				CategoryUIQueryModel subCategoryUi = new();
 
@@ -161,6 +157,8 @@ namespace Query.Services.Services
 				
 					categoryUi.Slug = category.Slug;
 					categoryUi.Title = category.Title;
+
+					
 				
 
 				if (blog.SubCategoryId > 0)
@@ -172,11 +170,13 @@ namespace Query.Services.Services
 					
 
 					breadCrumbs = GetArchiveBreadCrumb(category!.Slug, sub!.Slug);
+
+					
 				}
 
 				var seo = await _seoUiQuery.GetSeoForUI(blog.Id, WhereSeo.Blog, blog.Title);
 				var author = _userRepository.GetById(blog.UserId);
-
+				var relatedBlogs = GetRelatedBlogs(blog.CategoryId, blog.SubCategoryId);
 
 				return new()
 				{
@@ -193,12 +193,14 @@ namespace Query.Services.Services
 					Author = author!.FullName,
 					AuthorAvatar = author.Avatar,
 					AuthorAvatarImageAlt = author.FullName,
+					AuthorBio = author.Biography,
 					TotalComments = _commentRepository.GetCommentsCountForUi(blog.Id, CommentFor.بلاگ),
 					TotalVisits = blog.TotalVisits,
 					Category = categoryUi,
 					SubCategory = subCategoryUi,
 					Seo = seo,
-					BreadCrumbs = breadCrumbs
+					BreadCrumbs = breadCrumbs,
+					RelatedBlogs = relatedBlogs
 				};
 
 
@@ -215,8 +217,87 @@ namespace Query.Services.Services
 			}
 		}
 
+		public async Task<SingleBlogUIQueryModel> GetSingleBlog(long id)
+		{
+			try
+			{
 
-		private List<BreadCrumbUiQueryModel> GetArchiveBreadCrumb(string? categorySlug =null , string? subCategorySlug = null)
+				List<BreadCrumbUiQueryModel> breadCrumbs = new();
+				CategoryUIQueryModel categoryUi = new();
+				CategoryUIQueryModel subCategoryUi = new();
+
+				var blog = Table<Blog>().First(x => x.Id == id );
+
+				var category = await GetById<BlogCategory>(blog.CategoryId);
+
+				categoryUi.Slug = category.Slug;
+				categoryUi.Title = category.Title;
+
+
+
+
+				if (blog.SubCategoryId > 0)
+				{
+					var sub = await GetById<BlogCategory>(blog.SubCategoryId);
+
+					subCategoryUi.Slug = sub.Slug;
+					subCategoryUi.Title = sub.Title;
+
+
+					breadCrumbs = GetArchiveBreadCrumb(category!.Slug, sub!.Slug);
+
+
+				}
+
+				var seo = await _seoUiQuery.GetSeoForUI(blog.Id, WhereSeo.Blog, blog.Title);
+				var author = _userRepository.GetById(blog.UserId);
+				var relatedBlogs = GetRelatedBlogs(blog.CategoryId, blog.SubCategoryId);
+
+				return new()
+				{
+					Id = blog.Id,
+					Title = blog.Title,
+					Summary = blog.Summary,
+					Content = blog.Content,
+					CreateDate = blog.CreateDate.ConvertToPersianDate(),
+					ImageName = blog.ImageName,
+					ImageAlt = blog.ImageAlt,
+					Likes = blog.Likes,
+					CategoryId = blog.CategoryId,
+					SubCategoryId = blog.SubCategoryId,
+					Author = author!.FullName,
+					AuthorAvatar = author.Avatar,
+					AuthorAvatarImageAlt = author.FullName,
+					AuthorBio = author.Biography,
+					TotalComments = _commentRepository.GetCommentsCountForUi(blog.Id, CommentFor.بلاگ),
+					TotalVisits = blog.TotalVisits,
+					Category = categoryUi,
+					SubCategory = subCategoryUi,
+					Seo = seo,
+					BreadCrumbs = breadCrumbs,
+					RelatedBlogs = relatedBlogs
+				};
+
+
+
+
+
+			}
+			catch (Exception e)
+			{
+				return new()
+				{
+					Title = "در مورد این مقاله مشکلی وجود دارد!",
+					BreadCrumbs = new(),
+					Seo = await _seoUiQuery.GetSeoForUI(0,WhereSeo.Blog,"سئو ی مقاله"),
+				};
+			}
+		}
+
+
+		#region Private Methods
+
+		private List<BreadCrumbUiQueryModel> GetArchiveBreadCrumb(string? categorySlug = null, string? subCategorySlug = null)
 		{
 			List<BreadCrumbUiQueryModel> model = new()
 			{
@@ -227,24 +308,69 @@ namespace Query.Services.Services
 
 			if (string.IsNullOrEmpty(categorySlug) && string.IsNullOrEmpty(subCategorySlug))
 				model.Add(new()
-					{ Number = 4, Title = "نتایج جستجو", Url = "" }
+				{ Number = 4, Title = "نتایج جستجو", Url = "" }
 				);
 
 			if (!string.IsNullOrEmpty(categorySlug))
 			{
-				var category = Table<BlogCategory>().FirstOrDefault(x=> x.Slug == categorySlug);
+				var category = Table<BlogCategory>().FirstOrDefault(x => x.Slug == categorySlug);
 				if (category != null)
-					model.Add(new BreadCrumbUiQueryModel() { Number = 4, Title = category.Title, Url = subCategorySlug !=null ? $"/blog/blogs?slug={category.Slug}" : "" });
+					model.Add(new BreadCrumbUiQueryModel() { Number = 4, Title = category.Title, Url = subCategorySlug != null ? $"/blog/blogs?slug={category.Slug}" : "" });
 			}
 			if (!string.IsNullOrEmpty(subCategorySlug))
 			{
-				var category = Table<BlogCategory>().FirstOrDefault(x => x.Slug == subCategorySlug );
+				var category = Table<BlogCategory>().FirstOrDefault(x => x.Slug == subCategorySlug);
 				if (category != null)
 					model.Add(new BreadCrumbUiQueryModel() { Number = 5, Title = category.Title, Url = "" });
 			}
-			
-			
+
+
 			return model;
 		}
+
+		private List<RelatedBlogUIQueryModel> GetRelatedBlogs(long categoryId, long subCategoryId = 0)
+		{
+
+			try
+			{
+				IQueryable<Blog> relatedBlogs;
+
+				if (subCategoryId > 0)
+				{
+					relatedBlogs = Table<Blog>()
+						.Where(x => x.Active &&
+							x.CategoryId == categoryId || x.SubCategoryId == subCategoryId);
+
+				}
+				else
+				{
+					relatedBlogs = Table<Blog>()
+						.Where(x => x.Active &&
+									x.CategoryId == categoryId);
+				}
+
+				if (!relatedBlogs.Any())
+					return new();
+
+				return relatedBlogs.Take(6).OrderByDescending(x => x.Likes).Select(x => new RelatedBlogUIQueryModel
+				{
+					Title = x.Title,
+					ImageName = x.ImageName,
+					ImageAlt = x.ImageAlt,
+					Slug = x.Slug,
+					SubCategoryId = x.SubCategoryId
+				}).ToList();
+
+			}
+			catch (Exception e)
+			{
+				return new();
+			}
+
+		}
+
+		#endregion
+
+
 	}
 }

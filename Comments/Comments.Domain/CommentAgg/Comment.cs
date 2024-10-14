@@ -39,7 +39,7 @@ namespace Comments.Domain.CommentAgg
 			ParentComment = null;
 		}
 
-		public Comment(long userId, long ownerId, string fullName, string? email, string text, CommentFor commentFor, long parentId = 0)
+		public Comment(long userId, long ownerId, string fullName, string? email, string text, CommentFor commentFor, long? parentId = null)
 		{
 			UserId = userId;
 			OwnerId = ownerId;

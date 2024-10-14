@@ -36,8 +36,10 @@ namespace Users1.Application.Services
 
 				if (user == null)
 				{
-					
-					user = User.Register(command.Mobile, passkey);
+
+					var uniqueUserName = "User_" + RandomGenerator.GenerateUserUniqueCode()[..7];
+
+					user = User.Register(command.Mobile, passkey,uniqueUserName);
 					if(await _userRepository.Create(user))
 					{
 						//send sms passkey code

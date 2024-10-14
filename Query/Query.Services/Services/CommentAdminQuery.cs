@@ -22,7 +22,7 @@ namespace Query.Services.Services
 			
 		}
 
-		public async Task<CommentAdminFilteredPaging>  GetCommentsForAdmin(FilterParams filterParams, CommentStatus status , CommentFor commentFor ,long? ownerId)
+		public async Task<CommentAdminFilteredPaging>  GetCommentsForAdmin(FilterParams filterParams, CommentStatus status , CommentFor commentFor ,long? ownerId,long parentId )
 		{
 			try
 			{
@@ -32,6 +32,15 @@ namespace Query.Services.Services
 				if (ownerId != null)
 				{
 					result = result.Where(x => x.OwnerId == ownerId);
+				}
+
+				if (  parentId > 0)
+				{
+					result = result.Where(x => x.ParentId == parentId);
+				}
+				else if (parentId == 0)
+				{
+					result = result.Where(x => x.ParentId == null);
 				}
 
 				if (!string.IsNullOrEmpty(filterParams.Title))

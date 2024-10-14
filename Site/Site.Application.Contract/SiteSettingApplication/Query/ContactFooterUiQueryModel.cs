@@ -10,7 +10,7 @@ public class ContactFooterUiQueryModel
         Android = android;
         IOS = iOS;
     }
-
+	
     public string Address { get; set; }
     public string Phone { get; set; }
     public string Email { get; set; }

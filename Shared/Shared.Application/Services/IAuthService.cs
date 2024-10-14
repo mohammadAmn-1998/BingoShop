@@ -9,7 +9,7 @@ public interface IAuthService
 	string GetUserUniqueKey();
 	string GetUserMobile();
 	string GetUserFullName();
-	int GetUserId();
+	long GetUserId();
 	bool Logout();
 	
 	string GetUserAvatar();

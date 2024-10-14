@@ -1,0 +1,48 @@
+﻿@using Shared.Application.Utility
+@using Blogs1.Domain.BlogAgg
+@model List<Query.Contract.Ui.Blog.RelatedBlogUIQueryModel>
+
+<div class="title-wrap title-wrap--line">
+	
+</div>
+@* *@
+	@* @if ( Model.Count() > 0) *@
+	@* { *@
+	@* *@
+	@* <section class="section related-posts mt-40 mb-0"> *@
+	@* 	<div class="title-wrap title-wrap--line"> *@
+	@* 		<h3 class="section-title">مطالب مرتبط</h3> *@
+	@* 	</div> *@
+	@* *@
+	@* 	<div id="owl-posts-3-items" class="owl-carousel owl-theme owl-carousel--arrows-outside owl-rtl owl-loaded owl-drag"> *@
+	@* *@
+	@* *@
+	@* 		<div class="owl-stage-outer"> *@
+	@* 			<div class="owl-stage" style="transform: translate3d(742px, 0px, 0px); transition: all; width: 2721px;"> *@
+	@* 				 *@
+	@* 				@foreach (var blog in Model) *@
+	@* 				{ *@
+	@* 					<div class="owl-item  active" style="width: 227.333px; margin-left: 20px;"> *@
+	@* 						<article class="entry thumb thumb--size-1"> *@
+	@* 							<div class="entry__img-holder thumb__img-holder" style="background-image: url('@Directories.GetBlogImageFullPath(blog.ImageName, null)');"> *@
+	@* 								<div class="bottom-gradient"></div> *@
+	@* 								<div class="thumb-text-holder"> *@
+	@* 									<h2 class="thumb-entry-title"> *@
+	@* 										<a href="/Blog/@blog.Slug">@blog.Title</a> *@
+	@* 									</h2> *@
+	@* 								</div> *@
+	@* 								<a href="/Blogs/blog/@blog.Slug" class="thumb-url"></a> *@
+	@* 							</div> *@
+	@* 						</article> *@
+	@* 					 *@
+	@* 					</div> *@
+	@* 				} *@
+	@* 				</div> *@
+	@* *@
+	@* 		</div><div class="owl-nav"><div class="owl-prev"><i class="ui-arrow-right"></i></div><div class="owl-next"><i class="ui-arrow-left"></i></div></div><div class="owl-dots disabled"></div> *@
+	@* 	</div>  *@
+	@* *@
+	@* </section>  *@
+	@* *@
+	@* } *@
+

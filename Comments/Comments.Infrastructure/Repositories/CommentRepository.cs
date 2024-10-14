@@ -24,8 +24,8 @@ namespace Comments.Infrastructure.Repositories
 			try
 			{
 
-				var comment = new Comment(command.UserId, command.OwnerId, command.UserFullName, command.Email,
-					command.Text, command.CommentFor, command.ParentId);
+				var comment = new Comment(command.UserId, command.OwnerId, command.FullName, command.Email,
+					command.Text, command.For, command.ParentId);
 
 				Insert(comment);
 				return await Save() > 0;

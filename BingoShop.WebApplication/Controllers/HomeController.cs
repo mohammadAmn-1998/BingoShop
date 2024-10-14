@@ -1,5 +1,6 @@
 ﻿using BingoShop.WebApplication.Models;
 using Emails.Application.Contract.EmailUserApplication.Command;
+using Emails.Application.Contract.MessageUserApplication.Command;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Application.Services;
 using Shared.Domain.Enums;
@@ -11,11 +12,13 @@ namespace BingoShop.WebApplication.Controllers
 		private readonly ILogger<HomeController> _logger;
 		private readonly IEmailUserApplication _emailUserApplication;
 		private readonly IAuthService _authService;
-		public HomeController(ILogger<HomeController> logger, IEmailUserApplication emailUserApplication, IAuthService authService)
+		private readonly IMessageUserApplication _messageUserApplication;
+		public HomeController(ILogger<HomeController> logger, IEmailUserApplication emailUserApplication, IAuthService authService, IMessageUserApplication messageUserApplication)
 		{
 			_logger = logger;
 			_emailUserApplication = emailUserApplication;
 			_authService = authService;
+			_messageUserApplication = messageUserApplication;
 		}
 
 		public IActionResult Index()
@@ -27,6 +30,10 @@ namespace BingoShop.WebApplication.Controllers
 		{
 			return View();
 		}
+
+		
+
+		
 
 		[Route("/not-permitted")]
 		public IActionResult NotPermitted()

@@ -92,13 +92,13 @@ namespace Users1.WebUI.Services
 			}
 		}
 
-		public int GetUserId()
+		public long GetUserId()
 		{
 			try
 			{
 				var userId = HttpContext?.User.Claims.Single(x => x.Type == "user_id").Value;
 
-				return int.Parse(userId!);
+				return long.Parse(userId!);
 
 			}
 			catch (Exception e)
